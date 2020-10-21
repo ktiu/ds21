@@ -1,0 +1,25 @@
+--- 
+title: "Data Science für die Humangeographie I"
+subtitle: "Ein pragmatischer Einstieg mit R"
+author:
+  - name: Till Straube
+    email: straube@geo.uni-frankfurt.de
+    affiliation: |
+      | Institut für Humangeographie
+      | Goethe-Universität Frankfurt
+date: "Wintersemester 2020/21"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: article
+bibliography: [datascience.bib]
+link-citations: yes
+description: ""
+---
+
+# Termine
+
+# Voraussetzungen
+
+# Leistungsnachweise
+
+
