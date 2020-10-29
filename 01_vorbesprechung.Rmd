@@ -1,0 +1,150 @@
+# Vorbesprechung
+
+## Überblick
+
+### "Quanti-Projekt"
+
+- Bestandteil des Moduls BA3
+- Zwei Teile über zwei Semester
+>   - Konzeption quantitativer Forschung (Wintersemester)
+>   - Analyse quantitativer Daten (Sommersemester)
+- Im Winter gibt es [12 inhaltliche Termine](#terminüberblick) (davon 4x Textarbeit)
+
+### Lernziele
+
+Sie können...
+
+- einfache Skripte in R eigenständig erstellen.
+- Datensätze in vielfältigen Formaten visualisieren.
+- Online-Ressourcen gezielt einsetzen.
+- Möglichkeiten der Datenbeschaffung identifizieren.
+- epistemologische Verschiebungen durch Data Science wiedergeben.
+
+### Technische Anforderungen
+
+- Es sind keine Vorkenntnisse in R erforderlich
+- (Es wird trotzdem nicht langweilig, versprochen!)
+- Sie brauchen einen Laptop, mit dem Sie gut arbeiten können
+- Wir benutzen die RStudio Cloud als Plattform (dazu nächste Woche mehr)
+- Sie brauchen einen ruhigen Arbeitsplatz
+
+### Unterstützung im Corona-Semester
+
+- "Semesterlaptop": https://www.starkerstart.uni-frankfurt.de/92914986/ContentPage_92914986
+- Arbeitsplätze im Seminarraum (bei Bedarf?)
+
+## Leistungsnachweise
+
+### Exposé
+
+- Zum Ende des Wintersemesters geben Sie ein Exposé für ein Untersuchungsvorhaben für das Sommersemester ab.
+- Die Bewertungskriterien sind online einsehbar (und werden zu Semesterende noch einmal besprochen).
+- Sie können sich mit bis zu vier Personen zusammenschließen.
+- Die Projektgruppe besteht dann verbindlich für das Sommersemester. 
+- Damit steigen aber auch die Anforderungen an Umfang, Detail und technischen Anspruch.
+- Umfang für das Exposé: max. 15k Zeichen inkl. Leerzeichen, exkl. Literaturverzeichnis
+- Abgabetermin ist zu klären. Vorschlag: 31. März?
+
+### Anwesenheit
+
+- Es besteht Anwesenheitspflicht. 
+- Für Ihre ersten zwei Fehltermine pro Semester brauche ich keine Entschuldigung (aber ggf. mit Gruppe absprechen)
+- Danach brauche ich ein Attest und einen Nachweis über Nacharbeit
+
+### Teilnahme am Seminar
+
+Zur Anwesenheit gehört...
+
+- uneingeschränkte Aufmerksamkeit über die komplette Veranstaltungsdauer
+- (Eine eingeschaltete Kamera macht das allen Beteiligten leichter!)
+- aktive Mitarbeit an Beispielen
+- Bearbeitung von Übungsaufgaben
+- aktive Beteiligung an Diskussionen
+
+## Lehrphilosophie
+
+### Transparenz
+
+- Erforderliche Leistungen und Bewertungskriterien sind vorab bekannt.
+- Termine und Regelungen werden in der Vorbereitungssitzung verbindlich vereinbart.
+- Aktuelle Lehrmaterialien stehen online durchgängig zur Verfügung.
+
+### Praktische Übungen
+
+- Eigenständige Anwendung steht im Vordergrund.
+- Verfahren und Techniken werden mit Beispielen und Übungen erarbeitet.
+- Die perfekte Aufgabe ist immer ein bisschen "zu schwer".
+- Toleranz für Frustration ist notwendig und lässt sich trainieren.
+
+### Geschützte Räume
+
+- Alle können sich im Plenum respektiert und sicher fühlen. Verletzendes Verhalten wird benannt.
+- Es gibt einen vertrauensvollen Rahmen für ehrlichen Austausch.
+- Frustrationen und Momente des Scheiterns werden ernst genommen und konstruktiv bearbeitet.
+
+### Kritische Reflexion
+
+- Auch Teilnehmende, die kein weiterführendes Interesse an der Anwendung quantitativer Verfahren haben, sind im Seminar gut aufgehoben.
+- Verfahren werden kontextualisiert, ihre Limitationen werden aufgezeigt.
+- Kritische Forschung zu quantitativen Praktiken wird besprochen. 
+
+## Vorstellungsrunde
+
+### Peer introduction
+
+- Unterhalten Sie sich für 10 Minuten zu zweit zu folgende Fragen:
+>   - Wie möchten Sie von Ihren Komiliton\*innen angesprochen werden? (Spitz-/Name, ggf. bestimmte Pronomen)
+>   - Was studieren Sie / haben Sie schon studiert / gearbeitet?
+>   - An welchen Themen / geographischen Inhalten sind Sie besonders interessiert?
+>   - Welche *schlechte* Erfahrungen haben Sie mit der Didaktik von Informatik / Software gemacht?
+- Stellen Sie danach die jeweils andere Person kurz vor.
+
+## Lehrformat
+
+### Online-Seminar
+
+- Jede Woche Montags, 13--16h c.t.
+- Dieser Zoom-Link bleibt gleich.
+- Wir machen um ca. 14:25h eine zehnminütige Pause.
+- Für Textbesprechungen wird die Gruppe zweigeteilt.
+- Dieses Seminar findet in verschiedenen Modi statt.
+
+### Input und Plenum
+
+- Ich rede oder moderiere (mit Folien oder ohne)
+- Sie "melden" sich für Redebeiträge oder Fragen (Zoom-Funktion)
+- Sie hören mir und Ihren Kommiliton\*innen aufmerksam zu
+
+### Think-pair-share
+
+- Sie bearbeiten eine Fragestellung in zufälligen Zweier-Konstellationen (Breakout-Session)
+- Nach einer vorgegebenen Zeitspanne kehren Sie ins Plenum zurück
+- Ich fordere Sie ggf. auf, Ergebnisse und offene Fragen mit der Gruppe zu teilen
+
+### Follow the recipe
+
+- Ich teile ein unvollständiges Beispielprojekt.
+- Wir gehen die Teilschritte nach und nach durch.
+- Ich "habe den Plan", stelle aber immer wieder Fragen ans Plenum.
+- Sie vollziehen die Schritte an Ihrer eigenen Kopie des Projekts nach.
+
+### Hands-on session
+
+- Sie bearbeiten praktische Aufgabenstellungen alleine.
+- Dabei sind sie in zufälligen Dreier-Konstellationen (Breakout-Session).
+- Bei Fragen oder Problemen wenden Sie sich zunächst an Ihre Kleingruppe.
+- Falls Sie nicht weiterkommen, fordern Sie Hilfe an (Zoom-Funktion).
+- Ich reagiere auf Hilfegesuche oder schaue in zufälligen Gruppen vorbei. 
+
+### Share your work
+
+- Ich wähle eine Teilnehmer\*in zufällig aus.
+- Die Person teilt ihren Bildschirm und berichtet von ihrer Bearbeitung eines Problems.
+- Alle anderen unterstützen solidarisch durch aktives Nachvollziehen, Nachfragen und Hinweise.
+
+## Nächste Sitzung
+
+- "Erste Schritte" (mit R)
+- Zur Vorbereitung:
+  - Machen Sie sich einen kostenlosen Account auf https://rstudio.cloud.
+  - Wenn Sie mögen, installieren Sie R und RStudio auf Ihrem Computer. 
