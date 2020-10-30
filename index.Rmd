@@ -9,12 +9,6 @@ author:
       | Goethe-Universität Frankfurt
 date: "Wintersemester 2020/21"
 site: bookdown::bookdown_site
-output:
-  bookdown::gitbook:
-    config:
-      toc:
-        collapse: section
-  bookdown::pdf_book: default
 documentclass: article
 bibliography: ["datascience.bib"]
 link-citations: yes
