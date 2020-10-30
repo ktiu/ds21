@@ -38,12 +38,36 @@ Sie können...
 ### Exposé
 
 - Zum Ende des Wintersemesters geben Sie ein Exposé für ein Untersuchungsvorhaben für das Sommersemester ab.
-- Die Bewertungskriterien sind online einsehbar (und werden zu Semesterende noch einmal besprochen).
 - Sie können sich mit bis zu vier Personen zusammenschließen.
 - Die Projektgruppe besteht dann verbindlich für das Sommersemester. 
 - Damit steigen aber auch die Anforderungen an Umfang, Detail und technischen Anspruch.
 - Umfang für das Exposé: max. 15k Zeichen inkl. Leerzeichen, exkl. Literaturverzeichnis
 - Abgabetermin ist zu klären. Vorschlag: 31. März?
+
+#### Inhalte
+
+- Einführung ins Thema
+- Forschungsstand / Literaturüberblick
+- Herleitung einer klar abgegrenzten (vorläufigen) Forschungsfrage
+- Konkrete Datenquellen
+- Ideen für Verfahren und Visualisierungen
+
+#### Bewertungskriterien
+
+Alle kriterien werden mit einer (runden) Schulnote bewertet. Der gewichtete Schnitt ergibt die Gesamtnote.
+
+Kriterium                    | Gewichtung   | Erläuterung
+----------                   | -----------: | --------------
+Ziterweise und Formatierung  | 10%          | Der Text erfüllt formale Anforderungen an Wissenschaftlichkeit.
+Ausdruck und Rechtschreibung | 10%          | Der Text ist sprachlich gelungen.
+Roter Faden                  | 10%          | Der Text ist übersichtlich strukturiert und die Einzelteile greifen gut ineinander.
+Literatur                    | 10%          | Die zitierten Quellen sind für eine Einführung ins Thema geeignet und werden gut zusammengefasst.
+Theorie                      | 10%          | Relevante wissenschaftliche Perspektiven werden anhand von geeigneter Fachliteratur aufgezeigt.
+Fragestellung                | 10%          | Die Forschungsfrage ist für das Vorhaben geeignet und wird überzeugend hergeleitet.
+Datenquellen                 | 20%          | Die Datenquellen sind geeignet und detailliert beschrieben.
+Design                       | 20%          | Das Untersuchungsvorhaben ist nachvollziehbar beschrieben, und der technische Anspruch ist dem Projektseminar angemessen.
+
+
 
 ### Anwesenheit
 
