@@ -6,8 +6,8 @@
 
 - Bestandteil des Moduls BA3
 - Zwei Teile über zwei Semester
->   - Konzeption quantitativer Forschung (Wintersemester)
->   - Analyse quantitativer Daten (Sommersemester)
+  - Konzeption quantitativer Forschung (Wintersemester)
+  - Analyse quantitativer Daten (Sommersemester)
 - Im Winter gibt es [12 inhaltliche Termine](#terminüberblick) (davon 4x Textarbeit)
 
 ### Lernziele
@@ -88,17 +88,6 @@ Zur Anwesenheit gehört...
 - Verfahren werden kontextualisiert, ihre Limitationen werden aufgezeigt.
 - Kritische Forschung zu quantitativen Praktiken wird besprochen. 
 
-## Vorstellungsrunde
-
-### Peer introduction
-
-- Unterhalten Sie sich für 10 Minuten zu zweit zu folgende Fragen:
->   - Wie möchten Sie von Ihren Komiliton\*innen angesprochen werden? (Spitz-/Name, ggf. bestimmte Pronomen)
->   - Was studieren Sie / haben Sie schon studiert / gearbeitet?
->   - An welchen Themen / geographischen Inhalten sind Sie besonders interessiert?
->   - Welche *schlechte* Erfahrungen haben Sie mit der Didaktik von Informatik / Software gemacht?
-- Stellen Sie danach die jeweils andere Person kurz vor.
-
 ## Lehrformat
 
 ### Online-Seminar
@@ -109,26 +98,26 @@ Zur Anwesenheit gehört...
 - Für Textbesprechungen wird die Gruppe zweigeteilt.
 - Dieses Seminar findet in verschiedenen Modi statt.
 
-### Input und Plenum
+### Modus 1: Input und Plenum
 
 - Ich rede oder moderiere (mit Folien oder ohne)
 - Sie "melden" sich für Redebeiträge oder Fragen (Zoom-Funktion)
 - Sie hören mir und Ihren Kommiliton\*innen aufmerksam zu
 
-### Think-pair-share
+### Modus 2: Think-pair-share
 
 - Sie bearbeiten eine Fragestellung in zufälligen Zweier-Konstellationen (Breakout-Session)
 - Nach einer vorgegebenen Zeitspanne kehren Sie ins Plenum zurück
 - Ich fordere Sie ggf. auf, Ergebnisse und offene Fragen mit der Gruppe zu teilen
 
-### Follow the recipe
+### Modus 3: Follow the recipe
 
 - Ich teile ein unvollständiges Beispielprojekt.
 - Wir gehen die Teilschritte nach und nach durch.
 - Ich "habe den Plan", stelle aber immer wieder Fragen ans Plenum.
 - Sie vollziehen die Schritte an Ihrer eigenen Kopie des Projekts nach.
 
-### Hands-on session
+### Modus 4: Hands-on session
 
 - Sie bearbeiten praktische Aufgabenstellungen alleine.
 - Dabei sind sie in zufälligen Dreier-Konstellationen (Breakout-Session).
@@ -136,15 +125,8 @@ Zur Anwesenheit gehört...
 - Falls Sie nicht weiterkommen, fordern Sie Hilfe an (Zoom-Funktion).
 - Ich reagiere auf Hilfegesuche oder schaue in zufälligen Gruppen vorbei. 
 
-### Share your work
+### Modus 5: Share your work
 
 - Ich wähle eine Teilnehmer\*in zufällig aus.
 - Die Person teilt ihren Bildschirm und berichtet von ihrer Bearbeitung eines Problems.
 - Alle anderen unterstützen solidarisch durch aktives Nachvollziehen, Nachfragen und Hinweise.
-
-## Nächste Sitzung
-
-- "Erste Schritte" (mit R)
-- Zur Vorbereitung:
-  - Machen Sie sich einen kostenlosen Account auf https://rstudio.cloud.
-  - Wenn Sie mögen, installieren Sie R und RStudio auf Ihrem Computer. 

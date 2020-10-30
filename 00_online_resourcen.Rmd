@@ -1,0 +1,47 @@
+# Online-Ressourcen {-}
+
+## R Tutorials und eBooks {-}
+
+- **R for Data Science**  
+  https://r4ds.had.co.nz/  
+  Ausführliches Handbuch, Fokus auf Data Science
+
+- **RStudio Cloud Primers**  
+  https://rstudio.cloud/learn/primers/1
+
+- **Swirl**  
+  https://swirlstats.com/students.html  
+  Interaktives Tutorial als R-Paket, mit verschiedenen Lektionen
+
+- **Quick-R**  
+  https://www.statmethods.net/r-tutorial/index.html  
+  Überblickartiges Tutorial, kurz und bündig
+
+- **RStudio Cheat Sheets**  
+  https://www.rstudio.com/resources/cheatsheets/  
+  Einseitige Cheat Sheets zu verschiedenen Themen
+
+- **Google’s R Style Guide**  
+  https://google.github.io/styleguide/Rguide.xml  
+  Regeln für leserlichen R Code
+
+## Inspiration für Visualisierungen {-}
+
+- **R Graph Gallery**  
+  https://www.r-graph-gallery.com/  
+  Viele Beispiele für verschiedenste Visualisierungen
+
+- **DDJ Katalog**  
+  http://katalog.datenjournalismus.net/#/  
+  Portfolio Datenjournalismus, leider etwas veraltet 
+
+- **Subreddits**  
+  https://www.reddit.com/r/dataisbeautiful  
+  https://www.reddit.com/r/DataArt/  
+  https://www.reddit.com/r/MapPorn/
+
+## Spezialthemen {-}
+
+- **Tutorial Reguläre Ausdrücke**  
+  https://danielfett.de/en/tutorials/tutorial-regulare-ausdrucke/  
+  Deutschsprachige Einführung zu regulären Ausdrücken

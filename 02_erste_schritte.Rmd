@@ -1,0 +1,7 @@
+# Erste Schritte
+
+## Vorbereitung
+
+- Machen Sie sich einen kostenlosen Account auf https://rstudio.cloud
+- Treten Sie dem Seminar-Workspace bei. (Sie erhalten eine Einladung per E-Mail.)
+- Optional/alternativ: installieren Sie [R](https://www.r-project.org/) und [RStudio](https://rstudio.com/) auf Ihrem Computer. 
