@@ -1,0 +1,9 @@
+bookdown::gitbook:
+  split-by: chapter
+  config:
+    toc:
+      collapse: section
+      before: |
+         <li><strong><a href="/~tstraube/c/ds21">Data Science für die Humangeographie</a></strong></li>
+         <li><em><a href="/~tstraube/">Till Straube</a></em></li>
+bookdown::pdf_book: default
