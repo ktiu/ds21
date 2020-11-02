@@ -34,4 +34,4 @@ Datum                 | Sitzung   | Inhalt
 1. Februar 2021       | 12        | Web Scraping
 8. Februar 2021       | 13        | [Text] Straube 2021
 15. Februar 2021      | 13        | Präsentationen
-*31. März 2021 (?)*   |           | *Abgabe Exposé*
+*31. März 2021*       |           | *Abgabe Exposé*
