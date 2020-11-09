@@ -1,10 +1,10 @@
-## Textarbeit
+# Textarbeit
 
-### Lesetext
+## Lesetext
 
 Anderson, Chris. 2008. *The End of Theory: The Data Deluge Makes the Scientific Method Obsolete.* URL: https://www.wired.com/2008/06/pb-theory/ (zugegriffen: 11. Juli 2017).
 
-### Fragen an den Text
+## Fragen an den Text
 
 1. Um welche Art von Text handelt es sich? Wer ist der Autor, und an wen wendet er sich?
 2. Was ist das zentrale Anliegen des Texts? Welche Entwicklungen werden beschrieben?
