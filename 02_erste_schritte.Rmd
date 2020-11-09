@@ -5,3 +5,241 @@
 - Machen Sie sich einen kostenlosen Account auf https://rstudio.cloud
 - Treten Sie dem Seminar-Workspace bei. (Sie erhalten eine Einladung per E-Mail.)
 - Optional/alternativ: installieren Sie [R](https://www.r-project.org/) und [RStudio](https://rstudio.com/) auf Ihrem Computer. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Operatoren
+
+Zunächst stellen wir fest, dass man die R-Konsole ganz banal als Taschenrechner benutzen kann:
+
+```{r}
+1 + 4
+8 / 3
+(2.45 + 3.5) * 7
+```
+
+Die Zeichen `+`, `-`, `*` usw. heißen in der Informatik Operatoren oder Infixe (weil sie immer zwischen zwei Werten stehen).
+
+## Variablen
+
+Variablen funktionieren so, dass man einem *Wert* einen Namen gibt. Die Zuweisung folgt dabei dem Schema ``NAME <- WERT``:
+
+```{r}
+x <- 5
+```
+
+Nach einer erfolgreichen Variablenzuweisung gibt die Konsole *keine* Rückmeldung, sondern nur bei Fehlern.
+
+`x` steht jetzt für die Zahl fünf. Mit dieser Variable können wir jetzt genauso rechnen wie mit einer Zahl:
+
+```{r}
+x + 3
+```
+
+Auch die Zuweisung von Variablen kann Rechenoperationen und andere Variablen enthalten:
+
+```{r}
+y <- (x * 2) - 1
+print(y)
+```
+
+Der Befehl `print(y)` ist dabei ganz einfach die Anweisung an die Konsole, den Wert für `y` auszugeben. Das passiert zwar auch, wenn man nur `y` eingibt, aber `print(y)` (oder `print(x)`, `print(1 + 1)`, usw.) ist die formal korrekte Schreibweise.
+
+Der Wert einer Variable kann auch verändert werden. Dafür weisen wir ihr einfach einen neuen Wert zu:
+
+```{r}
+x <- 20
+print(x)
+```
+
+Eine Besonderheit ist, dass der alte Wert der Variable auch innerhalb der Zuweisung eines neuen Werts benutzt werden darf. Das kann in einem Script sehr praktisch sein. Wenn wir `x` also um 0,5 erhöhen wollen, sieht das so aus:
+
+```{r}
+x <- x + 0.5
+print(x)
+```
+
+Dabei wird als Dezimaltrennzeichen ausschließlich der Punkt verwendet. 
+
+## Konstanten
+
+Manche benannten Werte sind schon in R eingebaut:
+
+```{r}
+print(pi)
+```
+
+Diese Werte heißen üblicherweise "Konstanten" -- allerdings lassen sie sich in R auch überschreiben!
+
+```{r}
+pi <- 3
+print(pi)
+```
+
+## Funktionen
+
+Mit `print()` haben wir schon unsere erste *Funktion* kennengelernt. R stellt uns eine Vielzahl von verschiedenen Funktionen zur Verfügung, und sie werden immer nach dem gleichen Schema benutzt: `FUNKTIONSNAME(PARAMETER)`.
+
+*Parameter* (auf Englisch auch "arguments") sind die Werte, die als Input an die Funktion übergeben werden. Je nach Funktion können das auch mehrere Werte sein, die dann durch Kommas getrennt werden. So nimmt die Funktion `max()`, die den Maximalwert bestimmt, beliebig viele Zahlen als Parameter:
+
+```{r}
+max(1, 2, 2, 5, 4, 3)
+```
+
+Die Funktion `round()` hat als optionalen Parameter die Anzahl der Nachkommastellen, auf die gerundet werden soll. Wenn er nicht angegeben wird, nimmmt dieser Parameter immer den Wert 0 an:
+
+```{r}
+round(4.567)
+```
+
+Aber er lässt sich auch spezifizieren:
+
+```{r}
+round(4.567, digits = 2)
+```
+
+Dabei sind die folgenden Ausdrücke identisch:
+
+```{r}
+round(4.567, digits = 2)
+round(4.567, 2)
+round(digits = 2, 4.567)
+```
+
+Was Funktionen genau machen und welche Parameter sie dabei nehmen, ist in der R-Dokumentation sehr ausführlich (und auf den ersten Blick recht kompliziert) beschrieben. Ganz am Ende der Hilfeseite finden sich oft Beipsiele. Die Hilfe zu einer Funktion kann mit folgendem Befehl aufgerufen werden:
+
+```{r, eval=F}
+?max
+```
+
+Notiz am Rande: Auch die Infix-Operatoren `+`, `-`, `*`, usw. sind eigentlich nur verkürzte Schreibweisen von Funktionen. Mit "backticks" ( \` ) lassen sie sich in vollwertige Funktionen zurückverwandeln:
+
+```{r}
+`+`(2, 2)
+```
+
+## Strings
+
+R kann nicht nur mit Zahlen umgehen, sondern auch mit Text. Ein *String* ist eine Aneinanderreihung von Buchstaben, und wird mit einfachen oder doppelten Anführungszeichen umschlossen:
+
+```{r}
+print("Hello, World!")
+```
+
+Auch Variablen können Strings als Wert haben:
+
+```{r}
+name <- "Hase"
+```
+
+Es gibt auch Funktionen, die Strings als Parameter nehmen. `paste` fügt Strings aneinander:
+
+```{r}
+paste("Mein Name ist", name)
+```
+
+## Datentypen
+
+Den *Typ* einer Variable oder eines Wertes bestimmen wir durch den Befehl `str()`:
+
+```{r}
+str(name)
+str(10)
+```
+
+Dabei steht `chr` („character“) für Strings und `num` („numeric“) für Zahlen.
+
+Ein weiterer Variablentyp ist `logi` („logical“), der prinzipiell nur die Werte `TRUE` oder `FALSE` annehmen kann. Dieser Typ heißt auch [Boolsche Variabel](https://de.wikipedia.org/wiki/Boolesche_Variable):
+
+```{r}
+str(FALSE)
+```
+
+Soweit es ein eindeutiges Ergebnis gibt, kann R mit den entsprechenden Befehlen Werte vom einen in den anderen Typ umwandeln:
+
+```{r}
+as.numeric("1000")
+as.character(x)
+as.logical(0)
+```
+
+Kann R einen Wert nicht umwandeln, dann kommt dabei `NA` raus (mit einer Warnung):
+
+```{r}
+as.numeric("Hallo!")
+```
+
+`NA` („not available/assigned“) ist dabei ein besonderer Wert, den jeder Variablentyp annehmen kann.
+
+## Aufgaben
+
+### Rechnen
+
+Lösen Sie folgende Rechenaufgaben mit Hilfe von R:
+
+- 4 plus 10
+- 8 mal 12
+- 4 minus 7
+- 3 hoch 18
+- 4,5 geteilt durch die Summe von 5 und 8
+- Quadratwurzel aus 101
+- Kubikwurzel aus 12
+
+### Variablen
+
+Weisen Sie den Variablen a bis g folgende Werte zu:
+
+a) TRUE
+b) 2
+c) Ihren Namen
+d) Die Quadratwurzel aus b
+e) 8 $\textstyle\frac{1}{4}$
+f) Das vierfache von e
+g) Die aktuelle Uhrzeit mit Datum und Zeitzone (automatisch generiert)
+
+### Datentypen
+
+Bestimmen Sie die Typen der Variablen a bis g.
+
+Finden Sie je zwei Beispiele für die Umwandlung...
+
+- von `numeric` zu `character`
+- von `numeric` zu `logical`
+- von `character` zu `logical`
+- von `character` zu `numeric`
+- von `logical` zu `character`
+- von `logical` zu `numeric`
+- von `character` zu `Date`
+- von `Date` zu `numeric`
+
+(`Date` ist kein eigentlicher Datentyp, aber erfüllt an dieser Stelle denselben Zweck.)
+
+### Swirl
+
+Folgen Sie den Anleitungen, um Swirl zu installieren: https://swirlstats.com/students.html
+
+Absolvieren Sie Lektion 1 („Basic Building Blocks“).
+
+### Recherche
+
+Recherchieren Sie:
+
+- Welche Funktion gibt den absoluten Wert einer Zahl aus? (z.B. -4 ergibt 4, 8 ergibt 8)
+- Welche Konstanten sind in R „eingebaut“?
+- Wie bestimmt man den „Rest“ einer Division? (z.B. 40 geteilt durch 7 hat den Rest 5)
+- In der Statistik wird zwischen stetigen und diskreten Variablen unterschieden. Welche äquivalente Unterscheidung nimmt R vor?
+
+### Kniffliges
+
+Lösen Sie die folgenden Probleme:
+
+- Durch welchen Ausdruck lässt sich eine Zahl auf die nächste *gerade* Zahl runden? (z.B. 18,9 auf 18,0 oder 21,2 auf 22,0)
+- Durch welchen Ausdruck lässt sich eine Zahl auf die nächste *halbe* Zahl abrunden? (z.B. 18,9 auf 18,5 oder 21,2 auf 21,0)
+- Absolvieren Sie in die Lektion 8 („Logic“).
+- Machen Sie sich mit der Funktion `xor()` vertraut. Finden Sie einen Ausdruck, der `xor()` simuliert, aber nur aus Infix-Operatoren besteht.
+- Was bedeutet „strong“ bzw „weak typing“? Wie ist R hier einzuordnen?
+- Was sind funktionale Programmiersprachen? Welche Eigenschaften von R sind funktional, welche nicht?
+- Starten Sie den R Track in [Excercism](https://exercism.io/)
+- Richten Sie sich ein IDE *außer* RStudio für einen R Workflow ein.

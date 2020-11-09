@@ -45,8 +45,9 @@ Sie können...
 ### Input und Plenum
 
 - Ich rede oder moderiere (mit Folien oder ohne)
-- Sie "melden" sich für Redebeiträge oder Fragen (Zoom-Funktion)
 - Sie hören mir und Ihren Kommiliton\*innen aufmerksam zu
+- Sie "melden" sich für Redebeiträge oder Fragen (Zoom-Funktion)
+- Die\*der Chat-Verantwortliche unterbricht mich bei Klärungsbedarf
 
 ### Think-pair-share
 
@@ -60,6 +61,7 @@ Sie können...
 - Wir gehen die Teilschritte nach und nach durch.
 - Ich "habe den Plan", stelle aber immer wieder Fragen ans Plenum.
 - Sie vollziehen die Schritte an Ihrer eigenen Kopie des Projekts nach.
+- Die\*der Chat-Verantwortliche unterbricht mich bei Klärungsbedarf
 
 ### Hands-on session
 
