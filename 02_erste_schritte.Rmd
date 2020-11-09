@@ -13,12 +13,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Sie können...
 
-> - Rechenoperatoren einsetzen.
-> - Variablen zuweisen.
-> - Funktionen aufrufen.
-> - Hilfe zu Funktionen anzeigen.
-> - die wichtigsten Variablentypen bestimmen.
-> - zwischen Variablentypen konvertieren.
+- Rechenoperatoren einsetzen.
+- Variablen zuweisen.
+- Funktionen aufrufen.
+- Hilfe zu Funktionen anzeigen.
+- die wichtigsten Variablentypen bestimmen.
+- zwischen Variablentypen konvertieren.
 
 ## Operatoren
 

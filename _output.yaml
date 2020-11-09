@@ -6,6 +6,7 @@ bookdown::gitbook:
       before: |
          <li><strong><a href="/~tstraube/c/ds21">Data Science für die Humangeographie</a></strong></li>
          <li><em><a href="/~tstraube/">Till Straube</a></em></li>
+         <li><a onclick="window.location.reload(true);">Neu laden (Strg+Shift+R)</a></li>
       after: |
          <li><a href="https://github.com/ktiu/ds21">Auf GitHub anschauen</a></li>
 bookdown::pdf_book: default
