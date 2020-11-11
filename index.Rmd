@@ -1,6 +1,6 @@
 --- 
-title: "Data Science für die Humangeographie I"
-subtitle: "Ein pragmatischer Einstieg mit R"
+title: "Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R"
+subtitle: "Konzeption quantitativer Forschung"
 author:
   - name: Till Straube
     email: straube@geo.uni-frankfurt.de
@@ -23,7 +23,7 @@ Datum                 | Sitzung   | Inhalt
 --------------------: | --------: | :-------
 2. November 2020      | 1         | [Vorbesprechung](#vorbesprechung)
 9. November 2020      | 2         | [Erste Schritte](#erste-schritte)
-16. November 2020     | 3         | [Text] Anderson 2008
+16. November 2020     | 3         | [Text: Anderson 2008](#text-anderson-2008)
 23. November 2020     | 4         | Datenstrukturen
 30. November 2020     | 5         | Visualisierungen
 7. Dezember 2020      | 6         | [Text] Shelton et al. 2014
