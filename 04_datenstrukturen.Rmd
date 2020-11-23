@@ -79,6 +79,12 @@ IQR(alter)
 
 (Aber `IQR()` berechnet anders als in der Vorlesung besprochen!)
 
+Wir können den Mittelwert auch mit Hilfe der `sum()` und `length()` Funktionen selbst berechnen:
+
+```{r}
+sum(alter) / length(alter)
+```
+
 ## Matritzen
 
 Matritzen (engl. *matrix*) sind zweidimensionale Reihen von Werten gleichen Typs.

@@ -304,11 +304,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="datenstrukturen.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(alter)</span></code></pre></div>
 <pre><code>## [1] 9</code></pre>
 <p>(Aber <code>IQR()</code> berechnet anders als in der Vorlesung besprochen!)</p>
+<p>Wir können den Mittelwert auch mit Hilfe der <code>sum()</code> und <code>length()</code> Funktionen selbst berechnen:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="datenstrukturen.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(alter) <span class="sc">/</span> <span class="fu">length</span>(alter)</span></code></pre></div>
+<pre><code>## [1] 47</code></pre>
 </div>
 <div id="matritzen" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Matritzen</h2>
 <p>Matritzen (engl. <em>matrix</em>) sind zweidimensionale Reihen von Werten gleichen Typs.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="datenstrukturen.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">nrow=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="datenstrukturen.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">nrow=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    1    4    7   10   13
 ## [2,]    2    5    8   11   14
@@ -318,7 +321,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="listen" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Listen</h2>
 <p>Listen sind eindimensionale Reihen von Werten, wobei der Typ egal ist:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="datenstrukturen.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="st">&quot;Hallo&quot;</span>, <span class="dv">10</span>, F)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="datenstrukturen.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="st">&quot;Hallo&quot;</span>, <span class="dv">10</span>, F)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;Hallo&quot;
 ## 
@@ -328,8 +331,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [[3]]
 ## [1] FALSE</code></pre>
 <p>Dabei können die Werte benannt sein, und Listen können Unterlisten enthalten:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="datenstrukturen.html#cb95-1" aria-hidden="true" tabindex="-1"></a>profil <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name=</span><span class="st">&quot;Till&quot;</span>, <span class="at">plz=</span><span class="dv">60326</span>, <span class="at">x=</span><span class="fu">list</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span>
-<span id="cb95-2"><a href="datenstrukturen.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(profil)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="datenstrukturen.html#cb97-1" aria-hidden="true" tabindex="-1"></a>profil <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name=</span><span class="st">&quot;Till&quot;</span>, <span class="at">plz=</span><span class="dv">60326</span>, <span class="at">x=</span><span class="fu">list</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span>
+<span id="cb97-2"><a href="datenstrukturen.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(profil)</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ name: chr &quot;Till&quot;
 ##  $ plz : num 60326
@@ -343,7 +346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Data frames sind tabellarische Daten. Die Werte in jeder Spalte haben dabei denselben Typ.</p>
 <p>Viele Beispieldatensätze sind in Form von data frames in R eingebaut.</p>
 <p><code>head(x)</code> gibt nur die ersten sechs Zeilen aus:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="datenstrukturen.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="datenstrukturen.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div>
 <pre><code>##                    mpg cyl disp  hp drat    wt  qsec
 ## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46
 ## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02
@@ -363,9 +366,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.6</span> Tibbles</h2>
 <p>Tibbles können alles, was data frames können, und haben darüber hinaus noch Funktionen, die wir später kennenlernen werden.</p>
 <p>Sie sind teil der Paketsammlung <code>tidyverse</code>, die einmalig installiert werden muss und dann geladen werden kann:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="datenstrukturen.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="datenstrukturen.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Ein Beispieldatensatz ist <code>diamonds</code>:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="datenstrukturen.html#cb100-1" aria-hidden="true" tabindex="-1"></a>diamonds</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="datenstrukturen.html#cb102-1" aria-hidden="true" tabindex="-1"></a>diamonds</span></code></pre></div>
 <pre><code>## # A tibble: 53,940 x 10
 ##    carat cut      color clarity depth table price     x
 ##    &lt;dbl&gt; &lt;ord&gt;    &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
@@ -382,9 +385,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # … with 53,930 more rows, and 2 more variables:
 ## #   y &lt;dbl&gt;, z &lt;dbl&gt;</code></pre>
 <p>Einzelne Spalten lassen sich mit $ ansprechen und verhalten sich dann wie Vektoren:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="datenstrukturen.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(diamonds<span class="sc">$</span>carat)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="datenstrukturen.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(diamonds<span class="sc">$</span>carat)</span></code></pre></div>
 <pre><code>##  num [1:53940] 0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="datenstrukturen.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(diamonds<span class="sc">$</span>depth)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="datenstrukturen.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(diamonds<span class="sc">$</span>depth)</span></code></pre></div>
 <pre><code>## [1] 61.7494</code></pre>
 </div>
 <div id="aufgaben-1" class="section level2" number="4.7">
