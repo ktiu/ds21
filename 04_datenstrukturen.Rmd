@@ -5,9 +5,9 @@
 Sie können...
 
 - die verschiedenen Strukturen für Datensätze in R benennen.
-- Beispieldatensätze aufrufen.
 - Vektoren generieren.
-- einfache Befehle mit Vektoduren durchführen.
+- einfache Befehle mit Vektoren durchführen.
+- Beispieldatensätze aufrufen und beschreiben.
 
 ## Vektoren
 
