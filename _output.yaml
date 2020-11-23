@@ -11,3 +11,4 @@ bookdown::gitbook:
          <li><a href="https://github.com/ktiu/ds21">Auf GitHub anschauen</a></li>
 bookdown::pdf_book:
   template: template.tex
+  keep_tex: true

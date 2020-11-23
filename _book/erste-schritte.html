@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="de" xml:lang="de">
 <head>
 
   <meta charset="utf-8" />
@@ -196,6 +196,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
 <li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.2</b> Matritzen</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.3</b> Listen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.4</b> Data Frames</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.5</b> Tibbles</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.6</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.6.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.6.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.6.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.6.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.6.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.6.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.6.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.6.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.6.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.6.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.6.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ktiu/ds21">Auf GitHub anschauen</a></li>
 
@@ -241,103 +258,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="operatoren" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Operatoren</h2>
 <p>Zunächst stellen wir fest, dass man die R-Konsole ganz banal als Taschenrechner benutzen kann:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="erste-schritte.html#cb1-1" aria-hidden="true"></a><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="erste-schritte.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="erste-schritte.html#cb3-1" aria-hidden="true"></a><span class="dv">8</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="erste-schritte.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">/</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 2.666667</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="erste-schritte.html#cb5-1" aria-hidden="true"></a>(<span class="fl">2.45</span> <span class="op">+</span><span class="st"> </span><span class="fl">3.5</span>) <span class="op">*</span><span class="st"> </span><span class="dv">7</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="erste-schritte.html#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">2.45</span> <span class="sc">+</span> <span class="fl">3.5</span>) <span class="sc">*</span> <span class="dv">7</span></span></code></pre></div>
 <pre><code>## [1] 41.65</code></pre>
 <p>Die Zeichen <code>+</code>, <code>-</code>, <code>*</code> usw. heißen in der Informatik Operatoren oder Infixe (weil sie immer zwischen zwei Werten stehen).</p>
 </div>
 <div id="variablen" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Variablen</h2>
 <p>Variablen funktionieren so, dass man einem <em>Wert</em> einen Namen gibt. Die Zuweisung folgt dabei dem Schema <code>NAME &lt;- WERT</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="erste-schritte.html#cb7-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="erste-schritte.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
 <p>Nach einer erfolgreichen Variablenzuweisung gibt die Konsole <em>keine</em> Rückmeldung, sondern nur bei Fehlern.</p>
 <p><code>x</code> steht jetzt für die Zahl fünf. Mit dieser Variable können wir jetzt genauso rechnen wie mit einer Zahl:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="erste-schritte.html#cb8-1" aria-hidden="true"></a>x <span class="op">+</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="erste-schritte.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
 <p>Auch die Zuweisung von Variablen kann Rechenoperationen und andere Variablen enthalten:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="erste-schritte.html#cb10-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span>(x <span class="op">*</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb10-2"><a href="erste-schritte.html#cb10-2" aria-hidden="true"></a><span class="kw">print</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="erste-schritte.html#cb10-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> (x <span class="sc">*</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb10-2"><a href="erste-schritte.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
 <pre><code>## [1] 9</code></pre>
 <p>Der Befehl <code>print(y)</code> ist dabei ganz einfach die Anweisung an die Konsole, den Wert für <code>y</code> auszugeben. Das passiert zwar auch, wenn man nur <code>y</code> eingibt, aber <code>print(y)</code> (oder <code>print(x)</code>, <code>print(1 + 1)</code>, usw.) ist die formal korrekte Schreibweise.</p>
 <p>Der Wert einer Variable kann auch verändert werden. Dafür weisen wir ihr einfach einen neuen Wert zu:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="erste-schritte.html#cb12-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb12-2"><a href="erste-schritte.html#cb12-2" aria-hidden="true"></a><span class="kw">print</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="erste-schritte.html#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb12-2"><a href="erste-schritte.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
 <pre><code>## [1] 20</code></pre>
 <p>Eine Besonderheit ist, dass der alte Wert der Variable auch innerhalb der Zuweisung eines neuen Werts benutzt werden darf. Das kann in einem Script sehr praktisch sein. Wenn wir <code>x</code> also um 0,5 erhöhen wollen, sieht das so aus:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="erste-schritte.html#cb14-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb14-2"><a href="erste-schritte.html#cb14-2" aria-hidden="true"></a><span class="kw">print</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="erste-schritte.html#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fl">0.5</span></span>
+<span id="cb14-2"><a href="erste-schritte.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
 <pre><code>## [1] 20.5</code></pre>
 <p>Dabei wird als Dezimaltrennzeichen ausschließlich der Punkt verwendet.</p>
 </div>
 <div id="konstanten" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Konstanten</h2>
 <p>Manche benannten Werte sind schon in R eingebaut:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="erste-schritte.html#cb16-1" aria-hidden="true"></a><span class="kw">print</span>(pi)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="erste-schritte.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pi)</span></code></pre></div>
 <pre><code>## [1] 3.141593</code></pre>
 <p>Diese Werte heißen üblicherweise “Konstanten” – allerdings lassen sie sich in R auch überschreiben!</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="erste-schritte.html#cb18-1" aria-hidden="true"></a>pi &lt;-<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb18-2"><a href="erste-schritte.html#cb18-2" aria-hidden="true"></a><span class="kw">print</span>(pi)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="erste-schritte.html#cb18-1" aria-hidden="true" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb18-2"><a href="erste-schritte.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pi)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
 <div id="funktionen" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Funktionen</h2>
 <p>Mit <code>print()</code> haben wir schon unsere erste <em>Funktion</em> kennengelernt. R stellt uns eine Vielzahl von verschiedenen Funktionen zur Verfügung, und sie werden immer nach dem gleichen Schema benutzt: <code>FUNKTIONSNAME(PARAMETER)</code>.</p>
 <p><em>Parameter</em> (auf Englisch auch “arguments”) sind die Werte, die als Input an die Funktion übergeben werden. Je nach Funktion können das auch mehrere Werte sein, die dann durch Kommas getrennt werden. So nimmt die Funktion <code>max()</code>, die den Maximalwert bestimmt, beliebig viele Zahlen als Parameter:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="erste-schritte.html#cb20-1" aria-hidden="true"></a><span class="kw">max</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="erste-schritte.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>Die Funktion <code>round()</code> hat als optionalen Parameter die Anzahl der Nachkommastellen, auf die gerundet werden soll. Wenn er nicht angegeben wird, nimmmt dieser Parameter immer den Wert 0 an:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="erste-schritte.html#cb22-1" aria-hidden="true"></a><span class="kw">round</span>(<span class="fl">4.567</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="erste-schritte.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>Aber er lässt sich auch spezifizieren:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="erste-schritte.html#cb24-1" aria-hidden="true"></a><span class="kw">round</span>(<span class="fl">4.567</span>, <span class="dt">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="erste-schritte.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 4.57</code></pre>
 <p>Dabei sind die folgenden Ausdrücke identisch:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="erste-schritte.html#cb26-1" aria-hidden="true"></a><span class="kw">round</span>(<span class="fl">4.567</span>, <span class="dt">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="erste-schritte.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 4.57</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="erste-schritte.html#cb28-1" aria-hidden="true"></a><span class="kw">round</span>(<span class="fl">4.567</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="erste-schritte.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 4.57</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="erste-schritte.html#cb30-1" aria-hidden="true"></a><span class="kw">round</span>(<span class="dt">digits =</span> <span class="dv">2</span>, <span class="fl">4.567</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="erste-schritte.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="fl">4.567</span>)</span></code></pre></div>
 <pre><code>## [1] 4.57</code></pre>
 <p>Was Funktionen genau machen und welche Parameter sie dabei nehmen, ist in der R-Dokumentation sehr ausführlich (und auf den ersten Blick recht kompliziert) beschrieben. Ganz am Ende der Hilfeseite finden sich oft Beipsiele. Die Hilfe zu einer Funktion kann mit folgendem Befehl aufgerufen werden:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="erste-schritte.html#cb32-1" aria-hidden="true"></a>?max</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="erste-schritte.html#cb32-1" aria-hidden="true" tabindex="-1"></a>?max</span></code></pre></div>
 <p>Notiz am Rande: Auch die Infix-Operatoren <code>+</code>, <code>-</code>, <code>*</code>, usw. sind eigentlich nur verkürzte Schreibweisen von Funktionen. Mit “backticks” ( ` ) lassen sie sich in vollwertige Funktionen zurückverwandeln:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="erste-schritte.html#cb33-1" aria-hidden="true"></a><span class="st">`</span><span class="dt">+</span><span class="st">`</span>(<span class="dv">2</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="erste-schritte.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">2</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
 <div id="strings" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> Strings</h2>
 <p>R kann nicht nur mit Zahlen umgehen, sondern auch mit Text. Ein <em>String</em> ist eine Aneinanderreihung von Buchstaben, und wird mit einfachen oder doppelten Anführungszeichen umschlossen:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="erste-schritte.html#cb35-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="st">&quot;Hello, World!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="erste-schritte.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello, World!&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Hello, World!&quot;</code></pre>
 <p>Auch Variablen können Strings als Wert haben:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="erste-schritte.html#cb37-1" aria-hidden="true"></a>name &lt;-<span class="st"> &quot;Hase&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="erste-schritte.html#cb37-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Hase&quot;</span></span></code></pre></div>
 <p>Es gibt auch Funktionen, die Strings als Parameter nehmen. <code>paste</code> fügt Strings aneinander:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="erste-schritte.html#cb38-1" aria-hidden="true"></a><span class="kw">paste</span>(<span class="st">&quot;Mein Name ist&quot;</span>, name)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="erste-schritte.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;Mein Name ist&quot;</span>, name)</span></code></pre></div>
 <pre><code>## [1] &quot;Mein Name ist Hase&quot;</code></pre>
 </div>
 <div id="datentypen" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Datentypen</h2>
 <p>Den <em>Typ</em> einer Variable oder eines Wertes bestimmen wir durch den Befehl <code>str()</code>:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="erste-schritte.html#cb40-1" aria-hidden="true"></a><span class="kw">str</span>(name)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="erste-schritte.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(name)</span></code></pre></div>
 <pre><code>##  chr &quot;Hase&quot;</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="erste-schritte.html#cb42-1" aria-hidden="true"></a><span class="kw">str</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="erste-schritte.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  num 10</code></pre>
 <p>Dabei steht <code>chr</code> („character“) für Strings und <code>num</code> („numeric“) für Zahlen.</p>
 <p>Ein weiterer Variablentyp ist <code>logi</code> („logical“), der prinzipiell nur die Werte <code>TRUE</code> oder <code>FALSE</code> annehmen kann. Dieser Typ heißt auch <a href="https://de.wikipedia.org/wiki/Boolesche_Variable">Boolsche Variabel</a>:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="erste-schritte.html#cb44-1" aria-hidden="true"></a><span class="kw">str</span>(<span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="erste-schritte.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>##  logi FALSE</code></pre>
 <p>Soweit es ein eindeutiges Ergebnis gibt, kann R mit den entsprechenden Befehlen Werte vom einen in den anderen Typ umwandeln:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="erste-schritte.html#cb46-1" aria-hidden="true"></a><span class="kw">as.numeric</span>(<span class="st">&quot;1000&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="erste-schritte.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;1000&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 1000</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="erste-schritte.html#cb48-1" aria-hidden="true"></a><span class="kw">as.character</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="erste-schritte.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;20.5&quot;</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="erste-schritte.html#cb50-1" aria-hidden="true"></a><span class="kw">as.logical</span>(<span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="erste-schritte.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.logical</span>(<span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>Kann R einen Wert nicht umwandeln, dann kommt dabei <code>NA</code> raus (mit einer Warnung):</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="erste-schritte.html#cb52-1" aria-hidden="true"></a><span class="kw">as.numeric</span>(<span class="st">&quot;Hallo!&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="erste-schritte.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;Hallo!&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p><code>NA</code> („not available/assigned“) ist dabei ein besonderer Wert, den jeder Variablentyp annehmen kann.</p>

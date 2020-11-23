@@ -12,6 +12,7 @@ site: bookdown::bookdown_site
 documentclass: article
 bibliography: ["datascience.bib"]
 link-citations: yes
+lang: de
 description: "Projektseminar"
 ---
 
@@ -20,11 +21,11 @@ description: "Projektseminar"
 *Alle Sitzungen finden von 13 bis 16h c.t. statt*
 
 Datum                 | Sitzung   | Inhalt
---------------------: | --------: | :-------
+--------------------: | --------: | :-----------------------------------
 2. November 2020      | 1         | [Vorbesprechung](#vorbesprechung)
 9. November 2020      | 2         | [Erste Schritte](#erste-schritte)
 16. November 2020     | 3         | [Text: Anderson 2008](#text-anderson-2008)
-23. November 2020     | 4         | Datenstrukturen
+23. November 2020     | 4         | [Datenstrukturen](#datenstrukturen)
 30. November 2020     | 5         | Visualisierungen
 7. Dezember 2020      | 6         | Text: Shelton et al. 2014
 14. Dezember 2020     | 7         | Geodaten

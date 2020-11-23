@@ -101,7 +101,7 @@ Sie können...
 Alle kriterien werden mit einer (runden) Schulnote bewertet. Der gewichtete Schnitt ergibt die Gesamtnote.
 
 Kriterium                    | Gewichtung   | Erläuterung
-----------                   | -----------: | --------------
+-------------------          | -------:     | ----------------------------------------
 Ziterweise und Formatierung  | 10%          | Der Text erfüllt formale Anforderungen an Wissenschaftlichkeit.
 Ausdruck und Rechtschreibung | 10%          | Der Text ist sprachlich gelungen.
 Roter Faden                  | 10%          | Der Text ist übersichtlich strukturiert und die Einzelteile greifen gut ineinander.
