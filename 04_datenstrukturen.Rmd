@@ -1,5 +1,14 @@
 # Datenstrukturen
 
+## Lernziele dieser Sitzung
+
+Sie können...
+
+- die verschiedenen Strukturen für Datensätze in R benennen.
+- Beispieldatensätze aufrufen.
+- Vektoren generieren.
+- einfache Befehle mit Vektoduren durchführen.
+
 ## Vektoren
 
 Vektoren (engl. *vectors*) sind eindimensionale Reihen von Werten gleichen Typs. Sie bilden einen wichtigen Baustein von R und von den hier im Seminar besprochenen Inhalten.
