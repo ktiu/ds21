@@ -2076,14 +2076,40 @@ Schließlich lassen sich noch viele weitere optische Aspekte anpassen, z.B. Achs
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-56-1.pdf}
 
-\hypertarget{aufgaben-2}{%
-\subsection{Aufgaben}\label{aufgaben-2}}
+\hypertarget{aufgaben-mit-luxf6sungen}{%
+\subsection{Aufgaben (mit Lösungen)}\label{aufgaben-mit-luxf6sungen}}
 
 Versuchen Sie, folgende Visualisierungen des Datensatzes \texttt{diamonds} auszugeben:
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(diamonds, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cut)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill=}\NormalTok{color))}
+\end{Highlighting}
+\end{Shaded}
+
 \includegraphics{_main_files/figure-latex/unnamed-chunk-57-1.pdf}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(diamonds, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{depth, }\AttributeTok{y=}\NormalTok{price)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.1}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{cut)) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{colour=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes=}\FunctionTok{list}\NormalTok{(}\AttributeTok{alpha=}\DecValTok{1}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
 \includegraphics{_main_files/figure-latex/unnamed-chunk-58-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(diamonds, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{color, }\AttributeTok{y=}\NormalTok{price)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color=}\NormalTok{color), }\AttributeTok{outlier.colour =} \ConstantTok{NA}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{cut) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position=}\StringTok{"none"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\StringTok{"Farbe"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"Preis"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-59-1.pdf}
 

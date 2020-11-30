@@ -119,23 +119,22 @@ ggplot(diamonds, aes(x=carat, y=price)) +
   theme_dark()
 ```
 
-
-## Aufgaben
+## Aufgaben (mit Lösungen)
 
 Versuchen Sie, folgende Visualisierungen des Datensatzes `diamonds` auszugeben: 
 
-```{r echo=F, cache=T}
+```{r cache=T}
 ggplot(diamonds, aes(x=cut)) +
   geom_bar(aes(fill=color))
 ```
 
-```{r echo=F, cache=T}
+```{r cache=T}
 ggplot(diamonds, aes(x=depth, y=price)) +
   geom_point(alpha=0.1, aes(color=cut)) +
   guides(colour=guide_legend(override.aes=list(alpha=1)))
 ```
 
-```{r echo=F, cache=T}
+```{r cache=T}
 ggplot(diamonds, aes(x=color, y=price)) +
   geom_boxplot(aes(color=color), outlier.colour = NA) +
   facet_wrap(~cut) +
@@ -143,6 +142,8 @@ ggplot(diamonds, aes(x=color, y=price)) +
   scale_x_discrete("Farbe") + 
   scale_y_continuous("Preis")
 ```
+
+
 
 ### R for Data Science
 

@@ -220,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.2</b> Überblick</a></li>
 <li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.3</b> Visualisierung mit dem Standardpaket</a></li>
 <li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit <code>ggplot()</code></a></li>
-<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.5</b> Aufgaben</a>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-mit-lösungen"><i class="fa fa-check"></i><b>5.5</b> Aufgaben (mit Lösungen)</a>
 <ul>
 <li class="chapter" data-level="5.5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.5.1</b> R for Data Science</a></li>
 </ul></li>
@@ -373,11 +373,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb135-7"><a href="visualisierungen.html#cb135-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_dark</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 </div>
-<div id="aufgaben-2" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Aufgaben</h2>
+<div id="aufgaben-mit-lösungen" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Aufgaben (mit Lösungen)</h2>
 <p>Versuchen Sie, folgende Visualisierungen des Datensatzes <code>diamonds</code> auszugeben:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="visualisierungen.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>cut)) <span class="sc">+</span></span>
+<span id="cb136-2"><a href="visualisierungen.html#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill=</span>color))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="visualisierungen.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>depth, <span class="at">y=</span>price)) <span class="sc">+</span></span>
+<span id="cb137-2"><a href="visualisierungen.html#cb137-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.1</span>, <span class="fu">aes</span>(<span class="at">color=</span>cut)) <span class="sc">+</span></span>
+<span id="cb137-3"><a href="visualisierungen.html#cb137-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="fu">guide_legend</span>(<span class="at">override.aes=</span><span class="fu">list</span>(<span class="at">alpha=</span><span class="dv">1</span>)))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="visualisierungen.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>color, <span class="at">y=</span>price)) <span class="sc">+</span></span>
+<span id="cb138-2"><a href="visualisierungen.html#cb138-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">color=</span>color), <span class="at">outlier.colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb138-3"><a href="visualisierungen.html#cb138-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>cut) <span class="sc">+</span></span>
+<span id="cb138-4"><a href="visualisierungen.html#cb138-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb138-5"><a href="visualisierungen.html#cb138-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="st">&quot;Farbe&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb138-6"><a href="visualisierungen.html#cb138-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;Preis&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <div id="r-for-data-science" class="section level3" number="5.5.1">
 <h3><span class="header-section-number">5.5.1</span> R for Data Science</h3>
