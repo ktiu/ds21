@@ -1,0 +1,13 @@
+# Text: Shelton et al. 2014
+
+## Lesetext
+
+Shelton, Taylor, Ate Poorthuis, Mark Graham und Matthew Zook. 2014. Mapping the Data Shadows of Hurricane Sandy. Uncovering the Sociospatial Dimensions of ‘Big Data’. *Geoforum 52.* 167–79.
+
+## Fragen an den Text
+
+1. Um welche Art von Text handelt es sich? Wer sind die Autoren, und an wen wenden sie sich?
+2. Was war Hurricane Sandy, von dem der Text erzählt? Warum wird ausgerechnet dieser Hurricane herangezogen?
+2. Welche Methoden wenden die Autoren an, und zu welchen Ergebnissen kommen sie?
+3. Im Abstract versprechen die Autoren: "We also seek to fill a conceptual lacuna..." Was heißt das, und wie geht der Text das an?
+4. In welchen Punkten finden Sie den Text überzeugend? Welche Kritik haben Sie am Text?

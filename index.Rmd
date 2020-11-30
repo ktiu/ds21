@@ -27,7 +27,7 @@ Datum                 | Sitzung   | Inhalt
 16. November 2020     | 3         | [Text: Anderson 2008](#text-anderson-2008)
 23. November 2020     | 4         | [Datenstrukturen](#datenstrukturen)
 30. November 2020     | 5         | [Visualisierungen](#visualisierungen)
-7. Dezember 2020      | 6         | Text: Shelton et al. 2014
+7. Dezember 2020      | 6         | [Text: Shelton et al. 2014](#text-shelton-et-al.-2014)
 14. Dezember 2020     | 7         | Geodaten
 11. Januar 2021       | 9         | Choroplethen
 18. Januar 2021       | 10        | Text: Chandra 2014
