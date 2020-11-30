@@ -92,7 +92,7 @@ Matritzen (engl. *matrix*) sind zweidimensionale Reihen von Werten gleichen Typs
 ```{r}
 matrix(1:15, nrow=3)
 ```
-Sie spielen in diesem Seminar keine große Rolle
+Sie spielen in diesem Seminar aber keine große Rolle.
 
 ## Listen
 
@@ -159,7 +159,7 @@ rev(LETTERS)
 paste0(letters, LETTERS)
 ```
 
-* Wandeln Sie die Typen der ersten Drei Vektoren um:
+* Wandeln Sie die Typen der ersten drei obigen Vektoren um:
 
 ```{r echo=F}
 c(T, F, F) %>% as.numeric()

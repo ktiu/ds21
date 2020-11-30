@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Visualisierungen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Visualisierungen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Visualisierungen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="datenstrukturen.html"/>
+
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="/~tstraube/c/ds21">Data Science für die Humangeographie</a></strong></li>
+<li><em><a href="/~tstraube/">Till Straube</a></em></li>
+<li><a>(Neu laden: Strg+Shift+R)</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé"><i class="fa fa-check"></i><b>1.3.1</b> Exposé</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.2</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.1</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.2</b> Überblick</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.3</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.5</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.5.1</b> R for Data Science</a></li>
+<li class="chapter" data-level="5.5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#swirl-2"><i class="fa fa-check"></i><b>5.5.2</b> Swirl</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/ktiu/ds21">Auf GitHub anschauen</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualisierungen" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Visualisierungen</h1>
+<div id="voraussetzungen" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Voraussetzungen</h2>
+<p>Für diese Lektion benötigen wir das Paket <code>tidyverse</code>:</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="visualisierungen.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Und einen Datensatz, der in Form eines tibble vorliegt. Der Beispieldatensatz <code>diamonds</code> wird mitgeliefert:</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="visualisierungen.html#cb118-1" aria-hidden="true" tabindex="-1"></a>diamonds</span></code></pre></div>
+<pre><code>## # A tibble: 53,940 x 10
+##    carat cut      color clarity depth table price     x
+##    &lt;dbl&gt; &lt;ord&gt;    &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+##  1 0.23  Ideal    E     SI2      61.5    55   326  3.95
+##  2 0.21  Premium  E     SI1      59.8    61   326  3.89
+##  3 0.23  Good     E     VS1      56.9    65   327  4.05
+##  4 0.290 Premium  I     VS2      62.4    58   334  4.2 
+##  5 0.31  Good     J     SI2      63.3    58   335  4.34
+##  6 0.24  Very Go… J     VVS2     62.8    57   336  3.94
+##  7 0.24  Very Go… I     VVS1     62.3    57   336  3.95
+##  8 0.26  Very Go… H     SI1      61.9    55   337  4.07
+##  9 0.22  Fair     E     VS2      65.1    61   337  3.87
+## 10 0.23  Very Go… H     VS1      59.4    61   338  4   
+## # … with 53,930 more rows, and 2 more variables:
+## #   y &lt;dbl&gt;, z &lt;dbl&gt;</code></pre>
+<p>Wenn wir mögen, können wir ihn mit der Funktion <code>data()</code> explizit in unser Environment laden:</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="visualisierungen.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(diamonds)</span></code></pre></div>
+</div>
+<div id="überblick-1" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Überblick</h2>
+<p>Einen ersten Überblick kriegen wir zum Einen durch den Befehl <code>str()</code>, der uns die Typen in den Spalten anzeigt:</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="visualisierungen.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(diamonds)</span></code></pre></div>
+<pre><code>## tibble [53,940 × 10] (S3: tbl_df/tbl/data.frame)
+##  $ carat  : num [1:53940] 0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...
+##  $ cut    : Ord.factor w/ 5 levels &quot;Fair&quot;&lt;&quot;Good&quot;&lt;..: 5 4 2 4 2 3 3 3 1 3 ...
+##  $ color  : Ord.factor w/ 7 levels &quot;D&quot;&lt;&quot;E&quot;&lt;&quot;F&quot;&lt;&quot;G&quot;&lt;..: 2 2 2 6 7 7 6 5 2 5 ...
+##  $ clarity: Ord.factor w/ 8 levels &quot;I1&quot;&lt;&quot;SI2&quot;&lt;&quot;SI1&quot;&lt;..: 2 3 5 4 2 6 7 3 4 5 ...
+##  $ depth  : num [1:53940] 61.5 59.8 56.9 62.4 63.3 62.8 62.3 61.9 65.1 59.4 ...
+##  $ table  : num [1:53940] 55 61 65 58 58 57 57 55 61 61 ...
+##  $ price  : int [1:53940] 326 326 327 334 335 336 336 337 337 338 ...
+##  $ x      : num [1:53940] 3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
+##  $ y      : num [1:53940] 3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
+##  $ z      : num [1:53940] 2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
+<p>Zum Anderen gibt die Hilfefunktion Auskunft über den Datensatz und die einzelnen Variablen (Metadaten):</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="visualisierungen.html#cb123-1" aria-hidden="true" tabindex="-1"></a>?diamonds</span></code></pre></div>
+<p>Einen Überblick über die wichtigsten statistischen Parameter erhalten wir mit:</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="visualisierungen.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(diamonds)</span></code></pre></div>
+<pre><code>##      carat               cut        color    
+##  Min.   :0.2000   Fair     : 1610   D: 6775  
+##  1st Qu.:0.4000   Good     : 4906   E: 9797  
+##  Median :0.7000   Very Good:12082   F: 9542  
+##  Mean   :0.7979   Premium  :13791   G:11292  
+##  3rd Qu.:1.0400   Ideal    :21551   H: 8304  
+##  Max.   :5.0100                     I: 5422  
+##                                     J: 2808  
+##     clarity          depth           table      
+##  SI1    :13065   Min.   :43.00   Min.   :43.00  
+##  VS2    :12258   1st Qu.:61.00   1st Qu.:56.00  
+##  SI2    : 9194   Median :61.80   Median :57.00  
+##  VS1    : 8171   Mean   :61.75   Mean   :57.46  
+##  VVS2   : 5066   3rd Qu.:62.50   3rd Qu.:59.00  
+##  VVS1   : 3655   Max.   :79.00   Max.   :95.00  
+##  (Other): 2531                                  
+##      price             x                y         
+##  Min.   :  326   Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.:  950   1st Qu.: 4.710   1st Qu.: 4.720  
+##  Median : 2401   Median : 5.700   Median : 5.710  
+##  Mean   : 3933   Mean   : 5.731   Mean   : 5.735  
+##  3rd Qu.: 5324   3rd Qu.: 6.540   3rd Qu.: 6.540  
+##  Max.   :18823   Max.   :10.740   Max.   :58.900  
+##                                                   
+##        z         
+##  Min.   : 0.000  
+##  1st Qu.: 2.910  
+##  Median : 3.530  
+##  Mean   : 3.539  
+##  3rd Qu.: 4.040  
+##  Max.   :31.800  
+## </code></pre>
+</div>
+<div id="visualisierung-mit-dem-standardpaket" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Visualisierung mit dem Standardpaket</h2>
+<p>Es gibt in R mehrere grundlegend verschiedene Möblichkeiten, Daten zu visualiseren. Für einen schnellen Überblick sind z.B. <code>hist()</code> und <code>boxplot()</code> hilfreich:</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="visualisierungen.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(diamonds<span class="sc">$</span>price)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="visualisierungen.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(diamonds<span class="sc">$</span>x)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+</div>
+<div id="visualisierung-mit-ggplot" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Visualisierung mit <code>ggplot()</code></h2>
+<p>Das Paket <code>ggplot2</code> ist Teil vom <code>tidyverse</code>. Hiermit lassen sich sehr flexible Graphiken gestalten. Wir werden ausschließlich mit diesem System arbeiten.</p>
+<p>Die Syntax ist dabei auf den ersten Blick etwas komplexer.</p>
+<p>Am Anfang steht der Befehl <code>ggplot(x)</code> mit dem Datensatz als Parameter</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="visualisierungen.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>diamonds)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p>Mit einem Mapping-Parameter legen wir die Dimensionen fest:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="visualisierungen.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>diamonds, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>price, <span class="at">y=</span>carat))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>Das gleiche ohne Parameternamen:</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="visualisierungen.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(price, carat))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>Nun kann mit dem <code>+</code>-Operator ein “geometrischer” Layer hinzugefügt werden:</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="visualisierungen.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span></span>
+<span id="cb131-2"><a href="visualisierungen.html#cb131-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p>Weitere <code>geom</code>-Layer lassen sich mit dem <code>+</code>-Operator hinzufügen:</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="visualisierungen.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span></span>
+<span id="cb132-2"><a href="visualisierungen.html#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb132-3"><a href="visualisierungen.html#cb132-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>Die Layer-Funktionen können durch Parameter angepasst werden:</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="visualisierungen.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span></span>
+<span id="cb133-2"><a href="visualisierungen.html#cb133-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb133-3"><a href="visualisierungen.html#cb133-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p>Dabei lassen sich in den einzelnen Layers mappings hinzufügen oder verändern:</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="visualisierungen.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span></span>
+<span id="cb134-2"><a href="visualisierungen.html#cb134-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>clarity), <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb134-3"><a href="visualisierungen.html#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p>Schließlich lassen sich noch viele weitere optische Aspekte anpassen, z.B. Achsen, Farben, etc.:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="visualisierungen.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x=</span>carat, <span class="at">y=</span>price)) <span class="sc">+</span></span>
+<span id="cb135-2"><a href="visualisierungen.html#cb135-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>clarity), <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb135-3"><a href="visualisierungen.html#cb135-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb135-4"><a href="visualisierungen.html#cb135-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&quot;Karatzahl&quot;</span>, <span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb135-5"><a href="visualisierungen.html#cb135-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;Preis&quot;</span>) <span class="sc">+</span></span>
+<span id="cb135-6"><a href="visualisierungen.html#cb135-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="st">&quot;Klarheit&quot;</span>) <span class="sc">+</span></span>
+<span id="cb135-7"><a href="visualisierungen.html#cb135-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_dark</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+</div>
+<div id="aufgaben-2" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Aufgaben</h2>
+<p>Versuchen Sie, folgende Visualisierungen des Datensatzes <code>diamonds</code> auszugeben:</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div id="r-for-data-science" class="section level3" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> R for Data Science</h3>
+<p>Schauen Sie sich die Publikation <a href="https://r4ds.had.co.nz/">R for Data Science</a> an.</p>
+<p>Was ist das für ein Buch? Wer ist das Zielpublikum?</p>
+<p>Lesen Sie das Kapitel “3: Data Visualization” und vollziehen Sie die Visualisierungen nach.</p>
+<p>Bearbeiten Sie die Aufgaben.</p>
+</div>
+<div id="swirl-2" class="section level3" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Swirl</h3>
+<p>Bearbeiten Sie die Swirl-Aufgaben aus den letzten beiden Lektionen.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="datenstrukturen.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
