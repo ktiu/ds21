@@ -154,7 +154,4 @@ Lesen Sie das Kapitel "3: Data Visualization" und vollziehen Sie die Visualisier
 
 Bearbeiten Sie die Aufgaben.
 
-### Swirl
-
-Bearbeiten Sie die Swirl-Aufgaben aus den letzten beiden Lektionen.
- 
+Bearbeiten Sie die [RStudio Primers zu Datenvisualisierung](https://rstudio.cloud/learn/primers/3).
