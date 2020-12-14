@@ -2456,8 +2456,8 @@ Schließlich ergibt das Streudiagramm von Koordinaten so eine art Karte:
 
 Diesen Ansatz werden wir in der nächsten Lektion vertiefen.
 
-\hypertarget{aufgaben-2}{%
-\subsection{Aufgaben}\label{aufgaben-2}}
+\hypertarget{aufgaben-mit-luxf6sungen-1}{%
+\subsection{Aufgaben (mit Lösungen)}\label{aufgaben-mit-luxf6sungen-1}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2467,14 +2467,121 @@ Diesen Ansatz werden wir in der nächsten Lektion vertiefen.
   Finden Sie den kompletten aktuellen Datensatz für „locations`` als CSV-Datei.
 \item
   Importieren Sie ihn in R und weisen Sie dem Datensatz den Namen \texttt{pleiades} zu.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pleiades }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"http://atlantides.org/downloads/pleiades/dumps/pleiades{-}locations{-}latest.csv.gz"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
 \item
   Finden Sie geeignete Werte für (einzelne) Längen- und Breitengrade im Datensatz.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pleiades}\SpecialCharTok{$}\NormalTok{reprLong }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# Längengrad}
+ \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -16.910   8.045  17.500  19.896  30.730 111.078 
+##    NA's 
+##    7316
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pleiades}\SpecialCharTok{$}\NormalTok{reprLat }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# Breitengrad}
+  \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -20.00   36.25   39.10   39.53   43.73   62.50 
+##    NA's 
+##    7316
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
 \item
   Plotten Sie die Koordinaten auf x- und y-Achse mit \texttt{ggplot()}. Was erkennen Sie?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(pleiades) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ reprLong, }\AttributeTok{y =}\NormalTok{ reprLat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 7316 rows containing missing values
+## (geom_point).
+\end{verbatim}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-77-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
 \item
   Halbieren Sie die Größe und setzen Sie den Alpha-Wert der Punkte auf 0,2.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(pleiades) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ reprLong, }\AttributeTok{y =}\NormalTok{ reprLat), }\AttributeTok{size =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 7316 rows containing missing values
+## (geom_point).
+\end{verbatim}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-78-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
 \item
   Bringen Sie die Grafik in die Merkator-Projektion.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(pleiades) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ reprLong, }\AttributeTok{y =}\NormalTok{ reprLat), }\AttributeTok{size =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_map}\NormalTok{(}\StringTok{"mercator"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 7316 rows containing missing values
+## (geom_point).
+\end{verbatim}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-79-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
 \item
   Schauen Sie sich diesen Befehl an:
 \end{enumerate}
@@ -2500,17 +2607,189 @@ Diesen Ansatz werden wir in der nächsten Lektion vertiefen.
   Führen Sie den Befehl aus.
 \item
   Ändern Sie die Farbe der Flächen in hellgrau.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{map\_data}\NormalTok{(}\StringTok{"world"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ long, }\AttributeTok{y =}\NormalTok{ lat, }\AttributeTok{group =}\NormalTok{ group),}
+                 \AttributeTok{fill    =} \StringTok{"grey"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{coord\_quickmap}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }\DecValTok{40}\NormalTok{),}
+                   \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{26}\NormalTok{, }\DecValTok{48}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-81-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
 \item
   Wählen Sie einen Kartenausschnitt, auf dem Portugal, Ägypten, Irak und Frankreich komplett zu sehen sind.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{map\_data}\NormalTok{(}\StringTok{"world"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ long, }\AttributeTok{y =}\NormalTok{ lat, }\AttributeTok{group =}\NormalTok{ group),}
+                 \AttributeTok{fill    =} \StringTok{"grey"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{coord\_quickmap}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }\DecValTok{48}\NormalTok{),}
+                   \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{50}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-82-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
 \item
   Plotten Sie auf diesem Hintergrund den Datensatz \texttt{pleiades}. Passen Sie dabei die Parameter so an, dass es Ihnen optisch zusagt.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{map\_data}\NormalTok{(}\StringTok{"world"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ long, }\AttributeTok{y =}\NormalTok{ lat, }\AttributeTok{group =}\NormalTok{ group),}
+                 \AttributeTok{fill    =} \StringTok{"grey"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{coord\_quickmap}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }\DecValTok{48}\NormalTok{), }
+                   \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{50}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data    =}\NormalTok{ pleiades,}
+               \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ reprLong, }\AttributeTok{y =}\NormalTok{ reprLat),}
+               \AttributeTok{color   =} \StringTok{"blue"}\NormalTok{,}
+               \AttributeTok{size    =} \FloatTok{0.3}\NormalTok{,}
+               \AttributeTok{alpha   =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 7316 rows containing missing values
+## (geom_point).
+\end{verbatim}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-83-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
 \item
   Wählen Sie für die Karte die \href{https://de.wikipedia.org/wiki/Bonnesche_Projektion}{Bonnesche Projektion} mit Standardparallele bei 40°N.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{map\_data}\NormalTok{(}\StringTok{"world"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ long, }\AttributeTok{y =}\NormalTok{ lat, }\AttributeTok{group =}\NormalTok{ group),}
+                 \AttributeTok{fill    =} \StringTok{"grey"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{coord\_map}\NormalTok{(}\StringTok{"bonne"}\NormalTok{, }\DecValTok{40}\NormalTok{,}
+              \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }\DecValTok{48}\NormalTok{),}
+              \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{50}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data    =}\NormalTok{ pleiades,}
+               \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ reprLong, }\AttributeTok{y =}\NormalTok{ reprLat),}
+               \AttributeTok{color   =} \StringTok{"blue"}\NormalTok{,}
+               \AttributeTok{size    =} \FloatTok{0.3}\NormalTok{,}
+               \AttributeTok{alpha   =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 7316 rows containing missing values
+## (geom_point).
+\end{verbatim}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-84-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
 \item
   Entfernen Sie alle Achsenbeschriftungen.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{map\_data}\NormalTok{(}\StringTok{"world"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ long, }\AttributeTok{y =}\NormalTok{ lat, }\AttributeTok{group =}\NormalTok{ group),}
+                 \AttributeTok{fill    =} \StringTok{"grey"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{coord\_map}\NormalTok{(}\StringTok{"bonne"}\NormalTok{, }\DecValTok{40}\NormalTok{,}
+              \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }\DecValTok{48}\NormalTok{),}
+              \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{50}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data    =}\NormalTok{ pleiades,}
+               \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ reprLong, }\AttributeTok{y =}\NormalTok{ reprLat),}
+               \AttributeTok{color   =} \StringTok{"blue"}\NormalTok{,}
+               \AttributeTok{size    =} \FloatTok{0.3}\NormalTok{,}
+               \AttributeTok{alpha   =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{axis.ticks =} \FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{axis.text  =} \FunctionTok{element\_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 7316 rows containing missing values
+## (geom_point).
+\end{verbatim}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-85-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\tightlist
 \item
   (Achtung: extrem knifflig!) Bilden Sie diese Grafik nach, die die Orte geordnet nach ältestem Fund darstellt:
 \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pleiades }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\AttributeTok{long =}\NormalTok{ reprLong,}
+         \AttributeTok{lat =}\NormalTok{ reprLat,}
+\NormalTok{         timePeriods) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{oldest =} \FunctionTok{str\_extract}\NormalTok{(timePeriods, }\StringTok{"[ACHRL]"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{oldest =} \FunctionTok{factor}\NormalTok{(oldest, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"H"}\NormalTok{, }\StringTok{"R"}\NormalTok{, }\StringTok{"L"}\NormalTok{))) }\OtherTok{{-}\textgreater{}}
+\NormalTok{  pleiades\_periods}
+ 
+\FunctionTok{map\_data}\NormalTok{(}\StringTok{"world"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(region }\SpecialCharTok{!=} \StringTok{"Antarctica"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(long, lat, }\AttributeTok{group =}\NormalTok{ group),}
+                 \AttributeTok{fill    =} \StringTok{"darkgreen"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{coord\_map}\NormalTok{(}\StringTok{"albers"}\NormalTok{,}
+              \AttributeTok{parameters =} \FunctionTok{c}\NormalTok{(}\DecValTok{16}\NormalTok{, }\DecValTok{37}\NormalTok{),}
+              \AttributeTok{xlim       =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }\DecValTok{40}\NormalTok{),}
+              \AttributeTok{ylim       =} \FunctionTok{c}\NormalTok{(}\DecValTok{26}\NormalTok{, }\DecValTok{48}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data    =}\NormalTok{ pleiades\_periods,}
+               \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(long, lat, }\AttributeTok{color =}\NormalTok{ oldest),}
+               \AttributeTok{size    =} \FloatTok{0.2}\NormalTok{,}
+               \AttributeTok{alpha   =} \FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_color\_brewer}\NormalTok{(}\StringTok{"Früheste Epoche"}\NormalTok{,}
+                       \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"H"}\NormalTok{, }\StringTok{"R"}\NormalTok{, }\StringTok{"L"}\NormalTok{),}
+                       \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"1000{-}550 v.d.Z."}\NormalTok{,}
+                                  \StringTok{"550{-}330 v.d.Z."}\NormalTok{,}
+                                  \StringTok{"330 v.d.Z. {-} 30 n.d.Z."}\NormalTok{,}
+                                  \StringTok{"30{-}300 n.d.Z."}\NormalTok{,}
+                                  \StringTok{"300{-}640 n.d.Z."}\NormalTok{),}
+                       \AttributeTok{palette =} \StringTok{"YlOrBr"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.title       =} \FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{axis.ticks       =} \FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{axis.text        =} \FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{panel.background =} \FunctionTok{element\_rect}\NormalTok{(}\AttributeTok{fill  =} \StringTok{"darkblue"}\NormalTok{),}
+          \AttributeTok{panel.grid       =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"blue"}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{guides}\NormalTok{(}\AttributeTok{colour =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{alpha =} \DecValTok{1}\NormalTok{,}
+                                                     \AttributeTok{size  =} \DecValTok{8}\NormalTok{,}
+                                                     \AttributeTok{shape =} \DecValTok{15}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-86-1.pdf}
 

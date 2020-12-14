@@ -1,7 +1,7 @@
 # Geodaten
 
 ```{r include = F}
-show_solutions <- F
+show_solutions <- T
 ```
 ## Lernziele dieser Sitzung
 
@@ -133,7 +133,7 @@ ggplot(alte_baeume) +
 
 Diesen Ansatz werden wir in der nächsten Lektion vertiefen.
 
-## Aufgaben
+## Aufgaben (mit Lösungen)
 
 1. Besuchen Sie https://pleiades.stoa.org/ - worum geht es hier?
 

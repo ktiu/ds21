@@ -239,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
 <li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
 <li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
-<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-2"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-mit-lösungen-1"><i class="fa fa-check"></i><b>7.7</b> Aufgaben (mit Lösungen)</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ktiu/ds21">Auf GitHub anschauen</a></li>
@@ -425,35 +425,182 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="_main_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 <p>Diesen Ansatz werden wir in der nächsten Lektion vertiefen.</p>
 </div>
-<div id="aufgaben-2" class="section level2" number="7.7">
-<h2><span class="header-section-number">7.7</span> Aufgaben</h2>
+<div id="aufgaben-mit-lösungen-1" class="section level2" number="7.7">
+<h2><span class="header-section-number">7.7</span> Aufgaben (mit Lösungen)</h2>
 <ol style="list-style-type: decimal">
 <li><p>Besuchen Sie <a href="https://pleiades.stoa.org/" class="uri">https://pleiades.stoa.org/</a> - worum geht es hier?</p></li>
 <li><p>Finden Sie den kompletten aktuellen Datensatz für „locations“ als CSV-Datei.</p></li>
 <li><p>Importieren Sie ihn in R und weisen Sie dem Datensatz den Namen <code>pleiades</code> zu.</p></li>
-<li><p>Finden Sie geeignete Werte für (einzelne) Längen- und Breitengrade im Datensatz.</p></li>
-<li><p>Plotten Sie die Koordinaten auf x- und y-Achse mit <code>ggplot()</code>. Was erkennen Sie?</p></li>
-<li><p>Halbieren Sie die Größe und setzen Sie den Alpha-Wert der Punkte auf 0,2.</p></li>
-<li><p>Bringen Sie die Grafik in die Merkator-Projektion.</p></li>
-<li><p>Schauen Sie sich diesen Befehl an:</p></li>
 </ol>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="geodaten.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb162-2"><a href="geodaten.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb162-3"><a href="geodaten.html#cb162-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long,</span>
-<span id="cb162-4"><a href="geodaten.html#cb162-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> lat,</span>
-<span id="cb162-5"><a href="geodaten.html#cb162-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">group =</span> group)) <span class="sc">+</span></span>
-<span id="cb162-6"><a href="geodaten.html#cb162-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">40</span>),</span>
-<span id="cb162-7"><a href="geodaten.html#cb162-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">48</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="geodaten.html#cb162-1" aria-hidden="true" tabindex="-1"></a>pleiades <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;http://atlantides.org/downloads/pleiades/dumps/pleiades-locations-latest.csv.gz&quot;</span>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Finden Sie geeignete Werte für (einzelne) Längen- und Breitengrade im Datensatz.</li>
+</ol>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="geodaten.html#cb163-1" aria-hidden="true" tabindex="-1"></a>pleiades<span class="sc">$</span>reprLong <span class="sc">%&gt;%</span> <span class="co"># Längengrad</span></span>
+<span id="cb163-2"><a href="geodaten.html#cb163-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -16.910   8.045  17.500  19.896  30.730 111.078 
+##    NA&#39;s 
+##    7316</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="geodaten.html#cb165-1" aria-hidden="true" tabindex="-1"></a>pleiades<span class="sc">$</span>reprLat <span class="sc">%&gt;%</span> <span class="co"># Breitengrad</span></span>
+<span id="cb165-2"><a href="geodaten.html#cb165-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -20.00   36.25   39.10   39.53   43.73   62.50 
+##    NA&#39;s 
+##    7316</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Plotten Sie die Koordinaten auf x- und y-Achse mit <code>ggplot()</code>. Was erkennen Sie?</li>
+</ol>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="geodaten.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pleiades) <span class="sc">+</span></span>
+<span id="cb167-2"><a href="geodaten.html#cb167-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> reprLong, <span class="at">y =</span> reprLat))</span></code></pre></div>
+<pre><code>## Warning: Removed 7316 rows containing missing values
+## (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Halbieren Sie die Größe und setzen Sie den Alpha-Wert der Punkte auf 0,2.</li>
+</ol>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="geodaten.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pleiades) <span class="sc">+</span></span>
+<span id="cb169-2"><a href="geodaten.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> reprLong, <span class="at">y =</span> reprLat), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 7316 rows containing missing values
+## (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<ol start="7" style="list-style-type: decimal">
+<li>Bringen Sie die Grafik in die Merkator-Projektion.</li>
+</ol>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="geodaten.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pleiades) <span class="sc">+</span></span>
+<span id="cb171-2"><a href="geodaten.html#cb171-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> reprLong, <span class="at">y =</span> reprLat), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb171-3"><a href="geodaten.html#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_map</span>(<span class="st">&quot;mercator&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 7316 rows containing missing values
+## (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<ol start="8" style="list-style-type: decimal">
+<li>Schauen Sie sich diesen Befehl an:</li>
+</ol>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="geodaten.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb173-2"><a href="geodaten.html#cb173-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb173-3"><a href="geodaten.html#cb173-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long,</span>
+<span id="cb173-4"><a href="geodaten.html#cb173-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> lat,</span>
+<span id="cb173-5"><a href="geodaten.html#cb173-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb173-6"><a href="geodaten.html#cb173-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">40</span>),</span>
+<span id="cb173-7"><a href="geodaten.html#cb173-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">48</span>))</span></code></pre></div>
 <ol start="9" style="list-style-type: decimal">
 <li><p>Versuchen Sie, jede einzelne Zeile nachzuvollziehen, indem Sie die entsprechenden Funktionen recherchieren.</p></li>
 <li><p>Führen Sie den Befehl aus.</p></li>
 <li><p>Ändern Sie die Farbe der Flächen in hellgrau.</p></li>
-<li><p>Wählen Sie einen Kartenausschnitt, auf dem Portugal, Ägypten, Irak und Frankreich komplett zu sehen sind.</p></li>
-<li><p>Plotten Sie auf diesem Hintergrund den Datensatz <code>pleiades</code>. Passen Sie dabei die Parameter so an, dass es Ihnen optisch zusagt.</p></li>
-<li><p>Wählen Sie für die Karte die <a href="https://de.wikipedia.org/wiki/Bonnesche_Projektion">Bonnesche Projektion</a> mit Standardparallele bei 40°N.</p></li>
-<li><p>Entfernen Sie alle Achsenbeschriftungen.</p></li>
-<li><p>(Achtung: extrem knifflig!) Bilden Sie diese Grafik nach, die die Orte geordnet nach ältestem Fund darstellt:</p></li>
 </ol>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="geodaten.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb174-2"><a href="geodaten.html#cb174-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb174-3"><a href="geodaten.html#cb174-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb174-4"><a href="geodaten.html#cb174-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill    =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb174-5"><a href="geodaten.html#cb174-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">40</span>),</span>
+<span id="cb174-6"><a href="geodaten.html#cb174-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">48</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<ol start="12" style="list-style-type: decimal">
+<li>Wählen Sie einen Kartenausschnitt, auf dem Portugal, Ägypten, Irak und Frankreich komplett zu sehen sind.</li>
+</ol>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="geodaten.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb175-2"><a href="geodaten.html#cb175-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb175-3"><a href="geodaten.html#cb175-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb175-4"><a href="geodaten.html#cb175-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill    =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb175-5"><a href="geodaten.html#cb175-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">48</span>),</span>
+<span id="cb175-6"><a href="geodaten.html#cb175-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">50</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<ol start="13" style="list-style-type: decimal">
+<li>Plotten Sie auf diesem Hintergrund den Datensatz <code>pleiades</code>. Passen Sie dabei die Parameter so an, dass es Ihnen optisch zusagt.</li>
+</ol>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="geodaten.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb176-2"><a href="geodaten.html#cb176-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb176-3"><a href="geodaten.html#cb176-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb176-4"><a href="geodaten.html#cb176-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill    =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb176-5"><a href="geodaten.html#cb176-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">48</span>), </span>
+<span id="cb176-6"><a href="geodaten.html#cb176-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
+<span id="cb176-7"><a href="geodaten.html#cb176-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data    =</span> pleiades,</span>
+<span id="cb176-8"><a href="geodaten.html#cb176-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> reprLong, <span class="at">y =</span> reprLat),</span>
+<span id="cb176-9"><a href="geodaten.html#cb176-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">color   =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb176-10"><a href="geodaten.html#cb176-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">size    =</span> <span class="fl">0.3</span>,</span>
+<span id="cb176-11"><a href="geodaten.html#cb176-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha   =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 7316 rows containing missing values
+## (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<ol start="14" style="list-style-type: decimal">
+<li>Wählen Sie für die Karte die <a href="https://de.wikipedia.org/wiki/Bonnesche_Projektion">Bonnesche Projektion</a> mit Standardparallele bei 40°N.</li>
+</ol>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="geodaten.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb178-2"><a href="geodaten.html#cb178-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb178-3"><a href="geodaten.html#cb178-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb178-4"><a href="geodaten.html#cb178-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill    =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb178-5"><a href="geodaten.html#cb178-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_map</span>(<span class="st">&quot;bonne&quot;</span>, <span class="dv">40</span>,</span>
+<span id="cb178-6"><a href="geodaten.html#cb178-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">48</span>),</span>
+<span id="cb178-7"><a href="geodaten.html#cb178-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
+<span id="cb178-8"><a href="geodaten.html#cb178-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data    =</span> pleiades,</span>
+<span id="cb178-9"><a href="geodaten.html#cb178-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> reprLong, <span class="at">y =</span> reprLat),</span>
+<span id="cb178-10"><a href="geodaten.html#cb178-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">color   =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb178-11"><a href="geodaten.html#cb178-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">size    =</span> <span class="fl">0.3</span>,</span>
+<span id="cb178-12"><a href="geodaten.html#cb178-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha   =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 7316 rows containing missing values
+## (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<ol start="15" style="list-style-type: decimal">
+<li>Entfernen Sie alle Achsenbeschriftungen.</li>
+</ol>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="geodaten.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb180-2"><a href="geodaten.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb180-3"><a href="geodaten.html#cb180-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb180-4"><a href="geodaten.html#cb180-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill    =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb180-5"><a href="geodaten.html#cb180-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_map</span>(<span class="st">&quot;bonne&quot;</span>, <span class="dv">40</span>,</span>
+<span id="cb180-6"><a href="geodaten.html#cb180-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">48</span>),</span>
+<span id="cb180-7"><a href="geodaten.html#cb180-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
+<span id="cb180-8"><a href="geodaten.html#cb180-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data    =</span> pleiades,</span>
+<span id="cb180-9"><a href="geodaten.html#cb180-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> reprLong, <span class="at">y =</span> reprLat),</span>
+<span id="cb180-10"><a href="geodaten.html#cb180-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">color   =</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb180-11"><a href="geodaten.html#cb180-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">size    =</span> <span class="fl">0.3</span>,</span>
+<span id="cb180-12"><a href="geodaten.html#cb180-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha   =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb180-13"><a href="geodaten.html#cb180-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb180-14"><a href="geodaten.html#cb180-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb180-15"><a href="geodaten.html#cb180-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text  =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<pre><code>## Warning: Removed 7316 rows containing missing values
+## (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<ol start="16" style="list-style-type: decimal">
+<li>(Achtung: extrem knifflig!) Bilden Sie diese Grafik nach, die die Orte geordnet nach ältestem Fund darstellt:</li>
+</ol>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="geodaten.html#cb182-1" aria-hidden="true" tabindex="-1"></a>pleiades <span class="sc">%&gt;%</span></span>
+<span id="cb182-2"><a href="geodaten.html#cb182-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">long =</span> reprLong,</span>
+<span id="cb182-3"><a href="geodaten.html#cb182-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">lat =</span> reprLat,</span>
+<span id="cb182-4"><a href="geodaten.html#cb182-4" aria-hidden="true" tabindex="-1"></a>         timePeriods) <span class="sc">%&gt;%</span></span>
+<span id="cb182-5"><a href="geodaten.html#cb182-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">oldest =</span> <span class="fu">str_extract</span>(timePeriods, <span class="st">&quot;[ACHRL]&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb182-6"><a href="geodaten.html#cb182-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">oldest =</span> <span class="fu">factor</span>(oldest, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;H&quot;</span>, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;L&quot;</span>))) <span class="ot">-&gt;</span></span>
+<span id="cb182-7"><a href="geodaten.html#cb182-7" aria-hidden="true" tabindex="-1"></a>  pleiades_periods</span>
+<span id="cb182-8"><a href="geodaten.html#cb182-8" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb182-9"><a href="geodaten.html#cb182-9" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb182-10"><a href="geodaten.html#cb182-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">!=</span> <span class="st">&quot;Antarctica&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb182-11"><a href="geodaten.html#cb182-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb182-12"><a href="geodaten.html#cb182-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(long, lat, <span class="at">group =</span> group),</span>
+<span id="cb182-13"><a href="geodaten.html#cb182-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill    =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
+<span id="cb182-14"><a href="geodaten.html#cb182-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_map</span>(<span class="st">&quot;albers&quot;</span>,</span>
+<span id="cb182-15"><a href="geodaten.html#cb182-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">parameters =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">37</span>),</span>
+<span id="cb182-16"><a href="geodaten.html#cb182-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">xlim       =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">40</span>),</span>
+<span id="cb182-17"><a href="geodaten.html#cb182-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">ylim       =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">48</span>)) <span class="sc">+</span></span>
+<span id="cb182-18"><a href="geodaten.html#cb182-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data    =</span> pleiades_periods,</span>
+<span id="cb182-19"><a href="geodaten.html#cb182-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(long, lat, <span class="at">color =</span> oldest),</span>
+<span id="cb182-20"><a href="geodaten.html#cb182-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">size    =</span> <span class="fl">0.2</span>,</span>
+<span id="cb182-21"><a href="geodaten.html#cb182-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha   =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb182-22"><a href="geodaten.html#cb182-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_brewer</span>(<span class="st">&quot;Früheste Epoche&quot;</span>,</span>
+<span id="cb182-23"><a href="geodaten.html#cb182-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;H&quot;</span>, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;L&quot;</span>),</span>
+<span id="cb182-24"><a href="geodaten.html#cb182-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;1000-550 v.d.Z.&quot;</span>,</span>
+<span id="cb182-25"><a href="geodaten.html#cb182-25" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">&quot;550-330 v.d.Z.&quot;</span>,</span>
+<span id="cb182-26"><a href="geodaten.html#cb182-26" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">&quot;330 v.d.Z. - 30 n.d.Z.&quot;</span>,</span>
+<span id="cb182-27"><a href="geodaten.html#cb182-27" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">&quot;30-300 n.d.Z.&quot;</span>,</span>
+<span id="cb182-28"><a href="geodaten.html#cb182-28" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">&quot;300-640 n.d.Z.&quot;</span>),</span>
+<span id="cb182-29"><a href="geodaten.html#cb182-29" aria-hidden="true" tabindex="-1"></a>                       <span class="at">palette =</span> <span class="st">&quot;YlOrBr&quot;</span>) <span class="sc">+</span></span>
+<span id="cb182-30"><a href="geodaten.html#cb182-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title       =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb182-31"><a href="geodaten.html#cb182-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.ticks       =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb182-32"><a href="geodaten.html#cb182-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text        =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb182-33"><a href="geodaten.html#cb182-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill  =</span> <span class="st">&quot;darkblue&quot;</span>),</span>
+<span id="cb182-34"><a href="geodaten.html#cb182-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid       =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb182-35"><a href="geodaten.html#cb182-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="dv">1</span>,</span>
+<span id="cb182-36"><a href="geodaten.html#cb182-36" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">size  =</span> <span class="dv">8</span>,</span>
+<span id="cb182-37"><a href="geodaten.html#cb182-37" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">shape =</span> <span class="dv">15</span>)))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
 
 </div>
