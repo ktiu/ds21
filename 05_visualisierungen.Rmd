@@ -1,5 +1,13 @@
 # Visualisierungen
 
+## Lernziele dieser Sitzung
+
+Sie können...
+
+- einfache Befehle zur Visualisierung in Base R anwenden.
+- die Grammatik von `ggplot2` für Visualisierungen in Grundzügen wiedergeben und anwenden.
+- eigene Ideen für Visualisierungen entwickeln und umsetzen.
+
 ## Voraussetzungen
 
 Für diese Lektion benötigen wir das Paket `tidyverse`:

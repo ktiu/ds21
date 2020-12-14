@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Geodaten | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Geodaten | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Geodaten | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="text-shelton-et-al-2014.html"/>
+
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><strong><a href="/~tstraube/c/ds21">Data Science für die Humangeographie</a></strong></li>
+<li><em><a href="/~tstraube/">Till Straube</a></em></li>
+<li><a>(Neu laden: Strg+Shift+R)</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé"><i class="fa fa-check"></i><b>1.3.1</b> Exposé</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.2</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-mit-lösungen"><i class="fa fa-check"></i><b>5.6</b> Aufgaben (mit Lösungen)</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
+<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="geodaten.html"><a href="geodaten.html#lernziele-dieser-sitzung-2"><i class="fa fa-check"></i><b>7.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="7.2" data-path="geodaten.html"><a href="geodaten.html#voraussetzungen-1"><i class="fa fa-check"></i><b>7.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="7.3" data-path="geodaten.html"><a href="geodaten.html#exkurs-pipes"><i class="fa fa-check"></i><b>7.3</b> Exkurs: Pipes</a></li>
+<li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
+<li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-2"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/ktiu/ds21">Auf GitHub anschauen</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="geodaten" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Geodaten</h1>
+<div id="lernziele-dieser-sitzung-2" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Lernziele dieser Sitzung</h2>
+<p>Sie können…</p>
+<ul>
+<li>Pipes benutzen</li>
+<li>einfache <code>dplyr</code>-Befehle ausführen</li>
+<li>Koordinaten visualisieren</li>
+</ul>
+</div>
+<div id="voraussetzungen-1" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Voraussetzungen</h2>
+<p>Wir laden erstmal <code>tidyverse</code>:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="geodaten.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+</div>
+<div id="exkurs-pipes" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Exkurs: Pipes</h2>
+<p>Teil vom <code>tidyverse</code> ist auch das Paket <code>magrittr</code>, das einen besonderen Operator enthält: <code>%&gt;%</code></p>
+<p>Der Operator <code>%&gt;%</code> heisst „Pipe“ und setzt das Ergebnis der vorherigen Funktion als ersten Parameter in die nächste Funktion ein. Zur Veranschaulichung:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="geodaten.html#cb140-1" aria-hidden="true" tabindex="-1"></a>anzahl_buchstaben <span class="ot">&lt;-</span> <span class="fu">length</span>(letters)</span>
+<span id="cb140-2"><a href="geodaten.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(anzahl_buchstaben)</span></code></pre></div>
+<pre><code>## [1] 5.09902</code></pre>
+<p>…ist das gleiche wie…</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="geodaten.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">length</span>(letters))</span></code></pre></div>
+<pre><code>## [1] 5.09902</code></pre>
+<p>…ist das gleiche wie…</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="geodaten.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(letters) <span class="sc">%&gt;%</span></span>
+<span id="cb144-2"><a href="geodaten.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>()</span></code></pre></div>
+<pre><code>## [1] 5.09902</code></pre>
+<p>…ist das gleiche wie…</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="geodaten.html#cb146-1" aria-hidden="true" tabindex="-1"></a>letters <span class="sc">%&gt;%</span></span>
+<span id="cb146-2"><a href="geodaten.html#cb146-2" aria-hidden="true" tabindex="-1"></a>  length <span class="sc">%&gt;%</span></span>
+<span id="cb146-3"><a href="geodaten.html#cb146-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>()</span></code></pre></div>
+<pre><code>## [1] 5.09902</code></pre>
+<p>So können beliebig viele Funktionen aneinandergereiht werden. Und mit <code>-&gt;</code> kann eine Variable „in die andere Richtung“ zugewiesen werden</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="geodaten.html#cb148-1" aria-hidden="true" tabindex="-1"></a>letters <span class="sc">%&gt;%</span></span>
+<span id="cb148-2"><a href="geodaten.html#cb148-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb148-3"><a href="geodaten.html#cb148-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb148-4"><a href="geodaten.html#cb148-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb148-5"><a href="geodaten.html#cb148-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>() <span class="ot">-&gt;</span></span>
+<span id="cb148-6"><a href="geodaten.html#cb148-6" aria-hidden="true" tabindex="-1"></a>  my_var</span></code></pre></div>
+<p>Gerade bei komplizierteren Zusammenhängen wird der Code so oft lesbarer, weil die Logik von links nach rechts, bzw. von oben nach unten gelesen werden kann.</p>
+</div>
+<div id="daten-importieren" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Daten importieren</h2>
+<p>Beim Open-Data-Portal der Stadt Frankfurt steht ein <a href="http://offenedaten.frankfurt.de/dataset/baumkataster-frankfurt-am-main">Baumkataster</a> zur Verfügung.</p>
+<p>Die Datei im CSV-Format (comma separated values) kann entweder heruntergeladen und durch klicken importiert werden, oder direkt über den Befehl:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="geodaten.html#cb149-1" aria-hidden="true" tabindex="-1"></a>baumkataster <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">&quot;http://offenedaten.frankfurt.de/dataset/73c5a6b3-c033-4dad-bb7d-8783427dd233/resource/7a73520b-961a-4aad-a582-449e676c247c/download/gprojekteopen-datadatenamt-67datenbaumauswahl_veroffentlichung_4baumauswahl_veroffentlichung_4.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="überblick-verschaffen" class="section level2" number="7.5">
+<h2><span class="header-section-number">7.5</span> Überblick verschaffen</h2>
+<p>Mit <code>summary()</code> lässt sich eine Zusammenfassung der Werte generieren:</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="geodaten.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(baumkataster)</span></code></pre></div>
+<pre><code>##  Gattung/Art/Deutscher Name   Baumnummer     
+##  Length:118403              Min.   :    1.0  
+##  Class :character           1st Qu.:   24.0  
+##  Mode  :character           Median :   82.0  
+##                             Mean   :  232.7  
+##                             3rd Qu.:  270.0  
+##                             Max.   :20158.0  
+##                             NA&#39;s   :1853     
+##     Objekt            Pflanzjahr   Kronendurchmesser
+##  Length:118403      Min.   :1645   Min.   : 2.000   
+##  Class :character   1st Qu.:1970   1st Qu.: 4.000   
+##  Mode  :character   Median :1982   Median : 6.000   
+##                     Mean   :1979   Mean   : 6.688   
+##                     3rd Qu.:1995   3rd Qu.: 9.000   
+##                     Max.   :2017   Max.   :63.000   
+##                                                     
+##     HOCHWERT         RECHTSWERT    
+##  Min.   :5545117   Min.   :463163  
+##  1st Qu.:5550428   1st Qu.:472715  
+##  Median :5552601   Median :475219  
+##  Mean   :5552953   Mean   :475244  
+##  3rd Qu.:5555165   3rd Qu.:478201  
+##  Max.   :5563639   Max.   :485361  
+## </code></pre>
+<p>Genauere Infos über diese Merkmale gibt es auf dem Datenportal.</p>
+</div>
+<div id="visualisieren" class="section level2" number="7.6">
+<h2><span class="header-section-number">7.6</span> Visualisieren</h2>
+<p>Wie in der letzten Lektion besprochen, lässt sich der Datensatz mit <code>ggplot()</code> visualisieren, z.B.:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="geodaten.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(baumkataster, <span class="fu">aes</span>(<span class="at">x=</span>Kronendurchmesser)) <span class="sc">+</span></span>
+<span id="cb152-2"><a href="geodaten.html#cb152-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p>Eine neue Messreihe lässt sich z.B. so errechnen:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="geodaten.html#cb153-1" aria-hidden="true" tabindex="-1"></a>alter <span class="ot">&lt;-</span> <span class="dv">2020</span> <span class="sc">-</span> baumkataster<span class="sc">$</span>Pflanzjahr</span>
+<span id="cb153-2"><a href="geodaten.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(alter)</span></code></pre></div>
+<pre><code>## [1] 100 100 100 100 100 100</code></pre>
+<p>Der Befehl <code>mutate()</code> funktioniert sehr ähnlich, gibt aber den veränderten Datensatz zurück:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="geodaten.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(baumkataster, <span class="at">alter =</span> <span class="dv">2020</span> <span class="sc">-</span> Pflanzjahr)</span></code></pre></div>
+<pre><code>## # A tibble: 118,403 x 8
+##    `Gattung/Art/De… Baumnummer Objekt Pflanzjahr
+##    &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1 Platanus x hisp…          1 Acker…       1920
+##  2 Platanus x hisp…          2 Acker…       1920
+##  3 Platanus x hisp…          3 Acker…       1920
+##  4 Platanus x hisp…          4 Acker…       1920
+##  5 Platanus x hisp…          5 Acker…       1920
+##  6 Platanus x hisp…          6 Acker…       1920
+##  7 Platanus x hisp…          7 Acker…       1920
+##  8 Platanus x hisp…          8 Acker…       1920
+##  9 Platanus x hisp…          9 Acker…       1920
+## 10 Platanus x hisp…         10 Acker…       1920
+## # … with 118,393 more rows, and 4 more variables:
+## #   Kronendurchmesser &lt;dbl&gt;, HOCHWERT &lt;dbl&gt;,
+## #   RECHTSWERT &lt;dbl&gt;, alter &lt;dbl&gt;</code></pre>
+<p>Derselbe Befehl mit dem Pipe-Operator:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="geodaten.html#cb157-1" aria-hidden="true" tabindex="-1"></a>baumkataster <span class="sc">%&gt;%</span></span>
+<span id="cb157-2"><a href="geodaten.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">alter =</span> <span class="dv">2020</span> <span class="sc">-</span> Pflanzjahr)</span></code></pre></div>
+<pre><code>## # A tibble: 118,403 x 8
+##    `Gattung/Art/De… Baumnummer Objekt Pflanzjahr
+##    &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1 Platanus x hisp…          1 Acker…       1920
+##  2 Platanus x hisp…          2 Acker…       1920
+##  3 Platanus x hisp…          3 Acker…       1920
+##  4 Platanus x hisp…          4 Acker…       1920
+##  5 Platanus x hisp…          5 Acker…       1920
+##  6 Platanus x hisp…          6 Acker…       1920
+##  7 Platanus x hisp…          7 Acker…       1920
+##  8 Platanus x hisp…          8 Acker…       1920
+##  9 Platanus x hisp…          9 Acker…       1920
+## 10 Platanus x hisp…         10 Acker…       1920
+## # … with 118,393 more rows, and 4 more variables:
+## #   Kronendurchmesser &lt;dbl&gt;, HOCHWERT &lt;dbl&gt;,
+## #   RECHTSWERT &lt;dbl&gt;, alter &lt;dbl&gt;</code></pre>
+<p>So lassen sich auch hier verschiedene Befehle verknüpfen. <code>filter()</code> beschränkt den Datensatz auf Merkmalsträger, die den Kriterien entsprechen:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="geodaten.html#cb159-1" aria-hidden="true" tabindex="-1"></a>baumkataster <span class="sc">%&gt;%</span></span>
+<span id="cb159-2"><a href="geodaten.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">alter =</span> <span class="dv">2020</span> <span class="sc">-</span> Pflanzjahr) <span class="sc">%&gt;%</span></span>
+<span id="cb159-3"><a href="geodaten.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(alter <span class="sc">&gt;</span> <span class="dv">30</span>) <span class="ot">-&gt;</span></span>
+<span id="cb159-4"><a href="geodaten.html#cb159-4" aria-hidden="true" tabindex="-1"></a>  alte_baeume</span>
+<span id="cb159-5"><a href="geodaten.html#cb159-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-6"><a href="geodaten.html#cb159-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(alte_baeume)</span></code></pre></div>
+<pre><code>##  Gattung/Art/Deutscher Name   Baumnummer     
+##  Length:73859               Min.   :    1.0  
+##  Class :character           1st Qu.:   29.0  
+##  Mode  :character           Median :   97.0  
+##                             Mean   :  263.2  
+##                             3rd Qu.:  314.0  
+##                             Max.   :10489.0  
+##                             NA&#39;s   :684      
+##     Objekt            Pflanzjahr   Kronendurchmesser
+##  Length:73859       Min.   :1645   Min.   : 2.000   
+##  Class :character   1st Qu.:1960   1st Qu.: 6.000   
+##  Mode  :character   Median :1974   Median : 8.000   
+##                     Mean   :1966   Mean   : 8.503   
+##                     3rd Qu.:1980   3rd Qu.:10.000   
+##                     Max.   :1989   Max.   :35.000   
+##                                                     
+##     HOCHWERT         RECHTSWERT         alter       
+##  Min.   :5545117   Min.   :463163   Min.   : 31.00  
+##  1st Qu.:5550415   1st Qu.:472667   1st Qu.: 40.00  
+##  Median :5552480   Median :475708   Median : 46.00  
+##  Mean   :5552593   Mean   :475402   Mean   : 53.54  
+##  3rd Qu.:5554589   3rd Qu.:478539   3rd Qu.: 60.00  
+##  Max.   :5563639   Max.   :485360   Max.   :375.00  
+## </code></pre>
+<p>Schließlich ergibt das Streudiagramm von Koordinaten so eine art Karte:</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="geodaten.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(alte_baeume) <span class="sc">+</span></span>
+<span id="cb161-2"><a href="geodaten.html#cb161-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.1</span>, <span class="fu">aes</span>(<span class="at">x =</span> RECHTSWERT, <span class="at">y =</span> HOCHWERT))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p>Diesen Ansatz werden wir in der nächsten Lektion vertiefen.</p>
+</div>
+<div id="aufgaben-2" class="section level2" number="7.7">
+<h2><span class="header-section-number">7.7</span> Aufgaben</h2>
+<ol style="list-style-type: decimal">
+<li><p>Besuchen Sie <a href="https://pleiades.stoa.org/" class="uri">https://pleiades.stoa.org/</a> - worum geht es hier?</p></li>
+<li><p>Finden Sie den kompletten aktuellen Datensatz für „locations“ als CSV-Datei.</p></li>
+<li><p>Importieren Sie ihn in R und weisen Sie dem Datensatz den Namen <code>pleiades</code> zu.</p></li>
+<li><p>Finden Sie geeignete Werte für (einzelne) Längen- und Breitengrade im Datensatz.</p></li>
+<li><p>Plotten Sie die Koordinaten auf x- und y-Achse mit <code>ggplot()</code>. Was erkennen Sie?</p></li>
+<li><p>Halbieren Sie die Größe und setzen Sie den Alpha-Wert der Punkte auf 0,2.</p></li>
+<li><p>Bringen Sie die Grafik in die Merkator-Projektion.</p></li>
+<li><p>Schauen Sie sich diesen Befehl an:</p></li>
+</ol>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="geodaten.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb162-2"><a href="geodaten.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb162-3"><a href="geodaten.html#cb162-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> long,</span>
+<span id="cb162-4"><a href="geodaten.html#cb162-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> lat,</span>
+<span id="cb162-5"><a href="geodaten.html#cb162-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb162-6"><a href="geodaten.html#cb162-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_quickmap</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">40</span>),</span>
+<span id="cb162-7"><a href="geodaten.html#cb162-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">48</span>))</span></code></pre></div>
+<ol start="9" style="list-style-type: decimal">
+<li><p>Versuchen Sie, jede einzelne Zeile nachzuvollziehen, indem Sie die entsprechenden Funktionen recherchieren.</p></li>
+<li><p>Führen Sie den Befehl aus.</p></li>
+<li><p>Ändern Sie die Farbe der Flächen in hellgrau.</p></li>
+<li><p>Wählen Sie einen Kartenausschnitt, auf dem Portugal, Ägypten, Irak und Frankreich komplett zu sehen sind.</p></li>
+<li><p>Plotten Sie auf diesem Hintergrund den Datensatz <code>pleiades</code>. Passen Sie dabei die Parameter so an, dass es Ihnen optisch zusagt.</p></li>
+<li><p>Wählen Sie für die Karte die <a href="https://de.wikipedia.org/wiki/Bonnesche_Projektion">Bonnesche Projektion</a> mit Standardparallele bei 40°N.</p></li>
+<li><p>Entfernen Sie alle Achsenbeschriftungen.</p></li>
+<li><p>(Achtung: extrem knifflig!) Bilden Sie diese Grafik nach, die die Orte geordnet nach ältestem Fund darstellt:</p></li>
+</ol>
+<p><img src="_main_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="text-shelton-et-al-2014.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
