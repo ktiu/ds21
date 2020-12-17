@@ -1,14 +1,14 @@
 bookdown::gitbook:
+  css: custom.css
   split-by: chapter
   config:
     toc:
       collapse: section
-      before: |
-         <li><strong><a href="/~tstraube/c/ds21">Data Science für die Humangeographie</a></strong></li>
-         <li><em><a href="/~tstraube/">Till Straube</a></em></li>
-         <li><a>(Neu laden: Strg+Shift+R)</a></li>
-      after: |
-         <li><a href="https://github.com/ktiu/ds21">Auf GitHub anschauen</a></li>
+  includes:
+    in_header: header.html
+  lib_dir: "assets"
+  pandoc_args: ["--html-q-tags"]
+
 bookdown::pdf_book:
   template: template.tex
   keep_tex: true

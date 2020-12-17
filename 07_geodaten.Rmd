@@ -1,8 +1,5 @@
 # Geodaten
 
-```{r include = F}
-show_solutions <- T
-```
 ## Lernziele dieser Sitzung
 
 Sie können...
@@ -23,29 +20,29 @@ library(tidyverse)
 
 Teil vom `tidyverse` ist auch das Paket `magrittr`, das einen besonderen Operator enthält: `%>%`
 
-Der Operator `%>%` heisst „Pipe“ und setzt das Ergebnis der vorherigen Funktion als ersten Parameter in die nächste Funktion ein. Zur Veranschaulichung:
+Der Operator `%>%` heißt "Pipe" und setzt das Ergebnis der vorherigen Funktion als ersten Parameter in die nächste Funktion ein. Zur Veranschaulichung:
 
-```{r}
+```{r eval=F}
 anzahl_buchstaben <- length(letters)
 sqrt(anzahl_buchstaben)
 ```
 
 ...ist das gleiche wie...
 
-```{r}
+```{r eval=F}
 sqrt(length(letters))
 ```
 
 ...ist das gleiche wie...
 
-```{r}
+```{r eval=F}
 length(letters) %>%
   sqrt()
 ```
 
 ...ist das gleiche wie...
 
-```{r}
+```{r eval=F}
 letters %>%
   length %>%
   sqrt()
@@ -133,7 +130,7 @@ ggplot(alte_baeume) +
 
 Diesen Ansatz werden wir in der nächsten Lektion vertiefen.
 
-## Aufgaben (mit Lösungen)
+## Aufgaben
 
 1. Besuchen Sie https://pleiades.stoa.org/ - worum geht es hier?
 
@@ -141,37 +138,36 @@ Diesen Ansatz werden wir in der nächsten Lektion vertiefen.
 
 3. Importieren Sie ihn in R und weisen Sie dem Datensatz den Namen `pleiades` zu.
 
-```{r include=show_solutions, warning=F, message=F}
+```{r include=solutions, class.source='solution', warning=F, message=F}
 pleiades <- read_csv("http://atlantides.org/downloads/pleiades/dumps/pleiades-locations-latest.csv.gz")
 ```
 
 4. Finden Sie geeignete Werte für (einzelne) Längen- und Breitengrade im Datensatz.
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution'}
 pleiades$reprLong %>% # Längengrad
  summary()
-
 pleiades$reprLat %>% # Breitengrad
   summary()
 ```
 
 5. Plotten Sie die Koordinaten auf x- und y-Achse mit `ggplot()`. Was erkennen Sie?
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution', out.extra='class="solution"'}
 ggplot(pleiades) +
   geom_point(aes(x = reprLong, y = reprLat))
 ```
 
 6. Halbieren Sie die Größe und setzen Sie den Alpha-Wert der Punkte auf 0,2. 
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution', out.extra='class="solution"'}
 ggplot(pleiades) +
   geom_point(aes(x = reprLong, y = reprLat), size = 0.5, alpha = 0.2)
 ```
 
-7. Bringen Sie die Grafik in die Merkator-Projektion.
+7. Bringen Sie die Grafik in die Mercator-Projektion.
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution', out.extra='class="solution"'}
 ggplot(pleiades) +
   geom_point(aes(x = reprLong, y = reprLat), size = 0.5, alpha = 0.2) +
   coord_map("mercator")
@@ -193,9 +189,19 @@ map_data("world") %>%
 
 10. Führen Sie den Befehl aus.
 
+```{r echo=F, include=solutions, out.extra='class="solution"'}
+map_data("world") %>%
+  ggplot() +
+    geom_polygon(mapping = aes(x = long,
+                               y = lat,
+                               group = group)) +
+    coord_quickmap(xlim = c(-8, 40),
+                   ylim = c(26, 48))
+```
+
 11. Ändern Sie die Farbe der Flächen in hellgrau.
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution', out.extra='class="solution"'}
 map_data("world") %>%
   ggplot() +
     geom_polygon(mapping = aes(x = long, y = lat, group = group),
@@ -206,7 +212,7 @@ map_data("world") %>%
 
 12. Wählen Sie einen Kartenausschnitt, auf dem Portugal, Ägypten, Irak und Frankreich komplett zu sehen sind.
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution', out.extra='class="solution"'}
 map_data("world") %>%
   ggplot() +
     geom_polygon(mapping = aes(x = long, y = lat, group = group),
@@ -217,7 +223,7 @@ map_data("world") %>%
 
 13. Plotten Sie auf diesem Hintergrund den Datensatz `pleiades`. Passen Sie dabei die Parameter so an, dass es Ihnen optisch zusagt.
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution', out.extra='class="solution"'}
 map_data("world") %>%
   ggplot() +
     geom_polygon(mapping = aes(x = long, y = lat, group = group),
@@ -233,7 +239,7 @@ map_data("world") %>%
 
 14. Wählen Sie für die Karte die [Bonnesche Projektion](https://de.wikipedia.org/wiki/Bonnesche_Projektion) mit Standardparallele bei 40°N.
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution', out.extra='class="solution"'}
 map_data("world") %>%
   ggplot() +
     geom_polygon(mapping = aes(x = long, y = lat, group = group),
@@ -250,7 +256,7 @@ map_data("world") %>%
 
 15. Entfernen Sie alle Achsenbeschriftungen.
 
-```{r include=show_solutions}
+```{r include=solutions, class.source='solution', out.extra='class="solution"'}
 map_data("world") %>%
   ggplot() +
     geom_polygon(mapping = aes(x = long, y = lat, group = group),
@@ -270,7 +276,7 @@ map_data("world") %>%
 
 16. (Achtung: extrem knifflig!) Bilden Sie diese Grafik nach, die die Orte geordnet nach ältestem Fund darstellt:
 
-```{r echo=show_solutions, cache=T, warning=F, message=F}
+```{r echo=solutions, class.source='solution'}
 pleiades %>%
   select(long = reprLong,
          lat = reprLat,

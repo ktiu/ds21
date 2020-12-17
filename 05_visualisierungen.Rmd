@@ -1,6 +1,6 @@
 # Visualisierungen
 
-## Lernziele dieser Sitzung
+## Lernziele dieser Sitzung {-}
 
 Sie können...
 
@@ -8,7 +8,7 @@ Sie können...
 - die Grammatik von `ggplot2` für Visualisierungen in Grundzügen wiedergeben und anwenden.
 - eigene Ideen für Visualisierungen entwickeln und umsetzen.
 
-## Voraussetzungen
+## Voraussetzungen {-}
 
 Für diese Lektion benötigen wir das Paket `tidyverse`:
 
@@ -28,7 +28,7 @@ Wenn wir mögen, können wir ihn mit der Funktion `data()` explizit in unser Env
 data(diamonds)
 ```
 
-## Überblick
+## Überblick {-}
 
 Einen ersten Überblick kriegen wir zum Einen durch den Befehl `str()`, der uns die Typen in den Spalten anzeigt:
 
@@ -48,7 +48,7 @@ Einen Überblick über die wichtigsten statistischen Parameter erhalten wir mit:
 summary(diamonds)
 ```
 
-## Visualisierung mit dem Standardpaket
+## Visualisierung mit dem Standardpaket {-}
 
 Es gibt in R mehrere grundlegend verschiedene Möblichkeiten, Daten zu visualiseren. Für einen schnellen Überblick sind z.B. `hist()` und `boxplot()` hilfreich:
 
@@ -60,7 +60,7 @@ hist(diamonds$price)
 boxplot(diamonds$x)
 ```
 
-## Visualisierung mit `ggplot()`
+## Visualisierung mit `ggplot()` {-}
 
 Das Paket `ggplot2` ist Teil vom `tidyverse`. Hiermit lassen sich sehr flexible Graphiken gestalten. Wir werden ausschließlich mit diesem System arbeiten.
 
@@ -127,31 +127,29 @@ ggplot(diamonds, aes(x=carat, y=price)) +
   theme_dark()
 ```
 
-## Aufgaben (mit Lösungen)
+## Aufgaben {-}
 
 Versuchen Sie, folgende Visualisierungen des Datensatzes `diamonds` auszugeben: 
 
-```{r cache=T}
-ggplot(diamonds, aes(x=cut)) +
-  geom_bar(aes(fill=color))
+```{r cache=T, echo=solutions, class.source='solution'}
+ggplot(diamonds, aes(x = cut)) +
+  geom_bar(aes(fill = color))
 ```
 
-```{r cache=T}
-ggplot(diamonds, aes(x=depth, y=price)) +
-  geom_point(alpha=0.1, aes(color=cut)) +
-  guides(colour=guide_legend(override.aes=list(alpha=1)))
+```{r cache=T, echo=solutions, class.source='solution'}
+ggplot(diamonds, aes(x = depth, y = price)) +
+  geom_point(alpha = 0.1, aes(color = cut)) +
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))
 ```
 
-```{r cache=T}
-ggplot(diamonds, aes(x=color, y=price)) +
-  geom_boxplot(aes(color=color), outlier.colour = NA) +
+```{r cache=T, echo=solutions, class.source='solution'}
+ggplot(diamonds, aes(x = color, y = price)) +
+  geom_boxplot(aes(color = color), outlier.colour = NA) +
   facet_wrap(~cut) +
-  theme(legend.position="none") +
-  scale_x_discrete("Farbe") + 
+  theme(legend.position = "none") +
+  scale_x_discrete("Farbe") +
   scale_y_continuous("Preis")
 ```
-
-
 
 ### R for Data Science
 

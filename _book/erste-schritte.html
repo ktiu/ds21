@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Erste Schritte | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <title>Sitzung 2 Erste Schritte | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
   <meta name="description" content="Projektseminar" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Erste Schritte | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:title" content="Sitzung 2 Erste Schritte | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Erste Schritte | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta name="twitter:title" content="Sitzung 2 Erste Schritte | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
   
   <meta name="twitter:description" content="Projektseminar" />
   
@@ -31,15 +31,15 @@
   
 <link rel="prev" href="vorbesprechung.html"/>
 <link rel="next" href="text-anderson-2008.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="assets/header-attrs-2.5/header-attrs.js"></script>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -49,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="assets/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="solutions.js"></script>
 
 
 <style type="text/css">
@@ -117,6 +118,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<link rel="stylesheet" href="custom.css" type="text/css" />
 </head>
 
 <body>
@@ -129,11 +131,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><strong><a href="/~tstraube/c/ds21">Data Science für die Humangeographie</a></strong></li>
-<li><em><a href="/~tstraube/">Till Straube</a></em></li>
-<li><a>(Neu laden: Strg+Shift+R)</a></li>
-
-<li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
 <li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
 <ul>
@@ -143,93 +140,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<li class="chapter" data-level="" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i>Überblick</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
-<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
-<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
-<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+<li class="chapter" data-level="1.0.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.0.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.0.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.0.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.0.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.0.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.0.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.0.4</b> Unterstützung im Corona-Semester</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<li class="chapter" data-level="" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i>Seminarformat</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
-<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
-<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
-<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
-<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+<li class="chapter" data-level="1.0.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.0.5</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.0.6" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.0.6</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.0.7" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.0.7</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.0.8" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.0.8</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.0.9" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.0.9</b> Share your work</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<li class="chapter" data-level="" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i>Leistungsnachweise</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé"><i class="fa fa-check"></i><b>1.3.1</b> Exposé</a></li>
-<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.2</b> Anwesenheit</a></li>
+<li class="chapter" data-level="1.0.10" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé"><i class="fa fa-check"></i><b>1.0.10</b> Exposé</a></li>
+<li class="chapter" data-level="1.0.11" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.0.11</b> Anwesenheit</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<li class="chapter" data-level="" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i>Lehrphilosophie</a>
 <ul>
-<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
-<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
-<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
-<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+<li class="chapter" data-level="1.0.12" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.0.12</b> Transparenz</a></li>
+<li class="chapter" data-level="1.0.13" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.0.13</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.0.14" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.0.14</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.0.15" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.0.15</b> Kritische Reflexion</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
-<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
-<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
-<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
-<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
-<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
-<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
-<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
-<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i>Vorbereitung</a></li>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i>Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i>Operatoren</a></li>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i>Variablen</a></li>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i>Konstanten</a></li>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i>Funktionen</a></li>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i>Strings</a></li>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i>Datentypen</a></li>
+<li class="chapter" data-level="" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i>Aufgaben</a>
 <ul>
-<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
-<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
-<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
-<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
-<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
-<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+<li class="chapter" data-level="2.0.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.0.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.0.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.0.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.0.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.0.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.0.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.0.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.0.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.0.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.0.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.0.6</b> Kniffliges</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
-<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+<li class="chapter" data-level="" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i>Lesetext</a></li>
+<li class="chapter" data-level="" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i>Fragen an den Text</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
-<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
-<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
-<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
-<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
-<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
-<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<li class="chapter" data-level="" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i>Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i>Vektoren</a></li>
+<li class="chapter" data-level="" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i>Matritzen</a></li>
+<li class="chapter" data-level="" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i>Listen</a></li>
+<li class="chapter" data-level="" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i>Data Frames</a></li>
+<li class="chapter" data-level="" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i>Tibbles</a></li>
+<li class="chapter" data-level="" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i>Aufgaben</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
-<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
-<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
-<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
-<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
-<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+<li class="chapter" data-level="4.0.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.0.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.0.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.0.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.0.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.0.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.0.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.0.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.0.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.0.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.0.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.0.6</b> Kniffliges</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
-<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
-<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
-<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
-<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
-<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-mit-lösungen"><i class="fa fa-check"></i><b>5.6</b> Aufgaben (mit Lösungen)</a>
+<li class="chapter" data-level="" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i>Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i>Voraussetzungen</a></li>
+<li class="chapter" data-level="" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i>Überblick</a></li>
+<li class="chapter" data-level="" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i>Visualisierung mit dem Standardpaket</a></li>
+<li><a href="visualisierungen.html#visualisierung-mit-ggplot">Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i>Aufgaben</a>
 <ul>
-<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+<li class="chapter" data-level="5.0.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.0.1</b> R for Data Science</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
-<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+<li class="chapter" data-level="" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i>Lesetext</a></li>
+<li class="chapter" data-level="" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i>Fragen an den Text</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
 <ul>
@@ -239,11 +236,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
 <li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
 <li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
-<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-mit-lösungen-1"><i class="fa fa-check"></i><b>7.7</b> Aufgaben (mit Lösungen)</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-3"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
 </ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/ktiu/ds21">Auf GitHub anschauen</a></li>
-
 </ul>
 
       </nav>
@@ -262,17 +256,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="erste-schritte" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Erste Schritte</h1>
-<div id="vorbereitung" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Vorbereitung</h2>
+<h1><span class="header-section-number">Sitzung 2</span> Erste Schritte</h1>
+<div id="vorbereitung" class="section level2 unnumbered">
+<h2>Vorbereitung</h2>
 <ul>
 <li>Machen Sie sich einen kostenlosen Account auf <a href="https://rstudio.cloud" class="uri">https://rstudio.cloud</a></li>
 <li>Treten Sie dem Seminar-Workspace bei. (Sie erhalten eine Einladung per E-Mail.)</li>
 <li>Optional/alternativ: installieren Sie <a href="https://www.r-project.org/">R</a> und <a href="https://rstudio.com/">RStudio</a> auf Ihrem Computer.</li>
 </ul>
 </div>
-<div id="lernziele-für-diese-sitzung" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Lernziele für diese Sitzung</h2>
+<div id="lernziele-für-diese-sitzung" class="section level2 unnumbered">
+<h2>Lernziele für diese Sitzung</h2>
 <p>Sie können…</p>
 <ul>
 <li>Rechenoperatoren einsetzen.</li>
@@ -283,114 +277,113 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>zwischen Variablentypen konvertieren.</li>
 </ul>
 </div>
-<div id="operatoren" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Operatoren</h2>
+<div id="operatoren" class="section level2 unnumbered">
+<h2>Operatoren</h2>
 <p>Zunächst stellen wir fest, dass man die R-Konsole ganz banal als Taschenrechner benutzen kann:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="erste-schritte.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
-<pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="erste-schritte.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">/</span> <span class="dv">3</span></span></code></pre></div>
-<pre><code>## [1] 2.666667</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="erste-schritte.html#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">2.45</span> <span class="sc">+</span> <span class="fl">3.5</span>) <span class="sc">*</span> <span class="dv">7</span></span></code></pre></div>
-<pre><code>## [1] 41.65</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="erste-schritte.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">4</span></span>
+<span id="cb1-2"><a href="erste-schritte.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 5</span></span>
+<span id="cb1-3"><a href="erste-schritte.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">/</span> <span class="dv">3</span></span>
+<span id="cb1-4"><a href="erste-schritte.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.666667</span></span>
+<span id="cb1-5"><a href="erste-schritte.html#cb1-5" aria-hidden="true" tabindex="-1"></a>(<span class="fl">2.45</span> <span class="sc">+</span> <span class="fl">3.5</span>) <span class="sc">*</span> <span class="dv">7</span></span>
+<span id="cb1-6"><a href="erste-schritte.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 41.65</span></span></code></pre></div>
 <p>Die Zeichen <code>+</code>, <code>-</code>, <code>*</code> usw. heißen in der Informatik Operatoren oder Infixe (weil sie immer zwischen zwei Werten stehen).</p>
 </div>
-<div id="variablen" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Variablen</h2>
+<div id="variablen" class="section level2 unnumbered">
+<h2>Variablen</h2>
 <p>Variablen funktionieren so, dass man einem <em>Wert</em> einen Namen gibt. Die Zuweisung folgt dabei dem Schema <code>NAME &lt;- WERT</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="erste-schritte.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="erste-schritte.html#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
 <p>Nach einer erfolgreichen Variablenzuweisung gibt die Konsole <em>keine</em> Rückmeldung, sondern nur bei Fehlern.</p>
 <p><code>x</code> steht jetzt für die Zahl fünf. Mit dieser Variable können wir jetzt genauso rechnen wie mit einer Zahl:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="erste-schritte.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
-<pre><code>## [1] 8</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="erste-schritte.html#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb3-2"><a href="erste-schritte.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 8</span></span></code></pre></div>
 <p>Auch die Zuweisung von Variablen kann Rechenoperationen und andere Variablen enthalten:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="erste-schritte.html#cb10-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> (x <span class="sc">*</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb10-2"><a href="erste-schritte.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
-<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="erste-schritte.html#cb4-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> (x <span class="sc">*</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="erste-schritte.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span>
+<span id="cb4-3"><a href="erste-schritte.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 9</span></span></code></pre></div>
 <p>Der Befehl <code>print(y)</code> ist dabei ganz einfach die Anweisung an die Konsole, den Wert für <code>y</code> auszugeben. Das passiert zwar auch, wenn man nur <code>y</code> eingibt, aber <code>print(y)</code> (oder <code>print(x)</code>, <code>print(1 + 1)</code>, usw.) ist die formal korrekte Schreibweise.</p>
 <p>Der Wert einer Variable kann auch verändert werden. Dafür weisen wir ihr einfach einen neuen Wert zu:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="erste-schritte.html#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb12-2"><a href="erste-schritte.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
-<pre><code>## [1] 20</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="erste-schritte.html#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb5-2"><a href="erste-schritte.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span>
+<span id="cb5-3"><a href="erste-schritte.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 20</span></span></code></pre></div>
 <p>Eine Besonderheit ist, dass der alte Wert der Variable auch innerhalb der Zuweisung eines neuen Werts benutzt werden darf. Das kann in einem Script sehr praktisch sein. Wenn wir <code>x</code> also um 0,5 erhöhen wollen, sieht das so aus:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="erste-schritte.html#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fl">0.5</span></span>
-<span id="cb14-2"><a href="erste-schritte.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
-<pre><code>## [1] 20.5</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="erste-schritte.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fl">0.5</span></span>
+<span id="cb6-2"><a href="erste-schritte.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span>
+<span id="cb6-3"><a href="erste-schritte.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 20.5</span></span></code></pre></div>
 <p>Dabei wird als Dezimaltrennzeichen ausschließlich der Punkt verwendet.</p>
 </div>
-<div id="konstanten" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Konstanten</h2>
+<div id="konstanten" class="section level2 unnumbered">
+<h2>Konstanten</h2>
 <p>Manche benannten Werte sind schon in R eingebaut:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="erste-schritte.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pi)</span></code></pre></div>
-<pre><code>## [1] 3.141593</code></pre>
-<p>Diese Werte heißen üblicherweise “Konstanten” – allerdings lassen sie sich in R auch überschreiben!</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="erste-schritte.html#cb18-1" aria-hidden="true" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb18-2"><a href="erste-schritte.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pi)</span></code></pre></div>
-<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="erste-schritte.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pi)</span>
+<span id="cb7-2"><a href="erste-schritte.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.141593</span></span></code></pre></div>
+<p>Diese Werte heißen üblicherweise <q>Konstanten</q> – allerdings lassen sie sich in R auch überschreiben!</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="erste-schritte.html#cb8-1" aria-hidden="true" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb8-2"><a href="erste-schritte.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pi)</span>
+<span id="cb8-3"><a href="erste-schritte.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span></code></pre></div>
 </div>
-<div id="funktionen" class="section level2" number="2.6">
-<h2><span class="header-section-number">2.6</span> Funktionen</h2>
+<div id="funktionen" class="section level2 unnumbered">
+<h2>Funktionen</h2>
 <p>Mit <code>print()</code> haben wir schon unsere erste <em>Funktion</em> kennengelernt. R stellt uns eine Vielzahl von verschiedenen Funktionen zur Verfügung, und sie werden immer nach dem gleichen Schema benutzt: <code>FUNKTIONSNAME(PARAMETER)</code>.</p>
-<p><em>Parameter</em> (auf Englisch auch “arguments”) sind die Werte, die als Input an die Funktion übergeben werden. Je nach Funktion können das auch mehrere Werte sein, die dann durch Kommas getrennt werden. So nimmt die Funktion <code>max()</code>, die den Maximalwert bestimmt, beliebig viele Zahlen als Parameter:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="erste-schritte.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## [1] 5</code></pre>
+<p><em>Parameter</em> (auf Englisch auch <q>arguments</q>) sind die Werte, die als Input an die Funktion übergeben werden. Je nach Funktion können das auch mehrere Werte sein, die dann durch Kommas getrennt werden. So nimmt die Funktion <code>max()</code>, die den Maximalwert bestimmt, beliebig viele Zahlen als Parameter:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="erste-schritte.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>)</span>
+<span id="cb9-2"><a href="erste-schritte.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 5</span></span></code></pre></div>
 <p>Die Funktion <code>round()</code> hat als optionalen Parameter die Anzahl der Nachkommastellen, auf die gerundet werden soll. Wenn er nicht angegeben wird, nimmmt dieser Parameter immer den Wert 0 an:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="erste-schritte.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>)</span></code></pre></div>
-<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="erste-schritte.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>)</span>
+<span id="cb10-2"><a href="erste-schritte.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 5</span></span></code></pre></div>
 <p>Aber er lässt sich auch spezifizieren:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="erste-schritte.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 4.57</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="erste-schritte.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb11-2"><a href="erste-schritte.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4.57</span></span></code></pre></div>
 <p>Dabei sind die folgenden Ausdrücke identisch:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="erste-schritte.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 4.57</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="erste-schritte.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 4.57</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="erste-schritte.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="fl">4.567</span>)</span></code></pre></div>
-<pre><code>## [1] 4.57</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="erste-schritte.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb12-2"><a href="erste-schritte.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4.57</span></span>
+<span id="cb12-3"><a href="erste-schritte.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.567</span>, <span class="dv">2</span>)</span>
+<span id="cb12-4"><a href="erste-schritte.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4.57</span></span>
+<span id="cb12-5"><a href="erste-schritte.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="fl">4.567</span>)</span>
+<span id="cb12-6"><a href="erste-schritte.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4.57</span></span></code></pre></div>
 <p>Was Funktionen genau machen und welche Parameter sie dabei nehmen, ist in der R-Dokumentation sehr ausführlich (und auf den ersten Blick recht kompliziert) beschrieben. Ganz am Ende der Hilfeseite finden sich oft Beipsiele. Die Hilfe zu einer Funktion kann mit folgendem Befehl aufgerufen werden:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="erste-schritte.html#cb32-1" aria-hidden="true" tabindex="-1"></a>?max</span></code></pre></div>
-<p>Notiz am Rande: Auch die Infix-Operatoren <code>+</code>, <code>-</code>, <code>*</code>, usw. sind eigentlich nur verkürzte Schreibweisen von Funktionen. Mit “backticks” ( ` ) lassen sie sich in vollwertige Funktionen zurückverwandeln:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="erste-schritte.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">2</span>, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="erste-schritte.html#cb13-1" aria-hidden="true" tabindex="-1"></a>?max</span></code></pre></div>
+<p>Notiz am Rande: Auch die Infix-Operatoren <code>+</code>, <code>-</code>, <code>*</code>, usw. sind eigentlich nur verkürzte Schreibweisen von Funktionen. Mit <q>backticks</q> ( ` ) lassen sie sich in vollwertige Funktionen zurückverwandeln:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="erste-schritte.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb14-2"><a href="erste-schritte.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span></code></pre></div>
 </div>
-<div id="strings" class="section level2" number="2.7">
-<h2><span class="header-section-number">2.7</span> Strings</h2>
+<div id="strings" class="section level2 unnumbered">
+<h2>Strings</h2>
 <p>R kann nicht nur mit Zahlen umgehen, sondern auch mit Text. Ein <em>String</em> ist eine Aneinanderreihung von Buchstaben, und wird mit einfachen oder doppelten Anführungszeichen umschlossen:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="erste-schritte.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello, World!&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Hello, World!&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="erste-schritte.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello, World!&quot;</span>)</span>
+<span id="cb15-2"><a href="erste-schritte.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;Hello, World!&quot;</span></span></code></pre></div>
 <p>Auch Variablen können Strings als Wert haben:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="erste-schritte.html#cb37-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Hase&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="erste-schritte.html#cb16-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Hase&quot;</span></span></code></pre></div>
 <p>Es gibt auch Funktionen, die Strings als Parameter nehmen. <code>paste</code> fügt Strings aneinander:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="erste-schritte.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;Mein Name ist&quot;</span>, name)</span></code></pre></div>
-<pre><code>## [1] &quot;Mein Name ist Hase&quot;</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="erste-schritte.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;Mein Name ist&quot;</span>, name)</span>
+<span id="cb17-2"><a href="erste-schritte.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;Mein Name ist Hase&quot;</span></span></code></pre></div>
 </div>
-<div id="datentypen" class="section level2" number="2.8">
-<h2><span class="header-section-number">2.8</span> Datentypen</h2>
+<div id="datentypen" class="section level2 unnumbered">
+<h2>Datentypen</h2>
 <p>Den <em>Typ</em> einer Variable oder eines Wertes bestimmen wir durch den Befehl <code>str()</code>:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="erste-schritte.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(name)</span></code></pre></div>
-<pre><code>##  chr &quot;Hase&quot;</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="erste-schritte.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  num 10</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="erste-schritte.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(name)</span>
+<span id="cb18-2"><a href="erste-schritte.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  chr &quot;Hase&quot;</span></span>
+<span id="cb18-3"><a href="erste-schritte.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="dv">10</span>)</span>
+<span id="cb18-4"><a href="erste-schritte.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  num 10</span></span></code></pre></div>
 <p>Dabei steht <code>chr</code> („character“) für Strings und <code>num</code> („numeric“) für Zahlen.</p>
 <p>Ein weiterer Variablentyp ist <code>logi</code> („logical“), der prinzipiell nur die Werte <code>TRUE</code> oder <code>FALSE</code> annehmen kann. Dieser Typ heißt auch <a href="https://de.wikipedia.org/wiki/Boolesche_Variable">Boolsche Variabel</a>:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="erste-schritte.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>##  logi FALSE</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="erste-schritte.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb19-2"><a href="erste-schritte.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  logi FALSE</span></span></code></pre></div>
 <p>Soweit es ein eindeutiges Ergebnis gibt, kann R mit den entsprechenden Befehlen Werte vom einen in den anderen Typ umwandeln:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="erste-schritte.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;1000&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] 1000</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="erste-schritte.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(x)</span></code></pre></div>
-<pre><code>## [1] &quot;20.5&quot;</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="erste-schritte.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.logical</span>(<span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="erste-schritte.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;1000&quot;</span>)</span>
+<span id="cb20-2"><a href="erste-schritte.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1000</span></span>
+<span id="cb20-3"><a href="erste-schritte.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(x)</span>
+<span id="cb20-4"><a href="erste-schritte.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;20.5&quot;</span></span>
+<span id="cb20-5"><a href="erste-schritte.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">as.logical</span>(<span class="dv">0</span>)</span>
+<span id="cb20-6"><a href="erste-schritte.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span></code></pre></div>
 <p>Kann R einen Wert nicht umwandeln, dann kommt dabei <code>NA</code> raus (mit einer Warnung):</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="erste-schritte.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;Hallo!&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: NAs introduced by coercion</code></pre>
-<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="erste-schritte.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;Hallo!&quot;</span>)</span>
+<span id="cb21-2"><a href="erste-schritte.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] NA</span></span></code></pre></div>
 <p><code>NA</code> („not available/assigned“) ist dabei ein besonderer Wert, den jeder Variablentyp annehmen kann.</p>
 </div>
-<div id="aufgaben" class="section level2" number="2.9">
-<h2><span class="header-section-number">2.9</span> Aufgaben</h2>
-<div id="rechnen" class="section level3" number="2.9.1">
-<h3><span class="header-section-number">2.9.1</span> Rechnen</h3>
+<div id="aufgaben" class="section level2 unnumbered">
+<h2>Aufgaben</h2>
+<div id="rechnen" class="section level3" number="2.0.1">
+<h3><span class="header-section-number">2.0.1</span> Rechnen</h3>
 <p>Lösen Sie folgende Rechenaufgaben mit Hilfe von R:</p>
 <ul>
 <li>4 plus 10</li>
@@ -402,8 +395,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Kubikwurzel aus 12</li>
 </ul>
 </div>
-<div id="variablen-1" class="section level3" number="2.9.2">
-<h3><span class="header-section-number">2.9.2</span> Variablen</h3>
+<div id="variablen-1" class="section level3" number="2.0.2">
+<h3><span class="header-section-number">2.0.2</span> Variablen</h3>
 <p>Weisen Sie den Variablen a bis g folgende Werte zu:</p>
 <ol style="list-style-type: lower-alpha">
 <li>TRUE</li>
@@ -415,8 +408,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Die aktuelle Uhrzeit mit Datum und Zeitzone (automatisch generiert)</li>
 </ol>
 </div>
-<div id="datentypen-1" class="section level3" number="2.9.3">
-<h3><span class="header-section-number">2.9.3</span> Datentypen</h3>
+<div id="datentypen-1" class="section level3" number="2.0.3">
+<h3><span class="header-section-number">2.0.3</span> Datentypen</h3>
 <p>Bestimmen Sie die Typen der Variablen a bis g.</p>
 <p>Finden Sie je zwei Beispiele für die Umwandlung…</p>
 <ul>
@@ -431,13 +424,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>(<code>Date</code> ist kein eigentlicher Datentyp, aber erfüllt an dieser Stelle denselben Zweck.)</p>
 </div>
-<div id="swirl" class="section level3" number="2.9.4">
-<h3><span class="header-section-number">2.9.4</span> Swirl</h3>
+<div id="swirl" class="section level3" number="2.0.4">
+<h3><span class="header-section-number">2.0.4</span> Swirl</h3>
 <p>Folgen Sie den Anleitungen, um Swirl zu installieren: <a href="https://swirlstats.com/students.html" class="uri">https://swirlstats.com/students.html</a></p>
 <p>Absolvieren Sie Lektion 1 („Basic Building Blocks“).</p>
 </div>
-<div id="recherche" class="section level3" number="2.9.5">
-<h3><span class="header-section-number">2.9.5</span> Recherche</h3>
+<div id="recherche" class="section level3" number="2.0.5">
+<h3><span class="header-section-number">2.0.5</span> Recherche</h3>
 <p>Recherchieren Sie:</p>
 <ul>
 <li>Welche Funktion gibt den absoluten Wert einer Zahl aus? (z.B. -4 ergibt 4, 8 ergibt 8)</li>
@@ -446,8 +439,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>In der Statistik wird zwischen stetigen und diskreten Variablen unterschieden. Welche äquivalente Unterscheidung nimmt R vor?</li>
 </ul>
 </div>
-<div id="kniffliges" class="section level3" number="2.9.6">
-<h3><span class="header-section-number">2.9.6</span> Kniffliges</h3>
+<div id="kniffliges" class="section level3" number="2.0.6">
+<h3><span class="header-section-number">2.0.6</span> Kniffliges</h3>
 <p>Lösen Sie die folgenden Probleme:</p>
 <ul>
 <li>Durch welchen Ausdruck lässt sich eine Zahl auf die nächste <em>gerade</em> Zahl runden? (z.B. 18,9 auf 18,0 oder 21,2 auf 22,0)</li>
@@ -472,15 +465,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="text-anderson-2008.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -500,15 +493,15 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/ktiu/ds21/edit/master/02_erste_schritte.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
 "text": null
 },
 "view": {
-"link": null,
+"link": "https://github.com/ktiu/ds21/blob/master/02_erste_schritte.Rmd",
 "text": null
 },
 "download": ["_main.pdf"],

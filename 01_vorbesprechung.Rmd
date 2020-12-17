@@ -1,6 +1,6 @@
 # Vorbesprechung
 
-## Überblick
+## Überblick {-}
 
 ### Seminar im Curriculum
 
@@ -34,7 +34,7 @@ Sie können...
 - Bei Bedarf kann ich gerne versuchen, Arbeitsplätze im Seminarraum (PEG) anzubieten.
 - Bitte kontaktieren Sie mich per E-Mail, falls Sie einen Arbeitsplatz regelmäßig in Anspruch nehmen wollen würden. 
 
-## Seminarformat
+## Seminarformat {-}
 
 - Das Seminar findet jede Woche Montags, 13--16h c.t. statt.
 - Der Zoom-Link, den Sie per E-Mail erhalten haben, bleibt gleich.
@@ -77,7 +77,7 @@ Sie können...
 - Die Person teilt ihren Bildschirm und berichtet von ihrer Bearbeitung eines Problems.
 - Alle anderen unterstützen solidarisch durch aktives Nachvollziehen, Nachfragen und Hinweise.
 
-## Leistungsnachweise
+## Leistungsnachweise {-}
 
 ### Exposé
 
@@ -124,7 +124,7 @@ Design                       | 20%          | Das Untersuchungsvorhaben ist nach
   - aktive Beteiligung an Diskussionen.
 - Eine eingeschaltete Kamera macht das allen Beteiligten leichter!
 
-## Lehrphilosophie
+## Lehrphilosophie {-}
 
 - Die folgenden vier "Säulen" habe ich mal im Rahmen einer Fortbildung als meine Lehrphilosophie definiert.
 - Sie spiegeln meinen eigenen Anspruch an meine Lehre wider und sind als Vorschlag für ein gutes Miteinander zu verstehen.
