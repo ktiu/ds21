@@ -540,11 +540,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="aufgaben-4" class="section level2" number="8.8">
 <h2><span class="header-section-number">8.8</span> Aufgaben</h2>
 <ol style="list-style-type: decimal">
-<li><p>Erstellen Sie eine Choroplethenkarte der Frankfurter Stadtteile, in der Sie die Anzahl bzw. die Dichte von Apotheken darstellen. (Schritte analog zu oben.)</p></li>
-<li><p>Welche Stadtteile haben mehr Kioske? Welche mehr Apotheken? Wie ausgeprägt ist das Verhältnis? Erstellen Sie eine Karte, die das zum Ausdruck bringt.</p></li>
-<li><p>(Achtung, knifflig!) Siemens veröffentlicht einen <a href="https://press.siemens.com/global/de/feature/wo-blitzt-es-am-haeufigsten">Blitzatlas</a>. Laden Sie den Datensatz herunter und bauen Sie die folgende Ansicht nach:</p></li>
+<li>Erstellen Sie eine Choroplethenkarte der Frankfurter Stadtteile, in der Sie die Anzahl bzw. die Dichte von Apotheken darstellen. (Schritte analog zu oben.)</li>
 </ol>
-<p><img src="_main_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r solution"><code class="sourceCode r"><span id="cb102-1"><a href="choroplethen.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aus dem OSM-Wiki erfahren wir, dass die Abfrage lautet: amenity=pharmacy</span></span>
+<span id="cb102-2"><a href="choroplethen.html#cb102-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-3"><a href="choroplethen.html#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Auf Overpass Turbo lässt sich das Resultat als geoJSON exportieren.</span></span>
+<span id="cb102-4"><a href="choroplethen.html#cb102-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-5"><a href="choroplethen.html#cb102-5" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="sc">%&gt;%</span></span>
+<span id="cb102-6"><a href="choroplethen.html#cb102-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb102-7"><a href="choroplethen.html#cb102-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_covers</span>(<span class="fu">st_read</span>(<span class="st">&quot;resources/apotheken.geojson&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb102-8"><a href="choroplethen.html#cb102-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lengths</span>() <span class="ot">-&gt;</span> stadtteile<span class="sc">$</span>anzahl_apotheken</span>
+<span id="cb102-9"><a href="choroplethen.html#cb102-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading layer `apotheken&#39; from data source `/Users/till/teaching/2020x21_Data_Science/public/resources/apotheken.geojson&#39; using driver `GeoJSON&#39;</span></span>
+<span id="cb102-10"><a href="choroplethen.html#cb102-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Simple feature collection with 257 features and 61 fields</span></span>
+<span id="cb102-11"><a href="choroplethen.html#cb102-11" aria-hidden="true" tabindex="-1"></a><span class="do">## geometry type:  GEOMETRY</span></span>
+<span id="cb102-12"><a href="choroplethen.html#cb102-12" aria-hidden="true" tabindex="-1"></a><span class="do">## dimension:      XY</span></span>
+<span id="cb102-13"><a href="choroplethen.html#cb102-13" aria-hidden="true" tabindex="-1"></a><span class="do">## bbox:           xmin: 8.466004 ymin: 50.04214 xmax: 8.834962 ymax: 50.21252</span></span>
+<span id="cb102-14"><a href="choroplethen.html#cb102-14" aria-hidden="true" tabindex="-1"></a><span class="do">## geographic CRS: WGS 84</span></span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r solution"><code class="sourceCode r"><span id="cb103-1"><a href="choroplethen.html#cb103-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-2"><a href="choroplethen.html#cb103-2" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="sc">%&gt;%</span></span>
+<span id="cb103-3"><a href="choroplethen.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qkm =</span> <span class="fu">st_area</span>(.) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>() <span class="sc">/</span> <span class="dv">1000</span> <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb103-4"><a href="choroplethen.html#cb103-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">apothekendichte =</span> anzahl_apotheken<span class="sc">/</span> qkm) <span class="sc">%&gt;%</span></span>
+<span id="cb103-5"><a href="choroplethen.html#cb103-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb103-6"><a href="choroplethen.html#cb103-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> apothekendichte), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb103-7"><a href="choroplethen.html#cb103-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_continuous</span>(<span class="st">&quot;Apotheken pro km²&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-103-1.png" width="672" class="solution" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Welche Stadtteile haben mehr Kioske? Welche mehr Apotheken? Wie ausgeprägt ist das Verhältnis? Erstellen Sie eine Karte, die das zum Ausdruck bringt.</li>
+</ol>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r solution"><code class="sourceCode r"><span id="cb104-1"><a href="choroplethen.html#cb104-1" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="choroplethen.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> (anzahl_apotheken <span class="sc">-</span> anzahl_kioske) <span class="sc">/</span> (anzahl_apotheken <span class="sc">+</span> anzahl_kioske)) <span class="sc">%&gt;%</span></span>
+<span id="cb104-3"><a href="choroplethen.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb104-4"><a href="choroplethen.html#cb104-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> ratio), <span class="at">color=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb104-5"><a href="choroplethen.html#cb104-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_continuous</span>(<span class="cn">NULL</span>,</span>
+<span id="cb104-6"><a href="choroplethen.html#cb104-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">type =</span> <span class="st">&quot;viridis&quot;</span>,</span>
+<span id="cb104-7"><a href="choroplethen.html#cb104-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb104-8"><a href="choroplethen.html#cb104-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;nur Apotheken&quot;</span>,</span>
+<span id="cb104-9"><a href="choroplethen.html#cb104-9" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&quot;mehr Apotheken&quot;</span>,</span>
+<span id="cb104-10"><a href="choroplethen.html#cb104-10" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&quot;gleiche Anzahl&quot;</span>,</span>
+<span id="cb104-11"><a href="choroplethen.html#cb104-11" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&quot;mehr Kioske&quot;</span>,</span>
+<span id="cb104-12"><a href="choroplethen.html#cb104-12" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&quot;nur Kioske&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb104-13"><a href="choroplethen.html#cb104-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-104-1.png" width="672" class="solution" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>(Achtung, knifflig!) Siemens veröffentlicht einen <a href="https://press.siemens.com/global/de/feature/wo-blitzt-es-am-haeufigsten">Blitzatlas</a>. Laden Sie den Datensatz herunter und bauen Sie die folgende Ansicht nach:</li>
+</ol>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r solution"><code class="sourceCode r"><span id="cb105-1"><a href="choroplethen.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;resources/Uebersicht-Blitzeinschlaege-2019.xlsx&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb105-2"><a href="choroplethen.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_excel</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb105-3"><a href="choroplethen.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb105-4"><a href="choroplethen.html#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Dichte2016 =</span> <span class="st">`</span><span class="at">Dichte 2016</span><span class="st">`</span>,</span>
+<span id="cb105-5"><a href="choroplethen.html#cb105-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">DichteGesamt =</span> <span class="fu">mean</span>(<span class="fu">c</span>(Dichte2015,</span>
+<span id="cb105-6"><a href="choroplethen.html#cb105-6" aria-hidden="true" tabindex="-1"></a>                               Dichte2016,</span>
+<span id="cb105-7"><a href="choroplethen.html#cb105-7" aria-hidden="true" tabindex="-1"></a>                               Dichte2017,</span>
+<span id="cb105-8"><a href="choroplethen.html#cb105-8" aria-hidden="true" tabindex="-1"></a>                               Dichte2018,</span>
+<span id="cb105-9"><a href="choroplethen.html#cb105-9" aria-hidden="true" tabindex="-1"></a>                               Dichte2019)),</span>
+<span id="cb105-10"><a href="choroplethen.html#cb105-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">kreis =</span> <span class="st">`</span><span class="at">Stadt- oder Landkreis</span><span class="st">`</span> <span class="sc">%&gt;%</span></span>
+<span id="cb105-11"><a href="choroplethen.html#cb105-11" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">str_remove</span>(<span class="st">&quot;(LK) |(SK) &quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb105-12"><a href="choroplethen.html#cb105-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Dichte 2016</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-13"><a href="choroplethen.html#cb105-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">starts_with</span>(<span class="st">&quot;Dichte&quot;</span>),</span>
+<span id="cb105-14"><a href="choroplethen.html#cb105-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_prefix =</span> <span class="st">&quot;Dichte&quot;</span>,</span>
+<span id="cb105-15"><a href="choroplethen.html#cb105-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to     =</span> <span class="st">&quot;Jahr&quot;</span>,</span>
+<span id="cb105-16"><a href="choroplethen.html#cb105-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to    =</span> <span class="st">&quot;Blitzdichte&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb105-17"><a href="choroplethen.html#cb105-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(kreis, Jahr, Blitzdichte) <span class="ot">-&gt;</span></span>
+<span id="cb105-18"><a href="choroplethen.html#cb105-18" aria-hidden="true" tabindex="-1"></a>  blitze</span>
+<span id="cb105-19"><a href="choroplethen.html#cb105-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-20"><a href="choroplethen.html#cb105-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Landkreise gibt es z.B. vom GDZ: https://gdz.bkg.bund.de/</span></span>
+<span id="cb105-21"><a href="choroplethen.html#cb105-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Datensatz: Verwaltungsgebiete 1:250 000 mit Einwohnerzahlen (Ebenen)</span></span>
+<span id="cb105-22"><a href="choroplethen.html#cb105-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-23"><a href="choroplethen.html#cb105-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;resources/vg250-ew_3112.gk3.shape.ebenen/vg250-ew_ebenen_3112/VG250_KRS.shp&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb105-24"><a href="choroplethen.html#cb105-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_sf</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb105-25"><a href="choroplethen.html#cb105-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(RS, <span class="st">&quot;^06&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb105-26"><a href="choroplethen.html#cb105-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(blitze, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;GEN&quot;</span> <span class="ot">=</span> <span class="st">&quot;kreis&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb105-27"><a href="choroplethen.html#cb105-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb105-28"><a href="choroplethen.html#cb105-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Blitzdichte), <span class="at">color=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb105-29"><a href="choroplethen.html#cb105-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Jahr) <span class="sc">+</span></span>
+<span id="cb105-30"><a href="choroplethen.html#cb105-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_continuous</span>(<span class="at">type=</span><span class="st">&quot;viridis&quot;</span>) <span class="sc">+</span></span>
+<span id="cb105-31"><a href="choroplethen.html#cb105-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb105-32"><a href="choroplethen.html#cb105-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text  =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb105-33"><a href="choroplethen.html#cb105-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
 
 </div>
 </div>

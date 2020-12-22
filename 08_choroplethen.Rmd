@@ -147,10 +147,6 @@ stadtteile %>%
 
 ## Aufgaben
 
-```{r include=F}
-solutions <- F
-```
-
 1. Erstellen Sie eine Choroplethenkarte der Frankfurter Stadtteile, in der Sie die Anzahl bzw. die Dichte von Apotheken darstellen. (Schritte analog zu oben.)
 
 ```{r include=solutions, class.source='solution', out.extra='class="solution"'}
@@ -212,7 +208,8 @@ stadtteile %>%
   select(kreis, Jahr, Blitzdichte) ->
   blitze
 
-# Landkreise gibt es z.B. vom GDZ: https://gdz.bkg.bund.de/index.php/default/digitale-geodaten/verwaltungsgebiete/verwaltungsgebiete-1-250-000-mit-einwohnerzahlen-ebenen-stand-31-12-vg250-ew-ebenen-31-12.html
+# Landkreise gibt es z.B. vom GDZ: https://gdz.bkg.bund.de/
+# Datensatz: Verwaltungsgebiete 1:250 000 mit Einwohnerzahlen (Ebenen)
 
 "resources/vg250-ew_3112.gk3.shape.ebenen/vg250-ew_ebenen_3112/VG250_KRS.shp" %>%
   read_sf() %>%
