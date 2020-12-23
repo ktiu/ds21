@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sitzung 8 Choroplethen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sitzung 8 Choroplethen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sitzung 8 Choroplethen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="geodaten.html"/>
+
+<script src="assets/header-attrs-2.5/header-attrs.js"></script>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="solutions.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé"><i class="fa fa-check"></i><b>1.3.1</b> Exposé</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.2</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.6</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
+<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="geodaten.html"><a href="geodaten.html#lernziele-dieser-sitzung-2"><i class="fa fa-check"></i><b>7.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="7.2" data-path="geodaten.html"><a href="geodaten.html#voraussetzungen-1"><i class="fa fa-check"></i><b>7.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="7.3" data-path="geodaten.html"><a href="geodaten.html#exkurs-pipes"><i class="fa fa-check"></i><b>7.3</b> Exkurs: Pipes</a></li>
+<li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
+<li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-3"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="choroplethen.html"><a href="choroplethen.html"><i class="fa fa-check"></i><b>8</b> Choroplethen</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="choroplethen.html"><a href="choroplethen.html#lernziele"><i class="fa fa-check"></i><b>8.1</b> Lernziele</a></li>
+<li class="chapter" data-level="8.2" data-path="choroplethen.html"><a href="choroplethen.html#vorbereitung-1"><i class="fa fa-check"></i><b>8.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="8.3" data-path="choroplethen.html"><a href="choroplethen.html#ziel"><i class="fa fa-check"></i><b>8.3</b> Ziel</a></li>
+<li class="chapter" data-level="8.4" data-path="choroplethen.html"><a href="choroplethen.html#grundkarte"><i class="fa fa-check"></i><b>8.4</b> Grundkarte</a></li>
+<li class="chapter" data-level="8.5" data-path="choroplethen.html"><a href="choroplethen.html#osm-daten"><i class="fa fa-check"></i><b>8.5</b> OSM-Daten</a></li>
+<li class="chapter" data-level="8.6" data-path="choroplethen.html"><a href="choroplethen.html#koordinatenreferenzsysteme"><i class="fa fa-check"></i><b>8.6</b> Koordinatenreferenzsysteme</a></li>
+<li class="chapter" data-level="8.7" data-path="choroplethen.html"><a href="choroplethen.html#verschneiden"><i class="fa fa-check"></i><b>8.7</b> Verschneiden</a></li>
+<li class="chapter" data-level="8.8" data-path="choroplethen.html"><a href="choroplethen.html#aufgaben-4"><i class="fa fa-check"></i><b>8.8</b> Aufgaben</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="choroplethen" class="section level1" number="8">
+<h1><span class="header-section-number">Sitzung 8</span> Choroplethen</h1>
+<div id="lernziele" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Lernziele</h2>
+<p>Sie können…</p>
+<ul>
+<li>Geodaten als Simple Features importieren,</li>
+<li>CRS bestimmen und umwandeln,</li>
+<li>einfache Verschneidungen von Simple Features durchführen und</li>
+<li>Simple Features kartographisch darstellen.</li>
+</ul>
+</div>
+<div id="vorbereitung-1" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Vorbereitung</h2>
+<p>Für diese Lektion werden zwei Pakete geladen:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="choroplethen.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb87-2"><a href="choroplethen.html#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+</div>
+<div id="ziel" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Ziel</h2>
+<p>Ziel ist, eine <a href="https://de.wikipedia.org/wiki/Choroplethenkarte">Choroplethenkarte</a> von Frankfurt zu erstellen, die die Versorgung mit Kiosken darstellt.</p>
+</div>
+<div id="grundkarte" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Grundkarte</h2>
+<p>Eine Shapefile der Frankfurter Stadtteile findet sich hier: <a href="http://www.offenedaten.frankfurt.de/dataset/frankfurter-stadtteilgrenzen-fur-gis-systeme" class="uri">http://www.offenedaten.frankfurt.de/dataset/frankfurter-stadtteilgrenzen-fur-gis-systeme</a></p>
+<p>Wir laden die Zip-Datei herunter und speichern den enthaltenen Ordner <code>stadtteile</code> in unserem Arbeitsverzeichnis. Es ist eine gute Angewohnheit, einen Unterordner für Ressourcen anzulegen.</p>
+<p>Dann importieren wir den Geodatensatz als Simple Features (Paket <code>sf</code>):</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="choroplethen.html#cb88-1" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;resources/stadtteile/Stadtteile_Frankfurt_am_Main.shp&quot;</span>)</span>
+<span id="cb88-2"><a href="choroplethen.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading layer `Stadtteile_Frankfurt_am_Main&#39; from data source `/Users/till/teaching/2020x21_Data_Science/public/resources/stadtteile/Stadtteile_Frankfurt_am_Main.shp&#39; using driver `ESRI Shapefile&#39;</span></span>
+<span id="cb88-3"><a href="choroplethen.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Simple feature collection with 46 features and 2 fields</span></span>
+<span id="cb88-4"><a href="choroplethen.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="do">## geometry type:  POLYGON</span></span>
+<span id="cb88-5"><a href="choroplethen.html#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="do">## dimension:      XY</span></span>
+<span id="cb88-6"><a href="choroplethen.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="do">## bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925</span></span>
+<span id="cb88-7"><a href="choroplethen.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="do">## projected CRS:  ETRS89 / UTM zone 32N</span></span></code></pre></div>
+<p>Simple Features sind Datensätze, die eine Spalte <code>geometry</code> enthalten, in der Geodaten in einem standardisierten Format hinterlegt sind.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="choroplethen.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(stadtteile)</span>
+<span id="cb89-2"><a href="choroplethen.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Classes &#39;sf&#39; and &#39;data.frame&#39;:   46 obs. of  3 variables:</span></span>
+<span id="cb89-3"><a href="choroplethen.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ STTLNR  : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span id="cb89-4"><a href="choroplethen.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ STTLNAME: Factor w/ 46 levels &quot;Altstadt&quot;,&quot;Bahnhofsviertel&quot;,..: 1 22 2 45 44 30 29 32 7 17 ...</span></span>
+<span id="cb89-5"><a href="choroplethen.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ geometry:sfc_POLYGON of length 46; first list element: List of 1</span></span>
+<span id="cb89-6"><a href="choroplethen.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ : num [1:46, 1:2] 476934 476890 476852 476813 476799 ...</span></span>
+<span id="cb89-7"><a href="choroplethen.html#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..- attr(*, &quot;class&quot;)= chr  &quot;XY&quot; &quot;POLYGON&quot; &quot;sfg&quot;</span></span>
+<span id="cb89-8"><a href="choroplethen.html#cb89-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  - attr(*, &quot;sf_column&quot;)= chr &quot;geometry&quot;</span></span>
+<span id="cb89-9"><a href="choroplethen.html#cb89-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  - attr(*, &quot;agr&quot;)= Factor w/ 3 levels &quot;constant&quot;,&quot;aggregate&quot;,..: NA NA</span></span>
+<span id="cb89-10"><a href="choroplethen.html#cb89-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..- attr(*, &quot;names&quot;)= chr  &quot;STTLNR&quot; &quot;STTLNAME&quot;</span></span></code></pre></div>
+<p>Eine Vorschau:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="choroplethen.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stadtteile) <span class="sc">+</span></span>
+<span id="cb90-2"><a href="choroplethen.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb90-3"><a href="choroplethen.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> STTLNAME), <span class="at">size =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+</div>
+<div id="osm-daten" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> OSM-Daten</h2>
+<p>Im <a href="https://wiki.openstreetmap.org/wiki/Map_Features">OSM Wiki</a> suchen wir den richtigen <em>tag</em> heraus. In diesem Fall <code>shop=kiosk</code></p>
+<p>Dann bauen wir auf <a href="https://overpass-turbo.eu/">Overpass Turbo</a> die Abfrage und laden den Datensatz herunter.</p>
+<p>Schließlich importieren wir:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="choroplethen.html#cb91-1" aria-hidden="true" tabindex="-1"></a>kioske <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;resources/kioske.geojson&quot;</span>)</span>
+<span id="cb91-2"><a href="choroplethen.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading layer `kioske&#39; from data source `/Users/till/teaching/2020x21_Data_Science/public/resources/kioske.geojson&#39; using driver `GeoJSON&#39;</span></span>
+<span id="cb91-3"><a href="choroplethen.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Simple feature collection with 325 features and 74 fields</span></span>
+<span id="cb91-4"><a href="choroplethen.html#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="do">## geometry type:  GEOMETRY</span></span>
+<span id="cb91-5"><a href="choroplethen.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="do">## dimension:      XY</span></span>
+<span id="cb91-6"><a href="choroplethen.html#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="do">## bbox:           xmin: 8.505468 ymin: 50.04801 xmax: 8.789538 ymax: 50.20185</span></span>
+<span id="cb91-7"><a href="choroplethen.html#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="do">## geographic CRS: WGS 84</span></span></code></pre></div>
+<p>Eine Vorschau:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="choroplethen.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb92-2"><a href="choroplethen.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> stadtteile) <span class="sc">+</span></span>
+<span id="cb92-3"><a href="choroplethen.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> kioske)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+</div>
+<div id="koordinatenreferenzsysteme" class="section level2" number="8.6">
+<h2><span class="header-section-number">8.6</span> Koordinatenreferenzsysteme</h2>
+<p>Der OSM-Datensatz ist mit WGS84 (EPSG 4326) referenziert:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="choroplethen.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(kioske)</span>
+<span id="cb93-2"><a href="choroplethen.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Coordinate Reference System:</span></span>
+<span id="cb93-3"><a href="choroplethen.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   User input: WGS 84 </span></span>
+<span id="cb93-4"><a href="choroplethen.html#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   wkt:</span></span>
+<span id="cb93-5"><a href="choroplethen.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="do">## GEOGCRS[&quot;WGS 84&quot;,</span></span>
+<span id="cb93-6"><a href="choroplethen.html#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     DATUM[&quot;World Geodetic System 1984&quot;,</span></span>
+<span id="cb93-7"><a href="choroplethen.html#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="do">##         ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,</span></span>
+<span id="cb93-8"><a href="choroplethen.html#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="do">##             LENGTHUNIT[&quot;metre&quot;,1]]],</span></span>
+<span id="cb93-9"><a href="choroplethen.html#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     PRIMEM[&quot;Greenwich&quot;,0,</span></span>
+<span id="cb93-10"><a href="choroplethen.html#cb93-10" aria-hidden="true" tabindex="-1"></a><span class="do">##         ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span>
+<span id="cb93-11"><a href="choroplethen.html#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     CS[ellipsoidal,2],</span></span>
+<span id="cb93-12"><a href="choroplethen.html#cb93-12" aria-hidden="true" tabindex="-1"></a><span class="do">##         AXIS[&quot;geodetic latitude (Lat)&quot;,north,</span></span>
+<span id="cb93-13"><a href="choroplethen.html#cb93-13" aria-hidden="true" tabindex="-1"></a><span class="do">##             ORDER[1],</span></span>
+<span id="cb93-14"><a href="choroplethen.html#cb93-14" aria-hidden="true" tabindex="-1"></a><span class="do">##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span>
+<span id="cb93-15"><a href="choroplethen.html#cb93-15" aria-hidden="true" tabindex="-1"></a><span class="do">##         AXIS[&quot;geodetic longitude (Lon)&quot;,east,</span></span>
+<span id="cb93-16"><a href="choroplethen.html#cb93-16" aria-hidden="true" tabindex="-1"></a><span class="do">##             ORDER[2],</span></span>
+<span id="cb93-17"><a href="choroplethen.html#cb93-17" aria-hidden="true" tabindex="-1"></a><span class="do">##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span>
+<span id="cb93-18"><a href="choroplethen.html#cb93-18" aria-hidden="true" tabindex="-1"></a><span class="do">##     ID[&quot;EPSG&quot;,4326]]</span></span></code></pre></div>
+<p>Die Stadtteilen hingegen sind sind in ETSR89 (EPSG 25832):</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="choroplethen.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(stadtteile)</span>
+<span id="cb94-2"><a href="choroplethen.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Coordinate Reference System:</span></span>
+<span id="cb94-3"><a href="choroplethen.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   User input: ETRS89 / UTM zone 32N </span></span>
+<span id="cb94-4"><a href="choroplethen.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   wkt:</span></span>
+<span id="cb94-5"><a href="choroplethen.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="do">## PROJCRS[&quot;ETRS89 / UTM zone 32N&quot;,</span></span>
+<span id="cb94-6"><a href="choroplethen.html#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     BASEGEOGCRS[&quot;ETRS89&quot;,</span></span>
+<span id="cb94-7"><a href="choroplethen.html#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="do">##         DATUM[&quot;European Terrestrial Reference System 1989&quot;,</span></span>
+<span id="cb94-8"><a href="choroplethen.html#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="do">##             ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,</span></span>
+<span id="cb94-9"><a href="choroplethen.html#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="do">##                 LENGTHUNIT[&quot;metre&quot;,1]]],</span></span>
+<span id="cb94-10"><a href="choroplethen.html#cb94-10" aria-hidden="true" tabindex="-1"></a><span class="do">##         PRIMEM[&quot;Greenwich&quot;,0,</span></span>
+<span id="cb94-11"><a href="choroplethen.html#cb94-11" aria-hidden="true" tabindex="-1"></a><span class="do">##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span>
+<span id="cb94-12"><a href="choroplethen.html#cb94-12" aria-hidden="true" tabindex="-1"></a><span class="do">##         ID[&quot;EPSG&quot;,4258]],</span></span>
+<span id="cb94-13"><a href="choroplethen.html#cb94-13" aria-hidden="true" tabindex="-1"></a><span class="do">##     CONVERSION[&quot;UTM zone 32N&quot;,</span></span>
+<span id="cb94-14"><a href="choroplethen.html#cb94-14" aria-hidden="true" tabindex="-1"></a><span class="do">##         METHOD[&quot;Transverse Mercator&quot;,</span></span>
+<span id="cb94-15"><a href="choroplethen.html#cb94-15" aria-hidden="true" tabindex="-1"></a><span class="do">##             ID[&quot;EPSG&quot;,9807]],</span></span>
+<span id="cb94-16"><a href="choroplethen.html#cb94-16" aria-hidden="true" tabindex="-1"></a><span class="do">##         PARAMETER[&quot;Latitude of natural origin&quot;,0,</span></span>
+<span id="cb94-17"><a href="choroplethen.html#cb94-17" aria-hidden="true" tabindex="-1"></a><span class="do">##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],</span></span>
+<span id="cb94-18"><a href="choroplethen.html#cb94-18" aria-hidden="true" tabindex="-1"></a><span class="do">##             ID[&quot;EPSG&quot;,8801]],</span></span>
+<span id="cb94-19"><a href="choroplethen.html#cb94-19" aria-hidden="true" tabindex="-1"></a><span class="do">##         PARAMETER[&quot;Longitude of natural origin&quot;,9,</span></span>
+<span id="cb94-20"><a href="choroplethen.html#cb94-20" aria-hidden="true" tabindex="-1"></a><span class="do">##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],</span></span>
+<span id="cb94-21"><a href="choroplethen.html#cb94-21" aria-hidden="true" tabindex="-1"></a><span class="do">##             ID[&quot;EPSG&quot;,8802]],</span></span>
+<span id="cb94-22"><a href="choroplethen.html#cb94-22" aria-hidden="true" tabindex="-1"></a><span class="do">##         PARAMETER[&quot;Scale factor at natural origin&quot;,0.9996,</span></span>
+<span id="cb94-23"><a href="choroplethen.html#cb94-23" aria-hidden="true" tabindex="-1"></a><span class="do">##             SCALEUNIT[&quot;unity&quot;,1],</span></span>
+<span id="cb94-24"><a href="choroplethen.html#cb94-24" aria-hidden="true" tabindex="-1"></a><span class="do">##             ID[&quot;EPSG&quot;,8805]],</span></span>
+<span id="cb94-25"><a href="choroplethen.html#cb94-25" aria-hidden="true" tabindex="-1"></a><span class="do">##         PARAMETER[&quot;False easting&quot;,500000,</span></span>
+<span id="cb94-26"><a href="choroplethen.html#cb94-26" aria-hidden="true" tabindex="-1"></a><span class="do">##             LENGTHUNIT[&quot;metre&quot;,1],</span></span>
+<span id="cb94-27"><a href="choroplethen.html#cb94-27" aria-hidden="true" tabindex="-1"></a><span class="do">##             ID[&quot;EPSG&quot;,8806]],</span></span>
+<span id="cb94-28"><a href="choroplethen.html#cb94-28" aria-hidden="true" tabindex="-1"></a><span class="do">##         PARAMETER[&quot;False northing&quot;,0,</span></span>
+<span id="cb94-29"><a href="choroplethen.html#cb94-29" aria-hidden="true" tabindex="-1"></a><span class="do">##             LENGTHUNIT[&quot;metre&quot;,1],</span></span>
+<span id="cb94-30"><a href="choroplethen.html#cb94-30" aria-hidden="true" tabindex="-1"></a><span class="do">##             ID[&quot;EPSG&quot;,8807]]],</span></span>
+<span id="cb94-31"><a href="choroplethen.html#cb94-31" aria-hidden="true" tabindex="-1"></a><span class="do">##     CS[Cartesian,2],</span></span>
+<span id="cb94-32"><a href="choroplethen.html#cb94-32" aria-hidden="true" tabindex="-1"></a><span class="do">##         AXIS[&quot;(E)&quot;,east,</span></span>
+<span id="cb94-33"><a href="choroplethen.html#cb94-33" aria-hidden="true" tabindex="-1"></a><span class="do">##             ORDER[1],</span></span>
+<span id="cb94-34"><a href="choroplethen.html#cb94-34" aria-hidden="true" tabindex="-1"></a><span class="do">##             LENGTHUNIT[&quot;metre&quot;,1]],</span></span>
+<span id="cb94-35"><a href="choroplethen.html#cb94-35" aria-hidden="true" tabindex="-1"></a><span class="do">##         AXIS[&quot;(N)&quot;,north,</span></span>
+<span id="cb94-36"><a href="choroplethen.html#cb94-36" aria-hidden="true" tabindex="-1"></a><span class="do">##             ORDER[2],</span></span>
+<span id="cb94-37"><a href="choroplethen.html#cb94-37" aria-hidden="true" tabindex="-1"></a><span class="do">##             LENGTHUNIT[&quot;metre&quot;,1]],</span></span>
+<span id="cb94-38"><a href="choroplethen.html#cb94-38" aria-hidden="true" tabindex="-1"></a><span class="do">##     USAGE[</span></span>
+<span id="cb94-39"><a href="choroplethen.html#cb94-39" aria-hidden="true" tabindex="-1"></a><span class="do">##         SCOPE[&quot;Engineering survey, topographic mapping.&quot;],</span></span>
+<span id="cb94-40"><a href="choroplethen.html#cb94-40" aria-hidden="true" tabindex="-1"></a><span class="do">##         AREA[&quot;Europe between 6°E and 12°E: Austria; Belgium; Denmark - onshore and offshore; Germany - onshore and offshore; Norway including - onshore and offshore; Spain - offshore.&quot;],</span></span>
+<span id="cb94-41"><a href="choroplethen.html#cb94-41" aria-hidden="true" tabindex="-1"></a><span class="do">##         BBOX[38.76,6,83.92,12]],</span></span>
+<span id="cb94-42"><a href="choroplethen.html#cb94-42" aria-hidden="true" tabindex="-1"></a><span class="do">##     ID[&quot;EPSG&quot;,25832]]</span></span></code></pre></div>
+<p>Der Datensatz lässt sich allerdings transformieren:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="choroplethen.html#cb95-1" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="sc">%&gt;%</span></span>
+<span id="cb95-2"><a href="choroplethen.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb95-3"><a href="choroplethen.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_crs</span>()</span>
+<span id="cb95-4"><a href="choroplethen.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Coordinate Reference System:</span></span>
+<span id="cb95-5"><a href="choroplethen.html#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   User input: EPSG:4326 </span></span>
+<span id="cb95-6"><a href="choroplethen.html#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   wkt:</span></span>
+<span id="cb95-7"><a href="choroplethen.html#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="do">## GEOGCRS[&quot;WGS 84&quot;,</span></span>
+<span id="cb95-8"><a href="choroplethen.html#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     DATUM[&quot;World Geodetic System 1984&quot;,</span></span>
+<span id="cb95-9"><a href="choroplethen.html#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="do">##         ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,</span></span>
+<span id="cb95-10"><a href="choroplethen.html#cb95-10" aria-hidden="true" tabindex="-1"></a><span class="do">##             LENGTHUNIT[&quot;metre&quot;,1]]],</span></span>
+<span id="cb95-11"><a href="choroplethen.html#cb95-11" aria-hidden="true" tabindex="-1"></a><span class="do">##     PRIMEM[&quot;Greenwich&quot;,0,</span></span>
+<span id="cb95-12"><a href="choroplethen.html#cb95-12" aria-hidden="true" tabindex="-1"></a><span class="do">##         ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span>
+<span id="cb95-13"><a href="choroplethen.html#cb95-13" aria-hidden="true" tabindex="-1"></a><span class="do">##     CS[ellipsoidal,2],</span></span>
+<span id="cb95-14"><a href="choroplethen.html#cb95-14" aria-hidden="true" tabindex="-1"></a><span class="do">##         AXIS[&quot;geodetic latitude (Lat)&quot;,north,</span></span>
+<span id="cb95-15"><a href="choroplethen.html#cb95-15" aria-hidden="true" tabindex="-1"></a><span class="do">##             ORDER[1],</span></span>
+<span id="cb95-16"><a href="choroplethen.html#cb95-16" aria-hidden="true" tabindex="-1"></a><span class="do">##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span>
+<span id="cb95-17"><a href="choroplethen.html#cb95-17" aria-hidden="true" tabindex="-1"></a><span class="do">##         AXIS[&quot;geodetic longitude (Lon)&quot;,east,</span></span>
+<span id="cb95-18"><a href="choroplethen.html#cb95-18" aria-hidden="true" tabindex="-1"></a><span class="do">##             ORDER[2],</span></span>
+<span id="cb95-19"><a href="choroplethen.html#cb95-19" aria-hidden="true" tabindex="-1"></a><span class="do">##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],</span></span>
+<span id="cb95-20"><a href="choroplethen.html#cb95-20" aria-hidden="true" tabindex="-1"></a><span class="do">##     USAGE[</span></span>
+<span id="cb95-21"><a href="choroplethen.html#cb95-21" aria-hidden="true" tabindex="-1"></a><span class="do">##         SCOPE[&quot;Horizontal component of 3D system.&quot;],</span></span>
+<span id="cb95-22"><a href="choroplethen.html#cb95-22" aria-hidden="true" tabindex="-1"></a><span class="do">##         AREA[&quot;World.&quot;],</span></span>
+<span id="cb95-23"><a href="choroplethen.html#cb95-23" aria-hidden="true" tabindex="-1"></a><span class="do">##         BBOX[-90,-180,90,180]],</span></span>
+<span id="cb95-24"><a href="choroplethen.html#cb95-24" aria-hidden="true" tabindex="-1"></a><span class="do">##     ID[&quot;EPSG&quot;,4326]]</span></span></code></pre></div>
+<p>Jetzt haben beide Datensätze den selben EPSG-Code. Das ist die Voraussetzung für den nächsten Schritt.</p>
+</div>
+<div id="verschneiden" class="section level2" number="8.7">
+<h2><span class="header-section-number">8.7</span> Verschneiden</h2>
+<p>Mit <code>st_covers()</code> und <code>lengths()</code> lassen sich die Anzahl der Kioske in jedem Stadtteil zählen und einer neuen Spalte im Originaldatensatz zuordnen:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="choroplethen.html#cb96-1" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="sc">%&gt;%</span></span>
+<span id="cb96-2"><a href="choroplethen.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb96-3"><a href="choroplethen.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_covers</span>(kioske) <span class="sc">%&gt;%</span></span>
+<span id="cb96-4"><a href="choroplethen.html#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lengths</span>() <span class="ot">-&gt;</span> stadtteile<span class="sc">$</span>anzahl_kioske</span></code></pre></div>
+<p>Auf einer Karte veranschaulicht:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="choroplethen.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stadtteile) <span class="sc">+</span></span>
+<span id="cb97-2"><a href="choroplethen.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> anzahl_kioske))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p>Allerdings wäre es schöner, die Kioskdichte (nach Fläche) darzustellen. Dazu berechnen wir zunächst die Flächen der Stadtteile:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="choroplethen.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_area</span>(stadtteile) <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="choroplethen.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>() <span class="sc">/</span> <span class="dv">1000</span> <span class="sc">/</span> <span class="dv">1000</span> <span class="ot">-&gt;</span></span>
+<span id="cb98-3"><a href="choroplethen.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  stadtteile<span class="sc">$</span>qkm</span></code></pre></div>
+<p>Oder mit Pipes:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="choroplethen.html#cb99-1" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="sc">%&gt;%</span></span>
+<span id="cb99-2"><a href="choroplethen.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qkm =</span> <span class="fu">st_area</span>(.) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>() <span class="sc">/</span> <span class="dv">1000</span> <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb99-3"><a href="choroplethen.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Simple feature collection with 46 features and 4 fields</span></span>
+<span id="cb99-4"><a href="choroplethen.html#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="do">## geometry type:  POLYGON</span></span>
+<span id="cb99-5"><a href="choroplethen.html#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="do">## dimension:      XY</span></span>
+<span id="cb99-6"><a href="choroplethen.html#cb99-6" aria-hidden="true" tabindex="-1"></a><span class="do">## bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925</span></span>
+<span id="cb99-7"><a href="choroplethen.html#cb99-7" aria-hidden="true" tabindex="-1"></a><span class="do">## projected CRS:  ETRS89 / UTM zone 32N</span></span>
+<span id="cb99-8"><a href="choroplethen.html#cb99-8" aria-hidden="true" tabindex="-1"></a><span class="do">## First 10 features:</span></span>
+<span id="cb99-9"><a href="choroplethen.html#cb99-9" aria-hidden="true" tabindex="-1"></a><span class="do">##    STTLNR        STTLNAME</span></span>
+<span id="cb99-10"><a href="choroplethen.html#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 1       1        Altstadt</span></span>
+<span id="cb99-11"><a href="choroplethen.html#cb99-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 2       2      Innenstadt</span></span>
+<span id="cb99-12"><a href="choroplethen.html#cb99-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 3       3 Bahnhofsviertel</span></span>
+<span id="cb99-13"><a href="choroplethen.html#cb99-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 4       4     Westend-Süd</span></span>
+<span id="cb99-14"><a href="choroplethen.html#cb99-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 5       5    Westend-Nord</span></span>
+<span id="cb99-15"><a href="choroplethen.html#cb99-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 6       6    Nordend-West</span></span>
+<span id="cb99-16"><a href="choroplethen.html#cb99-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 7       7     Nordend-Ost</span></span>
+<span id="cb99-17"><a href="choroplethen.html#cb99-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 8       8          Ostend</span></span>
+<span id="cb99-18"><a href="choroplethen.html#cb99-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 9       9        Bornheim</span></span>
+<span id="cb99-19"><a href="choroplethen.html#cb99-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 10     10  Gutleutviertel</span></span>
+<span id="cb99-20"><a href="choroplethen.html#cb99-20" aria-hidden="true" tabindex="-1"></a><span class="do">##                          geometry anzahl_kioske</span></span>
+<span id="cb99-21"><a href="choroplethen.html#cb99-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  POLYGON ((476934.3 5550541,...             5</span></span>
+<span id="cb99-22"><a href="choroplethen.html#cb99-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  POLYGON ((477611.9 5552034,...             5</span></span>
+<span id="cb99-23"><a href="choroplethen.html#cb99-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  POLYGON ((475831 5550785, 4...             7</span></span>
+<span id="cb99-24"><a href="choroplethen.html#cb99-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  POLYGON ((475745.4 5552373,...             6</span></span>
+<span id="cb99-25"><a href="choroplethen.html#cb99-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  POLYGON ((476497.9 5553910,...             3</span></span>
+<span id="cb99-26"><a href="choroplethen.html#cb99-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  POLYGON ((478362.5 5553898,...            10</span></span>
+<span id="cb99-27"><a href="choroplethen.html#cb99-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  POLYGON ((478397.9 5551924,...            17</span></span>
+<span id="cb99-28"><a href="choroplethen.html#cb99-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 8  POLYGON ((481955.2 5552141,...            15</span></span>
+<span id="cb99-29"><a href="choroplethen.html#cb99-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 9  POLYGON ((478959.8 5552336,...            14</span></span>
+<span id="cb99-30"><a href="choroplethen.html#cb99-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 POLYGON ((472942 5548802, 4...            11</span></span>
+<span id="cb99-31"><a href="choroplethen.html#cb99-31" aria-hidden="true" tabindex="-1"></a><span class="do">##          qkm</span></span>
+<span id="cb99-32"><a href="choroplethen.html#cb99-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  0.5065673</span></span>
+<span id="cb99-33"><a href="choroplethen.html#cb99-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  1.4902009</span></span>
+<span id="cb99-34"><a href="choroplethen.html#cb99-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  0.5425421</span></span>
+<span id="cb99-35"><a href="choroplethen.html#cb99-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  2.4948957</span></span>
+<span id="cb99-36"><a href="choroplethen.html#cb99-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  1.6307925</span></span>
+<span id="cb99-37"><a href="choroplethen.html#cb99-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  3.0977694</span></span>
+<span id="cb99-38"><a href="choroplethen.html#cb99-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  1.5305338</span></span>
+<span id="cb99-39"><a href="choroplethen.html#cb99-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 8  5.5573382</span></span>
+<span id="cb99-40"><a href="choroplethen.html#cb99-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 9  2.7840413</span></span>
+<span id="cb99-41"><a href="choroplethen.html#cb99-41" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 2.1982354</span></span></code></pre></div>
+<p>Und dann die Kioskdichte:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="choroplethen.html#cb100-1" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="choroplethen.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qkm =</span> <span class="fu">st_area</span>(.) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>() <span class="sc">/</span> <span class="dv">1000</span> <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb100-3"><a href="choroplethen.html#cb100-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">kioskdichte =</span> anzahl_kioske <span class="sc">/</span> qkm)</span>
+<span id="cb100-4"><a href="choroplethen.html#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Simple feature collection with 46 features and 5 fields</span></span>
+<span id="cb100-5"><a href="choroplethen.html#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="do">## geometry type:  POLYGON</span></span>
+<span id="cb100-6"><a href="choroplethen.html#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="do">## dimension:      XY</span></span>
+<span id="cb100-7"><a href="choroplethen.html#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="do">## bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925</span></span>
+<span id="cb100-8"><a href="choroplethen.html#cb100-8" aria-hidden="true" tabindex="-1"></a><span class="do">## projected CRS:  ETRS89 / UTM zone 32N</span></span>
+<span id="cb100-9"><a href="choroplethen.html#cb100-9" aria-hidden="true" tabindex="-1"></a><span class="do">## First 10 features:</span></span>
+<span id="cb100-10"><a href="choroplethen.html#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="do">##    STTLNR        STTLNAME</span></span>
+<span id="cb100-11"><a href="choroplethen.html#cb100-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 1       1        Altstadt</span></span>
+<span id="cb100-12"><a href="choroplethen.html#cb100-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 2       2      Innenstadt</span></span>
+<span id="cb100-13"><a href="choroplethen.html#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 3       3 Bahnhofsviertel</span></span>
+<span id="cb100-14"><a href="choroplethen.html#cb100-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 4       4     Westend-Süd</span></span>
+<span id="cb100-15"><a href="choroplethen.html#cb100-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 5       5    Westend-Nord</span></span>
+<span id="cb100-16"><a href="choroplethen.html#cb100-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 6       6    Nordend-West</span></span>
+<span id="cb100-17"><a href="choroplethen.html#cb100-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 7       7     Nordend-Ost</span></span>
+<span id="cb100-18"><a href="choroplethen.html#cb100-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 8       8          Ostend</span></span>
+<span id="cb100-19"><a href="choroplethen.html#cb100-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 9       9        Bornheim</span></span>
+<span id="cb100-20"><a href="choroplethen.html#cb100-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 10     10  Gutleutviertel</span></span>
+<span id="cb100-21"><a href="choroplethen.html#cb100-21" aria-hidden="true" tabindex="-1"></a><span class="do">##                          geometry anzahl_kioske</span></span>
+<span id="cb100-22"><a href="choroplethen.html#cb100-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  POLYGON ((476934.3 5550541,...             5</span></span>
+<span id="cb100-23"><a href="choroplethen.html#cb100-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  POLYGON ((477611.9 5552034,...             5</span></span>
+<span id="cb100-24"><a href="choroplethen.html#cb100-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  POLYGON ((475831 5550785, 4...             7</span></span>
+<span id="cb100-25"><a href="choroplethen.html#cb100-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  POLYGON ((475745.4 5552373,...             6</span></span>
+<span id="cb100-26"><a href="choroplethen.html#cb100-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  POLYGON ((476497.9 5553910,...             3</span></span>
+<span id="cb100-27"><a href="choroplethen.html#cb100-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  POLYGON ((478362.5 5553898,...            10</span></span>
+<span id="cb100-28"><a href="choroplethen.html#cb100-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  POLYGON ((478397.9 5551924,...            17</span></span>
+<span id="cb100-29"><a href="choroplethen.html#cb100-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 8  POLYGON ((481955.2 5552141,...            15</span></span>
+<span id="cb100-30"><a href="choroplethen.html#cb100-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 9  POLYGON ((478959.8 5552336,...            14</span></span>
+<span id="cb100-31"><a href="choroplethen.html#cb100-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 POLYGON ((472942 5548802, 4...            11</span></span>
+<span id="cb100-32"><a href="choroplethen.html#cb100-32" aria-hidden="true" tabindex="-1"></a><span class="do">##          qkm kioskdichte</span></span>
+<span id="cb100-33"><a href="choroplethen.html#cb100-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  0.5065673    9.870357</span></span>
+<span id="cb100-34"><a href="choroplethen.html#cb100-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  1.4902009    3.355252</span></span>
+<span id="cb100-35"><a href="choroplethen.html#cb100-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  0.5425421   12.902225</span></span>
+<span id="cb100-36"><a href="choroplethen.html#cb100-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  2.4948957    2.404910</span></span>
+<span id="cb100-37"><a href="choroplethen.html#cb100-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  1.6307925    1.839596</span></span>
+<span id="cb100-38"><a href="choroplethen.html#cb100-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  3.0977694    3.228129</span></span>
+<span id="cb100-39"><a href="choroplethen.html#cb100-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  1.5305338   11.107236</span></span>
+<span id="cb100-40"><a href="choroplethen.html#cb100-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 8  5.5573382    2.699134</span></span>
+<span id="cb100-41"><a href="choroplethen.html#cb100-41" aria-hidden="true" tabindex="-1"></a><span class="do">## 9  2.7840413    5.028661</span></span>
+<span id="cb100-42"><a href="choroplethen.html#cb100-42" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 2.1982354    5.004014</span></span></code></pre></div>
+<p>Schließlich die Karte:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="choroplethen.html#cb101-1" aria-hidden="true" tabindex="-1"></a>stadtteile <span class="sc">%&gt;%</span></span>
+<span id="cb101-2"><a href="choroplethen.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">qkm =</span> <span class="fu">st_area</span>(.) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>() <span class="sc">/</span> <span class="dv">1000</span> <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb101-3"><a href="choroplethen.html#cb101-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">kioskdichte =</span> anzahl_kioske <span class="sc">/</span> qkm) <span class="sc">%&gt;%</span></span>
+<span id="cb101-4"><a href="choroplethen.html#cb101-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb101-5"><a href="choroplethen.html#cb101-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> kioskdichte), <span class="at">color=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb101-6"><a href="choroplethen.html#cb101-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_continuous</span>(<span class="st">&quot;Kioske pro km²&quot;</span>) <span class="sc">+</span></span>
+<span id="cb101-7"><a href="choroplethen.html#cb101-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+</div>
+<div id="aufgaben-4" class="section level2" number="8.8">
+<h2><span class="header-section-number">8.8</span> Aufgaben</h2>
+<ol style="list-style-type: decimal">
+<li><p>Erstellen Sie eine Choroplethenkarte der Frankfurter Stadtteile, in der Sie die Anzahl bzw. die Dichte von Apotheken darstellen. (Schritte analog zu oben.)</p></li>
+<li><p>Welche Stadtteile haben mehr Kioske? Welche mehr Apotheken? Wie ausgeprägt ist das Verhältnis? Erstellen Sie eine Karte, die das zum Ausdruck bringt.</p></li>
+<li><p>(Achtung, knifflig!) Siemens veröffentlicht einen <a href="https://press.siemens.com/global/de/feature/wo-blitzt-es-am-haeufigsten">Blitzatlas</a>. Laden Sie den Datensatz herunter und bauen Sie die folgende Ansicht nach:</p></li>
+</ol>
+<p><img src="_main_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="geodaten.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ktiu/ds21/edit/master/08_choroplethen.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ktiu/ds21/blob/master/08_choroplethen.Rmd",
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
