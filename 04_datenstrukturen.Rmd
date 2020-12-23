@@ -1,6 +1,6 @@
 # Datenstrukturen
 
-## Lernziele dieser Sitzung {-}
+## Lernziele dieser Sitzung
 
 Sie können...
 
@@ -9,7 +9,7 @@ Sie können...
 - einfache Befehle mit Vektoren durchführen.
 - Beispieldatensätze aufrufen und beschreiben.
 
-## Vektoren {-}
+## Vektoren
 
 Vektoren (engl. *vectors*) sind eindimensionale Reihen von Werten gleichen Typs. Sie bilden einen wichtigen Baustein von R und von den hier im Seminar besprochenen Inhalten.
 
@@ -85,7 +85,7 @@ Wir können den Mittelwert auch mit Hilfe der `sum()` und `length()` Funktionen 
 sum(alter) / length(alter)
 ```
 
-## Matritzen {-}
+## Matritzen
 
 Matritzen (engl. *matrix*) sind zweidimensionale Reihen von Werten gleichen Typs.
 
@@ -94,7 +94,7 @@ matrix(1:15, nrow=3)
 ```
 Sie spielen in diesem Seminar aber keine große Rolle.
 
-## Listen {-}
+## Listen
 
 Listen sind eindimensionale Reihen von Werten, wobei der Typ egal ist:
 
@@ -109,7 +109,7 @@ profil <- list(name="Till", plz=60326, x=list(TRUE, TRUE, FALSE))
 str(profil)
 ```
 
-## Data Frames {-}
+## Data Frames
 
 Data frames sind tabellarische Daten. Die Werte in jeder Spalte haben dabei denselben Typ.
 
@@ -121,7 +121,7 @@ Viele Beispieldatensätze sind in Form von data frames in R eingebaut.
 head(mtcars)
 ```
 
-## Tibbles {-}
+## Tibbles
 
 Tibbles können alles, was data frames können, und haben darüber hinaus noch Funktionen, die wir später kennenlernen werden.
 
@@ -144,7 +144,7 @@ str(diamonds$carat)
 mean(diamonds$depth)
 ```
 
-## Aufgaben  {-}
+## Aufgaben 
 
 ### Vektoren
 

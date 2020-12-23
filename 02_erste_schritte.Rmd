@@ -1,6 +1,6 @@
 # Erste Schritte
 
-## Vorbereitung {-}
+## Vorbereitung
 
 - Machen Sie sich einen kostenlosen Account auf https://rstudio.cloud
 - Treten Sie dem Seminar-Workspace bei. (Sie erhalten eine Einladung per E-Mail.)
@@ -9,7 +9,7 @@
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-## Lernziele für diese Sitzung {-}
+## Lernziele für diese Sitzung
 
 Sie können...
 
@@ -20,7 +20,7 @@ Sie können...
 - die wichtigsten Variablentypen bestimmen.
 - zwischen Variablentypen konvertieren.
 
-## Operatoren {-}
+## Operatoren
 
 Zunächst stellen wir fest, dass man die R-Konsole ganz banal als Taschenrechner benutzen kann:
 
@@ -32,7 +32,7 @@ Zunächst stellen wir fest, dass man die R-Konsole ganz banal als Taschenrechner
 
 Die Zeichen `+`, `-`, `*` usw. heißen in der Informatik Operatoren oder Infixe (weil sie immer zwischen zwei Werten stehen).
 
-## Variablen {-}
+## Variablen
 
 Variablen funktionieren so, dass man einem *Wert* einen Namen gibt. Die Zuweisung folgt dabei dem Schema ``NAME <- WERT``:
 
@@ -73,7 +73,7 @@ print(x)
 
 Dabei wird als Dezimaltrennzeichen ausschließlich der Punkt verwendet. 
 
-## Konstanten {-}
+## Konstanten
 
 Manche benannten Werte sind schon in R eingebaut:
 
@@ -88,7 +88,7 @@ pi <- 3
 print(pi)
 ```
 
-## Funktionen {-}
+## Funktionen
 
 Mit `print()` haben wir schon unsere erste *Funktion* kennengelernt. R stellt uns eine Vielzahl von verschiedenen Funktionen zur Verfügung, und sie werden immer nach dem gleichen Schema benutzt: `FUNKTIONSNAME(PARAMETER)`.
 
@@ -130,7 +130,7 @@ Notiz am Rande: Auch die Infix-Operatoren `+`, `-`, `*`, usw. sind eigentlich nu
 `+`(2, 2)
 ```
 
-## Strings {-}
+## Strings
 
 R kann nicht nur mit Zahlen umgehen, sondern auch mit Text. Ein *String* ist eine Aneinanderreihung von Buchstaben, und wird mit einfachen oder doppelten Anführungszeichen umschlossen:
 
@@ -150,7 +150,7 @@ Es gibt auch Funktionen, die Strings als Parameter nehmen. `paste` fügt Strings
 paste("Mein Name ist", name)
 ```
 
-## Datentypen {-}
+## Datentypen
 
 Den *Typ* einer Variable oder eines Wertes bestimmen wir durch den Befehl `str()`:
 
@@ -183,7 +183,7 @@ as.numeric("Hallo!")
 
 `NA` („not available/assigned“) ist dabei ein besonderer Wert, den jeder Variablentyp annehmen kann.
 
-## Aufgaben {-}
+## Aufgaben
 
 ### Rechnen
 
