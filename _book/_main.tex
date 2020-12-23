@@ -299,11 +299,11 @@ Datum & Sitzung & Inhalt \\ \addlinespace
 30. November 2020 & 5 & \protect\hyperlink{visualisierungen}{Visualisierungen} \\ \addlinespace
 7. Dezember 2020 & 6 & \protect\hyperlink{text-shelton-et-al.-2014}{Text: Shelton et al.~2014} \\ \addlinespace
 14. Dezember 2020 & 7 & \protect\hyperlink{geodaten}{Geodaten} \\ \addlinespace
-11. Januar 2021 & 9 & Choroplethen \\ \addlinespace
-18. Januar 2021 & 10 & Text: Chandra 2014 \\ \addlinespace
-25. Januar 2021 & 11 & HTML-Tabellen \\ \addlinespace
-1. Februar 2021 & 12 & Web Scraping \\ \addlinespace
-8. Februar 2021 & 13 & Text: Straube 2021 \\ \addlinespace
+11. Januar 2021 & 8 & \protect\hyperlink{choroplethen}{Choroplethen} \\ \addlinespace
+18. Januar 2021 & 9 & Text: Chandra 2014 \\ \addlinespace
+25. Januar 2021 & 10 & HTML-Tabellen \\ \addlinespace
+1. Februar 2021 & 11 & Web Scraping \\ \addlinespace
+8. Februar 2021 & 12 & Text: Straube 2021 \\ \addlinespace
 15. Februar 2021 & 13 & Präsentationen \\ \addlinespace
 \emph{31. März 2021} & & \emph{Abgabe Exposé} \\ \addlinespace
 \bottomrule
@@ -2133,6 +2133,399 @@ Diesen Ansatz werden wir in der nächsten Lektion vertiefen.
 \end{enumerate}
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-87-1.png}
+
+\hypertarget{choroplethen}{%
+\section{Choroplethen}\label{choroplethen}}
+
+\hypertarget{lernziele}{%
+\subsection{Lernziele}\label{lernziele}}
+
+Sie können\ldots{}
+
+\begin{itemize}
+\tightlist
+\item
+  Geodaten als Simple Features importieren,
+\item
+  CRS bestimmen und umwandeln,
+\item
+  einfache Verschneidungen von Simple Features durchführen und
+\item
+  Simple Features kartographisch darstellen.
+\end{itemize}
+
+\hypertarget{vorbereitung-1}{%
+\subsection{Vorbereitung}\label{vorbereitung-1}}
+
+Für diese Lektion werden zwei Pakete geladen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(sf)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ziel}{%
+\subsection{Ziel}\label{ziel}}
+
+Ziel ist, eine \href{https://de.wikipedia.org/wiki/Choroplethenkarte}{Choroplethenkarte} von Frankfurt zu erstellen, die die Versorgung mit Kiosken darstellt.
+
+\hypertarget{grundkarte}{%
+\subsection{Grundkarte}\label{grundkarte}}
+
+Eine Shapefile der Frankfurter Stadtteile findet sich hier: \url{http://www.offenedaten.frankfurt.de/dataset/frankfurter-stadtteilgrenzen-fur-gis-systeme}
+
+Wir laden die Zip-Datei herunter und speichern den enthaltenen Ordner \texttt{stadtteile} in unserem Arbeitsverzeichnis. Es ist eine gute Angewohnheit, einen Unterordner für Ressourcen anzulegen.
+
+Dann importieren wir den Geodatensatz als Simple Features (Paket \texttt{sf}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stadtteile }\OtherTok{\textless{}{-}} \FunctionTok{st\_read}\NormalTok{(}\StringTok{"resources/stadtteile/Stadtteile\_Frankfurt\_am\_Main.shp"}\NormalTok{)}
+\DocumentationTok{\#\# Reading layer \textasciigrave{}Stadtteile\_Frankfurt\_am\_Main\textquotesingle{} from data source \textasciigrave{}/Users/till/teaching/2020x21\_Data\_Science/public/resources/stadtteile/Stadtteile\_Frankfurt\_am\_Main.shp\textquotesingle{} using driver \textasciigrave{}ESRI Shapefile\textquotesingle{}}
+\DocumentationTok{\#\# Simple feature collection with 46 features and 2 fields}
+\DocumentationTok{\#\# geometry type:  POLYGON}
+\DocumentationTok{\#\# dimension:      XY}
+\DocumentationTok{\#\# bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
+\DocumentationTok{\#\# projected CRS:  ETRS89 / UTM zone 32N}
+\end{Highlighting}
+\end{Shaded}
+
+Simple Features sind Datensätze, die eine Spalte \texttt{geometry} enthalten, in der Geodaten in einem standardisierten Format hinterlegt sind.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(stadtteile)}
+\DocumentationTok{\#\# Classes \textquotesingle{}sf\textquotesingle{} and \textquotesingle{}data.frame\textquotesingle{}:   46 obs. of  3 variables:}
+\DocumentationTok{\#\#  $ STTLNR  : num  1 2 3 4 5 6 7 8 9 10 ...}
+\DocumentationTok{\#\#  $ STTLNAME: Factor w/ 46 levels "Altstadt","Bahnhofsviertel",..: 1 22 2 45 44 30 29 32 7 17 ...}
+\DocumentationTok{\#\#  $ geometry:sfc\_POLYGON of length 46; first list element: List of 1}
+\DocumentationTok{\#\#   ..$ : num [1:46, 1:2] 476934 476890 476852 476813 476799 ...}
+\DocumentationTok{\#\#   ..{-} attr(*, "class")= chr  "XY" "POLYGON" "sfg"}
+\DocumentationTok{\#\#  {-} attr(*, "sf\_column")= chr "geometry"}
+\DocumentationTok{\#\#  {-} attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA}
+\DocumentationTok{\#\#   ..{-} attr(*, "names")= chr  "STTLNR" "STTLNAME"}
+\end{Highlighting}
+\end{Shaded}
+
+Eine Vorschau:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(stadtteile) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf\_label}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ STTLNAME), }\AttributeTok{size =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-91-1.png}
+
+\hypertarget{osm-daten}{%
+\subsection{OSM-Daten}\label{osm-daten}}
+
+Im \href{https://wiki.openstreetmap.org/wiki/Map_Features}{OSM Wiki} suchen wir den richtigen \emph{tag} heraus. In diesem Fall \texttt{shop=kiosk}
+
+Dann bauen wir auf \href{https://overpass-turbo.eu/}{Overpass Turbo} die Abfrage und laden den Datensatz herunter.
+
+Schließlich importieren wir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kioske }\OtherTok{\textless{}{-}} \FunctionTok{st\_read}\NormalTok{(}\StringTok{"resources/kioske.geojson"}\NormalTok{)}
+\DocumentationTok{\#\# Reading layer \textasciigrave{}kioske\textquotesingle{} from data source \textasciigrave{}/Users/till/teaching/2020x21\_Data\_Science/public/resources/kioske.geojson\textquotesingle{} using driver \textasciigrave{}GeoJSON\textquotesingle{}}
+\DocumentationTok{\#\# Simple feature collection with 325 features and 74 fields}
+\DocumentationTok{\#\# geometry type:  GEOMETRY}
+\DocumentationTok{\#\# dimension:      XY}
+\DocumentationTok{\#\# bbox:           xmin: 8.505468 ymin: 50.04801 xmax: 8.789538 ymax: 50.20185}
+\DocumentationTok{\#\# geographic CRS: WGS 84}
+\end{Highlighting}
+\end{Shaded}
+
+Eine Vorschau:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data =}\NormalTok{ stadtteile) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data =}\NormalTok{ kioske)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-93-1.png}
+
+\hypertarget{koordinatenreferenzsysteme}{%
+\subsection{Koordinatenreferenzsysteme}\label{koordinatenreferenzsysteme}}
+
+Der OSM-Datensatz ist mit WGS84 (EPSG 4326) referenziert:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{st\_crs}\NormalTok{(kioske)}
+\DocumentationTok{\#\# Coordinate Reference System:}
+\DocumentationTok{\#\#   User input: WGS 84 }
+\DocumentationTok{\#\#   wkt:}
+\DocumentationTok{\#\# GEOGCRS["WGS 84",}
+\DocumentationTok{\#\#     DATUM["World Geodetic System 1984",}
+\DocumentationTok{\#\#         ELLIPSOID["WGS 84",6378137,298.257223563,}
+\DocumentationTok{\#\#             LENGTHUNIT["metre",1]]],}
+\DocumentationTok{\#\#     PRIMEM["Greenwich",0,}
+\DocumentationTok{\#\#         ANGLEUNIT["degree",0.0174532925199433]],}
+\DocumentationTok{\#\#     CS[ellipsoidal,2],}
+\DocumentationTok{\#\#         AXIS["geodetic latitude (Lat)",north,}
+\DocumentationTok{\#\#             ORDER[1],}
+\DocumentationTok{\#\#             ANGLEUNIT["degree",0.0174532925199433]],}
+\DocumentationTok{\#\#         AXIS["geodetic longitude (Lon)",east,}
+\DocumentationTok{\#\#             ORDER[2],}
+\DocumentationTok{\#\#             ANGLEUNIT["degree",0.0174532925199433]],}
+\DocumentationTok{\#\#     ID["EPSG",4326]]}
+\end{Highlighting}
+\end{Shaded}
+
+Die Stadtteilen hingegen sind sind in ETSR89 (EPSG 25832):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{st\_crs}\NormalTok{(stadtteile)}
+\DocumentationTok{\#\# Coordinate Reference System:}
+\DocumentationTok{\#\#   User input: ETRS89 / UTM zone 32N }
+\DocumentationTok{\#\#   wkt:}
+\DocumentationTok{\#\# PROJCRS["ETRS89 / UTM zone 32N",}
+\DocumentationTok{\#\#     BASEGEOGCRS["ETRS89",}
+\DocumentationTok{\#\#         DATUM["European Terrestrial Reference System 1989",}
+\DocumentationTok{\#\#             ELLIPSOID["GRS 1980",6378137,298.257222101,}
+\DocumentationTok{\#\#                 LENGTHUNIT["metre",1]]],}
+\DocumentationTok{\#\#         PRIMEM["Greenwich",0,}
+\DocumentationTok{\#\#             ANGLEUNIT["degree",0.0174532925199433]],}
+\DocumentationTok{\#\#         ID["EPSG",4258]],}
+\DocumentationTok{\#\#     CONVERSION["UTM zone 32N",}
+\DocumentationTok{\#\#         METHOD["Transverse Mercator",}
+\DocumentationTok{\#\#             ID["EPSG",9807]],}
+\DocumentationTok{\#\#         PARAMETER["Latitude of natural origin",0,}
+\DocumentationTok{\#\#             ANGLEUNIT["degree",0.0174532925199433],}
+\DocumentationTok{\#\#             ID["EPSG",8801]],}
+\DocumentationTok{\#\#         PARAMETER["Longitude of natural origin",9,}
+\DocumentationTok{\#\#             ANGLEUNIT["degree",0.0174532925199433],}
+\DocumentationTok{\#\#             ID["EPSG",8802]],}
+\DocumentationTok{\#\#         PARAMETER["Scale factor at natural origin",0.9996,}
+\DocumentationTok{\#\#             SCALEUNIT["unity",1],}
+\DocumentationTok{\#\#             ID["EPSG",8805]],}
+\DocumentationTok{\#\#         PARAMETER["False easting",500000,}
+\DocumentationTok{\#\#             LENGTHUNIT["metre",1],}
+\DocumentationTok{\#\#             ID["EPSG",8806]],}
+\DocumentationTok{\#\#         PARAMETER["False northing",0,}
+\DocumentationTok{\#\#             LENGTHUNIT["metre",1],}
+\DocumentationTok{\#\#             ID["EPSG",8807]]],}
+\DocumentationTok{\#\#     CS[Cartesian,2],}
+\DocumentationTok{\#\#         AXIS["(E)",east,}
+\DocumentationTok{\#\#             ORDER[1],}
+\DocumentationTok{\#\#             LENGTHUNIT["metre",1]],}
+\DocumentationTok{\#\#         AXIS["(N)",north,}
+\DocumentationTok{\#\#             ORDER[2],}
+\DocumentationTok{\#\#             LENGTHUNIT["metre",1]],}
+\DocumentationTok{\#\#     USAGE[}
+\DocumentationTok{\#\#         SCOPE["Engineering survey, topographic mapping."],}
+\DocumentationTok{\#\#         AREA["Europe between 6°E and 12°E: Austria; Belgium; Denmark {-} onshore and offshore; Germany {-} onshore and offshore; Norway including {-} onshore and offshore; Spain {-} offshore."],}
+\DocumentationTok{\#\#         BBOX[38.76,6,83.92,12]],}
+\DocumentationTok{\#\#     ID["EPSG",25832]]}
+\end{Highlighting}
+\end{Shaded}
+
+Der Datensatz lässt sich allerdings transformieren:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stadtteile }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_transform}\NormalTok{(}\DecValTok{4326}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_crs}\NormalTok{()}
+\DocumentationTok{\#\# Coordinate Reference System:}
+\DocumentationTok{\#\#   User input: EPSG:4326 }
+\DocumentationTok{\#\#   wkt:}
+\DocumentationTok{\#\# GEOGCRS["WGS 84",}
+\DocumentationTok{\#\#     DATUM["World Geodetic System 1984",}
+\DocumentationTok{\#\#         ELLIPSOID["WGS 84",6378137,298.257223563,}
+\DocumentationTok{\#\#             LENGTHUNIT["metre",1]]],}
+\DocumentationTok{\#\#     PRIMEM["Greenwich",0,}
+\DocumentationTok{\#\#         ANGLEUNIT["degree",0.0174532925199433]],}
+\DocumentationTok{\#\#     CS[ellipsoidal,2],}
+\DocumentationTok{\#\#         AXIS["geodetic latitude (Lat)",north,}
+\DocumentationTok{\#\#             ORDER[1],}
+\DocumentationTok{\#\#             ANGLEUNIT["degree",0.0174532925199433]],}
+\DocumentationTok{\#\#         AXIS["geodetic longitude (Lon)",east,}
+\DocumentationTok{\#\#             ORDER[2],}
+\DocumentationTok{\#\#             ANGLEUNIT["degree",0.0174532925199433]],}
+\DocumentationTok{\#\#     USAGE[}
+\DocumentationTok{\#\#         SCOPE["Horizontal component of 3D system."],}
+\DocumentationTok{\#\#         AREA["World."],}
+\DocumentationTok{\#\#         BBOX[{-}90,{-}180,90,180]],}
+\DocumentationTok{\#\#     ID["EPSG",4326]]}
+\end{Highlighting}
+\end{Shaded}
+
+Jetzt haben beide Datensätze den selben EPSG-Code. Das ist die Voraussetzung für den nächsten Schritt.
+
+\hypertarget{verschneiden}{%
+\subsection{Verschneiden}\label{verschneiden}}
+
+Mit \texttt{st\_covers()} und \texttt{lengths()} lassen sich die Anzahl der Kioske in jedem Stadtteil zählen und einer neuen Spalte im Originaldatensatz zuordnen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stadtteile }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_transform}\NormalTok{(}\DecValTok{4326}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_covers}\NormalTok{(kioske) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{lengths}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ stadtteile}\SpecialCharTok{$}\NormalTok{anzahl\_kioske}
+\end{Highlighting}
+\end{Shaded}
+
+Auf einer Karte veranschaulicht:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(stadtteile) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ anzahl\_kioske))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-98-1.png}
+
+Allerdings wäre es schöner, die Kioskdichte (nach Fläche) darzustellen. Dazu berechnen wir zunächst die Flächen der Stadtteile:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{st\_area}\NormalTok{(stadtteile) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.numeric}\NormalTok{() }\SpecialCharTok{/} \DecValTok{1000} \SpecialCharTok{/} \DecValTok{1000} \OtherTok{{-}\textgreater{}}
+\NormalTok{  stadtteile}\SpecialCharTok{$}\NormalTok{qkm}
+\end{Highlighting}
+\end{Shaded}
+
+Oder mit Pipes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stadtteile }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{qkm =} \FunctionTok{st\_area}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.numeric}\NormalTok{() }\SpecialCharTok{/} \DecValTok{1000} \SpecialCharTok{/} \DecValTok{1000}\NormalTok{)}
+\DocumentationTok{\#\# Simple feature collection with 46 features and 4 fields}
+\DocumentationTok{\#\# geometry type:  POLYGON}
+\DocumentationTok{\#\# dimension:      XY}
+\DocumentationTok{\#\# bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
+\DocumentationTok{\#\# projected CRS:  ETRS89 / UTM zone 32N}
+\DocumentationTok{\#\# First 10 features:}
+\DocumentationTok{\#\#    STTLNR        STTLNAME}
+\DocumentationTok{\#\# 1       1        Altstadt}
+\DocumentationTok{\#\# 2       2      Innenstadt}
+\DocumentationTok{\#\# 3       3 Bahnhofsviertel}
+\DocumentationTok{\#\# 4       4     Westend{-}Süd}
+\DocumentationTok{\#\# 5       5    Westend{-}Nord}
+\DocumentationTok{\#\# 6       6    Nordend{-}West}
+\DocumentationTok{\#\# 7       7     Nordend{-}Ost}
+\DocumentationTok{\#\# 8       8          Ostend}
+\DocumentationTok{\#\# 9       9        Bornheim}
+\DocumentationTok{\#\# 10     10  Gutleutviertel}
+\DocumentationTok{\#\#                          geometry anzahl\_kioske}
+\DocumentationTok{\#\# 1  POLYGON ((476934.3 5550541,...             5}
+\DocumentationTok{\#\# 2  POLYGON ((477611.9 5552034,...             5}
+\DocumentationTok{\#\# 3  POLYGON ((475831 5550785, 4...             7}
+\DocumentationTok{\#\# 4  POLYGON ((475745.4 5552373,...             6}
+\DocumentationTok{\#\# 5  POLYGON ((476497.9 5553910,...             3}
+\DocumentationTok{\#\# 6  POLYGON ((478362.5 5553898,...            10}
+\DocumentationTok{\#\# 7  POLYGON ((478397.9 5551924,...            17}
+\DocumentationTok{\#\# 8  POLYGON ((481955.2 5552141,...            15}
+\DocumentationTok{\#\# 9  POLYGON ((478959.8 5552336,...            14}
+\DocumentationTok{\#\# 10 POLYGON ((472942 5548802, 4...            11}
+\DocumentationTok{\#\#          qkm}
+\DocumentationTok{\#\# 1  0.5065673}
+\DocumentationTok{\#\# 2  1.4902009}
+\DocumentationTok{\#\# 3  0.5425421}
+\DocumentationTok{\#\# 4  2.4948957}
+\DocumentationTok{\#\# 5  1.6307925}
+\DocumentationTok{\#\# 6  3.0977694}
+\DocumentationTok{\#\# 7  1.5305338}
+\DocumentationTok{\#\# 8  5.5573382}
+\DocumentationTok{\#\# 9  2.7840413}
+\DocumentationTok{\#\# 10 2.1982354}
+\end{Highlighting}
+\end{Shaded}
+
+Und dann die Kioskdichte:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stadtteile }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{qkm =} \FunctionTok{st\_area}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.numeric}\NormalTok{() }\SpecialCharTok{/} \DecValTok{1000} \SpecialCharTok{/} \DecValTok{1000}\NormalTok{,}
+         \AttributeTok{kioskdichte =}\NormalTok{ anzahl\_kioske }\SpecialCharTok{/}\NormalTok{ qkm)}
+\DocumentationTok{\#\# Simple feature collection with 46 features and 5 fields}
+\DocumentationTok{\#\# geometry type:  POLYGON}
+\DocumentationTok{\#\# dimension:      XY}
+\DocumentationTok{\#\# bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
+\DocumentationTok{\#\# projected CRS:  ETRS89 / UTM zone 32N}
+\DocumentationTok{\#\# First 10 features:}
+\DocumentationTok{\#\#    STTLNR        STTLNAME}
+\DocumentationTok{\#\# 1       1        Altstadt}
+\DocumentationTok{\#\# 2       2      Innenstadt}
+\DocumentationTok{\#\# 3       3 Bahnhofsviertel}
+\DocumentationTok{\#\# 4       4     Westend{-}Süd}
+\DocumentationTok{\#\# 5       5    Westend{-}Nord}
+\DocumentationTok{\#\# 6       6    Nordend{-}West}
+\DocumentationTok{\#\# 7       7     Nordend{-}Ost}
+\DocumentationTok{\#\# 8       8          Ostend}
+\DocumentationTok{\#\# 9       9        Bornheim}
+\DocumentationTok{\#\# 10     10  Gutleutviertel}
+\DocumentationTok{\#\#                          geometry anzahl\_kioske}
+\DocumentationTok{\#\# 1  POLYGON ((476934.3 5550541,...             5}
+\DocumentationTok{\#\# 2  POLYGON ((477611.9 5552034,...             5}
+\DocumentationTok{\#\# 3  POLYGON ((475831 5550785, 4...             7}
+\DocumentationTok{\#\# 4  POLYGON ((475745.4 5552373,...             6}
+\DocumentationTok{\#\# 5  POLYGON ((476497.9 5553910,...             3}
+\DocumentationTok{\#\# 6  POLYGON ((478362.5 5553898,...            10}
+\DocumentationTok{\#\# 7  POLYGON ((478397.9 5551924,...            17}
+\DocumentationTok{\#\# 8  POLYGON ((481955.2 5552141,...            15}
+\DocumentationTok{\#\# 9  POLYGON ((478959.8 5552336,...            14}
+\DocumentationTok{\#\# 10 POLYGON ((472942 5548802, 4...            11}
+\DocumentationTok{\#\#          qkm kioskdichte}
+\DocumentationTok{\#\# 1  0.5065673    9.870357}
+\DocumentationTok{\#\# 2  1.4902009    3.355252}
+\DocumentationTok{\#\# 3  0.5425421   12.902225}
+\DocumentationTok{\#\# 4  2.4948957    2.404910}
+\DocumentationTok{\#\# 5  1.6307925    1.839596}
+\DocumentationTok{\#\# 6  3.0977694    3.228129}
+\DocumentationTok{\#\# 7  1.5305338   11.107236}
+\DocumentationTok{\#\# 8  5.5573382    2.699134}
+\DocumentationTok{\#\# 9  2.7840413    5.028661}
+\DocumentationTok{\#\# 10 2.1982354    5.004014}
+\end{Highlighting}
+\end{Shaded}
+
+Schließlich die Karte:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stadtteile }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{qkm =} \FunctionTok{st\_area}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.numeric}\NormalTok{() }\SpecialCharTok{/} \DecValTok{1000} \SpecialCharTok{/} \DecValTok{1000}\NormalTok{,}
+         \AttributeTok{kioskdichte =}\NormalTok{ anzahl\_kioske }\SpecialCharTok{/}\NormalTok{ qkm) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ kioskdichte), }\AttributeTok{color=}\ConstantTok{NA}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_continuous}\NormalTok{(}\StringTok{"Kioske pro km²"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{theme\_void}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-102-1.png}
+
+\hypertarget{aufgaben-4}{%
+\subsection{Aufgaben}\label{aufgaben-4}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Erstellen Sie eine Choroplethenkarte der Frankfurter Stadtteile, in der Sie die Anzahl bzw. die Dichte von Apotheken darstellen. (Schritte analog zu oben.)
+\item
+  Welche Stadtteile haben mehr Kioske? Welche mehr Apotheken? Wie ausgeprägt ist das Verhältnis? Erstellen Sie eine Karte, die das zum Ausdruck bringt.
+\item
+  (Achtung, knifflig!) Siemens veröffentlicht einen \href{https://press.siemens.com/global/de/feature/wo-blitzt-es-am-haeufigsten}{Blitzatlas}. Laden Sie den Datensatz herunter und bauen Sie die folgende Ansicht nach:
+\end{enumerate}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-106-1.png}
 
 
 \end{document}
