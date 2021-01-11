@@ -1,0 +1,24 @@
+# Text: Chandra 2014
+
+## Lesetext
+
+Chandra, Vikram. 2014. *Geek Sublime: The Beauty of Code, the Code of Beauty.* Graywolf Press, Minneapolis.
+
+Daraus:
+
+* Kapitel 1: Hello, World! (S. 1--8)
+* Kapitel 3: The Language of Logic (S. 19--40)
+
+## Fragen an den Text
+
+1. Um welche Art von Text handelt es sich? Wer ist der Autor, und an wen wendet er sich?
+2. Was ist "literate programming", und was könnte das in R konkret bedeuten?
+3. Auf S. 37 ist die Rede von "our journey down the stack of languages". Was ist damit gemeint?
+4. Was findet der Autor an Code und Computern so faszinierend? Wo können Sie das nachvollziehen, und wo nicht?
+
+## Themenfindung
+
+* Bereiten Sie *ein* Thema vor, zu dem Sie sich vorstellen könnten im Sommer zu arbeiten.
+* Achten Sie darauf, dass das Thema nicht zu allgemein ist ("Finanzmarkt") aber auch nicht zu speziell ("Zusammenhang zwischen Quadratmeterzahl und Mietpreis für Ladenflächen in Ginnheim").
+* Es wird in einem nächsten Schritt darum gehen, interessante Datenquellen zu finden (vielleicht haben Sie schon eine Idee?) und einer Fragestellung näher zu kommen.
+* Sie werden die Themen kurz vorstellen um Überschneidungen zu identifizieren und ggf. Gruppen zu bilden (wenn gewünscht).
