@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sitzung 10 HTML-Tabellen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sitzung 10 HTML-Tabellen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sitzung 10 HTML-Tabellen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="text-chandra-2014.html"/>
+
+<script src="assets/header-attrs-2.5/header-attrs.js"></script>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="solutions.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé"><i class="fa fa-check"></i><b>1.3.1</b> Exposé</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.2</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.6</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
+<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="geodaten.html"><a href="geodaten.html#lernziele-dieser-sitzung-2"><i class="fa fa-check"></i><b>7.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="7.2" data-path="geodaten.html"><a href="geodaten.html#voraussetzungen-1"><i class="fa fa-check"></i><b>7.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="7.3" data-path="geodaten.html"><a href="geodaten.html#exkurs-pipes"><i class="fa fa-check"></i><b>7.3</b> Exkurs: Pipes</a></li>
+<li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
+<li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-3"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="choroplethen.html"><a href="choroplethen.html"><i class="fa fa-check"></i><b>8</b> Choroplethen</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="choroplethen.html"><a href="choroplethen.html#lernziele"><i class="fa fa-check"></i><b>8.1</b> Lernziele</a></li>
+<li class="chapter" data-level="8.2" data-path="choroplethen.html"><a href="choroplethen.html#vorbereitung-1"><i class="fa fa-check"></i><b>8.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="8.3" data-path="choroplethen.html"><a href="choroplethen.html#ziel"><i class="fa fa-check"></i><b>8.3</b> Ziel</a></li>
+<li class="chapter" data-level="8.4" data-path="choroplethen.html"><a href="choroplethen.html#grundkarte"><i class="fa fa-check"></i><b>8.4</b> Grundkarte</a></li>
+<li class="chapter" data-level="8.5" data-path="choroplethen.html"><a href="choroplethen.html#osm-daten"><i class="fa fa-check"></i><b>8.5</b> OSM-Daten</a></li>
+<li class="chapter" data-level="8.6" data-path="choroplethen.html"><a href="choroplethen.html#koordinatenreferenzsysteme"><i class="fa fa-check"></i><b>8.6</b> Koordinatenreferenzsysteme</a></li>
+<li class="chapter" data-level="8.7" data-path="choroplethen.html"><a href="choroplethen.html#verschneiden"><i class="fa fa-check"></i><b>8.7</b> Verschneiden</a></li>
+<li class="chapter" data-level="8.8" data-path="choroplethen.html"><a href="choroplethen.html#aufgaben-4"><i class="fa fa-check"></i><b>8.8</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html"><i class="fa fa-check"></i><b>9</b> Text: Chandra 2014</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#lesetext-2"><i class="fa fa-check"></i><b>9.1</b> Lesetext</a></li>
+<li class="chapter" data-level="9.2" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#fragen-an-den-text-2"><i class="fa fa-check"></i><b>9.2</b> Fragen an den Text</a></li>
+<li class="chapter" data-level="9.3" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#themenfindung"><i class="fa fa-check"></i><b>9.3</b> Themenfindung</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="html-tabellen.html"><a href="html-tabellen.html"><i class="fa fa-check"></i><b>10</b> HTML-Tabellen</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="html-tabellen.html"><a href="html-tabellen.html#vorbereitung-2"><i class="fa fa-check"></i><b>10.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="10.2" data-path="html-tabellen.html"><a href="html-tabellen.html#datenbeschaffung"><i class="fa fa-check"></i><b>10.2</b> Datenbeschaffung</a></li>
+<li class="chapter" data-level="10.3" data-path="html-tabellen.html"><a href="html-tabellen.html#datenformatierung"><i class="fa fa-check"></i><b>10.3</b> Datenformatierung</a></li>
+<li class="chapter" data-level="10.4" data-path="html-tabellen.html"><a href="html-tabellen.html#datenaufbereitung"><i class="fa fa-check"></i><b>10.4</b> Datenaufbereitung</a></li>
+<li class="chapter" data-level="10.5" data-path="html-tabellen.html"><a href="html-tabellen.html#datenvisualisierung"><i class="fa fa-check"></i><b>10.5</b> Datenvisualisierung</a></li>
+<li class="chapter" data-level="10.6" data-path="html-tabellen.html"><a href="html-tabellen.html#aufgaben-5"><i class="fa fa-check"></i><b>10.6</b> Aufgaben</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="html-tabellen" class="section level1" number="10">
+<h1><span class="header-section-number">Sitzung 10</span> HTML-Tabellen</h1>
+<div id="vorbereitung-2" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Vorbereitung</h2>
+<p>Am Beispiel der Küstenlängen verschiedener Länder besprechen wir Techniken der Datenerhebung/-erfassung und -visualisierung. Unser Ziel ist es, die Daten zu den Küstenlängen in einer Grafik darzustellen.</p>
+<p>Für die folgenden Aufgaben benötigen wir die Pakete <code>rvest</code> und <code>tidyverse</code>. Zunächst müssen diese installiert und in unsere Umgebung geladen werden.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="html-tabellen.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb106-2"><a href="html-tabellen.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span></code></pre></div>
+</div>
+<div id="datenbeschaffung" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Datenbeschaffung</h2>
+<p>Auf dem Internetauftritt der CIA gab es es eine Tabelle, welche die Küstenlänge (inklusive der Inseln) der einzelnen Länder enthält.</p>
+<p>Über die Archivierungsplattform WayBackMachine ist die Seite immer noch abrufbar: <a href="https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the-world-factbook/fields/282.html" class="uri">https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the-world-factbook/fields/282.html</a></p>
+<p>In einem ersten Schritt wird die URL der Tabelle der Variable <code>url</code> zugewiesen, sodass der Quellcode mit dem Befehl <code>read_html()</code> eingelesen werden kann.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="html-tabellen.html#cb107-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&quot;https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the-world-factbook/fields/282.html&quot;</span></span>
+<span id="cb107-2"><a href="html-tabellen.html#cb107-2" aria-hidden="true" tabindex="-1"></a>reply <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span></code></pre></div>
+<p>Der Befehl <code>html_table()</code> ermöglicht das Auslesen <em>aller</em> Tabellen auf der Seite. Mithilfe des Befehls <code>str()</code> sehen wir, dass die Seite genau eine Tabelle enthält, welche die Informationen zu den Küstenlängen enthält.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="html-tabellen.html#cb108-1" aria-hidden="true" tabindex="-1"></a>tables <span class="ot">&lt;-</span> <span class="fu">html_table</span>(reply, <span class="at">fill =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb108-2"><a href="html-tabellen.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tables)</span>
+<span id="cb108-3"><a href="html-tabellen.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="do">## List of 1</span></span>
+<span id="cb108-4"><a href="html-tabellen.html#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ :&#39;data.frame&#39;:    266 obs. of  2 variables:</span></span>
+<span id="cb108-5"><a href="html-tabellen.html#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ Country  : chr [1:266] &quot;Afghanistan&quot; &quot;Akrotiri&quot; &quot;Albania&quot; &quot;Algeria&quot; ...</span></span>
+<span id="cb108-6"><a href="html-tabellen.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..$ Coastline: chr [1:266] &quot;0 km\n          (landlocked)&quot; &quot;56.3 km&quot; &quot;362 km&quot; &quot;998 km&quot; ...</span></span></code></pre></div>
+<p>Durch die Umformung zu einem tibble erhalten wir eine Tabelle mit den gewünschten Informationen:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="html-tabellen.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(tables[[<span class="dv">1</span>]])</span>
+<span id="cb109-2"><a href="html-tabellen.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 266 x 2</span></span>
+<span id="cb109-3"><a href="html-tabellen.html#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Country             Coastline                     </span></span>
+<span id="cb109-4"><a href="html-tabellen.html#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;               &lt;chr&gt;                         </span></span>
+<span id="cb109-5"><a href="html-tabellen.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Afghanistan         &quot;0 km\n          (landlocked)&quot;</span></span>
+<span id="cb109-6"><a href="html-tabellen.html#cb109-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Akrotiri            &quot;56.3 km&quot;                     </span></span>
+<span id="cb109-7"><a href="html-tabellen.html#cb109-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Albania             &quot;362 km&quot;                      </span></span>
+<span id="cb109-8"><a href="html-tabellen.html#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Algeria             &quot;998 km&quot;                      </span></span>
+<span id="cb109-9"><a href="html-tabellen.html#cb109-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 American Samoa      &quot;116 km&quot;                      </span></span>
+<span id="cb109-10"><a href="html-tabellen.html#cb109-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Andorra             &quot;0 km\n          (landlocked)&quot;</span></span>
+<span id="cb109-11"><a href="html-tabellen.html#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Angola              &quot;1,600 km&quot;                    </span></span>
+<span id="cb109-12"><a href="html-tabellen.html#cb109-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Anguilla            &quot;61 km&quot;                       </span></span>
+<span id="cb109-13"><a href="html-tabellen.html#cb109-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Antarctica          &quot;17,968 km&quot;                   </span></span>
+<span id="cb109-14"><a href="html-tabellen.html#cb109-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Antigua and Barbuda &quot;153 km&quot;                      </span></span>
+<span id="cb109-15"><a href="html-tabellen.html#cb109-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 256 more rows</span></span></code></pre></div>
+<p>Mit pipes können wir die obigen Befehle zusammenfassen und somit das Ganze auf einmal ausführen.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="html-tabellen.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the-world-factbook/fields/282.html&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb110-2"><a href="html-tabellen.html#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb110-3"><a href="html-tabellen.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>(<span class="at">fill =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb110-4"><a href="html-tabellen.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  .[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb110-5"><a href="html-tabellen.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="ot">-&gt;</span> coast</span></code></pre></div>
+</div>
+<div id="datenformatierung" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Datenformatierung</h2>
+<p>Zur Datenformatierung nutzen wir Funktionen aus dem Paket <code>stringr</code>. Die Spalte mit der Küstenlänge soll keinen Text, keine Einheit direkt hinter den Zahlenwerten und keine Kommata zur Trennung der Zahlenwerte enthalten.</p>
+<p>Der Befehl <q>str_extract()</q> sucht nach vorgegebenen Mustern (engl. <em>patterns</em>) und wählt diese aus. Diese patterns werden auch reguläre Ausdrücke (<em>regular expressions / regex</em>) genannt und sind eigentlich <a href="https://danielfett.de/en/tutorials/tutorial-regulare-ausdrucke/">ein Thema für sich</a>. Das Pattern <code>[0-9,.]+ km</code> extrahiert die Kilometerangaben.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="html-tabellen.html#cb111-1" aria-hidden="true" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(coast<span class="sc">$</span>Coastline, <span class="st">&quot;[0-9,.]+ km&quot;</span>)</span></code></pre></div>
+<p>Die ausgewählten Muster (in unserem Fall Kommata und Text) können durch den Befehl <code>str_replace_all()</code> gelöscht oder ersetzt werden. Wir ersetzen alle Zeichen <em>außer</em> Zahlen und Dezimalpunkt mit einem leeren String, so dass sie verschwinden.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="html-tabellen.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(km, <span class="st">&quot;[^0-9.]&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb112-2"><a href="html-tabellen.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   [1] &quot;0&quot;       &quot;56.3&quot;    &quot;362&quot;     &quot;998&quot;     &quot;116&quot;    </span></span>
+<span id="cb112-3"><a href="html-tabellen.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   [6] &quot;0&quot;       &quot;1600&quot;    &quot;61&quot;      &quot;17968&quot;   &quot;153&quot;    </span></span>
+<span id="cb112-4"><a href="html-tabellen.html#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [11] &quot;45389&quot;   &quot;4989&quot;    &quot;0&quot;       &quot;68.5&quot;    &quot;74.1&quot;   </span></span>
+<span id="cb112-5"><a href="html-tabellen.html#cb112-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [16] &quot;111866&quot;  &quot;25760&quot;   &quot;0&quot;       &quot;0&quot;       &quot;3542&quot;   </span></span>
+<span id="cb112-6"><a href="html-tabellen.html#cb112-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [21] &quot;161&quot;     &quot;580&quot;     &quot;97&quot;      &quot;0&quot;       &quot;66.5&quot;   </span></span>
+<span id="cb112-7"><a href="html-tabellen.html#cb112-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  [26] &quot;386&quot;     &quot;121&quot;     &quot;103&quot;     &quot;0&quot;       &quot;0&quot;      </span></span>
+<span id="cb112-8"><a href="html-tabellen.html#cb112-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  [31] &quot;20&quot;      &quot;0&quot;       &quot;29.6&quot;    &quot;7491&quot;    &quot;698&quot;    </span></span>
+<span id="cb112-9"><a href="html-tabellen.html#cb112-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  [36] &quot;80&quot;      &quot;161&quot;     &quot;354&quot;     &quot;0&quot;       &quot;1930&quot;   </span></span>
+<span id="cb112-10"><a href="html-tabellen.html#cb112-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [41] &quot;0&quot;       &quot;965&quot;     &quot;443&quot;     &quot;402&quot;     &quot;202080&quot; </span></span>
+<span id="cb112-11"><a href="html-tabellen.html#cb112-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  [46] &quot;160&quot;     &quot;0&quot;       &quot;0&quot;       &quot;6435&quot;    &quot;14500&quot;  </span></span>
+<span id="cb112-12"><a href="html-tabellen.html#cb112-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  [51] &quot;138.9&quot;   &quot;11.1&quot;    &quot;26&quot;      &quot;3208&quot;    &quot;340&quot;    </span></span>
+<span id="cb112-13"><a href="html-tabellen.html#cb112-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [56] &quot;37&quot;      &quot;169&quot;     &quot;120&quot;     &quot;3095&quot;    &quot;1290&quot;   </span></span>
+<span id="cb112-14"><a href="html-tabellen.html#cb112-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  [61] &quot;515&quot;     &quot;5835&quot;    &quot;3735&quot;    &quot;364&quot;     &quot;648&quot;    </span></span>
+<span id="cb112-15"><a href="html-tabellen.html#cb112-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  [66] &quot;0&quot;       &quot;7314&quot;    &quot;27.5&quot;    &quot;314&quot;     &quot;148&quot;    </span></span>
+<span id="cb112-16"><a href="html-tabellen.html#cb112-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  [71] &quot;1288&quot;    &quot;2237&quot;    &quot;2450&quot;    &quot;307&quot;     &quot;296&quot;    </span></span>
+<span id="cb112-17"><a href="html-tabellen.html#cb112-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  [76] &quot;2234&quot;    &quot;3794&quot;    &quot;0&quot;       &quot;0&quot;       &quot;65992.9&quot;</span></span>
+<span id="cb112-18"><a href="html-tabellen.html#cb112-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  [81] &quot;1288&quot;    &quot;1117&quot;    &quot;1129&quot;    &quot;1250&quot;    &quot;4853&quot;   </span></span>
+<span id="cb112-19"><a href="html-tabellen.html#cb112-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [86] &quot;2525&quot;    &quot;28&quot;      &quot;885&quot;     &quot;80&quot;      &quot;40&quot;     </span></span>
+<span id="cb112-20"><a href="html-tabellen.html#cb112-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  [91] &quot;310&quot;     &quot;2389&quot;    &quot;539&quot;     &quot;12&quot;      &quot;13676&quot;  </span></span>
+<span id="cb112-21"><a href="html-tabellen.html#cb112-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  [96] &quot;44087&quot;   &quot;121&quot;     &quot;125.5&quot;   &quot;400&quot;     &quot;50&quot;     </span></span>
+<span id="cb112-22"><a href="html-tabellen.html#cb112-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [101] &quot;320&quot;     &quot;350&quot;     &quot;459&quot;     &quot;1771&quot;    &quot;101.9&quot;  </span></span>
+<span id="cb112-23"><a href="html-tabellen.html#cb112-23" aria-hidden="true" tabindex="-1"></a><span class="do">## [106] &quot;0&quot;       &quot;823&quot;     &quot;733&quot;     &quot;6.4&quot;     &quot;0&quot;      </span></span>
+<span id="cb112-24"><a href="html-tabellen.html#cb112-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [111] &quot;4970&quot;    &quot;7000&quot;    &quot;66526&quot;   &quot;54716&quot;   &quot;2440&quot;   </span></span>
+<span id="cb112-25"><a href="html-tabellen.html#cb112-25" aria-hidden="true" tabindex="-1"></a><span class="do">## [116] &quot;58&quot;      &quot;1448&quot;    &quot;160&quot;     &quot;273&quot;     &quot;7600&quot;   </span></span>
+<span id="cb112-26"><a href="html-tabellen.html#cb112-26" aria-hidden="true" tabindex="-1"></a><span class="do">## [121] &quot;1022&quot;    &quot;124.1&quot;   &quot;29751&quot;   &quot;8&quot;       &quot;70&quot;     </span></span>
+<span id="cb112-27"><a href="html-tabellen.html#cb112-27" aria-hidden="true" tabindex="-1"></a><span class="do">## [126] &quot;34&quot;      &quot;26&quot;      &quot;0&quot;       &quot;536&quot;     &quot;3&quot;      </span></span>
+<span id="cb112-28"><a href="html-tabellen.html#cb112-28" aria-hidden="true" tabindex="-1"></a><span class="do">## [131] &quot;1143&quot;    &quot;2495&quot;    &quot;2413&quot;    &quot;0&quot;       &quot;499&quot;    </span></span>
+<span id="cb112-29"><a href="html-tabellen.html#cb112-29" aria-hidden="true" tabindex="-1"></a><span class="do">## [136] &quot;0&quot;       &quot;0&quot;       &quot;498&quot;     &quot;225&quot;     &quot;0&quot;      </span></span>
+<span id="cb112-30"><a href="html-tabellen.html#cb112-30" aria-hidden="true" tabindex="-1"></a><span class="do">## [141] &quot;579&quot;     &quot;1770&quot;    &quot;0&quot;       &quot;90&quot;      &quot;0&quot;      </span></span>
+<span id="cb112-31"><a href="html-tabellen.html#cb112-31" aria-hidden="true" tabindex="-1"></a><span class="do">## [146] &quot;41&quot;      &quot;4828&quot;    &quot;0&quot;       &quot;4675&quot;    &quot;644&quot;    </span></span>
+<span id="cb112-32"><a href="html-tabellen.html#cb112-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [151] &quot;0&quot;       &quot;196.8&quot;   &quot;370.4&quot;   &quot;754&quot;     &quot;177&quot;    </span></span>
+<span id="cb112-33"><a href="html-tabellen.html#cb112-33" aria-hidden="true" tabindex="-1"></a><span class="do">## [156] &quot;9330&quot;    &quot;6112&quot;    &quot;15&quot;      &quot;0&quot;       &quot;4.1&quot;    </span></span>
+<span id="cb112-34"><a href="html-tabellen.html#cb112-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [161] &quot;0&quot;       &quot;293.5&quot;   &quot;40&quot;      &quot;1835&quot;    &quot;2470&quot;   </span></span>
+<span id="cb112-35"><a href="html-tabellen.html#cb112-35" aria-hidden="true" tabindex="-1"></a><span class="do">## [166] &quot;1572&quot;    &quot;30&quot;      &quot;8&quot;       &quot;0&quot;       &quot;451&quot;    </span></span>
+<span id="cb112-36"><a href="html-tabellen.html#cb112-36" aria-hidden="true" tabindex="-1"></a><span class="do">## [171] &quot;2254&quot;    &quot;15134&quot;   &quot;910&quot;     &quot;0&quot;       &quot;853&quot;    </span></span>
+<span id="cb112-37"><a href="html-tabellen.html#cb112-37" aria-hidden="true" tabindex="-1"></a><span class="do">## [176] &quot;64&quot;      &quot;32&quot;      &quot;0&quot;       &quot;1482&quot;    &quot;25148&quot;  </span></span>
+<span id="cb112-38"><a href="html-tabellen.html#cb112-38" aria-hidden="true" tabindex="-1"></a><span class="do">## [181] &quot;2092&quot;    &quot;135663&quot;  &quot;1046&quot;    &quot;1519&quot;    &quot;14.5&quot;   </span></span>
+<span id="cb112-39"><a href="html-tabellen.html#cb112-39" aria-hidden="true" tabindex="-1"></a><span class="do">## [186] &quot;2490&quot;    &quot;5152&quot;    &quot;518&quot;     &quot;0&quot;       &quot;2414&quot;   </span></span>
+<span id="cb112-40"><a href="html-tabellen.html#cb112-40" aria-hidden="true" tabindex="-1"></a><span class="do">## [191] &quot;36289&quot;   &quot;51&quot;      &quot;440&quot;     &quot;1793&quot;    &quot;501&quot;    </span></span>
+<span id="cb112-41"><a href="html-tabellen.html#cb112-41" aria-hidden="true" tabindex="-1"></a><span class="do">## [196] &quot;563&quot;     &quot;225&quot;     &quot;37653&quot;   &quot;0&quot;       &quot;60&quot;     </span></span>
+<span id="cb112-42"><a href="html-tabellen.html#cb112-42" aria-hidden="true" tabindex="-1"></a><span class="do">## [201] &quot;135&quot;     &quot;158&quot;     &quot;58.9&quot;    &quot;120&quot;     &quot;84&quot;     </span></span>
+<span id="cb112-43"><a href="html-tabellen.html#cb112-43" aria-hidden="true" tabindex="-1"></a><span class="do">## [206] &quot;403&quot;     &quot;0&quot;       &quot;209&quot;     &quot;2640&quot;    &quot;531&quot;    </span></span>
+<span id="cb112-44"><a href="html-tabellen.html#cb112-44" aria-hidden="true" tabindex="-1"></a><span class="do">## [211] &quot;0&quot;       &quot;491&quot;     &quot;402&quot;     &quot;193&quot;     &quot;58.9&quot;   </span></span>
+<span id="cb112-45"><a href="html-tabellen.html#cb112-45" aria-hidden="true" tabindex="-1"></a><span class="do">## [216] &quot;0&quot;       &quot;46.6&quot;    &quot;5313&quot;    &quot;3025&quot;    &quot;2798&quot;   </span></span>
+<span id="cb112-46"><a href="html-tabellen.html#cb112-46" aria-hidden="true" tabindex="-1"></a><span class="do">## [221] NA        &quot;0&quot;       &quot;17968&quot;   &quot;4964&quot;    &quot;926&quot;    </span></span>
+<span id="cb112-47"><a href="html-tabellen.html#cb112-47" aria-hidden="true" tabindex="-1"></a><span class="do">## [226] &quot;1340&quot;    &quot;853&quot;     &quot;386&quot;     &quot;3587&quot;    &quot;3218&quot;   </span></span>
+<span id="cb112-48"><a href="html-tabellen.html#cb112-48" aria-hidden="true" tabindex="-1"></a><span class="do">## [231] &quot;0&quot;       &quot;193&quot;     &quot;1566.3&quot;  &quot;0&quot;       &quot;1424&quot;   </span></span>
+<span id="cb112-49"><a href="html-tabellen.html#cb112-49" aria-hidden="true" tabindex="-1"></a><span class="do">## [236] &quot;3219&quot;    &quot;706&quot;     &quot;56&quot;      &quot;101&quot;     &quot;419&quot;    </span></span>
+<span id="cb112-50"><a href="html-tabellen.html#cb112-50" aria-hidden="true" tabindex="-1"></a><span class="do">## [241] &quot;362&quot;     &quot;1148&quot;    &quot;7200&quot;    &quot;0&quot;       &quot;389&quot;    </span></span>
+<span id="cb112-51"><a href="html-tabellen.html#cb112-51" aria-hidden="true" tabindex="-1"></a><span class="do">## [246] &quot;24&quot;      &quot;0&quot;       &quot;2782&quot;    &quot;1318&quot;    &quot;12429&quot;  </span></span>
+<span id="cb112-52"><a href="html-tabellen.html#cb112-52" aria-hidden="true" tabindex="-1"></a><span class="do">## [251] &quot;19924&quot;   &quot;4.8&quot;     &quot;660&quot;     &quot;0&quot;       &quot;2528&quot;   </span></span>
+<span id="cb112-53"><a href="html-tabellen.html#cb112-53" aria-hidden="true" tabindex="-1"></a><span class="do">## [256] &quot;2800&quot;    &quot;3444&quot;    &quot;188&quot;     &quot;19.3&quot;    &quot;129&quot;    </span></span>
+<span id="cb112-54"><a href="html-tabellen.html#cb112-54" aria-hidden="true" tabindex="-1"></a><span class="do">## [261] &quot;0&quot;       &quot;1110&quot;    &quot;356000&quot;  &quot;1906&quot;    &quot;0&quot;      </span></span>
+<span id="cb112-55"><a href="html-tabellen.html#cb112-55" aria-hidden="true" tabindex="-1"></a><span class="do">## [266] &quot;0&quot;</span></span></code></pre></div>
+<p>Auch hier kann alles in einen Befehl gepackt werden:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="html-tabellen.html#cb113-1" aria-hidden="true" tabindex="-1"></a>coast<span class="sc">$</span>Coastline <span class="sc">%&gt;%</span></span>
+<span id="cb113-2"><a href="html-tabellen.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">&quot;[0-9,.]+ km&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb113-3"><a href="html-tabellen.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">&quot;[^0-9.]&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb113-4"><a href="html-tabellen.html#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>() <span class="ot">-&gt;</span> coast<span class="sc">$</span>coast_num</span></code></pre></div>
+</div>
+<div id="datenaufbereitung" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Datenaufbereitung</h2>
+<p>Mit dem Befehl <code>arrange()</code> kann die Tabelle sortiert werden. Zunächst auftseigend,</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="html-tabellen.html#cb114-1" aria-hidden="true" tabindex="-1"></a>coast <span class="sc">%&gt;%</span></span>
+<span id="cb114-2"><a href="html-tabellen.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(coast_num)</span>
+<span id="cb114-3"><a href="html-tabellen.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 266 x 3</span></span>
+<span id="cb114-4"><a href="html-tabellen.html#cb114-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Country    Coastline                       coast_num</span></span>
+<span id="cb114-5"><a href="html-tabellen.html#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;      &lt;chr&gt;                               &lt;dbl&gt;</span></span>
+<span id="cb114-6"><a href="html-tabellen.html#cb114-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Afghanist… &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-7"><a href="html-tabellen.html#cb114-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Andorra    &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-8"><a href="html-tabellen.html#cb114-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Armenia    &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-9"><a href="html-tabellen.html#cb114-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Austria    &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-10"><a href="html-tabellen.html#cb114-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Azerbaijan &quot;0 km\n          (landlocked);…         0</span></span>
+<span id="cb114-11"><a href="html-tabellen.html#cb114-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Belarus    &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-12"><a href="html-tabellen.html#cb114-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Bhutan     &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-13"><a href="html-tabellen.html#cb114-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Bolivia    &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-14"><a href="html-tabellen.html#cb114-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Botswana   &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-15"><a href="html-tabellen.html#cb114-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Burkina F… &quot;0 km\n          (landlocked)&quot;          0</span></span>
+<span id="cb114-16"><a href="html-tabellen.html#cb114-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 256 more rows</span></span></code></pre></div>
+<p>und schließlich absteigend, sodass die größten Werte an erster Stelle stehen.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="html-tabellen.html#cb115-1" aria-hidden="true" tabindex="-1"></a>coast <span class="sc">%&gt;%</span></span>
+<span id="cb115-2"><a href="html-tabellen.html#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(coast_num))</span>
+<span id="cb115-3"><a href="html-tabellen.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 266 x 3</span></span>
+<span id="cb115-4"><a href="html-tabellen.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Country     Coastline                      coast_num</span></span>
+<span id="cb115-5"><a href="html-tabellen.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;       &lt;chr&gt;                              &lt;dbl&gt;</span></span>
+<span id="cb115-6"><a href="html-tabellen.html#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 World       &quot;356,000 km\n          \n    …   356000 </span></span>
+<span id="cb115-7"><a href="html-tabellen.html#cb115-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Canada      &quot;202,080 km\n          \n    …   202080 </span></span>
+<span id="cb115-8"><a href="html-tabellen.html#cb115-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Pacific Oc… &quot;135,663 km&quot;                     135663 </span></span>
+<span id="cb115-9"><a href="html-tabellen.html#cb115-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Atlantic O… &quot;111,866 km&quot;                     111866 </span></span>
+<span id="cb115-10"><a href="html-tabellen.html#cb115-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Indian Oce… &quot;66,526 km&quot;                       66526 </span></span>
+<span id="cb115-11"><a href="html-tabellen.html#cb115-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 European U… &quot;65,992.9 km&quot;                     65993.</span></span>
+<span id="cb115-12"><a href="html-tabellen.html#cb115-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Indonesia   &quot;54,716 km&quot;                       54716 </span></span>
+<span id="cb115-13"><a href="html-tabellen.html#cb115-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Arctic Oce… &quot;45,389 km&quot;                       45389 </span></span>
+<span id="cb115-14"><a href="html-tabellen.html#cb115-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Greenland   &quot;44,087 km&quot;                       44087 </span></span>
+<span id="cb115-15"><a href="html-tabellen.html#cb115-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Russia      &quot;37,653 km&quot;                       37653 </span></span>
+<span id="cb115-16"><a href="html-tabellen.html#cb115-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 256 more rows</span></span></code></pre></div>
+<p>Bevor wir jedoch eine vollständig sortierte Liste haben, muss der Datensatz noch von falschen Einträgen gesäubert werden. Dafür benutzen wir den Befehl <code>filter()</code>. Wir suchen wieder nach einem bestimmten Muster (hier zum Beispiel dem Wort <q>Ocean</q>) und filtern es aus dem Datensatz.</p>
+<p>Die Grafik soll nur aus den ersten 30 Einträgen der Tabelle bestehen, welche uns der Befehl <code>head()</code> ausgibt.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="html-tabellen.html#cb116-1" aria-hidden="true" tabindex="-1"></a>coast <span class="sc">%&gt;%</span></span>
+<span id="cb116-2"><a href="html-tabellen.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(coast_num)) <span class="sc">%&gt;%</span></span>
+<span id="cb116-3"><a href="html-tabellen.html#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(Country, <span class="st">&quot;Ocean&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb116-4"><a href="html-tabellen.html#cb116-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;World&quot;</span>, <span class="st">&quot;European Union&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb116-5"><a href="html-tabellen.html#cb116-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">30</span>) <span class="ot">-&gt;</span> top_30</span></code></pre></div>
+</div>
+<div id="datenvisualisierung" class="section level2" number="10.5">
+<h2><span class="header-section-number">10.5</span> Datenvisualisierung</h2>
+<p>Das Balkendiagramm erhalten wir durch den <q>ggplot</q> Befehl. Hierbei gibt es verschiedenste Einstellmöglichkeiten. Wichitg sind vor allem die Angabe des verwendeten Datensatzes und die Art der Grafik (ob Kartendarstellung oder Balkendiagramm). Desweiteren kann man noch Farben der Eigenschaften, eine Achsenbeschriftung u. v. m. bestimmen.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="html-tabellen.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_30, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Country, coast_num), <span class="at">y=</span>coast_num)) <span class="sc">+</span></span>
+<span id="cb117-2"><a href="html-tabellen.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="at">fill=</span><span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-3"><a href="html-tabellen.html#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb117-4"><a href="html-tabellen.html#cb117-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb117-5"><a href="html-tabellen.html#cb117-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;Küstenlinie (km)&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
+</div>
+<div id="aufgaben-5" class="section level2" number="10.6">
+<h2><span class="header-section-number">10.6</span> Aufgaben</h2>
+<ol style="list-style-type: decimal">
+<li><p>Importieren Sie die Daten zu den <a href="https://en.wikipedia.org/wiki/List_of_deadly_earthquakes_since_1900">tödlichen Erdbeben auf Wikipedia</a>
+und formen sie diese zu einem tibble um.</p></li>
+<li><p>Erstellen Sie mit den erhaltenen Daten eine Karte, welche die Lage und die Stärke der Erdbeben angibt:</p></li>
+</ol>
+<p><img src="_main_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Wandeln Sie den Erdbeben-Datensatz in das Simple Features Format um. Laden Sie zusätzlich eine Weltkarte mit dem Paket <code>rnaturalearth</code> und wandeln Sie auch diese in Simple Features um. Finden Sie außerdem einen Geodatensatz zu tektonischen Platten. Visualiseren Sie alles auf einer Welktarte (Projektion: Gall-Peters).</li>
+</ol>
+<p><img src="_main_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="text-chandra-2014.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ktiu/ds21/edit/master/10_html_tabellen.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ktiu/ds21/blob/master/10_html_tabellen.Rmd",
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -40,6 +40,9 @@
   https://www.reddit.com/r/DataArt/  
   https://www.reddit.com/r/MapPorn/
 
+- **Infographics**  
+  https://www.listendata.com/2019/06/create-infographics-with-r.html
+
 ## Spezialthemen {-}
 
 - **Tutorial Reguläre Ausdrücke**  

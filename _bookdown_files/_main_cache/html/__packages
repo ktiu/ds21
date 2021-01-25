@@ -9,3 +9,6 @@ dplyr
 stringr
 forcats
 sf
+xml2
+rvest
+rnaturalearth

@@ -361,6 +361,9 @@ Datum & Sitzung & Inhalt \\ \addlinespace
   \url{https://www.reddit.com/r/dataisbeautiful}~\\
   \url{https://www.reddit.com/r/DataArt/}~\\
   \url{https://www.reddit.com/r/MapPorn/}
+\item
+  \textbf{Infographics}\\
+  \url{https://www.listendata.com/2019/06/create-infographics-with-r.html}
 \end{itemize}
 
 \hypertarget{spezialthemen}{%
@@ -2575,6 +2578,276 @@ Daraus:
 \item
   Sie werden die Themen kurz vorstellen um Überschneidungen zu identifizieren und ggf. Gruppen zu bilden (wenn gewünscht).
 \end{itemize}
+
+\hypertarget{html-tabellen}{%
+\section{HTML-Tabellen}\label{html-tabellen}}
+
+\hypertarget{vorbereitung-2}{%
+\subsection{Vorbereitung}\label{vorbereitung-2}}
+
+Am Beispiel der Küstenlängen verschiedener Länder besprechen wir Techniken der Datenerhebung/-erfassung und -visualisierung. Unser Ziel ist es, die Daten zu den Küstenlängen in einer Grafik darzustellen.
+
+Für die folgenden Aufgaben benötigen wir die Pakete \texttt{rvest} und \texttt{tidyverse}. Zunächst müssen diese installiert und in unsere Umgebung geladen werden.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(rvest)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{datenbeschaffung}{%
+\subsection{Datenbeschaffung}\label{datenbeschaffung}}
+
+Auf dem Internetauftritt der CIA gab es es eine Tabelle, welche die Küstenlänge (inklusive der Inseln) der einzelnen Länder enthält.
+
+Über die Archivierungsplattform WayBackMachine ist die Seite immer noch abrufbar: \url{https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the-world-factbook/fields/282.html}
+
+In einem ersten Schritt wird die URL der Tabelle der Variable \texttt{url} zugewiesen, sodass der Quellcode mit dem Befehl \texttt{read\_html()} eingelesen werden kann.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OtherTok{\textless{}{-}} \StringTok{"https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the{-}world{-}factbook/fields/282.html"}
+\NormalTok{reply }\OtherTok{\textless{}{-}} \FunctionTok{read\_html}\NormalTok{(url)}
+\end{Highlighting}
+\end{Shaded}
+
+Der Befehl \texttt{html\_table()} ermöglicht das Auslesen \emph{aller} Tabellen auf der Seite. Mithilfe des Befehls \texttt{str()} sehen wir, dass die Seite genau eine Tabelle enthält, welche die Informationen zu den Küstenlängen enthält.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tables }\OtherTok{\textless{}{-}} \FunctionTok{html\_table}\NormalTok{(reply, }\AttributeTok{fill =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(tables)}
+\DocumentationTok{\#\# List of 1}
+\DocumentationTok{\#\#  $ :\textquotesingle{}data.frame\textquotesingle{}:    266 obs. of  2 variables:}
+\DocumentationTok{\#\#   ..$ Country  : chr [1:266] "Afghanistan" "Akrotiri" "Albania" "Algeria" ...}
+\DocumentationTok{\#\#   ..$ Coastline: chr [1:266] "0 km\textbackslash{}n          (landlocked)" "56.3 km" "362 km" "998 km" ...}
+\end{Highlighting}
+\end{Shaded}
+
+Durch die Umformung zu einem tibble erhalten wir eine Tabelle mit den gewünschten Informationen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as\_tibble}\NormalTok{(tables[[}\DecValTok{1}\NormalTok{]])}
+\DocumentationTok{\#\# \# A tibble: 266 x 2}
+\DocumentationTok{\#\#    Country             Coastline                     }
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}               \textless{}chr\textgreater{}                         }
+\DocumentationTok{\#\#  1 Afghanistan         "0 km\textbackslash{}n          (landlocked)"}
+\DocumentationTok{\#\#  2 Akrotiri            "56.3 km"                     }
+\DocumentationTok{\#\#  3 Albania             "362 km"                      }
+\DocumentationTok{\#\#  4 Algeria             "998 km"                      }
+\DocumentationTok{\#\#  5 American Samoa      "116 km"                      }
+\DocumentationTok{\#\#  6 Andorra             "0 km\textbackslash{}n          (landlocked)"}
+\DocumentationTok{\#\#  7 Angola              "1,600 km"                    }
+\DocumentationTok{\#\#  8 Anguilla            "61 km"                       }
+\DocumentationTok{\#\#  9 Antarctica          "17,968 km"                   }
+\DocumentationTok{\#\# 10 Antigua and Barbuda "153 km"                      }
+\DocumentationTok{\#\# \# ... with 256 more rows}
+\end{Highlighting}
+\end{Shaded}
+
+Mit pipes können wir die obigen Befehle zusammenfassen und somit das Ganze auf einmal ausführen.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the{-}world{-}factbook/fields/282.html"} \SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{read\_html}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_table}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as\_tibble}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ coast}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{datenformatierung}{%
+\subsection{Datenformatierung}\label{datenformatierung}}
+
+Zur Datenformatierung nutzen wir Funktionen aus dem Paket \texttt{stringr}. Die Spalte mit der Küstenlänge soll keinen Text, keine Einheit direkt hinter den Zahlenwerten und keine Kommata zur Trennung der Zahlenwerte enthalten.
+
+Der Befehl ``str\_extract()'' sucht nach vorgegebenen Mustern (engl. \emph{patterns}) und wählt diese aus. Diese patterns werden auch reguläre Ausdrücke (\emph{regular expressions / regex}) genannt und sind eigentlich \href{https://danielfett.de/en/tutorials/tutorial-regulare-ausdrucke/}{ein Thema für sich}. Das Pattern \texttt{{[}0-9,.{]}+\ km} extrahiert die Kilometerangaben.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{km }\OtherTok{\textless{}{-}} \FunctionTok{str\_extract}\NormalTok{(coast}\SpecialCharTok{$}\NormalTok{Coastline, }\StringTok{"[0{-}9,.]+ km"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Die ausgewählten Muster (in unserem Fall Kommata und Text) können durch den Befehl \texttt{str\_replace\_all()} gelöscht oder ersetzt werden. Wir ersetzen alle Zeichen \emph{außer} Zahlen und Dezimalpunkt mit einem leeren String, so dass sie verschwinden.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str\_replace\_all}\NormalTok{(km, }\StringTok{"[\^{}0{-}9.]"}\NormalTok{, }\StringTok{""}\NormalTok{)}
+\DocumentationTok{\#\#   [1] "0"       "56.3"    "362"     "998"     "116"    }
+\DocumentationTok{\#\#   [6] "0"       "1600"    "61"      "17968"   "153"    }
+\DocumentationTok{\#\#  [11] "45389"   "4989"    "0"       "68.5"    "74.1"   }
+\DocumentationTok{\#\#  [16] "111866"  "25760"   "0"       "0"       "3542"   }
+\DocumentationTok{\#\#  [21] "161"     "580"     "97"      "0"       "66.5"   }
+\DocumentationTok{\#\#  [26] "386"     "121"     "103"     "0"       "0"      }
+\DocumentationTok{\#\#  [31] "20"      "0"       "29.6"    "7491"    "698"    }
+\DocumentationTok{\#\#  [36] "80"      "161"     "354"     "0"       "1930"   }
+\DocumentationTok{\#\#  [41] "0"       "965"     "443"     "402"     "202080" }
+\DocumentationTok{\#\#  [46] "160"     "0"       "0"       "6435"    "14500"  }
+\DocumentationTok{\#\#  [51] "138.9"   "11.1"    "26"      "3208"    "340"    }
+\DocumentationTok{\#\#  [56] "37"      "169"     "120"     "3095"    "1290"   }
+\DocumentationTok{\#\#  [61] "515"     "5835"    "3735"    "364"     "648"    }
+\DocumentationTok{\#\#  [66] "0"       "7314"    "27.5"    "314"     "148"    }
+\DocumentationTok{\#\#  [71] "1288"    "2237"    "2450"    "307"     "296"    }
+\DocumentationTok{\#\#  [76] "2234"    "3794"    "0"       "0"       "65992.9"}
+\DocumentationTok{\#\#  [81] "1288"    "1117"    "1129"    "1250"    "4853"   }
+\DocumentationTok{\#\#  [86] "2525"    "28"      "885"     "80"      "40"     }
+\DocumentationTok{\#\#  [91] "310"     "2389"    "539"     "12"      "13676"  }
+\DocumentationTok{\#\#  [96] "44087"   "121"     "125.5"   "400"     "50"     }
+\DocumentationTok{\#\# [101] "320"     "350"     "459"     "1771"    "101.9"  }
+\DocumentationTok{\#\# [106] "0"       "823"     "733"     "6.4"     "0"      }
+\DocumentationTok{\#\# [111] "4970"    "7000"    "66526"   "54716"   "2440"   }
+\DocumentationTok{\#\# [116] "58"      "1448"    "160"     "273"     "7600"   }
+\DocumentationTok{\#\# [121] "1022"    "124.1"   "29751"   "8"       "70"     }
+\DocumentationTok{\#\# [126] "34"      "26"      "0"       "536"     "3"      }
+\DocumentationTok{\#\# [131] "1143"    "2495"    "2413"    "0"       "499"    }
+\DocumentationTok{\#\# [136] "0"       "0"       "498"     "225"     "0"      }
+\DocumentationTok{\#\# [141] "579"     "1770"    "0"       "90"      "0"      }
+\DocumentationTok{\#\# [146] "41"      "4828"    "0"       "4675"    "644"    }
+\DocumentationTok{\#\# [151] "0"       "196.8"   "370.4"   "754"     "177"    }
+\DocumentationTok{\#\# [156] "9330"    "6112"    "15"      "0"       "4.1"    }
+\DocumentationTok{\#\# [161] "0"       "293.5"   "40"      "1835"    "2470"   }
+\DocumentationTok{\#\# [166] "1572"    "30"      "8"       "0"       "451"    }
+\DocumentationTok{\#\# [171] "2254"    "15134"   "910"     "0"       "853"    }
+\DocumentationTok{\#\# [176] "64"      "32"      "0"       "1482"    "25148"  }
+\DocumentationTok{\#\# [181] "2092"    "135663"  "1046"    "1519"    "14.5"   }
+\DocumentationTok{\#\# [186] "2490"    "5152"    "518"     "0"       "2414"   }
+\DocumentationTok{\#\# [191] "36289"   "51"      "440"     "1793"    "501"    }
+\DocumentationTok{\#\# [196] "563"     "225"     "37653"   "0"       "60"     }
+\DocumentationTok{\#\# [201] "135"     "158"     "58.9"    "120"     "84"     }
+\DocumentationTok{\#\# [206] "403"     "0"       "209"     "2640"    "531"    }
+\DocumentationTok{\#\# [211] "0"       "491"     "402"     "193"     "58.9"   }
+\DocumentationTok{\#\# [216] "0"       "46.6"    "5313"    "3025"    "2798"   }
+\DocumentationTok{\#\# [221] NA        "0"       "17968"   "4964"    "926"    }
+\DocumentationTok{\#\# [226] "1340"    "853"     "386"     "3587"    "3218"   }
+\DocumentationTok{\#\# [231] "0"       "193"     "1566.3"  "0"       "1424"   }
+\DocumentationTok{\#\# [236] "3219"    "706"     "56"      "101"     "419"    }
+\DocumentationTok{\#\# [241] "362"     "1148"    "7200"    "0"       "389"    }
+\DocumentationTok{\#\# [246] "24"      "0"       "2782"    "1318"    "12429"  }
+\DocumentationTok{\#\# [251] "19924"   "4.8"     "660"     "0"       "2528"   }
+\DocumentationTok{\#\# [256] "2800"    "3444"    "188"     "19.3"    "129"    }
+\DocumentationTok{\#\# [261] "0"       "1110"    "356000"  "1906"    "0"      }
+\DocumentationTok{\#\# [266] "0"}
+\end{Highlighting}
+\end{Shaded}
+
+Auch hier kann alles in einen Befehl gepackt werden:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{coast}\SpecialCharTok{$}\NormalTok{Coastline }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"[0{-}9,.]+ km"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_replace\_all}\NormalTok{(}\StringTok{"[\^{}0{-}9.]"}\NormalTok{, }\StringTok{""}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.numeric}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ coast}\SpecialCharTok{$}\NormalTok{coast\_num}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{datenaufbereitung}{%
+\subsection{Datenaufbereitung}\label{datenaufbereitung}}
+
+Mit dem Befehl \texttt{arrange()} kann die Tabelle sortiert werden. Zunächst auftseigend,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{coast }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(coast\_num)}
+\DocumentationTok{\#\# \# A tibble: 266 x 3}
+\DocumentationTok{\#\#    Country    Coastline                       coast\_num}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}      \textless{}chr\textgreater{}                               \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 Afghanist\textasciitilde{} "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\#  2 Andorra    "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\#  3 Armenia    "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\#  4 Austria    "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\#  5 Azerbaijan "0 km\textbackslash{}n          (landlocked);\textasciitilde{}         0}
+\DocumentationTok{\#\#  6 Belarus    "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\#  7 Bhutan     "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\#  8 Bolivia    "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\#  9 Botswana   "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\# 10 Burkina F\textasciitilde{} "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\# \# ... with 256 more rows}
+\end{Highlighting}
+\end{Shaded}
+
+und schließlich absteigend, sodass die größten Werte an erster Stelle stehen.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{coast }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(coast\_num))}
+\DocumentationTok{\#\# \# A tibble: 266 x 3}
+\DocumentationTok{\#\#    Country     Coastline                      coast\_num}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}       \textless{}chr\textgreater{}                              \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 World       "356,000 km\textbackslash{}n          \textbackslash{}n    \textasciitilde{}   356000 }
+\DocumentationTok{\#\#  2 Canada      "202,080 km\textbackslash{}n          \textbackslash{}n    \textasciitilde{}   202080 }
+\DocumentationTok{\#\#  3 Pacific Oc\textasciitilde{} "135,663 km"                     135663 }
+\DocumentationTok{\#\#  4 Atlantic O\textasciitilde{} "111,866 km"                     111866 }
+\DocumentationTok{\#\#  5 Indian Oce\textasciitilde{} "66,526 km"                       66526 }
+\DocumentationTok{\#\#  6 European U\textasciitilde{} "65,992.9 km"                     65993.}
+\DocumentationTok{\#\#  7 Indonesia   "54,716 km"                       54716 }
+\DocumentationTok{\#\#  8 Arctic Oce\textasciitilde{} "45,389 km"                       45389 }
+\DocumentationTok{\#\#  9 Greenland   "44,087 km"                       44087 }
+\DocumentationTok{\#\# 10 Russia      "37,653 km"                       37653 }
+\DocumentationTok{\#\# \# ... with 256 more rows}
+\end{Highlighting}
+\end{Shaded}
+
+Bevor wir jedoch eine vollständig sortierte Liste haben, muss der Datensatz noch von falschen Einträgen gesäubert werden. Dafür benutzen wir den Befehl \texttt{filter()}. Wir suchen wieder nach einem bestimmten Muster (hier zum Beispiel dem Wort ``Ocean'') und filtern es aus dem Datensatz.
+
+Die Grafik soll nur aus den ersten 30 Einträgen der Tabelle bestehen, welche uns der Befehl \texttt{head()} ausgibt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{coast }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(coast\_num)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{str\_detect}\NormalTok{(Country, }\StringTok{"Ocean"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{Country }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"World"}\NormalTok{, }\StringTok{"European Union"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{(}\DecValTok{30}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ top\_30}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{datenvisualisierung}{%
+\subsection{Datenvisualisierung}\label{datenvisualisierung}}
+
+Das Balkendiagramm erhalten wir durch den ``ggplot'' Befehl. Hierbei gibt es verschiedenste Einstellmöglichkeiten. Wichitg sind vor allem die Angabe des verwendeten Datensatzes und die Art der Grafik (ob Kartendarstellung oder Balkendiagramm). Desweiteren kann man noch Farben der Eigenschaften, eine Achsenbeschriftung u. v. m. bestimmen.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(top\_30, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Country, coast\_num), }\AttributeTok{y=}\NormalTok{coast\_num)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{\textquotesingle{}identity\textquotesingle{}}\NormalTok{, }\AttributeTok{fill=}\StringTok{"darkblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\StringTok{"Küstenlinie (km)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-117-1.png}
+
+\hypertarget{aufgaben-5}{%
+\subsection{Aufgaben}\label{aufgaben-5}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Importieren Sie die Daten zu den \href{https://en.wikipedia.org/wiki/List_of_deadly_earthquakes_since_1900}{tödlichen Erdbeben auf Wikipedia}
+  und formen sie diese zu einem tibble um.
+\item
+  Erstellen Sie mit den erhaltenen Daten eine Karte, welche die Lage und die Stärke der Erdbeben angibt:
+\end{enumerate}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-120-1.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Wandeln Sie den Erdbeben-Datensatz in das Simple Features Format um. Laden Sie zusätzlich eine Weltkarte mit dem Paket \texttt{rnaturalearth} und wandeln Sie auch diese in Simple Features um. Finden Sie außerdem einen Geodatensatz zu tektonischen Platten. Visualiseren Sie alles auf einer Welktarte (Projektion: Gall-Peters).
+\end{enumerate}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-123-1.png}
 
 
 \end{document}
