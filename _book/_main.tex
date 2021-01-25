@@ -2830,12 +2830,45 @@ Das Balkendiagramm erhalten wir durch den ``ggplot'' Befehl. Hierbei gibt es ver
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   Importieren Sie die Daten zu den \href{https://en.wikipedia.org/wiki/List_of_deadly_earthquakes_since_1900}{tödlichen Erdbeben auf Wikipedia}
   und formen sie diese zu einem tibble um.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"https://en.wikipedia.org/wiki/List\_of\_deadly\_earthquakes\_since\_1900"} \SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  read\_html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_table}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .[[}\DecValTok{5}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.tibble}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ earthquakes\_raw}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
 \item
   Erstellen Sie mit den erhaltenen Daten eine Karte, welche die Lage und die Stärke der Erdbeben angibt:
 \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{earthquakes\_raw }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Lat =} \FunctionTok{as.numeric}\NormalTok{(Lat), }\AttributeTok{Long =} \FunctionTok{as.numeric}\NormalTok{(Long)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{magnitude\_num =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(Magnitude, }\StringTok{"[0{-}9.]+"}\NormalTok{))) }\OtherTok{{-}\textgreater{}}\NormalTok{ earthquakes}
+
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_polygon}\NormalTok{(}\AttributeTok{data =} \FunctionTok{map\_data}\NormalTok{(}\StringTok{"world"}\NormalTok{), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ long, }\AttributeTok{y =}\NormalTok{ lat, }\AttributeTok{group =}\NormalTok{ group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =}\NormalTok{ earthquakes,}
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Long, }\AttributeTok{y =}\NormalTok{ Lat, }\AttributeTok{size =}\NormalTok{ magnitude\_num),}
+             \AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_quickmap}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_size\_area}\NormalTok{(}\StringTok{"Stärke"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-120-1.png}
 
@@ -2846,6 +2879,30 @@ Das Balkendiagramm erhalten wir durch den ``ggplot'' Befehl. Hierbei gibt es ver
 \item
   Wandeln Sie den Erdbeben-Datensatz in das Simple Features Format um. Laden Sie zusätzlich eine Weltkarte mit dem Paket \texttt{rnaturalearth} und wandeln Sie auch diese in Simple Features um. Finden Sie außerdem einen Geodatensatz zu tektonischen Platten. Visualiseren Sie alles auf einer Welktarte (Projektion: Gall-Peters).
 \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(sf)}
+
+\NormalTok{earthquakes }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!} \FunctionTok{is.na}\NormalTok{(Long)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_as\_sf}\NormalTok{(}\AttributeTok{coords=}\FunctionTok{c}\NormalTok{(}\StringTok{"Long"}\NormalTok{, }\StringTok{"Lat"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_set\_crs}\NormalTok{(}\DecValTok{4326}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ quakesf}
+
+\FunctionTok{library}\NormalTok{(rnaturalearth)}
+
+\FunctionTok{ne\_download}\NormalTok{(}\AttributeTok{type=}\StringTok{"land"}\NormalTok{, }\AttributeTok{category =} \StringTok{"physical"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_as\_sf}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_transform}\NormalTok{(}\StringTok{\textquotesingle{}+proj=cea +lon\_0=0 +x\_0=0 +y\_0=0 +lat\_ts=45 +ellps=WGS84 +datum=WGS84 +units=m +no\_defs\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ earthsf}
+
+\FunctionTok{st\_read}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002\_plates.json"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ plates}
+
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data =}\NormalTok{ earthsf, }\AttributeTok{fill =} \StringTok{"gray"}\NormalTok{, }\AttributeTok{color =} \ConstantTok{NA}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ quakesf, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data =}\NormalTok{ plates, }\AttributeTok{color =} \StringTok{"orange"}\NormalTok{, }\AttributeTok{fill =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{lwd =} \FloatTok{0.3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-123-1.png}
 

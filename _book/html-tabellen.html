@@ -452,14 +452,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="aufgaben-5" class="section level2" number="10.6">
 <h2><span class="header-section-number">10.6</span> Aufgaben</h2>
 <ol style="list-style-type: decimal">
-<li><p>Importieren Sie die Daten zu den <a href="https://en.wikipedia.org/wiki/List_of_deadly_earthquakes_since_1900">tödlichen Erdbeben auf Wikipedia</a>
-und formen sie diese zu einem tibble um.</p></li>
-<li><p>Erstellen Sie mit den erhaltenen Daten eine Karte, welche die Lage und die Stärke der Erdbeben angibt:</p></li>
+<li>Importieren Sie die Daten zu den <a href="https://en.wikipedia.org/wiki/List_of_deadly_earthquakes_since_1900">tödlichen Erdbeben auf Wikipedia</a>
+und formen sie diese zu einem tibble um.</li>
 </ol>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r solution"><code class="sourceCode r"><span id="cb118-1"><a href="html-tabellen.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;https://en.wikipedia.org/wiki/List_of_deadly_earthquakes_since_1900&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb118-2"><a href="html-tabellen.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  read_html <span class="sc">%&gt;%</span></span>
+<span id="cb118-3"><a href="html-tabellen.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>(<span class="at">fill =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb118-4"><a href="html-tabellen.html#cb118-4" aria-hidden="true" tabindex="-1"></a>  .[[<span class="dv">5</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb118-5"><a href="html-tabellen.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.tibble</span>() <span class="ot">-&gt;</span> earthquakes_raw</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Erstellen Sie mit den erhaltenen Daten eine Karte, welche die Lage und die Stärke der Erdbeben angibt:</li>
+</ol>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r solution"><code class="sourceCode r"><span id="cb119-1"><a href="html-tabellen.html#cb119-1" aria-hidden="true" tabindex="-1"></a>earthquakes_raw <span class="sc">%&gt;%</span></span>
+<span id="cb119-2"><a href="html-tabellen.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Lat =</span> <span class="fu">as.numeric</span>(Lat), <span class="at">Long =</span> <span class="fu">as.numeric</span>(Long)) <span class="sc">%&gt;%</span></span>
+<span id="cb119-3"><a href="html-tabellen.html#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">magnitude_num =</span> <span class="fu">as.numeric</span>(<span class="fu">str_extract</span>(Magnitude, <span class="st">&quot;[0-9.]+&quot;</span>))) <span class="ot">-&gt;</span> earthquakes</span>
+<span id="cb119-4"><a href="html-tabellen.html#cb119-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-5"><a href="html-tabellen.html#cb119-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb119-6"><a href="html-tabellen.html#cb119-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> <span class="fu">map_data</span>(<span class="st">&quot;world&quot;</span>), <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb119-7"><a href="html-tabellen.html#cb119-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> earthquakes,</span>
+<span id="cb119-8"><a href="html-tabellen.html#cb119-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Long, <span class="at">y =</span> Lat, <span class="at">size =</span> magnitude_num),</span>
+<span id="cb119-9"><a href="html-tabellen.html#cb119-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb119-10"><a href="html-tabellen.html#cb119-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_quickmap</span>() <span class="sc">+</span></span>
+<span id="cb119-11"><a href="html-tabellen.html#cb119-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="st">&quot;Stärke&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Wandeln Sie den Erdbeben-Datensatz in das Simple Features Format um. Laden Sie zusätzlich eine Weltkarte mit dem Paket <code>rnaturalearth</code> und wandeln Sie auch diese in Simple Features um. Finden Sie außerdem einen Geodatensatz zu tektonischen Platten. Visualiseren Sie alles auf einer Welktarte (Projektion: Gall-Peters).</li>
 </ol>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r solution"><code class="sourceCode r"><span id="cb120-1"><a href="html-tabellen.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb120-2"><a href="html-tabellen.html#cb120-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-3"><a href="html-tabellen.html#cb120-3" aria-hidden="true" tabindex="-1"></a>earthquakes <span class="sc">%&gt;%</span></span>
+<span id="cb120-4"><a href="html-tabellen.html#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span> <span class="fu">is.na</span>(Long)) <span class="sc">%&gt;%</span></span>
+<span id="cb120-5"><a href="html-tabellen.html#cb120-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords=</span><span class="fu">c</span>(<span class="st">&quot;Long&quot;</span>, <span class="st">&quot;Lat&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb120-6"><a href="html-tabellen.html#cb120-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">4326</span>) <span class="ot">-&gt;</span> quakesf</span>
+<span id="cb120-7"><a href="html-tabellen.html#cb120-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-8"><a href="html-tabellen.html#cb120-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb120-9"><a href="html-tabellen.html#cb120-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-10"><a href="html-tabellen.html#cb120-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ne_download</span>(<span class="at">type=</span><span class="st">&quot;land&quot;</span>, <span class="at">category =</span> <span class="st">&quot;physical&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb120-11"><a href="html-tabellen.html#cb120-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb120-12"><a href="html-tabellen.html#cb120-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="st">&#39;+proj=cea +lon_0=0 +x_0=0 +y_0=0 +lat_ts=45 +ellps=WGS84 +datum=WGS84 +units=m +no_defs&#39;</span>) <span class="ot">-&gt;</span> earthsf</span>
+<span id="cb120-13"><a href="html-tabellen.html#cb120-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-14"><a href="html-tabellen.html#cb120-14" aria-hidden="true" tabindex="-1"></a><span class="fu">st_read</span>(<span class="st">&quot;https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json&quot;</span>) <span class="ot">-&gt;</span> plates</span>
+<span id="cb120-15"><a href="html-tabellen.html#cb120-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-16"><a href="html-tabellen.html#cb120-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb120-17"><a href="html-tabellen.html#cb120-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> earthsf, <span class="at">fill =</span> <span class="st">&quot;gray&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb120-18"><a href="html-tabellen.html#cb120-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">data =</span> quakesf, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb120-19"><a href="html-tabellen.html#cb120-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> plates, <span class="at">color =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="fl">0.3</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 
 </div>
