@@ -1,5 +1,13 @@
 # HTML-Tabellen
 
+## Lernziele dieser Sitzung
+
+Sie können...
+
+- sich den Quellcode einer Webseite anzeigen lassen und interpretieren.
+- HTML-Tabellen als Datensatz einlesen.
+- Fortgeschrittene Methoden der Datenbereinigung nachvollziehen.
+
 ## Vorbereitung
 
 Am Beispiel der Küstenlängen verschiedener Länder besprechen wir Techniken der Datenerhebung/-erfassung und -visualisierung. Unser Ziel ist es, die Daten zu den Küstenlängen in einer Grafik darzustellen. 

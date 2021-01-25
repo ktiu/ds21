@@ -258,12 +258,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="html-tabellen.html"><a href="html-tabellen.html"><i class="fa fa-check"></i><b>10</b> HTML-Tabellen</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="html-tabellen.html"><a href="html-tabellen.html#vorbereitung-2"><i class="fa fa-check"></i><b>10.1</b> Vorbereitung</a></li>
-<li class="chapter" data-level="10.2" data-path="html-tabellen.html"><a href="html-tabellen.html#datenbeschaffung"><i class="fa fa-check"></i><b>10.2</b> Datenbeschaffung</a></li>
-<li class="chapter" data-level="10.3" data-path="html-tabellen.html"><a href="html-tabellen.html#datenformatierung"><i class="fa fa-check"></i><b>10.3</b> Datenformatierung</a></li>
-<li class="chapter" data-level="10.4" data-path="html-tabellen.html"><a href="html-tabellen.html#datenaufbereitung"><i class="fa fa-check"></i><b>10.4</b> Datenaufbereitung</a></li>
-<li class="chapter" data-level="10.5" data-path="html-tabellen.html"><a href="html-tabellen.html#datenvisualisierung"><i class="fa fa-check"></i><b>10.5</b> Datenvisualisierung</a></li>
-<li class="chapter" data-level="10.6" data-path="html-tabellen.html"><a href="html-tabellen.html#aufgaben-5"><i class="fa fa-check"></i><b>10.6</b> Aufgaben</a></li>
+<li class="chapter" data-level="10.1" data-path="html-tabellen.html"><a href="html-tabellen.html#lernziele-dieser-sitzung-3"><i class="fa fa-check"></i><b>10.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="10.2" data-path="html-tabellen.html"><a href="html-tabellen.html#vorbereitung-2"><i class="fa fa-check"></i><b>10.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="10.3" data-path="html-tabellen.html"><a href="html-tabellen.html#datenbeschaffung"><i class="fa fa-check"></i><b>10.3</b> Datenbeschaffung</a></li>
+<li class="chapter" data-level="10.4" data-path="html-tabellen.html"><a href="html-tabellen.html#datenformatierung"><i class="fa fa-check"></i><b>10.4</b> Datenformatierung</a></li>
+<li class="chapter" data-level="10.5" data-path="html-tabellen.html"><a href="html-tabellen.html#datenaufbereitung"><i class="fa fa-check"></i><b>10.5</b> Datenaufbereitung</a></li>
+<li class="chapter" data-level="10.6" data-path="html-tabellen.html"><a href="html-tabellen.html#datenvisualisierung"><i class="fa fa-check"></i><b>10.6</b> Datenvisualisierung</a></li>
+<li class="chapter" data-level="10.7" data-path="html-tabellen.html"><a href="html-tabellen.html#aufgaben-5"><i class="fa fa-check"></i><b>10.7</b> Aufgaben</a></li>
 </ul></li>
 </ul>
 
@@ -284,15 +285,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="html-tabellen" class="section level1" number="10">
 <h1><span class="header-section-number">Sitzung 10</span> HTML-Tabellen</h1>
-<div id="vorbereitung-2" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Vorbereitung</h2>
+<div id="lernziele-dieser-sitzung-3" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Lernziele dieser Sitzung</h2>
+<p>Sie können…</p>
+<ul>
+<li>sich den Quellcode einer Webseite anzeigen lassen und interpretieren.</li>
+<li>HTML-Tabellen als Datensatz einlesen.</li>
+<li>Fortgeschrittene Methoden der Datenbereinigung nachvollziehen.</li>
+</ul>
+</div>
+<div id="vorbereitung-2" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Vorbereitung</h2>
 <p>Am Beispiel der Küstenlängen verschiedener Länder besprechen wir Techniken der Datenerhebung/-erfassung und -visualisierung. Unser Ziel ist es, die Daten zu den Küstenlängen in einer Grafik darzustellen.</p>
 <p>Für die folgenden Aufgaben benötigen wir die Pakete <code>rvest</code> und <code>tidyverse</code>. Zunächst müssen diese installiert und in unsere Umgebung geladen werden.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="html-tabellen.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb106-2"><a href="html-tabellen.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span></code></pre></div>
 </div>
-<div id="datenbeschaffung" class="section level2" number="10.2">
-<h2><span class="header-section-number">10.2</span> Datenbeschaffung</h2>
+<div id="datenbeschaffung" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Datenbeschaffung</h2>
 <p>Auf dem Internetauftritt der CIA gab es es eine Tabelle, welche die Küstenlänge (inklusive der Inseln) der einzelnen Länder enthält.</p>
 <p>Über die Archivierungsplattform WayBackMachine ist die Seite immer noch abrufbar: <a href="https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the-world-factbook/fields/282.html" class="uri">https://web.archive.org/web/20190802010710/https://www.cia.gov/library/publications/the-world-factbook/fields/282.html</a></p>
 <p>In einem ersten Schritt wird die URL der Tabelle der Variable <code>url</code> zugewiesen, sodass der Quellcode mit dem Befehl <code>read_html()</code> eingelesen werden kann.</p>
@@ -328,8 +338,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb110-4"><a href="html-tabellen.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  .[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span></span>
 <span id="cb110-5"><a href="html-tabellen.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="ot">-&gt;</span> coast</span></code></pre></div>
 </div>
-<div id="datenformatierung" class="section level2" number="10.3">
-<h2><span class="header-section-number">10.3</span> Datenformatierung</h2>
+<div id="datenformatierung" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Datenformatierung</h2>
 <p>Zur Datenformatierung nutzen wir Funktionen aus dem Paket <code>stringr</code>. Die Spalte mit der Küstenlänge soll keinen Text, keine Einheit direkt hinter den Zahlenwerten und keine Kommata zur Trennung der Zahlenwerte enthalten.</p>
 <p>Der Befehl <q>str_extract()</q> sucht nach vorgegebenen Mustern (engl. <em>patterns</em>) und wählt diese aus. Diese patterns werden auch reguläre Ausdrücke (<em>regular expressions / regex</em>) genannt und sind eigentlich <a href="https://danielfett.de/en/tutorials/tutorial-regulare-ausdrucke/">ein Thema für sich</a>. Das Pattern <code>[0-9,.]+ km</code> extrahiert die Kilometerangaben.</p>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="html-tabellen.html#cb111-1" aria-hidden="true" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(coast<span class="sc">$</span>Coastline, <span class="st">&quot;[0-9,.]+ km&quot;</span>)</span></code></pre></div>
@@ -395,8 +405,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb113-3"><a href="html-tabellen.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">&quot;[^0-9.]&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb113-4"><a href="html-tabellen.html#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>() <span class="ot">-&gt;</span> coast<span class="sc">$</span>coast_num</span></code></pre></div>
 </div>
-<div id="datenaufbereitung" class="section level2" number="10.4">
-<h2><span class="header-section-number">10.4</span> Datenaufbereitung</h2>
+<div id="datenaufbereitung" class="section level2" number="10.5">
+<h2><span class="header-section-number">10.5</span> Datenaufbereitung</h2>
 <p>Mit dem Befehl <code>arrange()</code> kann die Tabelle sortiert werden. Zunächst auftseigend,</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="html-tabellen.html#cb114-1" aria-hidden="true" tabindex="-1"></a>coast <span class="sc">%&gt;%</span></span>
 <span id="cb114-2"><a href="html-tabellen.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(coast_num)</span>
@@ -439,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb116-4"><a href="html-tabellen.html#cb116-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;World&quot;</span>, <span class="st">&quot;European Union&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb116-5"><a href="html-tabellen.html#cb116-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">30</span>) <span class="ot">-&gt;</span> top_30</span></code></pre></div>
 </div>
-<div id="datenvisualisierung" class="section level2" number="10.5">
-<h2><span class="header-section-number">10.5</span> Datenvisualisierung</h2>
+<div id="datenvisualisierung" class="section level2" number="10.6">
+<h2><span class="header-section-number">10.6</span> Datenvisualisierung</h2>
 <p>Das Balkendiagramm erhalten wir durch den <q>ggplot</q> Befehl. Hierbei gibt es verschiedenste Einstellmöglichkeiten. Wichitg sind vor allem die Angabe des verwendeten Datensatzes und die Art der Grafik (ob Kartendarstellung oder Balkendiagramm). Desweiteren kann man noch Farben der Eigenschaften, eine Achsenbeschriftung u. v. m. bestimmen.</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="html-tabellen.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_30, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Country, coast_num), <span class="at">y=</span>coast_num)) <span class="sc">+</span></span>
 <span id="cb117-2"><a href="html-tabellen.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="at">fill=</span><span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span></span>
@@ -449,8 +459,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb117-5"><a href="html-tabellen.html#cb117-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">&quot;Küstenlinie (km)&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 </div>
-<div id="aufgaben-5" class="section level2" number="10.6">
-<h2><span class="header-section-number">10.6</span> Aufgaben</h2>
+<div id="aufgaben-5" class="section level2" number="10.7">
+<h2><span class="header-section-number">10.7</span> Aufgaben</h2>
 <ol style="list-style-type: decimal">
 <li>Importieren Sie die Daten zu den <a href="https://en.wikipedia.org/wiki/List_of_deadly_earthquakes_since_1900">tödlichen Erdbeben auf Wikipedia</a>
 und formen sie diese zu einem tibble um.</li>
