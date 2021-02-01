@@ -2980,8 +2980,8 @@ Dem Browser kann man sagen: Zeig mir nicht wie üblich die „gerenderte`` Seite
 
 Viele Browser (hier seien Chrome und Firefox empfohlen) haben auch einen Modus namens „Entwicklertools`` / „Developer tools``, in dem die HTML-Elemente hierarchisch geordnet sind.
 
-\hypertarget{web-scraping-1}{%
-\subsection{Web Scraping}\label{web-scraping-1}}
+\hypertarget{seite-laden}{%
+\subsection{Seite laden}\label{seite-laden}}
 
 Beim so genannten Web Scraping ist die Grundidee, dass wir eine Webseite nicht im Browser öffnen, sondern den HTML-Quelltext direkt in R laden. R kann dann aus dem Quelltext bestimmte Elemente extrahieren.
 
@@ -3004,6 +3004,9 @@ Zunächst laden wir den Quelltext in R und nennen ihn \texttt{quelltext}:
 \end{Shaded}
 
 In diesem Schritt hat R den HTML-Quelltext schon ``geparsed'', d.h. ihn nicht nur als Text gespeichert, sondern als hierarchische Konstruktion mit den beiden Grundelementen \texttt{head} und \texttt{html}.
+
+\hypertarget{elemente-suchen}{%
+\subsection{Elemente suchen}\label{elemente-suchen}}
 
 Uns soll jetzt das Baujahr interessieren. Auf der Seite stehen die Informationen rechts neben dem Bild. Mit den Entwicklertools können wir schauen, wie die Elemente in HTML genau heißen. Ein geeigneter Ausgangspunkt wäre das \texttt{\textless{}div\textgreater{}}-Element mit dem Attribut \texttt{id="c599"}.
 
@@ -3070,7 +3073,12 @@ mit \texttt{html\_nodes()} (Mehrzahl) werden alle Unterelemente eines Typs (hier
 \end{Highlighting}
 \end{Shaded}
 
-Jetzt ließe sich der dritte Eintrag säubern und als Ergebnis ``speichern'':
+\hypertarget{elemente-reinigen}{%
+\subsection{Elemente reinigen}\label{elemente-reinigen}}
+
+Jetzt ließe sich der dritte Eintrag dieses Ergebnisvectors reinigen und als Ergebnis ``speichern''.
+
+Der Befehl \texttt{str\_extract()} wendet dabei einen Regulären Ausdruck an, der nach einer Folge von vier Zahlen sucht.
 
 \begin{Shaded}
 \begin{Highlighting}[]

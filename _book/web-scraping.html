@@ -271,8 +271,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1" data-path="web-scraping.html"><a href="web-scraping.html#lernziele-dieser-sitzung-4"><i class="fa fa-check"></i><b>11.1</b> Lernziele dieser Sitzung</a></li>
 <li class="chapter" data-level="11.2" data-path="web-scraping.html"><a href="web-scraping.html#vorbereitung-3"><i class="fa fa-check"></i><b>11.2</b> Vorbereitung</a></li>
 <li class="chapter" data-level="11.3" data-path="web-scraping.html"><a href="web-scraping.html#exkurs-html"><i class="fa fa-check"></i><b>11.3</b> Exkurs: HTML</a></li>
-<li class="chapter" data-level="11.4" data-path="web-scraping.html"><a href="web-scraping.html#web-scraping-1"><i class="fa fa-check"></i><b>11.4</b> Web Scraping</a></li>
-<li class="chapter" data-level="11.5" data-path="web-scraping.html"><a href="web-scraping.html#aufgaben-6"><i class="fa fa-check"></i><b>11.5</b> Aufgaben</a></li>
+<li class="chapter" data-level="11.4" data-path="web-scraping.html"><a href="web-scraping.html#seite-laden"><i class="fa fa-check"></i><b>11.4</b> Seite laden</a></li>
+<li class="chapter" data-level="11.5" data-path="web-scraping.html"><a href="web-scraping.html#elemente-suchen"><i class="fa fa-check"></i><b>11.5</b> Elemente suchen</a></li>
+<li class="chapter" data-level="11.6" data-path="web-scraping.html"><a href="web-scraping.html#elemente-reinigen"><i class="fa fa-check"></i><b>11.6</b> Elemente reinigen</a></li>
+<li class="chapter" data-level="11.7" data-path="web-scraping.html"><a href="web-scraping.html#aufgaben-6"><i class="fa fa-check"></i><b>11.7</b> Aufgaben</a></li>
 </ul></li>
 </ul>
 
@@ -327,8 +329,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Dem Browser kann man sagen: Zeig mir nicht wie üblich die „gerenderte“ Seite an, sondern die zu Grunde liegende HTML-Datei. Das geht mit „Quelltext anzeigen“ / „View Source“ o.ä.</p>
 <p>Viele Browser (hier seien Chrome und Firefox empfohlen) haben auch einen Modus namens „Entwicklertools“ / „Developer tools“, in dem die HTML-Elemente hierarchisch geordnet sind.</p>
 </div>
-<div id="web-scraping-1" class="section level2" number="11.4">
-<h2><span class="header-section-number">11.4</span> Web Scraping</h2>
+<div id="seite-laden" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> Seite laden</h2>
 <p>Beim so genannten Web Scraping ist die Grundidee, dass wir eine Webseite nicht im Browser öffnen, sondern den HTML-Quelltext direkt in R laden. R kann dann aus dem Quelltext bestimmte Elemente extrahieren.</p>
 <p>In der letzten Sitzung haben wir schon gesehen, wie Tabellen nach genau diesem Prinzip von einer Webseite direkt in R geladen werden können. Jetzt soll es darum gehen, noch präziser zu sagen, welche Elemente wir von einer bestimmten Webseite ziehen wollen.</p>
 <p>Als Beispiel soll die Infoseite eines Wohnheims des Studentenwerks Frankfurt dienen. Die Adresse ist: <a href="https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11" class="uri">https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11</a></p>
@@ -341,6 +343,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb123-6"><a href="web-scraping.html#cb123-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content= ...</span></span>
 <span id="cb123-7"><a href="web-scraping.html#cb123-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [2] &lt;body id=&quot;p187&quot; class=&quot;page-187 pagelevel-4 lang ...</span></span></code></pre></div>
 <p>In diesem Schritt hat R den HTML-Quelltext schon <q>geparsed</q>, d.h. ihn nicht nur als Text gespeichert, sondern als hierarchische Konstruktion mit den beiden Grundelementen <code>head</code> und <code>html</code>.</p>
+</div>
+<div id="elemente-suchen" class="section level2" number="11.5">
+<h2><span class="header-section-number">11.5</span> Elemente suchen</h2>
 <p>Uns soll jetzt das Baujahr interessieren. Auf der Seite stehen die Informationen rechts neben dem Bild. Mit den Entwicklertools können wir schauen, wie die Elemente in HTML genau heißen. Ein geeigneter Ausgangspunkt wäre das <code>&lt;div&gt;</code>-Element mit dem Attribut <code>id="c599"</code>.</p>
 <p>In R können wir dieses einzelne Element ansprechen mit:</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="web-scraping.html#cb124-1" aria-hidden="true" tabindex="-1"></a>quelltext <span class="sc">%&gt;%</span></span>
@@ -381,7 +386,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb127-7"><a href="web-scraping.html#cb127-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [2] &quot;25 Wohnheimplätze&quot;                           </span></span>
 <span id="cb127-8"><a href="web-scraping.html#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;Baujahr 1995\r&quot;                              </span></span>
 <span id="cb127-9"><a href="web-scraping.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [4] &quot;&quot;</span></span></code></pre></div>
-<p>Jetzt ließe sich der dritte Eintrag säubern und als Ergebnis <q>speichern</q>:</p>
+</div>
+<div id="elemente-reinigen" class="section level2" number="11.6">
+<h2><span class="header-section-number">11.6</span> Elemente reinigen</h2>
+<p>Jetzt ließe sich der dritte Eintrag dieses Ergebnisvectors reinigen und als Ergebnis <q>speichern</q>.</p>
+<p>Der Befehl <code>str_extract()</code> wendet dabei einen Regulären Ausdruck an, der nach einer Folge von vier Zahlen sucht.</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="web-scraping.html#cb128-1" aria-hidden="true" tabindex="-1"></a>quelltext <span class="sc">%&gt;%</span></span>
 <span id="cb128-2"><a href="web-scraping.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div#c599&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb128-3"><a href="web-scraping.html#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div.frame-inner&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -395,8 +404,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb128-11"><a href="web-scraping.html#cb128-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1995</span></span></code></pre></div>
 <p>Wie diese Technik automatisiert auf eine Reihe von Seiten angewendet werden kann, wird zu einem späteren Zeitpunkt besprochen.</p>
 </div>
-<div id="aufgaben-6" class="section level2" number="11.5">
-<h2><span class="header-section-number">11.5</span> Aufgaben</h2>
+<div id="aufgaben-6" class="section level2" number="11.7">
+<h2><span class="header-section-number">11.7</span> Aufgaben</h2>
 <ol style="list-style-type: decimal">
 <li><p>Lesen Sie die Anzahl der Wohnheimplätze aus.</p></li>
 <li><p>Lesen Sie Baujahr und Anzahl der Wohnheimplätze von einem anderen Wohnheim aus. Was muss angepasst werden?</p></li>
