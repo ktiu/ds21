@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Sitzung 9 Text: Chandra 2014 | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <title>Sitzung 11 Web scraping | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
   <meta name="description" content="Projektseminar" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Sitzung 9 Text: Chandra 2014 | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:title" content="Sitzung 11 Web scraping | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Sitzung 9 Text: Chandra 2014 | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta name="twitter:title" content="Sitzung 11 Web scraping | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
   
   <meta name="twitter:description" content="Projektseminar" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="choroplethen.html"/>
-<link rel="next" href="html-tabellen.html"/>
+<link rel="prev" href="html-tabellen.html"/>
+
 <script src="assets/header-attrs-2.5/header-attrs.js"></script>
 <script src="assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -291,34 +291,120 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="text-chandra-2014" class="section level1" number="9">
-<h1><span class="header-section-number">Sitzung 9</span> Text: Chandra 2014</h1>
-<div id="lesetext-2" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> Lesetext</h2>
-<p>Chandra, Vikram. 2014. <em>Geek Sublime: The Beauty of Code, the Code of Beauty.</em> Graywolf Press, Minneapolis.</p>
-<p>Daraus:</p>
+<div id="web-scraping" class="section level1" number="11">
+<h1><span class="header-section-number">Sitzung 11</span> Web scraping</h1>
+<div id="lernziele-dieser-sitzung-4" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Lernziele dieser Sitzung</h2>
+<p>Sie können…</p>
 <ul>
-<li>Kapitel 1: Hello, World! (S. 1–8)</li>
-<li>Kapitel 3: The Language of Logic (S. 19–40)</li>
+<li>HTML in seiner Grundstruktur interpretieren.</li>
+<li>gezielt einzelne Elemente einer Seite mit R auslesen.</li>
 </ul>
 </div>
-<div id="fragen-an-den-text-2" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> Fragen an den Text</h2>
+<div id="vorbereitung-3" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Vorbereitung</h2>
+<p>Für diese Lektion werden die Pakete benötigt:</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="web-scraping.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb121-2"><a href="web-scraping.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span></code></pre></div>
+</div>
+<div id="exkurs-html" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Exkurs: HTML</h2>
+<p>Wenn man eine Webseite ganz normal in einem Browser aufruft, erscheint sie als eine Mischung aus formatiertem Text, Bildern, Designelementen, ggf. Videos, usw. Was aber im Hintergrund eigentlich vom Server an den Browser übertragen wird, ist eine Textdatei in einem bestimmten Format – HTML (Hyptertext Markup Language). Darin wird Text auf eine genau festgelegte Art und Weise annotiert, damit der Browser weiß, wie er ihn anzeigen soll. Im HTML-Dokument kann auch stehen: Lade ein Bild von einer bestimmten Stelle und zeig es an dieser Stelle an.</p>
+<p>Einen brauchbaren Überblick über die HTML-Elemente und die Struktur einer HTML-Datei gibt es hier: <a href="https://www.tutorialspoint.com/de/html/" class="uri">https://www.tutorialspoint.com/de/html/</a></p>
+<p>An dieser Stelle ist wichtig ist zu wissen: HTML-Elemente (<q>Tags</q> oder <q>Nodes</q>) sind streng hierarchisch angeordnet. Sie bestehen oft aus einem Anfangs- und einem End-Tag in spitzen Klammern:</p>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Titel meiner Webseite&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Überschrift&lt;/h1&gt;
+    &lt;p&gt;Erster Absatz mit &lt;b&gt;fettem Text&lt;/b&gt;&lt;/p&gt;
+    &lt;p&gt;Zweiter Absatz mit &lt;i&gt;kursivem Text&lt;/i&gt;&lt;/p&gt;
+    &lt;img src=&quot;path/to/image.jpg alt=&quot;Ein Bild&quot; /&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>In diesem Beispiel ist das Bild mit <code>&lt;img /&gt;</code> das einzige Element, das nicht geöffnet und wieder geschlossen wird. Außerdem hat dieses Element Attribute (<code>src</code> und <code>alt</code>) mit bestimmten Werten. Eine echte Webseite ist weitaus komplexer und unübersichtlicher.</p>
+<p>Dem Browser kann man sagen: Zeig mir nicht wie üblich die „gerenderte“ Seite an, sondern die zu Grunde liegende HTML-Datei. Das geht mit „Quelltext anzeigen“ / „View Source“ o.ä.</p>
+<p>Viele Browser (hier seien Chrome und Firefox empfohlen) haben auch einen Modus namens „Entwicklertools“ / „Developer tools“, in dem die HTML-Elemente hierarchisch geordnet sind.</p>
+</div>
+<div id="web-scraping-1" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> Web Scraping</h2>
+<p>Beim so genannten Web Scraping ist die Grundidee, dass wir eine Webseite nicht im Browser öffnen, sondern den HTML-Quelltext direkt in R laden. R kann dann aus dem Quelltext bestimmte Elemente extrahieren.</p>
+<p>In der letzten Sitzung haben wir schon gesehen, wie Tabellen nach genau diesem Prinzip von einer Webseite direkt in R geladen werden können. Jetzt soll es darum gehen, noch präziser zu sagen, welche Elemente wir von einer bestimmten Webseite ziehen wollen.</p>
+<p>Als Beispiel soll die Infoseite eines Wohnheims des Studentenwerks Frankfurt dienen. Die Adresse ist: <a href="https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11" class="uri">https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11</a></p>
+<p>Zunächst laden wir den Quelltext in R und nennen ihn <code>quelltext</code>:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="web-scraping.html#cb123-1" aria-hidden="true" tabindex="-1"></a>quelltext <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">&quot;https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11&quot;</span>)</span>
+<span id="cb123-2"><a href="web-scraping.html#cb123-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-3"><a href="web-scraping.html#cb123-3" aria-hidden="true" tabindex="-1"></a>quelltext</span>
+<span id="cb123-4"><a href="web-scraping.html#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="do">## {html_document}</span></span>
+<span id="cb123-5"><a href="web-scraping.html#cb123-5" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;html lang=&quot;de&quot; dir=&quot;ltr&quot; class=&quot;no-js&quot;&gt;</span></span>
+<span id="cb123-6"><a href="web-scraping.html#cb123-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &lt;head&gt;\n&lt;meta http-equiv=&quot;Content-Type&quot; content= ...</span></span>
+<span id="cb123-7"><a href="web-scraping.html#cb123-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [2] &lt;body id=&quot;p187&quot; class=&quot;page-187 pagelevel-4 lang ...</span></span></code></pre></div>
+<p>In diesem Schritt hat R den HTML-Quelltext schon <q>geparsed</q>, d.h. ihn nicht nur als Text gespeichert, sondern als hierarchische Konstruktion mit den beiden Grundelementen <code>head</code> und <code>html</code>.</p>
+<p>Uns soll jetzt das Baujahr interessieren. Auf der Seite stehen die Informationen rechts neben dem Bild. Mit den Entwicklertools können wir schauen, wie die Elemente in HTML genau heißen. Ein geeigneter Ausgangspunkt wäre das <code>&lt;div&gt;</code>-Element mit dem Attribut <code>id="c599"</code>.</p>
+<p>In R können wir dieses einzelne Element ansprechen mit:</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="web-scraping.html#cb124-1" aria-hidden="true" tabindex="-1"></a>quelltext <span class="sc">%&gt;%</span></span>
+<span id="cb124-2"><a href="web-scraping.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div#c599&quot;</span>)</span>
+<span id="cb124-3"><a href="web-scraping.html#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="do">## {html_node}</span></span>
+<span id="cb124-4"><a href="web-scraping.html#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;div id=&quot;c599&quot; class=&quot;frame frame-default frame-type-text frame-layout-0 frame-background-none frame-no-backgroundimage frame-space-before-none frame-space-after-none&quot;&gt;</span></span>
+<span id="cb124-5"><a href="web-scraping.html#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &lt;div class=&quot;frame-container&quot;&gt;&lt;div class=&quot;frame-i ...</span></span></code></pre></div>
+<p>Dann gehen wir in der Hierarchie drei <code>&lt;div&gt;</code>- Elemente „tiefer“. (<code>&lt;div&gt;</code>- Elemente sind abstrakte Container und werden im Webdesign oft angewendet.)</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="web-scraping.html#cb125-1" aria-hidden="true" tabindex="-1"></a>quelltext <span class="sc">%&gt;%</span></span>
+<span id="cb125-2"><a href="web-scraping.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div#c599&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb125-3"><a href="web-scraping.html#cb125-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb125-4"><a href="web-scraping.html#cb125-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div&quot;</span>)</span>
+<span id="cb125-5"><a href="web-scraping.html#cb125-5" aria-hidden="true" tabindex="-1"></a><span class="do">## {html_node}</span></span>
+<span id="cb125-6"><a href="web-scraping.html#cb125-6" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;div class=&quot;frame-inner&quot;&gt;</span></span>
+<span id="cb125-7"><a href="web-scraping.html#cb125-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &lt;p&gt;Kleine Seestraße 11&lt;br&gt;60486 Frankfurt am Mai ...</span></span>
+<span id="cb125-8"><a href="web-scraping.html#cb125-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [2] &lt;p&gt;25 Wohnheimplätze&lt;/p&gt;\n</span></span>
+<span id="cb125-9"><a href="web-scraping.html#cb125-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &lt;ul class=&quot;list-normal&quot;&gt;\n&lt;li&gt;5 Wohnküchen&lt;/li&gt;\ ...</span></span>
+<span id="cb125-10"><a href="web-scraping.html#cb125-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [4] &lt;p&gt;Baujahr&lt;strong&gt; &lt;/strong&gt;1995\r&lt;/p&gt;\n</span></span>
+<span id="cb125-11"><a href="web-scraping.html#cb125-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [5] &lt;p&gt;&lt;strong&gt;&lt;/strong&gt;&lt;/p&gt;</span></span></code></pre></div>
+<p>Alternativ könnten wir auch sagen: Darin das <code>div</code> mit <code>class="frame-inner"</code>:</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="web-scraping.html#cb126-1" aria-hidden="true" tabindex="-1"></a>quelltext <span class="sc">%&gt;%</span></span>
+<span id="cb126-2"><a href="web-scraping.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div#c599&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb126-3"><a href="web-scraping.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div.frame-inner&quot;</span>)</span>
+<span id="cb126-4"><a href="web-scraping.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="do">## {html_node}</span></span>
+<span id="cb126-5"><a href="web-scraping.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;div class=&quot;frame-inner&quot;&gt;</span></span>
+<span id="cb126-6"><a href="web-scraping.html#cb126-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &lt;p&gt;Kleine Seestraße 11&lt;br&gt;60486 Frankfurt am Mai ...</span></span>
+<span id="cb126-7"><a href="web-scraping.html#cb126-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [2] &lt;p&gt;25 Wohnheimplätze&lt;/p&gt;\n</span></span>
+<span id="cb126-8"><a href="web-scraping.html#cb126-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &lt;ul class=&quot;list-normal&quot;&gt;\n&lt;li&gt;5 Wohnküchen&lt;/li&gt;\ ...</span></span>
+<span id="cb126-9"><a href="web-scraping.html#cb126-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [4] &lt;p&gt;Baujahr&lt;strong&gt; &lt;/strong&gt;1995\r&lt;/p&gt;\n</span></span>
+<span id="cb126-10"><a href="web-scraping.html#cb126-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [5] &lt;p&gt;&lt;strong&gt;&lt;/strong&gt;&lt;/p&gt;</span></span></code></pre></div>
+<p>mit <code>html_nodes()</code> (Mehrzahl) werden alle Unterelemente eines Typs (hier <code>&lt;p&gt;</code> = Paragraph) angesprochen. Davon dann den Textinhalt (<code>html_text()</code>) gibt uns die relevanten Informationen:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="web-scraping.html#cb127-1" aria-hidden="true" tabindex="-1"></a>quelltext <span class="sc">%&gt;%</span></span>
+<span id="cb127-2"><a href="web-scraping.html#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div#c599&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb127-3"><a href="web-scraping.html#cb127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div.frame-inner&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb127-4"><a href="web-scraping.html#cb127-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;p&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb127-5"><a href="web-scraping.html#cb127-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb127-6"><a href="web-scraping.html#cb127-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;Kleine Seestraße 1160486 Frankfurt am Main\r&quot;</span></span>
+<span id="cb127-7"><a href="web-scraping.html#cb127-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [2] &quot;25 Wohnheimplätze&quot;                           </span></span>
+<span id="cb127-8"><a href="web-scraping.html#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;Baujahr 1995\r&quot;                              </span></span>
+<span id="cb127-9"><a href="web-scraping.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [4] &quot;&quot;</span></span></code></pre></div>
+<p>Jetzt ließe sich der dritte Eintrag säubern und als Ergebnis <q>speichern</q>:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="web-scraping.html#cb128-1" aria-hidden="true" tabindex="-1"></a>quelltext <span class="sc">%&gt;%</span></span>
+<span id="cb128-2"><a href="web-scraping.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div#c599&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb128-3"><a href="web-scraping.html#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;div.frame-inner&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb128-4"><a href="web-scraping.html#cb128-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;p&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb128-5"><a href="web-scraping.html#cb128-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb128-6"><a href="web-scraping.html#cb128-6" aria-hidden="true" tabindex="-1"></a>  .[<span class="dv">3</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb128-7"><a href="web-scraping.html#cb128-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">&quot;[0-9]{4}&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb128-8"><a href="web-scraping.html#cb128-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>() <span class="ot">-&gt;</span> baujahr</span>
+<span id="cb128-9"><a href="web-scraping.html#cb128-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-10"><a href="web-scraping.html#cb128-10" aria-hidden="true" tabindex="-1"></a>baujahr</span>
+<span id="cb128-11"><a href="web-scraping.html#cb128-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1995</span></span></code></pre></div>
+<p>Wie diese Technik automatisiert auf eine Reihe von Seiten angewendet werden kann, wird zu einem späteren Zeitpunkt besprochen.</p>
+</div>
+<div id="aufgaben-6" class="section level2" number="11.5">
+<h2><span class="header-section-number">11.5</span> Aufgaben</h2>
 <ol style="list-style-type: decimal">
-<li>Um welche Art von Text handelt es sich? Wer ist der Autor, und an wen wendet er sich?</li>
-<li>Was ist <q>literate programming</q>, und was könnte das in R konkret bedeuten?</li>
-<li>Auf S. 37 ist die Rede von <q>our journey down the stack of languages</q>. Was ist damit gemeint?</li>
-<li>Was findet der Autor an Code und Computern so faszinierend? Wo können Sie das nachvollziehen, und wo nicht?</li>
+<li><p>Lesen Sie die Anzahl der Wohnheimplätze aus.</p></li>
+<li><p>Lesen Sie Baujahr und Anzahl der Wohnheimplätze von einem anderen Wohnheim aus. Was muss angepasst werden?</p></li>
+<li><p>Ändern Sie das Script so, dass es auf beiden (allen) Wohnheimseiten funktioniert.</p></li>
+<li><p>Lesen Sie die Adresse eines Wohnheims aus. Speichern Sie dabei Straße, Hausnummer, Postleitzahl und Ort getrennt.</p></li>
+<li><p>Sammeln Sie eine Liste aller Wohnheime mit Link.</p></li>
+<li><p>Sammeln Sie einen Datensatz (tibble) aller <q>Nutzungsentgelte</q> mit Wohnheim, Baujahr, Anzahl Wohneinheiten und Adresse. Stellen Sie sich vor es handle sich um Tausende Wohnheime – vermeiden Sie also Copy-Paste-Strategien.</p></li>
 </ol>
-</div>
-<div id="themenfindung" class="section level2" number="9.3">
-<h2><span class="header-section-number">9.3</span> Themenfindung</h2>
-<ul>
-<li>Bereiten Sie <em>ein</em> Thema vor, zu dem Sie sich vorstellen könnten im Sommer zu arbeiten.</li>
-<li>Achten Sie darauf, dass das Thema nicht zu allgemein ist (<q>Finanzmarkt</q>) aber auch nicht zu speziell (<q>Zusammenhang zwischen Quadratmeterzahl und Mietpreis für Ladenflächen in Ginnheim</q>).</li>
-<li>Es wird in einem nächsten Schritt darum gehen, interessante Datenquellen zu finden (vielleicht haben Sie schon eine Idee?) und einer Fragestellung näher zu kommen.</li>
-<li>Sie werden die Themen kurz vorstellen um Überschneidungen zu identifizieren und ggf. Gruppen zu bilden (wenn gewünscht).</li>
-</ul>
 
 </div>
 </div>
@@ -327,8 +413,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="choroplethen.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="html-tabellen.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="html-tabellen.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -359,7 +445,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ktiu/ds21/edit/master/09_text_chandra_2014.Rmd",
+"link": "https://github.com/ktiu/ds21/edit/master/11_web_scraping.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -367,7 +453,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/ktiu/ds21/blob/master/09_text_chandra_2014.Rmd",
+"link": "https://github.com/ktiu/ds21/blob/master/11_web_scraping.Rmd",
 "text": null
 },
 "download": ["_main.pdf"],

@@ -1,0 +1,130 @@
+# Web scraping
+
+## Lernziele dieser Sitzung
+
+Sie können...
+
+- HTML in seiner Grundstruktur interpretieren.
+- gezielt einzelne Elemente einer Seite mit R auslesen.
+
+## Vorbereitung
+
+Für diese Lektion werden die Pakete benötigt:
+
+```{r, message=F}
+library(tidyverse)
+library(rvest)
+```
+
+## Exkurs: HTML
+
+Wenn man eine Webseite ganz normal in einem Browser aufruft, erscheint sie als eine Mischung aus formatiertem Text, Bildern, Designelementen, ggf. Videos, usw. Was aber im Hintergrund eigentlich vom Server an den Browser übertragen wird, ist eine Textdatei in einem bestimmten Format -- HTML (Hyptertext Markup Language). Darin wird Text auf eine genau festgelegte Art und Weise annotiert, damit der Browser weiß, wie er ihn anzeigen soll. Im HTML-Dokument kann auch stehen: Lade ein Bild von einer bestimmten Stelle und zeig es an dieser Stelle an.
+
+Einen brauchbaren Überblick über die HTML-Elemente und die Struktur einer HTML-Datei gibt es hier: https://www.tutorialspoint.com/de/html/
+
+An dieser Stelle ist wichtig ist zu wissen: HTML-Elemente ("Tags" oder "Nodes") sind streng hierarchisch angeordnet. Sie bestehen oft aus einem Anfangs- und einem End-Tag in spitzen Klammern:
+
+```
+<html>
+  <head>
+    <title>Titel meiner Webseite</title>
+  </head>
+  <body>
+    <h1>Überschrift</h1>
+    <p>Erster Absatz mit <b>fettem Text</b></p>
+    <p>Zweiter Absatz mit <i>kursivem Text</i></p>
+    <img src="path/to/image.jpg alt="Ein Bild" />
+  </body>
+</html>
+```
+
+In diesem Beispiel ist das Bild mit `<img />` das einzige Element, das nicht geöffnet und wieder geschlossen wird. Außerdem hat dieses Element Attribute (`src` und `alt`) mit bestimmten Werten. Eine echte Webseite ist weitaus komplexer und unübersichtlicher.
+
+Dem Browser kann man sagen: Zeig mir nicht wie üblich die „gerenderte“ Seite an, sondern die zu Grunde liegende HTML-Datei. Das geht mit „Quelltext anzeigen“ / „View Source“ o.ä.
+
+Viele Browser (hier seien Chrome und Firefox empfohlen) haben auch einen Modus namens „Entwicklertools“ / „Developer tools“, in dem die HTML-Elemente hierarchisch geordnet sind.
+
+## Web Scraping
+
+Beim so genannten Web Scraping ist die Grundidee, dass wir eine Webseite nicht im Browser öffnen, sondern den HTML-Quelltext direkt in R laden. R kann dann aus dem Quelltext bestimmte Elemente extrahieren.
+
+In der letzten Sitzung haben wir schon gesehen, wie Tabellen nach genau diesem Prinzip von einer Webseite direkt in R geladen werden können. Jetzt soll es darum gehen, noch präziser zu sagen, welche Elemente wir von einer bestimmten Webseite ziehen wollen.
+
+Als Beispiel soll die Infoseite eines Wohnheims des Studentenwerks Frankfurt dienen. Die Adresse ist: https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11
+
+Zunächst laden wir den Quelltext in R und nennen ihn `quelltext`:
+
+```{r}
+quelltext <- read_html("https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11")
+
+quelltext
+```
+
+In diesem Schritt hat R den HTML-Quelltext schon "geparsed", d.h. ihn nicht nur als Text gespeichert, sondern als hierarchische Konstruktion mit den beiden Grundelementen `head` und `html`.
+
+Uns soll jetzt das Baujahr interessieren. Auf der Seite stehen die Informationen rechts neben dem Bild. Mit den Entwicklertools können wir schauen, wie die Elemente in HTML genau heißen. Ein geeigneter Ausgangspunkt wäre das `<div>`-Element mit dem Attribut `id="c599"`.
+
+In R können wir dieses einzelne Element ansprechen mit:
+
+```{r}
+quelltext %>%
+  html_node("div#c599")
+```
+
+Dann gehen wir in der Hierarchie drei `<div>`- Elemente „tiefer“. (`<div>`- Elemente sind abstrakte Container und werden im Webdesign oft angewendet.)
+
+```{r}
+quelltext %>%
+  html_node("div#c599") %>%
+  html_node("div") %>%
+  html_node("div")
+```
+
+Alternativ könnten wir auch sagen: Darin das `div` mit `class="frame-inner"`:
+
+```{r}
+quelltext %>%
+  html_node("div#c599") %>%
+  html_node("div.frame-inner")
+```
+
+mit `html_nodes()` (Mehrzahl) werden alle Unterelemente eines Typs (hier `<p>` = Paragraph) angesprochen. Davon dann den Textinhalt (`html_text()`) gibt uns die relevanten Informationen:
+
+```{r}
+quelltext %>%
+  html_node("div#c599") %>%
+  html_node("div.frame-inner") %>%
+  html_nodes("p") %>%
+  html_text()
+```
+
+Jetzt ließe sich der dritte Eintrag säubern und als Ergebnis "speichern":
+
+```{r}
+quelltext %>%
+  html_node("div#c599") %>%
+  html_node("div.frame-inner") %>%
+  html_nodes("p") %>%
+  html_text() %>%
+  .[3] %>%
+  str_extract("[0-9]{4}") %>%
+  as.numeric() -> baujahr
+
+baujahr
+```
+
+Wie diese Technik automatisiert auf eine Reihe von Seiten angewendet werden kann, wird zu einem späteren Zeitpunkt besprochen.
+
+## Aufgaben
+
+1. Lesen Sie die Anzahl der Wohnheimplätze aus.
+
+2. Lesen Sie Baujahr und Anzahl der Wohnheimplätze von einem anderen Wohnheim aus. Was muss angepasst werden?
+
+3. Ändern Sie das Script so, dass es auf beiden (allen) Wohnheimseiten funktioniert.
+
+4. Lesen Sie die Adresse eines Wohnheims aus. Speichern Sie dabei Straße, Hausnummer, Postleitzahl und Ort getrennt. 
+
+5. Sammeln Sie eine Liste aller Wohnheime mit Link.
+
+6. Sammeln Sie einen Datensatz (tibble) aller "Nutzungsentgelte" mit Wohnheim, Baujahr, Anzahl Wohneinheiten und Adresse. Stellen Sie sich vor es handle sich um Tausende Wohnheime -- vermeiden Sie also Copy-Paste-Strategien.
