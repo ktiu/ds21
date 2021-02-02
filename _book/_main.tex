@@ -5,7 +5,7 @@
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
+  \usepackage[utf8x]{inputenc}
 \else % if luatex or xelatex
   \ifxetex
     \usepackage{mathspec}
@@ -303,7 +303,7 @@ Datum & Sitzung & Inhalt \\
 18. Januar 2021 & 9 & \protect\hyperlink{text-chandra-2014}{Text: Chandra 2014} \\
 25. Januar 2021 & 10 & \protect\hyperlink{html-tabellen}{HTML-Tabellen} \\
 1. Februar 2021 & 11 & \protect\hyperlink{web-scraping}{Web scraping} \\
-8. Februar 2021 & 12 & Text: Straube 2021 \\
+8. Februar 2021 & 12 & \protect\hyperlink{text-straube-2021}{Text: Straube 2021} \\
 15. Februar 2021 & 13 & Präsentationen \\
 \emph{31. März 2021} & & \emph{Abgabe Exposé} \\
 \bottomrule
@@ -378,6 +378,9 @@ Datum & Sitzung & Inhalt \\
   \textbf{Tutorial Reguläre Ausdrücke}\\
   \url{https://danielfett.de/en/tutorials/tutorial-regulare-ausdrucke/}~\\
   Deutschsprachige Einführung zu regulären Ausdrücken
+\item
+  \textbf{Übersicht CSS-Selektoren}\\
+  \url{https://www.w3schools.com/cssref/css_selectors.asp}
 \end{itemize}
 
 \hypertarget{vorbesprechung}{%
@@ -2942,7 +2945,7 @@ Sie können\ldots{}
 \hypertarget{vorbereitung-3}{%
 \subsection{Vorbereitung}\label{vorbereitung-3}}
 
-Für diese Lektion werden die Pakete benötigt:
+Für diese Lektion werden folgende Pakete benötigt:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3103,18 +3106,293 @@ Wie diese Technik automatisiert auf eine Reihe von Seiten angewendet werden kann
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   Lesen Sie die Anzahl der Wohnheimplätze aus.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quelltext}
+\DocumentationTok{\#\# \{html\_document\}}
+\DocumentationTok{\#\# \textless{}html lang="de" dir="ltr" class="no{-}js"\textgreater{}}
+\DocumentationTok{\#\# [1] \textless{}head\textgreater{}\textbackslash{}n\textless{}meta http{-}equiv="Content{-}Type" content= ...}
+\DocumentationTok{\#\# [2] \textless{}body id="p187" class="page{-}187 pagelevel{-}4 lang ...}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{quelltext }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div\#c599"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div.frame{-}inner"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"[0{-}9]+"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.numeric}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ anzahl\_plaetze}
+
+\NormalTok{anzahl\_plaetze}
+\DocumentationTok{\#\# [1] 25}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
 \item
   Lesen Sie Baujahr und Anzahl der Wohnheimplätze von einem anderen Wohnheim aus. Was muss angepasst werden?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# z.B.: https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/wiesbaden/max{-}kade{-}haus{-}adolfsallee{-}49{-}53}
+
+\StringTok{"https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/wiesbaden/max{-}kade{-}haus{-}adolfsallee{-}49{-}53"} \SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{read\_html}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ quelltext\_wi}
+
+\CommentTok{\# Baujahr nicht vorhanden!}
+\NormalTok{baujahr\_wi }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+
+\NormalTok{quelltext\_wi }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div\#c1563"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Auf dieser Seite ist es eine andere div{-}ID!}
+  \CommentTok{\# Außerdem: Appartment = Platz? Scheint aber so zu sein...}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div.frame{-}inner"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"[0{-}9]+"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.numeric}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ anzahl\_plaetze\_wi}
+
+\NormalTok{anzahl\_plaetze\_wi}
+\DocumentationTok{\#\# [1] 87}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
 \item
   Ändern Sie das Script so, dass es auf beiden (allen) Wohnheimseiten funktioniert.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Hier kann (hoffentlich) auch jede andere Wohnheim{-}URL eingesetzt werden.}
+\StringTok{"https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt{-}am{-}main/kleine{-}seestrasse{-}11"} \SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{read\_html}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ quelltext\_x}
+
+\NormalTok{quelltext\_x }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# So funktioniert es unabhänging von ID:}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div.wohnheim{-}2 \textgreater{} div:nth{-}child(2)"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ items}
+
+\NormalTok{items[}\DecValTok{3}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"[0{-}9]\{4\}"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.numeric}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ baujahr\_x}
+
+\NormalTok{items[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Funktioniert leider nicht bei der getrennten Angabe mehrerer Kategorien:}
+  \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"[0{-}9]+"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.numeric}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ anzahl\_plaetze\_x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
 \item
   Lesen Sie die Adresse eines Wohnheims aus. Speichern Sie dabei Straße, Hausnummer, Postleitzahl und Ort getrennt.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Wie in Aufgabe 5 ersichtlich lassen sich die beiden Adresszeilen eigentlich}
+\CommentTok{\# recht einfach aus der Übersichtsseite auslesen.}
+
+\CommentTok{\# Eine Schwierigkeit beim Auslesen aus der Einzelseite liegt darin, dass die}
+\CommentTok{\# Funktion html\_text() den Zeilenumbruch \textless{}br\textgreater{} "verschluckt". Die neueste Version}
+\CommentTok{\# von rvest beinhaltet die Funktion html\_text2(), die genau dieses Probem löst.}
+
+\CommentTok{\# Die neue Version kann installiert werden mit:}
+\CommentTok{\# install.packages("devtools")}
+\CommentTok{\# devtools::install\_github("tidyverse/rvest")}
+\CommentTok{\# (Danach R neu starten)}
+
+\NormalTok{quelltext\_x }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div.wohnheim{-}2 \textgreater{} div:nth{-}child(2)"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text2}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{trimws}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_split}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .[[}\DecValTok{1}\NormalTok{]] }\OtherTok{{-}\textgreater{}}\NormalTok{ adresse}
+
+\CommentTok{\# Die Hausnummer sind die Zahlen am Ende der ersten Zeile:}
+\NormalTok{adresse[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"[{-}0{-}9]+$"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ hausnummer }\CommentTok{\# Funktioniert aber nicht bei 1b u.ä...}
+
+\CommentTok{\# Die Straße ist der Rest:}
+\NormalTok{adresse[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_remove}\NormalTok{(}\StringTok{" [0{-}9]+$"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ strasse}
+
+\CommentTok{\# Die PLZ sind die 5 Zahlen am Anfang der zweiten Zeile:}
+\NormalTok{adresse[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"\^{}[0{-}9]\{5\}"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ plz}
+
+\CommentTok{\# Der Ort ist der Rest:}
+\NormalTok{adresse[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{str\_remove}\NormalTok{(}\StringTok{"\^{}[0{-}9]\{5\} "}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ ort}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
 \item
   Sammeln Sie eine Liste aller Wohnheime mit Link.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"https://www.studentenwerkfrankfurt.de/wohnen/wohnheime"} \SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{read\_html}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"div.thumbnail"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ items}
+
+\NormalTok{items }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"a"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_attr}\NormalTok{(}\StringTok{"href"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ links}
+
+\NormalTok{items }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"h4"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  html\_text }\OtherTok{{-}\textgreater{}}\NormalTok{ strasse\_nr}
+
+\NormalTok{items }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ plz\_ort}
+
+\FunctionTok{tibble}\NormalTok{(links, strasse\_nr, plz\_ort) }\OtherTok{{-}\textgreater{}}\NormalTok{ index}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
 \item
-  Sammeln Sie einen Datensatz (tibble) aller ``Nutzungsentgelte'' mit Wohnheim, Baujahr, Anzahl Wohneinheiten und Adresse. Stellen Sie sich vor es handle sich um Tausende Wohnheime -- vermeiden Sie also Copy-Paste-Strategien.
+  Sammeln Sie einen Datensatz (tibble) aller ``Nutzungsentgelte'' mit Wohnheim, Baujahr, Anzahl Wohneinheiten und Adresse. Stellen Sie sich vor, es handelte sich um Tausende Wohnheime -- vermeiden Sie also Copy-Paste-Strategien.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Hierfür gibt es einige Strategien. Meine präferierte Variante erfordert}
+\CommentTok{\# zunächst eine eigene Funktion, die eine URL nimmt und die gewünschten}
+\CommentTok{\# Informationen ausgibt:}
+
+\NormalTok{scrape }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(url) \{}
+\NormalTok{  url }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    read\_html }\OtherTok{{-}\textgreater{}}\NormalTok{ quelltext}
+
+\NormalTok{  quelltext }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_table}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{last}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \CommentTok{\# Die Größe soll immer ein String sein, weil es sonst später Probeme gibt:}
+    \FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Größe m²}\StringTok{\textasciigrave{}} \OtherTok{=} \FunctionTok{as.character}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Größe m²}\StringTok{\textasciigrave{}}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ Nutzungsentgelte}
+
+\NormalTok{  quelltext }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div.wohnheim{-}2 \textgreater{} div:nth{-}child(2)"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"p"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ items}
+
+\NormalTok{  items[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_text2}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{trimws}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{str\_split}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    .[[}\DecValTok{1}\NormalTok{]] }\OtherTok{{-}\textgreater{}}\NormalTok{ adresse}
+  
+\NormalTok{  Nutzungsentgelte}\SpecialCharTok{$}\NormalTok{strasse }\OtherTok{\textless{}{-}}\NormalTok{ adresse[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  Nutzungsentgelte}\SpecialCharTok{$}\NormalTok{ort }\OtherTok{\textless{}{-}}\NormalTok{ adresse[}\DecValTok{2}\NormalTok{]}
+     
+\NormalTok{  items[}\DecValTok{3}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_text}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"[0{-}9]\{4\}"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{as.numeric}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ Nutzungsentgelte}\SpecialCharTok{$}\NormalTok{baujahr}
+  
+\NormalTok{  items[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_text}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{str\_extract}\NormalTok{(}\StringTok{"[0{-}9]+"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{as.numeric}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ Nutzungsentgelte}\SpecialCharTok{$}\NormalTok{anzahl\_plaetze}
+  
+  \FunctionTok{return}\NormalTok{(Nutzungsentgelte)}
+\NormalTok{\}}
+
+\CommentTok{\# Dann kann ich die eigene Funktion "scrape" auf alle Links anwenden. Das}
+\CommentTok{\# Ergebnis ist eine Liste von Tibbles. Die lässt sich schließlich noch}
+\CommentTok{\# kombinieren:}
+
+\NormalTok{index}\SpecialCharTok{$}\NormalTok{links }\SpecialCharTok{\%\textgreater{}\%}
+ \FunctionTok{paste0}\NormalTok{(}\StringTok{"https://www.studentenwerkfrankfurt.de"}\NormalTok{, .) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(scrape) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{do.call}\NormalTok{(bind\_rows, .) }\OtherTok{{-}\textgreater{}}\NormalTok{ liste}
+
+\NormalTok{liste}
+\DocumentationTok{\#\# \# A tibble: 133 x 8}
+\DocumentationTok{\#\#    Art   \textasciigrave{}Größe m²\textasciigrave{} Ausstattung \textasciigrave{}EUR*\textasciigrave{} strasse ort  }
+\DocumentationTok{\#\#    \textless{}chr\textgreater{} \textless{}chr\textgreater{}      \textless{}chr\textgreater{}       \textless{}chr\textgreater{}  \textless{}chr\textgreater{}   \textless{}chr\textgreater{}}
+\DocumentationTok{\#\#  1 "Ein\textasciitilde{} "16"       "unmöblier\textasciitilde{} "250,\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}}
+\DocumentationTok{\#\#  2 "Ein\textasciitilde{} "18{-}20"    "unmöblier\textasciitilde{} "311,\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}}
+\DocumentationTok{\#\#  3 "Ein\textasciitilde{} "24"       "barrieref\textasciitilde{} "295,\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}}
+\DocumentationTok{\#\#  4 ""    ""         ""          ""     Beetho\textasciitilde{} 6032\textasciitilde{}}
+\DocumentationTok{\#\#  5 "Ein\textasciitilde{} "9"        "möbliert,\textasciitilde{} "207,\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}}
+\DocumentationTok{\#\#  6 "Ein\textasciitilde{} "15"       "unmöblier\textasciitilde{} "236,\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}}
+\DocumentationTok{\#\#  7 "Zwe\textasciitilde{} "45"       "unmöblier\textasciitilde{} "Bele\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}}
+\DocumentationTok{\#\#  8 "Ein\textasciitilde{} "11 {-} 17"  "unmöblier\textasciitilde{} "256,\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}}
+\DocumentationTok{\#\#  9 "Ein\textasciitilde{} "11"       "möbliert,\textasciitilde{} "266,\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}}
+\DocumentationTok{\#\# 10 "Ein\textasciitilde{} "23"       "unmöblier\textasciitilde{} "315,\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}}
+\DocumentationTok{\#\# \# ... with 123 more rows, and 2 more variables:}
+\DocumentationTok{\#\# \#   baujahr \textless{}dbl\textgreater{}, anzahl\_plaetze \textless{}dbl\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{text-straube-2021}{%
+\section{Text: Straube 2021}\label{text-straube-2021}}
+
+\hypertarget{lesetexte}{%
+\subsection{Lesetexte}\label{lesetexte}}
+
+Straube, Till. 2021. Datenbeschaffung. In: Tabea Bork-Hüffer, Henning Füller und Till Straube (Hrsg). \emph{Handbuch Digitale Geographien.} Stuttgart: UTB.
+
+Bauß, Jan-Luca und Felix Hiemeyer. 2021. Research Puzzle: Datenbeschaffung durch Web Scraping. In: Tabea Bork-Hüffer, Henning Füller und Till Straube (Hrsg). \emph{Handbuch Digitale Geographien.} Stuttgart: UTB.
+
+\hypertarget{fragen-an-den-text-3}{%
+\subsection{Fragen an den Text}\label{fragen-an-den-text-3}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Um was für eine Art von Text handelt es sich? An wen wenden sich die Autoren?
+\item
+  Welche Momente werden im Research Puzzle beschrieben, in denen die Autoren ihr Vorhaben geändert haben?
+\item
+  Wie verändert Datenbeschaffung (statt -erhebung) den wissenschaftlichen Prozess?
+\item
+  Welche Beispiele gibt es im Rahmen Ihres Projektvorhabens für\ldots{}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    offene Daten?
+  \item
+    Daten, die sich durch web scraping abrufen lassen?
+  \item
+    Daten, die sich über (öffentliche oder private) APIs abrufen lassen?
+  \end{itemize}
 \end{enumerate}
 
 

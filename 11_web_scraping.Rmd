@@ -9,9 +9,9 @@ Sie können...
 
 ## Vorbereitung
 
-Für diese Lektion werden die Pakete benötigt:
+Für diese Lektion werden folgende Pakete benötigt:
 
-```{r, message=F}
+```{r setuplocal, message=F}
 library(tidyverse)
 library(rvest)
 ```
@@ -54,7 +54,7 @@ Als Beispiel soll die Infoseite eines Wohnheims des Studentenwerks Frankfurt die
 
 Zunächst laden wir den Quelltext in R und nennen ihn `quelltext`:
 
-```{r}
+```{r quelltext}
 quelltext <- read_html("https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11")
 
 quelltext
@@ -125,12 +125,185 @@ Wie diese Technik automatisiert auf eine Reihe von Seiten angewendet werden kann
 
 1. Lesen Sie die Anzahl der Wohnheimplätze aus.
 
+```{r}
+quelltext
+```
+
+```{r echo=solutions, class.source='solution', out.extra='class="solution"'}
+quelltext %>%
+  html_node("div#c599") %>%
+  html_node("div.frame-inner") %>%
+  html_nodes("p") %>%
+  html_text() %>%
+  .[2] %>%
+  str_extract("[0-9]+") %>%
+  as.numeric() -> anzahl_plaetze
+
+anzahl_plaetze
+```
+
 2. Lesen Sie Baujahr und Anzahl der Wohnheimplätze von einem anderen Wohnheim aus. Was muss angepasst werden?
+
+```{r echo=solutions, class.source='solution', out.extra='class="solution"'}
+# z.B.: https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/wiesbaden/max-kade-haus-adolfsallee-49-53
+
+"https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/wiesbaden/max-kade-haus-adolfsallee-49-53" %>%
+  read_html() -> quelltext_wi
+
+# Baujahr nicht vorhanden!
+baujahr_wi <- NA
+
+quelltext_wi %>%
+  html_node("div#c1563") %>%
+  # Auf dieser Seite ist es eine andere div-ID!
+  # Außerdem: Appartment = Platz? Scheint aber so zu sein...
+  html_node("div.frame-inner") %>%
+  html_nodes("p") %>%
+  html_text() %>%
+  .[2] %>%
+  str_extract("[0-9]+") %>%
+  as.numeric() -> anzahl_plaetze_wi
+
+anzahl_plaetze_wi
+```
 
 3. Ändern Sie das Script so, dass es auf beiden (allen) Wohnheimseiten funktioniert.
 
+```{r echo=solutions, class.source='solution', out.extra='class="solution"'}
+# Hier kann (hoffentlich) auch jede andere Wohnheim-URL eingesetzt werden.
+"https://www.studentenwerkfrankfurt.de/wohnen/wohnheime/frankfurt-am-main/kleine-seestrasse-11" %>%
+  read_html() -> quelltext_x
+
+quelltext_x %>%
+  # So funktioniert es unabhänging von ID:
+  html_node("div.wohnheim-2 > div:nth-child(2)") %>%
+  html_nodes("p") %>%
+  html_text() -> items
+
+items[3] %>%
+  str_extract("[0-9]{4}") %>%
+  as.numeric() -> baujahr_x
+
+items[2] %>%
+  # Funktioniert leider nicht bei der getrennten Angabe mehrerer Kategorien:
+  str_extract("[0-9]+") %>%
+  as.numeric() -> anzahl_plaetze_x
+```
+
 4. Lesen Sie die Adresse eines Wohnheims aus. Speichern Sie dabei Straße, Hausnummer, Postleitzahl und Ort getrennt. 
+
+```{r echo=solutions, class.source='solution', out.extra='class="solution"'}
+# Wie in Aufgabe 5 ersichtlich lassen sich die beiden Adresszeilen eigentlich
+# recht einfach aus der Übersichtsseite auslesen.
+
+# Eine Schwierigkeit beim Auslesen aus der Einzelseite liegt darin, dass die
+# Funktion html_text() den Zeilenumbruch <br> "verschluckt". Die neueste Version
+# von rvest beinhaltet die Funktion html_text2(), die genau dieses Probem löst.
+
+# Die neue Version kann installiert werden mit:
+# install.packages("devtools")
+# devtools::install_github("tidyverse/rvest")
+# (Danach R neu starten)
+
+quelltext_x %>%
+  html_node("div.wohnheim-2 > div:nth-child(2)") %>%
+  html_nodes("p") %>%
+  html_text2() %>%
+  .[1] %>%
+  trimws() %>%
+  str_split("\n") %>%
+  .[[1]] -> adresse
+
+# Die Hausnummer sind die Zahlen am Ende der ersten Zeile:
+adresse[1] %>%
+  str_extract("[-0-9]+$") -> hausnummer # Funktioniert aber nicht bei 1b u.ä...
+
+# Die Straße ist der Rest:
+adresse[1] %>%
+  str_remove(" [0-9]+$") -> strasse
+
+# Die PLZ sind die 5 Zahlen am Anfang der zweiten Zeile:
+adresse[2] %>%
+  str_extract("^[0-9]{5}") -> plz
+
+# Der Ort ist der Rest:
+adresse[2] %>%
+  str_remove("^[0-9]{5} ") -> ort
+```
 
 5. Sammeln Sie eine Liste aller Wohnheime mit Link.
 
-6. Sammeln Sie einen Datensatz (tibble) aller "Nutzungsentgelte" mit Wohnheim, Baujahr, Anzahl Wohneinheiten und Adresse. Stellen Sie sich vor es handle sich um Tausende Wohnheime -- vermeiden Sie also Copy-Paste-Strategien.
+```{r echo=solutions, class.source='solution', out.extra='class="solution"'}
+"https://www.studentenwerkfrankfurt.de/wohnen/wohnheime" %>%
+  read_html() %>%
+  html_nodes("div.thumbnail") -> items
+
+items %>%
+  html_node("a") %>%
+  html_attr("href") -> links
+
+items %>%
+  html_node("h4") %>%
+  html_text -> strasse_nr
+
+items %>%
+  html_node("p") %>%
+  html_text() -> plz_ort
+
+tibble(links, strasse_nr, plz_ort) -> index
+```
+
+6. Sammeln Sie einen Datensatz (tibble) aller "Nutzungsentgelte" mit Wohnheim, Baujahr, Anzahl Wohneinheiten und Adresse. Stellen Sie sich vor, es handelte sich um Tausende Wohnheime -- vermeiden Sie also Copy-Paste-Strategien.
+
+```{r echo=solutions, message=FALSE, class.source='solution', out.extra='class="solution"'}
+# Hierfür gibt es einige Strategien. Meine präferierte Variante erfordert
+# zunächst eine eigene Funktion, die eine URL nimmt und die gewünschten
+# Informationen ausgibt:
+
+scrape <- function(url) {
+  url %>%
+    read_html -> quelltext
+
+  quelltext %>%
+    html_table() %>%
+    last() %>%
+    # Die Größe soll immer ein String sein, weil es sonst später Probeme gibt:
+    mutate(`Größe m²` = as.character(`Größe m²`)) -> Nutzungsentgelte
+
+  quelltext %>%
+    html_node("div.wohnheim-2 > div:nth-child(2)") %>%
+    html_nodes("p") -> items
+
+  items[[1]] %>%
+    html_text2() %>%
+    trimws() %>%
+    str_split("\n") %>%
+    .[[1]] -> adresse
+  
+  Nutzungsentgelte$strasse <- adresse[1]
+  Nutzungsentgelte$ort <- adresse[2]
+     
+  items[3] %>%
+    html_text() %>%
+    str_extract("[0-9]{4}") %>%
+    as.numeric() -> Nutzungsentgelte$baujahr
+  
+  items[2] %>%
+    html_text() %>%
+    str_extract("[0-9]+") %>%
+    as.numeric() -> Nutzungsentgelte$anzahl_plaetze
+  
+  return(Nutzungsentgelte)
+}
+
+# Dann kann ich die eigene Funktion "scrape" auf alle Links anwenden. Das
+# Ergebnis ist eine Liste von Tibbles. Die lässt sich schließlich noch
+# kombinieren:
+
+index$links %>%
+ paste0("https://www.studentenwerkfrankfurt.de", .) %>%
+  map(scrape) %>%
+  do.call(bind_rows, .) -> liste
+
+liste
+```

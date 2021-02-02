@@ -51,3 +51,6 @@
 - **Tutorial Reguläre Ausdrücke**  
   https://danielfett.de/en/tutorials/tutorial-regulare-ausdrucke/  
   Deutschsprachige Einführung zu regulären Ausdrücken
+
+- **Übersicht CSS-Selektoren**  
+  https://www.w3schools.com/cssref/css_selectors.asp

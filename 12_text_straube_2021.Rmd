@@ -1,0 +1,17 @@
+# Text: Straube 2021
+
+## Lesetexte
+
+Straube, Till. 2021. Datenbeschaffung. In: Tabea Bork-Hüffer, Henning Füller und Till Straube (Hrsg). *Handbuch Digitale Geographien.* Stuttgart: UTB.
+
+Bauß, Jan-Luca und Felix Hiemeyer. 2021. Research Puzzle: Datenbeschaffung durch Web Scraping. In: Tabea Bork-Hüffer, Henning Füller und Till Straube (Hrsg). *Handbuch Digitale Geographien.* Stuttgart: UTB.
+
+## Fragen an den Text
+
+1. Um was für eine Art von Text handelt es sich? An wen wenden sich die Autoren?
+2. Welche Momente werden im Research Puzzle beschrieben, in denen die Autoren ihr Vorhaben geändert haben?
+3. Wie verändert Datenbeschaffung (statt -erhebung) den wissenschaftlichen Prozess?
+4. Welche Beispiele gibt es im Rahmen Ihres Projektvorhabens für...
+   - offene Daten?
+   - Daten, die sich durch web scraping abrufen lassen?
+   - Daten, die sich über (öffentliche oder private) APIs abrufen lassen?
