@@ -3377,4 +3377,216 @@ Bauß, Jan-Luca und Felix Hiemeyer. 2021. Research Puzzle: Datenbeschaffung durc
   \end{itemize}
 \end{enumerate}
 
+\hypertarget{apis}{%
+\section{APIs}\label{apis}}
+
+\hypertarget{vorbereitung-4}{%
+\subsection{Vorbereitung}\label{vorbereitung-4}}
+
+Für diese Lektion werden die Pakete benötigt:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(jsonlite)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{swapi}{%
+\subsection{SWAPI}\label{swapi}}
+
+Die \href{https://www.swapi.tech/}{Star Wars API} ist eine eigens für Übungszwecke eingerichtete API, und steht uns deshalb (anders als andere APIs) ohne Login zur Verfügung. Wir sollten bei der Benutzung darauf achten, sie nicht zu überladen.
+
+Jede gute API kommt mit einer \href{https://www.swapi.tech/documentation}{ausführlichen Dokumentation} in der die Endpunkte und Abfrageoptionen erklärt sind.
+
+Bei den hier besprochenen REST-APIs geht es eigentlich nur darum, die richtige Abfrage \textbf{als URL} zu formulieren. Die Antwort des Servers gibt uns dann die Daten, die wir brauchen, und zwar üblicherweise im \href{https://de.wikipedia.org/wiki/JavaScript_Object_Notation}{JSON}-Format.
+
+Zum Beispiel fragen wir so Informationen über Han Solo ab:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{han\_solo }\OtherTok{\textless{}{-}} \FunctionTok{read\_json}\NormalTok{(}\StringTok{"https://www.swapi.tech/api/people/14/"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+Die Antwort ist eine Liste, deren Elemente sich wie gewohnt mit \texttt{\$} ansprechen lassen und wiederum Hinweise auf API-Abfragen enthalten können:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{han\_solo}\SpecialCharTok{$}\NormalTok{properties}\SpecialCharTok{$}\NormalTok{eye\_color}
+\DocumentationTok{\#\# [1] "brown"}
+\NormalTok{han\_solo}\SpecialCharTok{$}\NormalTok{properties}\SpecialCharTok{$}\NormalTok{homeworld}
+\DocumentationTok{\#\# [1] "https://www.swapi.tech/api/planets/22"}
+\end{Highlighting}
+\end{Shaded}
+
+Diese Information ließe sich wiederum abfragen durch:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{han\_solo}\SpecialCharTok{$}\NormalTok{properties}\SpecialCharTok{$}\NormalTok{homeworld }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{read\_json}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .}\SpecialCharTok{$}\NormalTok{result }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .}\SpecialCharTok{$}\NormalTok{properties }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .}\SpecialCharTok{$}\NormalTok{name}
+\DocumentationTok{\#\# [1] "Corellia"}
+\end{Highlighting}
+\end{Shaded}
+
+Eine (recht willkürlich gewählte) Herausforderung wäre es nun, die Namen aller Charaktere herauszufinden, die in \emph{Return of the Jedi} vorkommen.
+
+Zunächst können wir den richtigen Film suchen mit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_json}\NormalTok{(}\StringTok{"https://www.swapi.tech/api/films/"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{result }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(}\StringTok{"properties"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(}\StringTok{"title"}\NormalTok{)}
+\DocumentationTok{\#\# [[1]]}
+\DocumentationTok{\#\# [1] "A New Hope"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[2]]}
+\DocumentationTok{\#\# [1] "The Empire Strikes Back"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[3]]}
+\DocumentationTok{\#\# [1] "Return of the Jedi"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[4]]}
+\DocumentationTok{\#\# [1] "The Phantom Menace"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[5]]}
+\DocumentationTok{\#\# [1] "Attack of the Clones"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[6]]}
+\DocumentationTok{\#\# [1] "Revenge of the Sith"}
+\end{Highlighting}
+\end{Shaded}
+
+Dann lässt sich die gewünschte Liste ziehen mit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_json}\NormalTok{(}\StringTok{"https://www.swapi.tech/api/films/3"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{result}\SpecialCharTok{$}\NormalTok{properties}\SpecialCharTok{$}\NormalTok{characters }\OtherTok{{-}\textgreater{}}\NormalTok{ return\_characters}
+\end{Highlighting}
+\end{Shaded}
+
+Für jeden dieser Charaktere ließe sich der Name herausfinden mit
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_json}\NormalTok{(}\StringTok{"https://www.swapi.tech/api/people/1/"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{result}\SpecialCharTok{$}\NormalTok{properties}\SpecialCharTok{$}\NormalTok{name}
+\DocumentationTok{\#\# [1] "Luke Skywalker"}
+\FunctionTok{read\_json}\NormalTok{(}\StringTok{"https://www.swapi.tech/api/people/4/"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{result}\SpecialCharTok{$}\NormalTok{properties}\SpecialCharTok{$}\NormalTok{name}
+\DocumentationTok{\#\# [1] "Darth Vader"}
+\CommentTok{\# usw.}
+\end{Highlighting}
+\end{Shaded}
+
+Können wir aber auch die Namen nicht einzeln, sondern automatisch Abfragen?
+
+\hypertarget{exkurs-funktionen-schreiben}{%
+\subsection{Exkurs: Funktionen schreiben}\label{exkurs-funktionen-schreiben}}
+
+Funktionen sind überall in R. Funktionen haben eine Eingabe (parameters) und eine Ausgabe (return values). Z.B. hat die Funktion \texttt{mean()} als Eingabe einen numerischen Vektor, und als Ausgabe das arithmetische Mittel dieses Vektors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(diamonds)}
+\FunctionTok{mean}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{carat)}
+\DocumentationTok{\#\# [1] 0.7979397}
+\end{Highlighting}
+\end{Shaded}
+
+Wir können auch eigene Funktionen schreiben. Die Definition einer eigenen Funktionen hat immer diese Form:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FUNKTIONSNAME }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(EINGABE) \{}
+\NormalTok{  ...}
+\NormalTok{  AUSGABE}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Wenn es die Funktion \texttt{mean()} nicht gäbe, könnten wir sie (bzw. so etwas ähnliches) selbst schreiben, mit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_mean }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(verteilung) \{}
+  \FunctionTok{sum}\NormalTok{(verteilung) }\SpecialCharTok{/} \FunctionTok{length}\NormalTok{(verteilung)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Wenn wir die Definition ausführen, erscheint die Funktion in unserem Environment, genauso wie andere Objekte. Wir können sie dann genauso anwenden wie andere Funktionen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{my\_mean}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{carat)}
+\DocumentationTok{\#\# [1] 0.7979397}
+\FunctionTok{my\_mean}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{depth)}
+\DocumentationTok{\#\# [1] 61.7494}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{abfragefunktion}{%
+\subsection{Abfragefunktion}\label{abfragefunktion}}
+
+Eine Funktion zur automatischen Abfrage der Charakternamen bräuchte als Eingabe die URL der API, und als Ausgabe den Charakternamen. Eigentlich geht es nur um eine \emph{Abstraktion} des \emph{konkreten} Befehls:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read\_json}\NormalTok{(}\StringTok{"https://www.swapi.tech/api/people/1/"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{result}\SpecialCharTok{$}\NormalTok{properties}\SpecialCharTok{$}\NormalTok{name}
+\DocumentationTok{\#\# [1] "Luke Skywalker"}
+\end{Highlighting}
+\end{Shaded}
+
+Die Definition der Funktion könnte so aussehen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{get\_character\_name }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(url) \{}
+  \FunctionTok{read\_json}\NormalTok{(url)}\SpecialCharTok{$}\NormalTok{result}\SpecialCharTok{$}\NormalTok{properties}\SpecialCharTok{$}\NormalTok{name}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Testweise lässt sie sich anwenden:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get\_character\_name}\NormalTok{(}\StringTok{"https://www.swapi.tech/api/people/1/"}\NormalTok{)}
+\DocumentationTok{\#\# [1] "Luke Skywalker"}
+\end{Highlighting}
+\end{Shaded}
+
+Leider lässt sie sich nicht so einfach (wie andere Funktionen) auf den Vektor von URLS anwenden, da die Funktion keinen Vektor als Eingabe erwartet:
+
+Abhilfe schafft der Befehl \texttt{map()} aus dem \texttt{purrr}-Paket (Teil von \texttt{tidyverse}). Hier lässt sich ein Vektor (oder eine Liste) angeben, sowie der Name einer Funktion, die dann \emph{auf jedes Element des Vektors} angewendet wird:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{map}\NormalTok{(return\_characters, get\_character\_name)}
+\end{Highlighting}
+\end{Shaded}
+
+Resultat ist eine Liste, die sich mit \texttt{unlist()} auch zu einem Vektor wandeln ließe\ldots{} oder man benutzt direkt die Abwandlung \texttt{map\_chr()}, die nach Möglichkeit immer einen character vector ausgibt:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{map\_chr}\NormalTok{(return\_characters, get\_character\_name)}
+\DocumentationTok{\#\#  [1] "Luke Skywalker"        "C{-}3PO"                }
+\DocumentationTok{\#\#  [3] "R2{-}D2"                 "Darth Vader"          }
+\DocumentationTok{\#\#  [5] "Leia Organa"           "Obi{-}Wan Kenobi"       }
+\DocumentationTok{\#\#  [7] "Chewbacca"             "Han Solo"             }
+\DocumentationTok{\#\#  [9] "Jabba Desilijic Tiure" "Wedge Antilles"       }
+\DocumentationTok{\#\# [11] "Yoda"                  "Palpatine"            }
+\DocumentationTok{\#\# [13] "Boba Fett"             "Lando Calrissian"     }
+\DocumentationTok{\#\# [15] "Ackbar"                "Mon Mothma"           }
+\DocumentationTok{\#\# [17] "Arvel Crynyd"          "Wicket Systri Warrick"}
+\DocumentationTok{\#\# [19] "Nien Nunb"             "Bib Fortuna"}
+\end{Highlighting}
+\end{Shaded}
+
+
 \end{document}
