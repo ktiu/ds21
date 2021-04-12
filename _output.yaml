@@ -10,6 +10,5 @@ bookdown::gitbook:
   pandoc_args: ["--html-q-tags"]
 
 bookdown::pdf_book:
-  template: template.tex
   keep_tex: true
   latex_engine: xelatex

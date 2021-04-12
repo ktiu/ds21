@@ -43,6 +43,9 @@
 - **Infographics**  
   https://www.listendata.com/2019/06/create-infographics-with-r.html
 
+- **HTML Widgets für R**
+  http://gallery.htmlwidgets.org/
+
 ## Spezialthemen {-}
 
 - **HTML-Überblick**  

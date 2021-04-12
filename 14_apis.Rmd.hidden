@@ -1,0 +1,142 @@
+# APIs
+
+## Vorbereitung
+
+Für diese Lektion werden die Pakete benötigt:
+
+```{r}
+library(tidyverse)
+library(jsonlite)
+```
+
+## SWAPI
+
+Die [Star Wars API](https://www.swapi.tech/) ist eine eigens für Übungszwecke eingerichtete API, und steht uns deshalb (anders als andere APIs) ohne Login zur Verfügung. Wir sollten bei der Benutzung darauf achten, sie nicht zu überladen.
+
+Jede gute API kommt mit einer [ausführlichen Dokumentation](https://www.swapi.tech/documentation) in der die Endpunkte und Abfrageoptionen erklärt sind.
+
+Bei den hier besprochenen REST-APIs geht es eigentlich nur darum, die richtige Abfrage **als URL** zu formulieren. Die Antwort des Servers gibt uns dann die Daten, die wir brauchen, und zwar üblicherweise im [JSON](https://de.wikipedia.org/wiki/JavaScript_Object_Notation)-Format.
+
+Zum Beispiel fragen wir so Informationen über Han Solo ab:
+
+```{r}
+han_solo <- read_json("https://www.swapi.tech/api/people/14/")$result
+```
+
+Die Antwort ist eine Liste, deren Elemente sich wie gewohnt mit `$` ansprechen lassen und wiederum Hinweise auf API-Abfragen enthalten können:
+
+```{r}
+han_solo$properties$eye_color
+han_solo$properties$homeworld
+```
+
+Diese Information ließe sich wiederum abfragen durch:
+
+```{r}
+han_solo$properties$homeworld %>%
+  read_json() %>%
+  .$result %>%
+  .$properties %>%
+  .$name
+```
+
+Eine (recht willkürlich gewählte) Herausforderung wäre es nun, die Namen aller Charaktere herauszufinden, die in *Return of the Jedi* vorkommen.
+
+Zunächst können wir den richtigen Film suchen mit:
+
+```{r eval=F}
+read_json("https://www.swapi.tech/api/films/")$result %>%
+  map("properties") %>%
+  map("title")
+```
+
+Dann lässt sich die gewünschte Liste ziehen mit:
+
+```{r eval=F}
+read_json("https://www.swapi.tech/api/films/3")$result$properties$characters -> return_characters
+```
+
+Die Liste lässt sich mit `unlist()` in einen character vector umwandeln:
+
+```{r}
+unlist(return_characters)
+```
+
+Für jeden dieser Charaktere ließe sich der Name herausfinden mit
+
+```{r}
+read_json("https://swapi.co/api/people/1/")$name
+read_json("https://swapi.co/api/people/4/")$name
+# usw.
+```
+
+Können wir aber auch die Namen nicht einzeln, sondern automatisch Abfragen?
+
+## Exkurs: Funktionen schreiben
+
+Funktionen sind überall in R. Funktionen haben eine Eingabe (parameters) und eine Ausgabe (return values). Z.B. hat die Funktion `mean()` als Eingabe einen numerischen Vektor, und als Ausgabe das arithmetische Mittel dieses Vektors:
+
+```{r}
+mean(diamonds$carat)
+```
+
+Wir können auch eigene Funktionen schreiben. Die Definition einer eigenen Funktionen hat immer diese Form:
+
+```{r, eval=F}
+FUNKTIONSNAME <- function(EINGABE) {
+  ...
+  AUSGABE
+}
+```
+
+Wenn es die Funktion `mean()` nicht gäbe, könnten wir sie (bzw. so etwas ähnliches) selbst schreiben, mit:
+
+```{r}
+my_mean <- function(verteilung) {
+  sum(verteilung) / length(verteilung)
+}
+```
+
+Wenn wir die Definition ausführen, erscheint die Funktion in unserem Environment, genauso wie andere Objekte. Wir können sie dann genauso anwenden wie andere Funktionen:
+
+```{r}
+my_mean(diamonds$carat)
+my_mean(diamonds$depth)
+```
+
+## Abfragefunktion
+
+Eine Funktion zur automatischen Abfrage der Charakternamen bräuchte als Eingabe die URL der API, und als Ausgabe den Charakternamen. Eigentlich geht es nur um eine *Abstraktion* des *konkreten* Befehls:
+
+```{r}
+read_json("https://swapi.co/api/people/1/")$name
+```
+
+Die Definition der Funktion könnte so aussehen:
+
+```{r}
+get_character_name <- function(url) {
+  read_json(url)$name
+}
+```
+
+Testweise lässt sie sich anwenden:
+
+```{r}
+get_character_name("https://swapi.co/api/people/1/")
+```
+
+Leider lässt sie sich nicht so einfach (wie andere Funktionen) auf den Vektor von URLS anwenden, da die Funktion keinen Vektor als Eingabe erwartet:
+
+Abhilfe schafft der Befehl `map()` aus dem `purrr`-Paket (Teil von `tidyverse`). Hier lässt sich ein Vektor (oder eine Liste) angeben, sowie der Name einer Funktion, die dann *auf jedes Element des Vektors* angewendet wird:
+
+```{r eval=F}
+map(character_urls, get_character_name)
+```
+
+Resultat ist eine Liste, die sich mit `unlist()` wieder zu einem Vektor wandeln ließe... oder man benutzt direkt die Abwandlung `map_chr()`, die nach Möglichkeit immer einen character vector ausgibt:
+
+```{r}
+map_chr(character_urls, get_character_name)
+```
+

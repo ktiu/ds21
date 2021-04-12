@@ -79,7 +79,7 @@ Sie können...
 
 ## Leistungsnachweise
 
-### Exposé
+### Exposé (WiSe)
 
 - Zum Ende des Wintersemesters geben Sie ein Exposé für ein Untersuchungsvorhaben für das Sommersemester ab.
 - Sie können sich mit bis zu vier Personen zusammenschließen.
@@ -98,7 +98,7 @@ Sie können...
 
 #### Bewertungskriterien
 
-Alle kriterien werden mit einer (runden) Schulnote bewertet. Der gewichtete Schnitt ergibt die Gesamtnote.
+Alle Kriterien werden mit einer (runden) Schulnote bewertet. Der gewichtete Schnitt ergibt die Gesamtnote.
 
 Kriterium                    | Gewichtung   | Erläuterung
 -------------------          | -------:     | ----------------------------------------
@@ -110,6 +110,55 @@ Theorie                      | 10%          | Relevante wissenschaftliche Perspe
 Fragestellung                | 10%          | Die Forschungsfrage ist für das Vorhaben geeignet und wird überzeugend hergeleitet.
 Datenquellen                 | 20%          | Die Datenquellen sind geeignet und detailliert beschrieben.
 Design                       | 20%          | Das Untersuchungsvorhaben ist nachvollziehbar beschrieben, und der technische Anspruch ist dem Projektseminar angemessen.
+
+### Projektbericht (SoSe)
+
+- Zum Ende des Sommersemesters geben Sie einen Projektbericht ab.
+- Der Projektbericht darf (überarbeitete) Teile des Exposés enthalten.
+- Die Gruppen, in denen Sie Ihr Exposé verfasst haben, bleiben verbindlich bestehen.
+- Umfang für den Projektbericht:
+  - max. 35k Zeichen
+  - inkl. Leerzeichen
+  - exkl. Literaturverzeichnis
+  - exkl. Code
+- Als Abgabetermin haben wir den 31. August vereinbart.
+
+#### Format
+
+- Der Projektbericht muss in Rmarkdown verfasst werden und (grundsätzlich) ausführbar sein.
+  - Daten, die für die Ausführung benötigt werden, müssen mit abgegeben werden. (Bei sehr großen Datensätzen wenden Sie sich bitte frühzeitig an mich).
+  - Dabei dürfen alle Pakete aus CRAN verwendet werden. Eigene Scripts müssen mit abgegeben werden.
+  - Aufwändige oder prekäre Zwischenschritte (etwa Web Scraping, rechenintensive Grafiken) bitte als Zwischenergebnis speichern. (Code trotzdem darlegen!)
+
+#### Inhalte
+
+- Einführung ins Thema
+- Forschungsstand / Literaturüberblick
+- Herleitung einer klar abgegrenzten Forschungsfrage
+- Besprechung der Datenquellen
+- Darstellung der Methoden für
+  - Datenbeschaffung
+  - Datenaufbereitung (säubern, verschneiden)
+  - Datenanalyse (Visualisierung, statische Verfahren)
+- Präsentation der Ergebnisse
+- Einordnung der Ergebnisse
+
+#### Bewertungskriterien
+
+Alle Kriterien werden mit einer (runden) Schulnote bewertet. Der gewichtete Schnitt ergibt die Gesamtnote.
+
+Kriterium                    | Gewichtung   | Erläuterung
+-------------------          | -------:     | ----------------------------------------
+Ziterweise und Formatierung  | 10%          | Der Text erfüllt formale Anforderungen an Wissenschaftlichkeit.
+Ausdruck und Rechtschreibung | 10%          | Der Text ist sprachlich gelungen.
+Roter Faden                  | 10%          | Der Text ist übersichtlich strukturiert und die Einzelteile greifen gut ineinander.
+Literatur                    | 5%          | Die zitierten Quellen sind für eine Einführung ins Thema geeignet und werden gut zusammengefasst.
+Theorie                      | 10%          | Relevante wissenschaftliche Perspektiven werden anhand von geeigneter Fachliteratur aufgezeigt.
+Fragestellung                | 5%          | Die Forschungsfrage ist für das Vorhaben geeignet und wird überzeugend hergeleitet.
+Anspruch                     | 20%          | Der technische Anspruch ist dem Projektseminar angemessen.
+Beschaffung                  | 10%          | Die Datenquellen sind geeignet und werden nachvollziehbar ausgelesen.
+Aufbereitung                 | 10%          | Die Datenaufbereitung ist sauber durchgeführt und gut nachvollziehbar.
+Analyse                      | 10%          | Die Datenanalyse ist geeignet, sauber durchgeführt und anschaulich beschrieben.
 
 ### Anwesenheit
 
@@ -126,9 +175,9 @@ Design                       | 20%          | Das Untersuchungsvorhaben ist nach
 
 ## Lehrphilosophie
 
-- Die folgenden vier "Säulen" habe ich mal im Rahmen einer Fortbildung als meine Lehrphilosophie definiert.
-- Sie spiegeln meinen eigenen Anspruch an meine Lehre wider und sind als Vorschlag für ein gutes Miteinander zu verstehen.
-- Begreifen Sie das gerne auch als Ermunterung, Aspekte hiervon einzufordern, wenn sie in der Veranstaltung zu kurz kommen.
+- Die folgenden vier "Säulen" habe ich mal im Rahmen einer Fortbildung als meine "Lehrphilosophie" definiert.
+- Sie spiegeln meinen eigenen Anspruch an meine Lehre wider und sind auch als Vorschlag für ein gutes Miteinander zu verstehen.
+- Begreifen Sie die hier genannten Aspekte gerne auch als Ermunterung, sie von mir und Ihren Kommiliton\*innen einzufordern, wenn sie in der Veranstaltung zu kurz kommen.
 
 ### Transparenz
 
