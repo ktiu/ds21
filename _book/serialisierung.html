@@ -51,6 +51,9 @@
 
 <link rel="icon" href="https://www.uni-frankfurt.de/favicon.ico" type="image/x-icon">
 <script src="solutions.js"></script>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 
 
 <style type="text/css">
@@ -298,13 +301,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen"><i class="fa fa-check"></i><b>15.3.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
 <li class="chapter" data-level="15.3.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren"><i class="fa fa-check"></i><b>15.3.2</b> Schritt 2: Abstrahieren</a></li>
 <li class="chapter" data-level="15.3.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen"><i class="fa fa-check"></i><b>15.3.3</b> Schritt 3: Testen</a></li>
-<li class="chapter" data-level="15.3.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-serialisiert-ausführen"><i class="fa fa-check"></i><b>15.3.4</b> Schritt Serialisiert ausführen</a></li>
+<li class="chapter" data-level="15.3.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen"><i class="fa fa-check"></i><b>15.3.4</b> Schritt 4: Serialisiert ausführen</a></li>
 </ul></li>
 <li class="chapter" data-level="15.4" data-path="serialisierung.html"><a href="serialisierung.html#informationen-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.4</b> Informationen der Anzeigen auslesen</a>
 <ul>
 <li class="chapter" data-level="15.4.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen-1"><i class="fa fa-check"></i><b>15.4.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
 <li class="chapter" data-level="15.4.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren-1"><i class="fa fa-check"></i><b>15.4.2</b> Schritt 2: Abstrahieren</a></li>
 <li class="chapter" data-level="15.4.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen-1"><i class="fa fa-check"></i><b>15.4.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.4.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen-1"><i class="fa fa-check"></i><b>15.4.4</b> Schritt 4: Serialisiert ausführen</a></li>
 </ul></li>
 <li class="chapter" data-level="15.5" data-path="serialisierung.html"><a href="serialisierung.html#aufbereiten"><i class="fa fa-check"></i><b>15.5</b> Aufbereiten</a></li>
 </ul></li>
@@ -355,7 +359,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>An einem Beispiel konkret ausführen</li>
 <li>Abstrahieren (hier: als Funktion)</li>
-<li>Serialisiert ausführen (hier: mit <code>lapply</code> o.ä.)</li>
+<li>Testen an weiteren einzelfällen</li>
+<li>Serialisiert ausführen (hier: mit <code>map</code> o.ä.)</li>
 </ol>
 </div>
 <div id="urls-der-anzeigen-auslesen" class="section level2" number="15.3">
@@ -403,8 +408,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="schritt-3-testen" class="section level3" number="15.3.3">
 <h3><span class="header-section-number">15.3.3</span> Schritt 3: Testen</h3>
 </div>
-<div id="schritt-serialisiert-ausführen" class="section level3" number="15.3.4">
-<h3><span class="header-section-number">15.3.4</span> Schritt Serialisiert ausführen</h3>
+<div id="schritt-4-serialisiert-ausführen" class="section level3" number="15.3.4">
+<h3><span class="header-section-number">15.3.4</span> Schritt 4: Serialisiert ausführen</h3>
 <p>Schließlich können wir die Funktion auf eine Reihe von Inputs anwenden. Einen Vektor mit den gewünschten Input-URLs können wir erstellen mit:</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="serialisierung.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.&quot;</span>,<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>,<span class="st">&quot;.html&quot;</span>)</span>
 <span id="cb155-2"><a href="serialisierung.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html&quot;</span></span>
@@ -500,6 +505,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb162-3"><a href="serialisierung.html#cb162-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;20m²&quot;              &quot;800€&quot;             </span></span>
 <span id="cb162-4"><a href="serialisierung.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (1w,1m,0d)&quot;</span></span></code></pre></div>
 <p>Klappt!</p>
+</div>
+<div id="schritt-4-serialisiert-ausführen-1" class="section level3" number="15.4.4">
+<h3><span class="header-section-number">15.4.4</span> Schritt 4: Serialisiert ausführen</h3>
 <p>Jetzt noch der Trick, diese Funktion mit <code>map()</code> auf alle 60 URLs auszuführen. Damit das hier aber klappt, ohne dass wir gesperrt werden, beschränke ich vorab auf die ersten zehn Einträge mit <code>head()</code>:</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="serialisierung.html#cb163-1" aria-hidden="true" tabindex="-1"></a>anzeige_urls <span class="sc">%&gt;%</span></span>
 <span id="cb163-2"><a href="serialisierung.html#cb163-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>

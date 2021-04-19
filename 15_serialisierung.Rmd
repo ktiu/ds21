@@ -25,7 +25,8 @@ Beide Zielsetzungen können in folgende Schritte unterteilt werden:
 
 1. An einem Beispiel konkret ausführen
 2. Abstrahieren (hier: als Funktion)
-3. Serialisiert ausführen (hier: mit `lapply` o.ä.)
+3. Testen an weiteren einzelfällen
+4. Serialisiert ausführen (hier: mit `map` o.ä.)
 
 ## URLs der Anzeigen auslesen
 
@@ -60,7 +61,7 @@ get_url_list <- function(list_url) {
 
 ### Schritt 3: Testen
 
-### Schritt Serialisiert ausführen
+### Schritt 4: Serialisiert ausführen
 
 Schließlich können wir die Funktion auf eine Reihe von Inputs anwenden. Einen Vektor mit den gewünschten Input-URLs können wir erstellen mit:
 
@@ -177,6 +178,8 @@ Wir führen die Funktion probeweise für eine (andere) Anzeige aus:
 ```
 
 Klappt!
+
+### Schritt 4: Serialisiert ausführen
 
 Jetzt noch der Trick, diese Funktion mit `map()` auf alle 60 URLs auszuführen. Damit das hier aber klappt, ohne dass wir gesperrt werden, beschränke ich vorab auf die ersten zehn Einträge mit `head()`:
 

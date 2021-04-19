@@ -3644,7 +3644,9 @@ Beide Zielsetzungen können in folgende Schritte unterteilt werden:
 \item
   Abstrahieren (hier: als Funktion)
 \item
-  Serialisiert ausführen (hier: mit \texttt{lapply} o.ä.)
+  Testen an weiteren einzelfällen
+\item
+  Serialisiert ausführen (hier: mit \texttt{map} o.ä.)
 \end{enumerate}
 
 \hypertarget{urls-der-anzeigen-auslesen}{%
@@ -3707,8 +3709,8 @@ Der obige Code lässt sich als Funktion abstrahieren, die eine URL als Input hat
 \hypertarget{schritt-3-testen}{%
 \subsubsection{Schritt 3: Testen}\label{schritt-3-testen}}
 
-\hypertarget{schritt-serialisiert-ausfuxfchren}{%
-\subsubsection{Schritt Serialisiert ausführen}\label{schritt-serialisiert-ausfuxfchren}}
+\hypertarget{schritt-4-serialisiert-ausfuxfchren}{%
+\subsubsection{Schritt 4: Serialisiert ausführen}\label{schritt-4-serialisiert-ausfuxfchren}}
 
 Schließlich können wir die Funktion auf eine Reihe von Inputs anwenden. Einen Vektor mit den gewünschten Input-URLs können wir erstellen mit:
 
@@ -3864,6 +3866,9 @@ Wir führen die Funktion probeweise für eine (andere) Anzeige aus:
 \end{Shaded}
 
 Klappt!
+
+\hypertarget{schritt-4-serialisiert-ausfuxfchren-1}{%
+\subsubsection{Schritt 4: Serialisiert ausführen}\label{schritt-4-serialisiert-ausfuxfchren-1}}
 
 Jetzt noch der Trick, diese Funktion mit \texttt{map()} auf alle 60 URLs auszuführen. Damit das hier aber klappt, ohne dass wir gesperrt werden, beschränke ich vorab auf die ersten zehn Einträge mit \texttt{head()}:
 
