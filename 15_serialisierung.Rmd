@@ -1,0 +1,216 @@
+# Serialisierung
+
+## Vorbereitung
+
+Für diese Lektion werden die Pakete benötigt:
+
+```{r, message=F}
+library(tidyverse)
+library(rvest)
+```
+
+## Zielsetzung
+
+Auf https://www.wg-gesucht.de/ finden sich Anzeigen für WGs. In der Listenansicht werden pro Seite 20 Angebote überblicksartig angezeigt. Bei Click auf ein Angebot erscheinen Details der Anzeige, für die wir uns als Rohdaten interessieren.
+
+Wir wollen...
+
+1. ... für die ersten drei Überblicksseiten automatisiert alle URLs der einzelnen Anzeigen auslesen (was sich aber in der Praxis erweitern ließe).
+2. ... für diese 60 URLs automatisiert die folgenden Details auslesen
+  - Gesamtmiete
+  - Zimmergröße
+  - Wer wohnt dort?
+  
+Beide Zielsetzungen können in folgende Schritte unterteilt werden:
+
+1. An einem Beispiel konkret ausführen
+2. Abstrahieren (hier: als Funktion)
+3. Serialisiert ausführen (hier: mit `lapply` o.ä.)
+
+## URLs der Anzeigen auslesen
+
+### Schritt 1: An einem Beispiel konkret ausführen
+
+In [Lektion 11](../11_web_scraping/) haben wir gelernt, wie mit dem Paket `rvest` HTML-Seiten in R geladen und einzelne Elemente angesporchen werden können.
+
+Wenn man sich die [erste Listenansicht](https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html) genau anschaut (mit Developer Tools / Inspect Element vom Browser), wird deutlich, dass die `<tr>`-Tags mit `class=offer_list_elemnt` die einzelnen Anzeigen enthalten. Ebenfalls im `<tr>`-Element enthält das Attribuit `adid` den entscheidenden Teil der Anzeigen-URL.
+
+Deshalb können wir schreiben:
+
+```{r}
+"https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html" %>%
+  read_html() %>%
+  html_nodes("tr.offer_list_item") %>%
+  html_attr("adid")
+```
+
+### Schritt 2: Abstrahieren
+
+Der obige Code lässt sich als Funktion abstrahieren, die eine URL als Input hat (s. [Sitzung 16](../16_breuer_2005_apis)):
+
+```{r}
+get_url_list <- function(list_url) {
+  "https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html" %>%
+    read_html() %>%
+    html_nodes("tr.offer_list_item") %>%
+    html_attr("adid")
+}
+```
+
+
+### Schritt 3: Testen
+
+### Schritt Serialisiert ausführen
+
+Schließlich können wir die Funktion auf eine Reihe von Inputs anwenden. Einen Vektor mit den gewünschten Input-URLs können wir erstellen mit:
+
+```{r}
+paste0("https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.",0:4,".html")
+```
+
+Diese Liste ließe sich natürlich erweitern.
+
+Mit `map()` aus dem `purrr`-Paket (Teil von `tidyverse`) lässt sich dann unsere Funktion `get_url_list()` auf alle Elemente dieses Vektors anwenden. Das vorläufige Resultat ist eine Liste der Länge 3, wobei jedes Element wiederum ein Vektor mit 20 Elementen ist.
+
+Der Befehl `map_chr()` dampft das Ergebnis dann direkt auf einen einfachen Character-Vektor ein.
+
+Am Ende wird das Resultat mit `paste0()` an den Domainnamen gehängt und dem Objektnamen `anzeige_urls` zugewiesen.
+
+```{r}
+
+paste0("https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.",0:2,".html") %>%
+  map(get_url_list) %>%
+  flatten_chr() %>%
+  paste0("https://www.wg-gesucht.de/", .) -> anzeige_urls
+
+str(anzeige_urls)
+```
+
+## Informationen der Anzeigen auslesen
+
+Jetzt ginge es darum, für jede dieser 60 URLs die relevanten Informationen rauszusuchen:
+
+- Gesamtmiete
+- Zimmergröße
+- Wer wohnt dort?
+
+Auch hier gehen wir für die Automatisierung in den drei Schritten vor.
+
+### Schritt 1: An einem Beispiel konkret ausführen
+
+Zunächst eine Beispielanzeige laden und zwischenspeichern:
+
+```{r}
+"https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main-Nied.7651909.html" %>%
+  read_html() -> site
+```
+
+Dann lassen sich Quadratmeterzahl und Gesamtmiete recht einfach auslesen, weil beide in einer `h2`-Überschrift mit `class="headline-key-facts"` stecken:
+
+```{r}
+site %>%
+  html_nodes("h2.headline-key-facts") %>%
+  html_text() %>%
+  trimws() -> key_facts
+  qm <- key_facts[1]
+  eur <- key_facts[2]
+
+qm
+eur
+```
+
+Die Information, wer dort wohnt, steckt in einem span title:
+
+```{r}
+site %>%
+  html_node("h1#sliderTopTitle") %>%
+  html_nodes("span")%>%
+  .[[2]] %>%
+  html_attr("title") -> bewohnerinnen
+
+bewohnerinnen
+```
+
+Geballt lassen sich die Daten für eine Anzeige so ausgeben:
+
+```{r}
+c(qm, eur, bewohnerinnen)
+```
+
+### Schritt 2: Abstrahieren
+
+Wir abstrahieren die obigen Schritte als Funktion:
+
+```{r}
+get_anzeige_details <- function(anzeige_url) {
+
+  Sys.sleep(2)
+
+  anzeige_url %>%
+    read_html() -> site
+
+  site %>%
+    html_nodes("h2.headline-key-facts") %>%
+    html_text() %>%
+    trimws() -> key_facts
+    qm <- key_facts[1]
+    eur <- key_facts[2]
+
+  site %>%
+    html_nodes("h1#sliderTopTitle") %>%
+    html_nodes("span") %>%
+    .[[2]] %>%
+    html_attr("title") -> bewohnerinnen
+  c(qm, eur, bewohnerinnen)
+}
+```
+
+Der Befehl `Sys.sleep(2)` sorgt dafür, dass die Funktion bei jeder Ausführung erst mal zwei Sekunden „schläft“. Das ist leider nötig um zu verhindern, dass unsere IP automatisch gesperrt wird. Dadurch verlängert sich die Ausführung natürlich enorm.
+
+### Schritt 3: Testen
+
+Wir führen die Funktion probeweise für eine (andere) Anzeige aus:
+
+```{r}
+"https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main-Westend-Sud.8401009.html" %>%
+  get_anzeige_details
+```
+
+Klappt!
+
+Jetzt noch der Trick, diese Funktion mit `map()` auf alle 60 URLs auszuführen. Damit das hier aber klappt, ohne dass wir gesperrt werden, beschränke ich vorab auf die ersten zehn Einträge mit `head()`:
+
+```{r}
+anzeige_urls %>%
+  head(10) %>%
+  map(get_anzeige_details) -> results
+ 
+results
+```
+
+Mit `map_chr()` können wir aus dem Ergebnis direkt einen tibble basteln:
+
+```{r}
+tibble(link = head(anzeige_urls, 10),
+       flaeche = map_chr(results, 1),
+       preis = map_chr(results, 2),
+       bewohnerinnen = map_chr(results, 3)) -> wgs
+
+wgs
+```
+
+## Aufbereiten
+
+Um mit den Daten sinnvoll weiterzuarbeiten müssen sie in ein numerisches Format gebracht werden. Das funktioniert z. T. am besten mit regulären Ausdrücken ("regex"), denen wir uns in der nächsten Sitzung widmen werden.
+
+```{r}
+wgs$bewohnerinnen
+
+wgs %>%
+  mutate(flaeche = parse_number(flaeche),
+         preis = parse_number(preis),
+         bw_gesamt = parse_number(bewohnerinnen),
+         bw_w = str_extract(bewohnerinnen, "[0-9]+w") %>% parse_number(),
+         bw_m = str_extract(bewohnerinnen, "[0-9]+m") %>% parse_number(),
+         bw_d = str_extract(bewohnerinnen, "[0-9]+d") %>% parse_number())
+```

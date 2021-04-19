@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sitzung 15 Serialisierung | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sitzung 15 Serialisierung | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sitzung 15 Serialisierung | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="apis.html"/>
+<link rel="next" href="text-breuer-2005.html"/>
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link rel="icon" href="https://www.uni-frankfurt.de/favicon.ico" type="image/x-icon">
+<script src="solutions.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé-wise"><i class="fa fa-check"></i><b>1.3.1</b> Exposé (WiSe)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#projektbericht-sose"><i class="fa fa-check"></i><b>1.3.2</b> Projektbericht (SoSe)</a></li>
+<li class="chapter" data-level="1.3.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.3</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.6</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
+<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="geodaten.html"><a href="geodaten.html#lernziele-dieser-sitzung-2"><i class="fa fa-check"></i><b>7.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="7.2" data-path="geodaten.html"><a href="geodaten.html#voraussetzungen-1"><i class="fa fa-check"></i><b>7.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="7.3" data-path="geodaten.html"><a href="geodaten.html#exkurs-pipes"><i class="fa fa-check"></i><b>7.3</b> Exkurs: Pipes</a></li>
+<li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
+<li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-3"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="choroplethen.html"><a href="choroplethen.html"><i class="fa fa-check"></i><b>8</b> Choroplethen</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="choroplethen.html"><a href="choroplethen.html#lernziele"><i class="fa fa-check"></i><b>8.1</b> Lernziele</a></li>
+<li class="chapter" data-level="8.2" data-path="choroplethen.html"><a href="choroplethen.html#vorbereitung-1"><i class="fa fa-check"></i><b>8.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="8.3" data-path="choroplethen.html"><a href="choroplethen.html#ziel"><i class="fa fa-check"></i><b>8.3</b> Ziel</a></li>
+<li class="chapter" data-level="8.4" data-path="choroplethen.html"><a href="choroplethen.html#grundkarte"><i class="fa fa-check"></i><b>8.4</b> Grundkarte</a></li>
+<li class="chapter" data-level="8.5" data-path="choroplethen.html"><a href="choroplethen.html#osm-daten"><i class="fa fa-check"></i><b>8.5</b> OSM-Daten</a></li>
+<li class="chapter" data-level="8.6" data-path="choroplethen.html"><a href="choroplethen.html#koordinatenreferenzsysteme"><i class="fa fa-check"></i><b>8.6</b> Koordinatenreferenzsysteme</a></li>
+<li class="chapter" data-level="8.7" data-path="choroplethen.html"><a href="choroplethen.html#verschneiden"><i class="fa fa-check"></i><b>8.7</b> Verschneiden</a></li>
+<li class="chapter" data-level="8.8" data-path="choroplethen.html"><a href="choroplethen.html#aufgaben-4"><i class="fa fa-check"></i><b>8.8</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html"><i class="fa fa-check"></i><b>9</b> Text: Chandra 2014</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#lesetext-2"><i class="fa fa-check"></i><b>9.1</b> Lesetext</a></li>
+<li class="chapter" data-level="9.2" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#fragen-an-den-text-2"><i class="fa fa-check"></i><b>9.2</b> Fragen an den Text</a></li>
+<li class="chapter" data-level="9.3" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#themenfindung"><i class="fa fa-check"></i><b>9.3</b> Themenfindung</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="html-tabellen.html"><a href="html-tabellen.html"><i class="fa fa-check"></i><b>10</b> HTML-Tabellen</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="html-tabellen.html"><a href="html-tabellen.html#lernziele-dieser-sitzung-3"><i class="fa fa-check"></i><b>10.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="10.2" data-path="html-tabellen.html"><a href="html-tabellen.html#vorbereitung-2"><i class="fa fa-check"></i><b>10.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="10.3" data-path="html-tabellen.html"><a href="html-tabellen.html#datenbeschaffung"><i class="fa fa-check"></i><b>10.3</b> Datenbeschaffung</a></li>
+<li class="chapter" data-level="10.4" data-path="html-tabellen.html"><a href="html-tabellen.html#datenformatierung"><i class="fa fa-check"></i><b>10.4</b> Datenformatierung</a></li>
+<li class="chapter" data-level="10.5" data-path="html-tabellen.html"><a href="html-tabellen.html#datenaufbereitung"><i class="fa fa-check"></i><b>10.5</b> Datenaufbereitung</a></li>
+<li class="chapter" data-level="10.6" data-path="html-tabellen.html"><a href="html-tabellen.html#datenvisualisierung"><i class="fa fa-check"></i><b>10.6</b> Datenvisualisierung</a></li>
+<li class="chapter" data-level="10.7" data-path="html-tabellen.html"><a href="html-tabellen.html#aufgaben-5"><i class="fa fa-check"></i><b>10.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>11</b> Web scraping</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="web-scraping.html"><a href="web-scraping.html#lernziele-dieser-sitzung-4"><i class="fa fa-check"></i><b>11.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="11.2" data-path="web-scraping.html"><a href="web-scraping.html#vorbereitung-3"><i class="fa fa-check"></i><b>11.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="11.3" data-path="web-scraping.html"><a href="web-scraping.html#exkurs-html"><i class="fa fa-check"></i><b>11.3</b> Exkurs: HTML</a></li>
+<li class="chapter" data-level="11.4" data-path="web-scraping.html"><a href="web-scraping.html#seite-laden"><i class="fa fa-check"></i><b>11.4</b> Seite laden</a></li>
+<li class="chapter" data-level="11.5" data-path="web-scraping.html"><a href="web-scraping.html#elemente-suchen"><i class="fa fa-check"></i><b>11.5</b> Elemente suchen</a></li>
+<li class="chapter" data-level="11.6" data-path="web-scraping.html"><a href="web-scraping.html#elemente-reinigen"><i class="fa fa-check"></i><b>11.6</b> Elemente reinigen</a></li>
+<li class="chapter" data-level="11.7" data-path="web-scraping.html"><a href="web-scraping.html#aufgaben-6"><i class="fa fa-check"></i><b>11.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="text-straube-2021.html"><a href="text-straube-2021.html"><i class="fa fa-check"></i><b>12</b> Text: Straube 2021</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="text-straube-2021.html"><a href="text-straube-2021.html#lesetexte"><i class="fa fa-check"></i><b>12.1</b> Lesetexte</a></li>
+<li class="chapter" data-level="12.2" data-path="text-straube-2021.html"><a href="text-straube-2021.html#fragen-an-den-text-3"><i class="fa fa-check"></i><b>12.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="präsentationen.html"><a href="präsentationen.html"><i class="fa fa-check"></i><b>13</b> Präsentationen</a></li>
+<li class="chapter" data-level="14" data-path="apis.html"><a href="apis.html"><i class="fa fa-check"></i><b>14</b> APIs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="apis.html"><a href="apis.html#vorbereitung-4"><i class="fa fa-check"></i><b>14.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="14.2" data-path="apis.html"><a href="apis.html#swapi"><i class="fa fa-check"></i><b>14.2</b> SWAPI</a></li>
+<li class="chapter" data-level="14.3" data-path="apis.html"><a href="apis.html#exkurs-funktionen-schreiben"><i class="fa fa-check"></i><b>14.3</b> Exkurs: Funktionen schreiben</a></li>
+<li class="chapter" data-level="14.4" data-path="apis.html"><a href="apis.html#abfragefunktion"><i class="fa fa-check"></i><b>14.4</b> Abfragefunktion</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="serialisierung.html"><a href="serialisierung.html"><i class="fa fa-check"></i><b>15</b> Serialisierung</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="serialisierung.html"><a href="serialisierung.html#vorbereitung-5"><i class="fa fa-check"></i><b>15.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="15.2" data-path="serialisierung.html"><a href="serialisierung.html#zielsetzung"><i class="fa fa-check"></i><b>15.2</b> Zielsetzung</a></li>
+<li class="chapter" data-level="15.3" data-path="serialisierung.html"><a href="serialisierung.html#urls-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.3</b> URLs der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen"><i class="fa fa-check"></i><b>15.3.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.3.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren"><i class="fa fa-check"></i><b>15.3.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.3.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen"><i class="fa fa-check"></i><b>15.3.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.3.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-serialisiert-ausführen"><i class="fa fa-check"></i><b>15.3.4</b> Schritt Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="serialisierung.html"><a href="serialisierung.html#informationen-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.4</b> Informationen der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen-1"><i class="fa fa-check"></i><b>15.4.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.4.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren-1"><i class="fa fa-check"></i><b>15.4.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.4.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen-1"><i class="fa fa-check"></i><b>15.4.3</b> Schritt 3: Testen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="serialisierung.html"><a href="serialisierung.html#aufbereiten"><i class="fa fa-check"></i><b>15.5</b> Aufbereiten</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html"><i class="fa fa-check"></i><b>16</b> Text: Breuer 2005</a>
+<ul>
+<li class="chapter" data-level="16.0.1" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#lesetext-3"><i class="fa fa-check"></i><b>16.0.1</b> Lesetext</a></li>
+<li class="chapter" data-level="16.0.2" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#fragen-an-den-text-4"><i class="fa fa-check"></i><b>16.0.2</b> Fragen an den Text</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="serialisierung" class="section level1" number="15">
+<h1><span class="header-section-number">Sitzung 15</span> Serialisierung</h1>
+<div id="vorbereitung-5" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> Vorbereitung</h2>
+<p>Für diese Lektion werden die Pakete benötigt:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="serialisierung.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb152-2"><a href="serialisierung.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span></code></pre></div>
+</div>
+<div id="zielsetzung" class="section level2" number="15.2">
+<h2><span class="header-section-number">15.2</span> Zielsetzung</h2>
+<p>Auf <a href="https://www.wg-gesucht.de/" class="uri">https://www.wg-gesucht.de/</a> finden sich Anzeigen für WGs. In der Listenansicht werden pro Seite 20 Angebote überblicksartig angezeigt. Bei Click auf ein Angebot erscheinen Details der Anzeige, für die wir uns als Rohdaten interessieren.</p>
+<p>Wir wollen…</p>
+<ol style="list-style-type: decimal">
+<li>… für die ersten drei Überblicksseiten automatisiert alle URLs der einzelnen Anzeigen auslesen (was sich aber in der Praxis erweitern ließe).</li>
+<li>… für diese 60 URLs automatisiert die folgenden Details auslesen</li>
+</ol>
+<ul>
+<li>Gesamtmiete</li>
+<li>Zimmergröße</li>
+<li>Wer wohnt dort?</li>
+</ul>
+<p>Beide Zielsetzungen können in folgende Schritte unterteilt werden:</p>
+<ol style="list-style-type: decimal">
+<li>An einem Beispiel konkret ausführen</li>
+<li>Abstrahieren (hier: als Funktion)</li>
+<li>Serialisiert ausführen (hier: mit <code>lapply</code> o.ä.)</li>
+</ol>
+</div>
+<div id="urls-der-anzeigen-auslesen" class="section level2" number="15.3">
+<h2><span class="header-section-number">15.3</span> URLs der Anzeigen auslesen</h2>
+<div id="schritt-1-an-einem-beispiel-konkret-ausführen" class="section level3" number="15.3.1">
+<h3><span class="header-section-number">15.3.1</span> Schritt 1: An einem Beispiel konkret ausführen</h3>
+<p>In <a href="../11_web_scraping/">Lektion 11</a> haben wir gelernt, wie mit dem Paket <code>rvest</code> HTML-Seiten in R geladen und einzelne Elemente angesporchen werden können.</p>
+<p>Wenn man sich die <a href="https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html">erste Listenansicht</a> genau anschaut (mit Developer Tools / Inspect Element vom Browser), wird deutlich, dass die <code>&lt;tr&gt;</code>-Tags mit <code>class=offer_list_elemnt</code> die einzelnen Anzeigen enthalten. Ebenfalls im <code>&lt;tr&gt;</code>-Element enthält das Attribuit <code>adid</code> den entscheidenden Teil der Anzeigen-URL.</p>
+<p>Deshalb können wir schreiben:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="serialisierung.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb153-2"><a href="serialisierung.html#cb153-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb153-3"><a href="serialisierung.html#cb153-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;tr.offer_list_item&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb153-4"><a href="serialisierung.html#cb153-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">&quot;adid&quot;</span>)</span>
+<span id="cb153-5"><a href="serialisierung.html#cb153-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;wg-zimmer-in-Frankfurt-am-Main-Innenstadt.8456057.html&quot;  </span></span>
+<span id="cb153-6"><a href="serialisierung.html#cb153-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [2] &quot;wg-zimmer-in-Frankfurt-am-Main-Altstadt.8179908.html&quot;    </span></span>
+<span id="cb153-7"><a href="serialisierung.html#cb153-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  [3] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Nord.8380602.html&quot;</span></span>
+<span id="cb153-8"><a href="serialisierung.html#cb153-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  [4] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Nord.7743282.html&quot;</span></span>
+<span id="cb153-9"><a href="serialisierung.html#cb153-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Nord.8523213.html&quot;</span></span>
+<span id="cb153-10"><a href="serialisierung.html#cb153-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [6] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Nord.7952174.html&quot;</span></span>
+<span id="cb153-11"><a href="serialisierung.html#cb153-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] &quot;wg-zimmer-in-Frankfurt-am-Main-Nordend-West.8369804.html&quot;</span></span>
+<span id="cb153-12"><a href="serialisierung.html#cb153-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  [8] &quot;wg-zimmer-in-Frankfurt-am-Main-Innenstadt.8376022.html&quot;  </span></span>
+<span id="cb153-13"><a href="serialisierung.html#cb153-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] &quot;wg-zimmer-in-Frankfurt-am-Main-Nordend-West.6936308.html&quot;</span></span>
+<span id="cb153-14"><a href="serialisierung.html#cb153-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [10] &quot;wg-zimmer-in-Frankfurt-am-Main-Nordend-West.6944572.html&quot;</span></span>
+<span id="cb153-15"><a href="serialisierung.html#cb153-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [11] &quot;wg-zimmer-in-Frankfurt-am-Main-Neu-Isenburg.8616014.html&quot;</span></span>
+<span id="cb153-16"><a href="serialisierung.html#cb153-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [12] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Nord.7695069.html&quot;</span></span>
+<span id="cb153-17"><a href="serialisierung.html#cb153-17" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Nord.7693038.html&quot;</span></span>
+<span id="cb153-18"><a href="serialisierung.html#cb153-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [14] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Sud.8401007.html&quot; </span></span>
+<span id="cb153-19"><a href="serialisierung.html#cb153-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [15] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Nord.8401016.html&quot;</span></span>
+<span id="cb153-20"><a href="serialisierung.html#cb153-20" aria-hidden="true" tabindex="-1"></a><span class="do">## [16] &quot;wg-zimmer-in-Frankfurt-am-Main-Offenbach.5934645.html&quot;   </span></span>
+<span id="cb153-21"><a href="serialisierung.html#cb153-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [17] &quot;wg-zimmer-in-Frankfurt-am-Main-Innenstadt.8591977.html&quot;  </span></span>
+<span id="cb153-22"><a href="serialisierung.html#cb153-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [18] &quot;wg-zimmer-in-Frankfurt-am-Main-Altstadt.6999237.html&quot;    </span></span>
+<span id="cb153-23"><a href="serialisierung.html#cb153-23" aria-hidden="true" tabindex="-1"></a><span class="do">## [19] &quot;wg-zimmer-in-Frankfurt-am-Main-Westend-Nord.8376044.html&quot;</span></span>
+<span id="cb153-24"><a href="serialisierung.html#cb153-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [20] &quot;wg-zimmer-in-Frankfurt-am-Main-Nied.4715523.html&quot;</span></span></code></pre></div>
+</div>
+<div id="schritt-2-abstrahieren" class="section level3" number="15.3.2">
+<h3><span class="header-section-number">15.3.2</span> Schritt 2: Abstrahieren</h3>
+<p>Der obige Code lässt sich als Funktion abstrahieren, die eine URL als Input hat (s. <a href="../16_breuer_2005_apis">Sitzung 16</a>):</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="serialisierung.html#cb154-1" aria-hidden="true" tabindex="-1"></a>get_url_list <span class="ot">&lt;-</span> <span class="cf">function</span>(list_url) {</span>
+<span id="cb154-2"><a href="serialisierung.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb154-3"><a href="serialisierung.html#cb154-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb154-4"><a href="serialisierung.html#cb154-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="st">&quot;tr.offer_list_item&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb154-5"><a href="serialisierung.html#cb154-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_attr</span>(<span class="st">&quot;adid&quot;</span>)</span>
+<span id="cb154-6"><a href="serialisierung.html#cb154-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="schritt-3-testen" class="section level3" number="15.3.3">
+<h3><span class="header-section-number">15.3.3</span> Schritt 3: Testen</h3>
+</div>
+<div id="schritt-serialisiert-ausführen" class="section level3" number="15.3.4">
+<h3><span class="header-section-number">15.3.4</span> Schritt Serialisiert ausführen</h3>
+<p>Schließlich können wir die Funktion auf eine Reihe von Inputs anwenden. Einen Vektor mit den gewünschten Input-URLs können wir erstellen mit:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="serialisierung.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.&quot;</span>,<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>,<span class="st">&quot;.html&quot;</span>)</span>
+<span id="cb155-2"><a href="serialisierung.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html&quot;</span></span>
+<span id="cb155-3"><a href="serialisierung.html#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [2] &quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.1.html&quot;</span></span>
+<span id="cb155-4"><a href="serialisierung.html#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.2.html&quot;</span></span>
+<span id="cb155-5"><a href="serialisierung.html#cb155-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [4] &quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.3.html&quot;</span></span>
+<span id="cb155-6"><a href="serialisierung.html#cb155-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [5] &quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.4.html&quot;</span></span></code></pre></div>
+<p>Diese Liste ließe sich natürlich erweitern.</p>
+<p>Mit <code>map()</code> aus dem <code>purrr</code>-Paket (Teil von <code>tidyverse</code>) lässt sich dann unsere Funktion <code>get_url_list()</code> auf alle Elemente dieses Vektors anwenden. Das vorläufige Resultat ist eine Liste der Länge 3, wobei jedes Element wiederum ein Vektor mit 20 Elementen ist.</p>
+<p>Der Befehl <code>map_chr()</code> dampft das Ergebnis dann direkt auf einen einfachen Character-Vektor ein.</p>
+<p>Am Ende wird das Resultat mit <code>paste0()</code> an den Domainnamen gehängt und dem Objektnamen <code>anzeige_urls</code> zugewiesen.</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="serialisierung.html#cb156-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-2"><a href="serialisierung.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.&quot;</span>,<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>,<span class="st">&quot;.html&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb156-3"><a href="serialisierung.html#cb156-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(get_url_list) <span class="sc">%&gt;%</span></span>
+<span id="cb156-4"><a href="serialisierung.html#cb156-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flatten_chr</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb156-5"><a href="serialisierung.html#cb156-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;https://www.wg-gesucht.de/&quot;</span>, .) <span class="ot">-&gt;</span> anzeige_urls</span>
+<span id="cb156-6"><a href="serialisierung.html#cb156-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-7"><a href="serialisierung.html#cb156-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(anzeige_urls)</span>
+<span id="cb156-8"><a href="serialisierung.html#cb156-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  chr [1:60] &quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main-Innenstadt.8456057.html&quot; ...</span></span></code></pre></div>
+</div>
+</div>
+<div id="informationen-der-anzeigen-auslesen" class="section level2" number="15.4">
+<h2><span class="header-section-number">15.4</span> Informationen der Anzeigen auslesen</h2>
+<p>Jetzt ginge es darum, für jede dieser 60 URLs die relevanten Informationen rauszusuchen:</p>
+<ul>
+<li>Gesamtmiete</li>
+<li>Zimmergröße</li>
+<li>Wer wohnt dort?</li>
+</ul>
+<p>Auch hier gehen wir für die Automatisierung in den drei Schritten vor.</p>
+<div id="schritt-1-an-einem-beispiel-konkret-ausführen-1" class="section level3" number="15.4.1">
+<h3><span class="header-section-number">15.4.1</span> Schritt 1: An einem Beispiel konkret ausführen</h3>
+<p>Zunächst eine Beispielanzeige laden und zwischenspeichern:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="serialisierung.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main-Nied.7651909.html&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb157-2"><a href="serialisierung.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="ot">-&gt;</span> site</span></code></pre></div>
+<p>Dann lassen sich Quadratmeterzahl und Gesamtmiete recht einfach auslesen, weil beide in einer <code>h2</code>-Überschrift mit <code>class="headline-key-facts"</code> stecken:</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="serialisierung.html#cb158-1" aria-hidden="true" tabindex="-1"></a>site <span class="sc">%&gt;%</span></span>
+<span id="cb158-2"><a href="serialisierung.html#cb158-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;h2.headline-key-facts&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb158-3"><a href="serialisierung.html#cb158-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb158-4"><a href="serialisierung.html#cb158-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trimws</span>() <span class="ot">-&gt;</span> key_facts</span>
+<span id="cb158-5"><a href="serialisierung.html#cb158-5" aria-hidden="true" tabindex="-1"></a>  qm <span class="ot">&lt;-</span> key_facts[<span class="dv">1</span>]</span>
+<span id="cb158-6"><a href="serialisierung.html#cb158-6" aria-hidden="true" tabindex="-1"></a>  eur <span class="ot">&lt;-</span> key_facts[<span class="dv">2</span>]</span>
+<span id="cb158-7"><a href="serialisierung.html#cb158-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-8"><a href="serialisierung.html#cb158-8" aria-hidden="true" tabindex="-1"></a>qm</span>
+<span id="cb158-9"><a href="serialisierung.html#cb158-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;16m²&quot;</span></span>
+<span id="cb158-10"><a href="serialisierung.html#cb158-10" aria-hidden="true" tabindex="-1"></a>eur</span>
+<span id="cb158-11"><a href="serialisierung.html#cb158-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;400€&quot;</span></span></code></pre></div>
+<p>Die Information, wer dort wohnt, steckt in einem span title:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="serialisierung.html#cb159-1" aria-hidden="true" tabindex="-1"></a>site <span class="sc">%&gt;%</span></span>
+<span id="cb159-2"><a href="serialisierung.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="st">&quot;h1#sliderTopTitle&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb159-3"><a href="serialisierung.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&quot;span&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb159-4"><a href="serialisierung.html#cb159-4" aria-hidden="true" tabindex="-1"></a>  .[[<span class="dv">2</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb159-5"><a href="serialisierung.html#cb159-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">&quot;title&quot;</span>) <span class="ot">-&gt;</span> bewohnerinnen</span>
+<span id="cb159-6"><a href="serialisierung.html#cb159-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-7"><a href="serialisierung.html#cb159-7" aria-hidden="true" tabindex="-1"></a>bewohnerinnen</span>
+<span id="cb159-8"><a href="serialisierung.html#cb159-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;3er WG (0w,2m,0d)&quot;</span></span></code></pre></div>
+<p>Geballt lassen sich die Daten für eine Anzeige so ausgeben:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="serialisierung.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(qm, eur, bewohnerinnen)</span>
+<span id="cb160-2"><a href="serialisierung.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;16m²&quot;              &quot;400€&quot;             </span></span>
+<span id="cb160-3"><a href="serialisierung.html#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (0w,2m,0d)&quot;</span></span></code></pre></div>
+</div>
+<div id="schritt-2-abstrahieren-1" class="section level3" number="15.4.2">
+<h3><span class="header-section-number">15.4.2</span> Schritt 2: Abstrahieren</h3>
+<p>Wir abstrahieren die obigen Schritte als Funktion:</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="serialisierung.html#cb161-1" aria-hidden="true" tabindex="-1"></a>get_anzeige_details <span class="ot">&lt;-</span> <span class="cf">function</span>(anzeige_url) {</span>
+<span id="cb161-2"><a href="serialisierung.html#cb161-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-3"><a href="serialisierung.html#cb161-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)</span>
+<span id="cb161-4"><a href="serialisierung.html#cb161-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-5"><a href="serialisierung.html#cb161-5" aria-hidden="true" tabindex="-1"></a>  anzeige_url <span class="sc">%&gt;%</span></span>
+<span id="cb161-6"><a href="serialisierung.html#cb161-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read_html</span>() <span class="ot">-&gt;</span> site</span>
+<span id="cb161-7"><a href="serialisierung.html#cb161-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-8"><a href="serialisierung.html#cb161-8" aria-hidden="true" tabindex="-1"></a>  site <span class="sc">%&gt;%</span></span>
+<span id="cb161-9"><a href="serialisierung.html#cb161-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="st">&quot;h2.headline-key-facts&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb161-10"><a href="serialisierung.html#cb161-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_text</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb161-11"><a href="serialisierung.html#cb161-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trimws</span>() <span class="ot">-&gt;</span> key_facts</span>
+<span id="cb161-12"><a href="serialisierung.html#cb161-12" aria-hidden="true" tabindex="-1"></a>    qm <span class="ot">&lt;-</span> key_facts[<span class="dv">1</span>]</span>
+<span id="cb161-13"><a href="serialisierung.html#cb161-13" aria-hidden="true" tabindex="-1"></a>    eur <span class="ot">&lt;-</span> key_facts[<span class="dv">2</span>]</span>
+<span id="cb161-14"><a href="serialisierung.html#cb161-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-15"><a href="serialisierung.html#cb161-15" aria-hidden="true" tabindex="-1"></a>  site <span class="sc">%&gt;%</span></span>
+<span id="cb161-16"><a href="serialisierung.html#cb161-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="st">&quot;h1#sliderTopTitle&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb161-17"><a href="serialisierung.html#cb161-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_nodes</span>(<span class="st">&quot;span&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb161-18"><a href="serialisierung.html#cb161-18" aria-hidden="true" tabindex="-1"></a>    .[[<span class="dv">2</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb161-19"><a href="serialisierung.html#cb161-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">html_attr</span>(<span class="st">&quot;title&quot;</span>) <span class="ot">-&gt;</span> bewohnerinnen</span>
+<span id="cb161-20"><a href="serialisierung.html#cb161-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(qm, eur, bewohnerinnen)</span>
+<span id="cb161-21"><a href="serialisierung.html#cb161-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Der Befehl <code>Sys.sleep(2)</code> sorgt dafür, dass die Funktion bei jeder Ausführung erst mal zwei Sekunden „schläft“. Das ist leider nötig um zu verhindern, dass unsere IP automatisch gesperrt wird. Dadurch verlängert sich die Ausführung natürlich enorm.</p>
+</div>
+<div id="schritt-3-testen-1" class="section level3" number="15.4.3">
+<h3><span class="header-section-number">15.4.3</span> Schritt 3: Testen</h3>
+<p>Wir führen die Funktion probeweise für eine (andere) Anzeige aus:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="serialisierung.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main-Westend-Sud.8401009.html&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb162-2"><a href="serialisierung.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  get_anzeige_details</span>
+<span id="cb162-3"><a href="serialisierung.html#cb162-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;20m²&quot;              &quot;800€&quot;             </span></span>
+<span id="cb162-4"><a href="serialisierung.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (1w,1m,0d)&quot;</span></span></code></pre></div>
+<p>Klappt!</p>
+<p>Jetzt noch der Trick, diese Funktion mit <code>map()</code> auf alle 60 URLs auszuführen. Damit das hier aber klappt, ohne dass wir gesperrt werden, beschränke ich vorab auf die ersten zehn Einträge mit <code>head()</code>:</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="serialisierung.html#cb163-1" aria-hidden="true" tabindex="-1"></a>anzeige_urls <span class="sc">%&gt;%</span></span>
+<span id="cb163-2"><a href="serialisierung.html#cb163-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb163-3"><a href="serialisierung.html#cb163-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(get_anzeige_details) <span class="ot">-&gt;</span> results</span>
+<span id="cb163-4"><a href="serialisierung.html#cb163-4" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb163-5"><a href="serialisierung.html#cb163-5" aria-hidden="true" tabindex="-1"></a>results</span>
+<span id="cb163-6"><a href="serialisierung.html#cb163-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [[1]]</span></span>
+<span id="cb163-7"><a href="serialisierung.html#cb163-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;30m²&quot;              &quot;1000€&quot;            </span></span>
+<span id="cb163-8"><a href="serialisierung.html#cb163-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb163-9"><a href="serialisierung.html#cb163-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-10"><a href="serialisierung.html#cb163-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [[2]]</span></span>
+<span id="cb163-11"><a href="serialisierung.html#cb163-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;16m²&quot;              &quot;380€&quot;             </span></span>
+<span id="cb163-12"><a href="serialisierung.html#cb163-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;5er WG (2w,2m,0d)&quot;</span></span>
+<span id="cb163-13"><a href="serialisierung.html#cb163-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-14"><a href="serialisierung.html#cb163-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [[3]]</span></span>
+<span id="cb163-15"><a href="serialisierung.html#cb163-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;30m²&quot;              &quot;800€&quot;             </span></span>
+<span id="cb163-16"><a href="serialisierung.html#cb163-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb163-17"><a href="serialisierung.html#cb163-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-18"><a href="serialisierung.html#cb163-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [[4]]</span></span>
+<span id="cb163-19"><a href="serialisierung.html#cb163-19" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;35m²&quot;              &quot;800€&quot;             </span></span>
+<span id="cb163-20"><a href="serialisierung.html#cb163-20" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb163-21"><a href="serialisierung.html#cb163-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-22"><a href="serialisierung.html#cb163-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [[5]]</span></span>
+<span id="cb163-23"><a href="serialisierung.html#cb163-23" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;20m²&quot;              &quot;800€&quot;             </span></span>
+<span id="cb163-24"><a href="serialisierung.html#cb163-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb163-25"><a href="serialisierung.html#cb163-25" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-26"><a href="serialisierung.html#cb163-26" aria-hidden="true" tabindex="-1"></a><span class="do">## [[6]]</span></span>
+<span id="cb163-27"><a href="serialisierung.html#cb163-27" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;25m²&quot;              &quot;900€&quot;             </span></span>
+<span id="cb163-28"><a href="serialisierung.html#cb163-28" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb163-29"><a href="serialisierung.html#cb163-29" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-30"><a href="serialisierung.html#cb163-30" aria-hidden="true" tabindex="-1"></a><span class="do">## [[7]]</span></span>
+<span id="cb163-31"><a href="serialisierung.html#cb163-31" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;25m²&quot;              &quot;800€&quot;             </span></span>
+<span id="cb163-32"><a href="serialisierung.html#cb163-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;2er WG (1w,0m,0d)&quot;</span></span>
+<span id="cb163-33"><a href="serialisierung.html#cb163-33" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-34"><a href="serialisierung.html#cb163-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [[8]]</span></span>
+<span id="cb163-35"><a href="serialisierung.html#cb163-35" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;20m²&quot;              &quot;900€&quot;             </span></span>
+<span id="cb163-36"><a href="serialisierung.html#cb163-36" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb163-37"><a href="serialisierung.html#cb163-37" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-38"><a href="serialisierung.html#cb163-38" aria-hidden="true" tabindex="-1"></a><span class="do">## [[9]]</span></span>
+<span id="cb163-39"><a href="serialisierung.html#cb163-39" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;52m²&quot;              &quot;1090€&quot;            </span></span>
+<span id="cb163-40"><a href="serialisierung.html#cb163-40" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;2er WG (0w,1m,0d)&quot;</span></span>
+<span id="cb163-41"><a href="serialisierung.html#cb163-41" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb163-42"><a href="serialisierung.html#cb163-42" aria-hidden="true" tabindex="-1"></a><span class="do">## [[10]]</span></span>
+<span id="cb163-43"><a href="serialisierung.html#cb163-43" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;38m²&quot;              &quot;870€&quot;             </span></span>
+<span id="cb163-44"><a href="serialisierung.html#cb163-44" aria-hidden="true" tabindex="-1"></a><span class="do">## [3] &quot;2er WG (0w,1m,0d)&quot;</span></span></code></pre></div>
+<p>Mit <code>map_chr()</code> können wir aus dem Ergebnis direkt einen tibble basteln:</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="serialisierung.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">link =</span> <span class="fu">head</span>(anzeige_urls, <span class="dv">10</span>),</span>
+<span id="cb164-2"><a href="serialisierung.html#cb164-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">flaeche =</span> <span class="fu">map_chr</span>(results, <span class="dv">1</span>),</span>
+<span id="cb164-3"><a href="serialisierung.html#cb164-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">preis =</span> <span class="fu">map_chr</span>(results, <span class="dv">2</span>),</span>
+<span id="cb164-4"><a href="serialisierung.html#cb164-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">bewohnerinnen =</span> <span class="fu">map_chr</span>(results, <span class="dv">3</span>)) <span class="ot">-&gt;</span> wgs</span>
+<span id="cb164-5"><a href="serialisierung.html#cb164-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-6"><a href="serialisierung.html#cb164-6" aria-hidden="true" tabindex="-1"></a>wgs</span>
+<span id="cb164-7"><a href="serialisierung.html#cb164-7" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 10 x 4</span></span>
+<span id="cb164-8"><a href="serialisierung.html#cb164-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    link                    flaeche preis bewohnerinnen </span></span>
+<span id="cb164-9"><a href="serialisierung.html#cb164-9" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;                   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;         </span></span>
+<span id="cb164-10"><a href="serialisierung.html#cb164-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 https://www.wg-gesucht… 30m²    1000€ 3er WG (1w,1m…</span></span>
+<span id="cb164-11"><a href="serialisierung.html#cb164-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 https://www.wg-gesucht… 16m²    380€  5er WG (2w,2m…</span></span>
+<span id="cb164-12"><a href="serialisierung.html#cb164-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 https://www.wg-gesucht… 30m²    800€  3er WG (1w,1m…</span></span>
+<span id="cb164-13"><a href="serialisierung.html#cb164-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 https://www.wg-gesucht… 35m²    800€  3er WG (1w,1m…</span></span>
+<span id="cb164-14"><a href="serialisierung.html#cb164-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 https://www.wg-gesucht… 20m²    800€  3er WG (1w,1m…</span></span>
+<span id="cb164-15"><a href="serialisierung.html#cb164-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 https://www.wg-gesucht… 25m²    900€  3er WG (1w,1m…</span></span>
+<span id="cb164-16"><a href="serialisierung.html#cb164-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 https://www.wg-gesucht… 25m²    800€  2er WG (1w,0m…</span></span>
+<span id="cb164-17"><a href="serialisierung.html#cb164-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 https://www.wg-gesucht… 20m²    900€  3er WG (1w,1m…</span></span>
+<span id="cb164-18"><a href="serialisierung.html#cb164-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 https://www.wg-gesucht… 52m²    1090€ 2er WG (0w,1m…</span></span>
+<span id="cb164-19"><a href="serialisierung.html#cb164-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 https://www.wg-gesucht… 38m²    870€  2er WG (0w,1m…</span></span></code></pre></div>
+</div>
+</div>
+<div id="aufbereiten" class="section level2" number="15.5">
+<h2><span class="header-section-number">15.5</span> Aufbereiten</h2>
+<p>Um mit den Daten sinnvoll weiterzuarbeiten müssen sie in ein numerisches Format gebracht werden. Das funktioniert z. T. am besten mit regulären Ausdrücken (<q>regex</q>), denen wir uns in der nächsten Sitzung widmen werden.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="serialisierung.html#cb165-1" aria-hidden="true" tabindex="-1"></a>wgs<span class="sc">$</span>bewohnerinnen</span>
+<span id="cb165-2"><a href="serialisierung.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;3er WG (1w,1m,0d)&quot; &quot;5er WG (2w,2m,0d)&quot;</span></span>
+<span id="cb165-3"><a href="serialisierung.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  [3] &quot;3er WG (1w,1m,0d)&quot; &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb165-4"><a href="serialisierung.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] &quot;3er WG (1w,1m,0d)&quot; &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb165-5"><a href="serialisierung.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] &quot;2er WG (1w,0m,0d)&quot; &quot;3er WG (1w,1m,0d)&quot;</span></span>
+<span id="cb165-6"><a href="serialisierung.html#cb165-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] &quot;2er WG (0w,1m,0d)&quot; &quot;2er WG (0w,1m,0d)&quot;</span></span>
+<span id="cb165-7"><a href="serialisierung.html#cb165-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-8"><a href="serialisierung.html#cb165-8" aria-hidden="true" tabindex="-1"></a>wgs <span class="sc">%&gt;%</span></span>
+<span id="cb165-9"><a href="serialisierung.html#cb165-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flaeche =</span> <span class="fu">parse_number</span>(flaeche),</span>
+<span id="cb165-10"><a href="serialisierung.html#cb165-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">preis =</span> <span class="fu">parse_number</span>(preis),</span>
+<span id="cb165-11"><a href="serialisierung.html#cb165-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">bw_gesamt =</span> <span class="fu">parse_number</span>(bewohnerinnen),</span>
+<span id="cb165-12"><a href="serialisierung.html#cb165-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">bw_w =</span> <span class="fu">str_extract</span>(bewohnerinnen, <span class="st">&quot;[0-9]+w&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">parse_number</span>(),</span>
+<span id="cb165-13"><a href="serialisierung.html#cb165-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">bw_m =</span> <span class="fu">str_extract</span>(bewohnerinnen, <span class="st">&quot;[0-9]+m&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">parse_number</span>(),</span>
+<span id="cb165-14"><a href="serialisierung.html#cb165-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">bw_d =</span> <span class="fu">str_extract</span>(bewohnerinnen, <span class="st">&quot;[0-9]+d&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">parse_number</span>())</span>
+<span id="cb165-15"><a href="serialisierung.html#cb165-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 10 x 8</span></span>
+<span id="cb165-16"><a href="serialisierung.html#cb165-16" aria-hidden="true" tabindex="-1"></a><span class="do">##    link  flaeche preis bewohnerinnen bw_gesamt  bw_w</span></span>
+<span id="cb165-17"><a href="serialisierung.html#cb165-17" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb165-18"><a href="serialisierung.html#cb165-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 http…      30  1000 3er WG (1w,1…         3     1</span></span>
+<span id="cb165-19"><a href="serialisierung.html#cb165-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 http…      16   380 5er WG (2w,2…         5     2</span></span>
+<span id="cb165-20"><a href="serialisierung.html#cb165-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 http…      30   800 3er WG (1w,1…         3     1</span></span>
+<span id="cb165-21"><a href="serialisierung.html#cb165-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 http…      35   800 3er WG (1w,1…         3     1</span></span>
+<span id="cb165-22"><a href="serialisierung.html#cb165-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 http…      20   800 3er WG (1w,1…         3     1</span></span>
+<span id="cb165-23"><a href="serialisierung.html#cb165-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 http…      25   900 3er WG (1w,1…         3     1</span></span>
+<span id="cb165-24"><a href="serialisierung.html#cb165-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 http…      25   800 2er WG (1w,0…         2     1</span></span>
+<span id="cb165-25"><a href="serialisierung.html#cb165-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 http…      20   900 3er WG (1w,1…         3     1</span></span>
+<span id="cb165-26"><a href="serialisierung.html#cb165-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 http…      52  1090 2er WG (0w,1…         2     0</span></span>
+<span id="cb165-27"><a href="serialisierung.html#cb165-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 http…      38   870 2er WG (0w,1…         2     0</span></span>
+<span id="cb165-28"><a href="serialisierung.html#cb165-28" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 2 more variables: bw_m &lt;dbl&gt;, bw_d &lt;dbl&gt;</span></span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="apis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="text-breuer-2005.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ktiu/ds21/edit/master/15_serialisierung.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ktiu/ds21/blob/master/15_serialisierung.Rmd",
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

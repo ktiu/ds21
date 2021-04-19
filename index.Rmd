@@ -45,19 +45,19 @@ Datum                 | Sitzung | Inhalt
 25. Januar 2021       | 10      | [HTML-Tabellen](#html-tabellen)
 1. Februar 2021       | 11      | [Web scraping](#web-scraping)
 8. Februar 2021       | 12      | [Text: Straube 2021](#text-straube-2021)
-15. Februar 2021      | 13      | Präsentationen
+15. Februar 2021      | 13      | [Präsentationen]
 *31. März 2021*       |         | *Abgabe Exposé*
-12. April 2021        | 14      | APIs
-19. April 2021        | 15      | Serialisierung
-26. April 2021        | 16      | Text: Breuer 2005
-03. Mai 2021          | 17      | Reguläre Ausdrücke
-10. Mai 2021          | 18      | Merging, Grouping
-17. Mai 2021          | 19      | Text: Bowker und Star 2003
+12. April 2021        | 14      | [APIs]
+19. April 2021        | 15      | [Serialisierung]
+26. April 2021        | 16      | [Text: Breuer 2005]
+3. Mai 2021           | 17      | [Reguläre Ausdrücke]
+10. Mai 2021          | 18      | [Merging, Grouping]
+17. Mai 2021          | 19      | [Text: Bowker und Star 2003]
 *24. Mai 2021*        | 20      | *Entfällt (Pfingstmontag)*
-31. Mai 2021          | 21      | Datenmanagement und Kollaboration
-07. Juni 2021         | 22      | Clusteranalyse
-14. Juni 2021         | 23      | Text: Beer 2017
-21. Juni 2021         | 24      | ANOVA
-28. Juni 2021         | 25      | Rmarkdown
-05. Juli 2021         | 26      | Präsentationen
-12. Juli 2021         | 27      | Präsentationen
+31. Mai 2021          | 21      | [Datenmanagement und Kollaboration]
+7. Juni 2021          | 22      | [Clusteranalyse]
+14. Juni 2021         | 23      | [Text: Beer 2017]
+21. Juni 2021         | 24      | [ANOVA]
+28. Juni 2021         | 25      | [Rmarkdown]
+5. Juli 2021          | 26      | [Präsentationen]
+12. Juli 2021         | 27      | [Präsentationen]

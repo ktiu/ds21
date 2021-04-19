@@ -164,22 +164,22 @@ Datum & Sitzung & Inhalt \\
 25. Januar 2021 & 10 & \protect\hyperlink{html-tabellen}{HTML-Tabellen} \\
 1. Februar 2021 & 11 & \protect\hyperlink{web-scraping}{Web scraping} \\
 8. Februar 2021 & 12 & \protect\hyperlink{text-straube-2021}{Text: Straube 2021} \\
-15. Februar 2021 & 13 & Präsentationen \\
+15. Februar 2021 & 13 & \protect\hyperlink{pruxe4sentationen}{Präsentationen} \\
 \emph{31. März 2021} & & \emph{Abgabe Exposé} \\
-12. April 2021 & 14 & APIs \\
-19. April 2021 & 15 & Serialisierung \\
-26. April 2021 & 16 & Text: Breuer 2005 \\
-03. Mai 2021 & 17 & Reguläre Ausdrücke \\
-10. Mai 2021 & 18 & Merging, Grouping \\
-17. Mai 2021 & 19 & Text: Bowker und Star 2003 \\
+12. April 2021 & 14 & \protect\hyperlink{apis}{APIs} \\
+19. April 2021 & 15 & \protect\hyperlink{serialisierung}{Serialisierung} \\
+26. April 2021 & 16 & \protect\hyperlink{text-breuer-2005}{Text: Breuer 2005} \\
+3. Mai 2021 & 17 & {[}Reguläre Ausdrücke{]} \\
+10. Mai 2021 & 18 & {[}Merging, Grouping{]} \\
+17. Mai 2021 & 19 & {[}Text: Bowker und Star 2003{]} \\
 \emph{24. Mai 2021} & 20 & \emph{Entfällt (Pfingstmontag)} \\
-31. Mai 2021 & 21 & Datenmanagement und Kollaboration \\
-07. Juni 2021 & 22 & Clusteranalyse \\
-14. Juni 2021 & 23 & Text: Beer 2017 \\
-21. Juni 2021 & 24 & ANOVA \\
-28. Juni 2021 & 25 & Rmarkdown \\
-05. Juli 2021 & 26 & Präsentationen \\
-12. Juli 2021 & 27 & Präsentationen \\
+31. Mai 2021 & 21 & {[}Datenmanagement und Kollaboration{]} \\
+7. Juni 2021 & 22 & {[}Clusteranalyse{]} \\
+14. Juni 2021 & 23 & {[}Text: Beer 2017{]} \\
+21. Juni 2021 & 24 & {[}ANOVA{]} \\
+28. Juni 2021 & 25 & {[}Rmarkdown{]} \\
+5. Juli 2021 & 26 & \protect\hyperlink{pruxe4sentationen}{Präsentationen} \\
+12. Juli 2021 & 27 & \protect\hyperlink{pruxe4sentationen}{Präsentationen} \\
 \bottomrule
 \end{longtable}
 
@@ -3377,6 +3377,11 @@ Bauß, Jan-Luca und Felix Hiemeyer. 2021. Research Puzzle: Datenbeschaffung durc
   \end{itemize}
 \end{enumerate}
 
+\hypertarget{pruxe4sentationen}{%
+\section{Präsentationen}\label{pruxe4sentationen}}
+
+Zum Semesterabschluss präsentieren die Gruppen Ihre Projektvorhaben und erhalten Feedback.
+
 \hypertarget{apis}{%
 \section{APIs}\label{apis}}
 
@@ -3588,5 +3593,417 @@ Resultat ist eine Liste, die sich mit \texttt{unlist()} auch zu einem Vektor wan
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{serialisierung}{%
+\section{Serialisierung}\label{serialisierung}}
+
+\hypertarget{vorbereitung-5}{%
+\subsection{Vorbereitung}\label{vorbereitung-5}}
+
+Für diese Lektion werden die Pakete benötigt:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(rvest)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{zielsetzung}{%
+\subsection{Zielsetzung}\label{zielsetzung}}
+
+Auf \url{https://www.wg-gesucht.de/} finden sich Anzeigen für WGs. In der Listenansicht werden pro Seite 20 Angebote überblicksartig angezeigt. Bei Click auf ein Angebot erscheinen Details der Anzeige, für die wir uns als Rohdaten interessieren.
+
+Wir wollen\ldots{}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \ldots{} für die ersten drei Überblicksseiten automatisiert alle URLs der einzelnen Anzeigen auslesen (was sich aber in der Praxis erweitern ließe).
+\item
+  \ldots{} für diese 60 URLs automatisiert die folgenden Details auslesen
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Gesamtmiete
+\item
+  Zimmergröße
+\item
+  Wer wohnt dort?
+\end{itemize}
+
+Beide Zielsetzungen können in folgende Schritte unterteilt werden:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  An einem Beispiel konkret ausführen
+\item
+  Abstrahieren (hier: als Funktion)
+\item
+  Serialisiert ausführen (hier: mit \texttt{lapply} o.ä.)
+\end{enumerate}
+
+\hypertarget{urls-der-anzeigen-auslesen}{%
+\subsection{URLs der Anzeigen auslesen}\label{urls-der-anzeigen-auslesen}}
+
+\hypertarget{schritt-1-an-einem-beispiel-konkret-ausfuxfchren}{%
+\subsubsection{Schritt 1: An einem Beispiel konkret ausführen}\label{schritt-1-an-einem-beispiel-konkret-ausfuxfchren}}
+
+In \href{../11_web_scraping/}{Lektion 11} haben wir gelernt, wie mit dem Paket \texttt{rvest} HTML-Seiten in R geladen und einzelne Elemente angesporchen werden können.
+
+Wenn man sich die \href{https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html}{erste Listenansicht} genau anschaut (mit Developer Tools / Inspect Element vom Browser), wird deutlich, dass die \texttt{\textless{}tr\textgreater{}}-Tags mit \texttt{class=offer\_list\_elemnt} die einzelnen Anzeigen enthalten. Ebenfalls im \texttt{\textless{}tr\textgreater{}}-Element enthält das Attribuit \texttt{adid} den entscheidenden Teil der Anzeigen-URL.
+
+Deshalb können wir schreiben:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0.0.html"} \SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{read\_html}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"tr.offer\_list\_item"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_attr}\NormalTok{(}\StringTok{"adid"}\NormalTok{)}
+\DocumentationTok{\#\#  [1] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8456057.html"  }
+\DocumentationTok{\#\#  [2] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Altstadt.8179908.html"    }
+\DocumentationTok{\#\#  [3] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8380602.html"}
+\DocumentationTok{\#\#  [4] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7743282.html"}
+\DocumentationTok{\#\#  [5] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8523213.html"}
+\DocumentationTok{\#\#  [6] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7952174.html"}
+\DocumentationTok{\#\#  [7] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.8369804.html"}
+\DocumentationTok{\#\#  [8] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8376022.html"  }
+\DocumentationTok{\#\#  [9] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.6936308.html"}
+\DocumentationTok{\#\# [10] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.6944572.html"}
+\DocumentationTok{\#\# [11] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Neu{-}Isenburg.8616014.html"}
+\DocumentationTok{\#\# [12] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7695069.html"}
+\DocumentationTok{\#\# [13] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7693038.html"}
+\DocumentationTok{\#\# [14] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Sud.8401007.html" }
+\DocumentationTok{\#\# [15] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8401016.html"}
+\DocumentationTok{\#\# [16] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Offenbach.5934645.html"   }
+\DocumentationTok{\#\# [17] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8591977.html"  }
+\DocumentationTok{\#\# [18] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Altstadt.6999237.html"    }
+\DocumentationTok{\#\# [19] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8376044.html"}
+\DocumentationTok{\#\# [20] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nied.4715523.html"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{schritt-2-abstrahieren}{%
+\subsubsection{Schritt 2: Abstrahieren}\label{schritt-2-abstrahieren}}
+
+Der obige Code lässt sich als Funktion abstrahieren, die eine URL als Input hat (s. \href{../16_breuer_2005_apis}{Sitzung 16}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{get\_url\_list }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(list\_url) \{}
+  \StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0.0.html"} \SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{read\_html}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"tr.offer\_list\_item"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_attr}\NormalTok{(}\StringTok{"adid"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{schritt-3-testen}{%
+\subsubsection{Schritt 3: Testen}\label{schritt-3-testen}}
+
+\hypertarget{schritt-serialisiert-ausfuxfchren}{%
+\subsubsection{Schritt Serialisiert ausführen}\label{schritt-serialisiert-ausfuxfchren}}
+
+Schließlich können wir die Funktion auf eine Reihe von Inputs anwenden. Einen Vektor mit den gewünschten Input-URLs können wir erstellen mit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{paste0}\NormalTok{(}\StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0."}\NormalTok{,}\DecValTok{0}\SpecialCharTok{:}\DecValTok{4}\NormalTok{,}\StringTok{".html"}\NormalTok{)}
+\DocumentationTok{\#\# [1] "https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0.0.html"}
+\DocumentationTok{\#\# [2] "https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0.1.html"}
+\DocumentationTok{\#\# [3] "https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0.2.html"}
+\DocumentationTok{\#\# [4] "https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0.3.html"}
+\DocumentationTok{\#\# [5] "https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0.4.html"}
+\end{Highlighting}
+\end{Shaded}
+
+Diese Liste ließe sich natürlich erweitern.
+
+Mit \texttt{map()} aus dem \texttt{purrr}-Paket (Teil von \texttt{tidyverse}) lässt sich dann unsere Funktion \texttt{get\_url\_list()} auf alle Elemente dieses Vektors anwenden. Das vorläufige Resultat ist eine Liste der Länge 3, wobei jedes Element wiederum ein Vektor mit 20 Elementen ist.
+
+Der Befehl \texttt{map\_chr()} dampft das Ergebnis dann direkt auf einen einfachen Character-Vektor ein.
+
+Am Ende wird das Resultat mit \texttt{paste0()} an den Domainnamen gehängt und dem Objektnamen \texttt{anzeige\_urls} zugewiesen.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{paste0}\NormalTok{(}\StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main.41.0.0."}\NormalTok{,}\DecValTok{0}\SpecialCharTok{:}\DecValTok{2}\NormalTok{,}\StringTok{".html"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(get\_url\_list) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{flatten\_chr}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{paste0}\NormalTok{(}\StringTok{"https://www.wg{-}gesucht.de/"}\NormalTok{, .) }\OtherTok{{-}\textgreater{}}\NormalTok{ anzeige\_urls}
+
+\FunctionTok{str}\NormalTok{(anzeige\_urls)}
+\DocumentationTok{\#\#  chr [1:60] "https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8456057.html" ...}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{informationen-der-anzeigen-auslesen}{%
+\subsection{Informationen der Anzeigen auslesen}\label{informationen-der-anzeigen-auslesen}}
+
+Jetzt ginge es darum, für jede dieser 60 URLs die relevanten Informationen rauszusuchen:
+
+\begin{itemize}
+\tightlist
+\item
+  Gesamtmiete
+\item
+  Zimmergröße
+\item
+  Wer wohnt dort?
+\end{itemize}
+
+Auch hier gehen wir für die Automatisierung in den drei Schritten vor.
+
+\hypertarget{schritt-1-an-einem-beispiel-konkret-ausfuxfchren-1}{%
+\subsubsection{Schritt 1: An einem Beispiel konkret ausführen}\label{schritt-1-an-einem-beispiel-konkret-ausfuxfchren-1}}
+
+Zunächst eine Beispielanzeige laden und zwischenspeichern:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nied.7651909.html"} \SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{read\_html}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ site}
+\end{Highlighting}
+\end{Shaded}
+
+Dann lassen sich Quadratmeterzahl und Gesamtmiete recht einfach auslesen, weil beide in einer \texttt{h2}-Überschrift mit \texttt{class="headline-key-facts"} stecken:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{site }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"h2.headline{-}key{-}facts"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{trimws}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ key\_facts}
+\NormalTok{  qm }\OtherTok{\textless{}{-}}\NormalTok{ key\_facts[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  eur }\OtherTok{\textless{}{-}}\NormalTok{ key\_facts[}\DecValTok{2}\NormalTok{]}
+
+\NormalTok{qm}
+\DocumentationTok{\#\# [1] "16m²"}
+\NormalTok{eur}
+\DocumentationTok{\#\# [1] "400€"}
+\end{Highlighting}
+\end{Shaded}
+
+Die Information, wer dort wohnt, steckt in einem span title:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{site }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_node}\NormalTok{(}\StringTok{"h1\#sliderTopTitle"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"span"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_attr}\NormalTok{(}\StringTok{"title"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ bewohnerinnen}
+
+\NormalTok{bewohnerinnen}
+\DocumentationTok{\#\# [1] "3er WG (0w,2m,0d)"}
+\end{Highlighting}
+\end{Shaded}
+
+Geballt lassen sich die Daten für eine Anzeige so ausgeben:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(qm, eur, bewohnerinnen)}
+\DocumentationTok{\#\# [1] "16m²"              "400€"             }
+\DocumentationTok{\#\# [3] "3er WG (0w,2m,0d)"}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{schritt-2-abstrahieren-1}{%
+\subsubsection{Schritt 2: Abstrahieren}\label{schritt-2-abstrahieren-1}}
+
+Wir abstrahieren die obigen Schritte als Funktion:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{get\_anzeige\_details }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(anzeige\_url) \{}
+
+  \FunctionTok{Sys.sleep}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{  anzeige\_url }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{read\_html}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ site}
+
+\NormalTok{  site }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"h2.headline{-}key{-}facts"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_text}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{trimws}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ key\_facts}
+\NormalTok{    qm }\OtherTok{\textless{}{-}}\NormalTok{ key\_facts[}\DecValTok{1}\NormalTok{]}
+\NormalTok{    eur }\OtherTok{\textless{}{-}}\NormalTok{ key\_facts[}\DecValTok{2}\NormalTok{]}
+
+\NormalTok{  site }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"h1\#sliderTopTitle"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"span"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    .[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{html\_attr}\NormalTok{(}\StringTok{"title"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ bewohnerinnen}
+  \FunctionTok{c}\NormalTok{(qm, eur, bewohnerinnen)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Der Befehl \texttt{Sys.sleep(2)} sorgt dafür, dass die Funktion bei jeder Ausführung erst mal zwei Sekunden „schläft``. Das ist leider nötig um zu verhindern, dass unsere IP automatisch gesperrt wird. Dadurch verlängert sich die Ausführung natürlich enorm.
+
+\hypertarget{schritt-3-testen-1}{%
+\subsubsection{Schritt 3: Testen}\label{schritt-3-testen-1}}
+
+Wir führen die Funktion probeweise für eine (andere) Anzeige aus:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Sud.8401009.html"} \SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  get\_anzeige\_details}
+\DocumentationTok{\#\# [1] "20m²"              "800€"             }
+\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\end{Highlighting}
+\end{Shaded}
+
+Klappt!
+
+Jetzt noch der Trick, diese Funktion mit \texttt{map()} auf alle 60 URLs auszuführen. Damit das hier aber klappt, ohne dass wir gesperrt werden, beschränke ich vorab auf die ersten zehn Einträge mit \texttt{head()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anzeige\_urls }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{(}\DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(get\_anzeige\_details) }\OtherTok{{-}\textgreater{}}\NormalTok{ results}
+ 
+\NormalTok{results}
+\DocumentationTok{\#\# [[1]]}
+\DocumentationTok{\#\# [1] "30m²"              "1000€"            }
+\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[2]]}
+\DocumentationTok{\#\# [1] "16m²"              "380€"             }
+\DocumentationTok{\#\# [3] "5er WG (2w,2m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[3]]}
+\DocumentationTok{\#\# [1] "30m²"              "800€"             }
+\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[4]]}
+\DocumentationTok{\#\# [1] "35m²"              "800€"             }
+\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[5]]}
+\DocumentationTok{\#\# [1] "20m²"              "800€"             }
+\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[6]]}
+\DocumentationTok{\#\# [1] "25m²"              "900€"             }
+\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[7]]}
+\DocumentationTok{\#\# [1] "25m²"              "800€"             }
+\DocumentationTok{\#\# [3] "2er WG (1w,0m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[8]]}
+\DocumentationTok{\#\# [1] "20m²"              "900€"             }
+\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[9]]}
+\DocumentationTok{\#\# [1] "52m²"              "1090€"            }
+\DocumentationTok{\#\# [3] "2er WG (0w,1m,0d)"}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[10]]}
+\DocumentationTok{\#\# [1] "38m²"              "870€"             }
+\DocumentationTok{\#\# [3] "2er WG (0w,1m,0d)"}
+\end{Highlighting}
+\end{Shaded}
+
+Mit \texttt{map\_chr()} können wir aus dem Ergebnis direkt einen tibble basteln:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{link =} \FunctionTok{head}\NormalTok{(anzeige\_urls, }\DecValTok{10}\NormalTok{),}
+       \AttributeTok{flaeche =} \FunctionTok{map\_chr}\NormalTok{(results, }\DecValTok{1}\NormalTok{),}
+       \AttributeTok{preis =} \FunctionTok{map\_chr}\NormalTok{(results, }\DecValTok{2}\NormalTok{),}
+       \AttributeTok{bewohnerinnen =} \FunctionTok{map\_chr}\NormalTok{(results, }\DecValTok{3}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ wgs}
+
+\NormalTok{wgs}
+\DocumentationTok{\#\# \# A tibble: 10 x 4}
+\DocumentationTok{\#\#    link                    flaeche preis bewohnerinnen }
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}                   \textless{}chr\textgreater{}   \textless{}chr\textgreater{} \textless{}chr\textgreater{}         }
+\DocumentationTok{\#\#  1 https://www.wg{-}gesucht\textasciitilde{} 30m²    1000€ 3er WG (1w,1m\textasciitilde{}}
+\DocumentationTok{\#\#  2 https://www.wg{-}gesucht\textasciitilde{} 16m²    380€  5er WG (2w,2m\textasciitilde{}}
+\DocumentationTok{\#\#  3 https://www.wg{-}gesucht\textasciitilde{} 30m²    800€  3er WG (1w,1m\textasciitilde{}}
+\DocumentationTok{\#\#  4 https://www.wg{-}gesucht\textasciitilde{} 35m²    800€  3er WG (1w,1m\textasciitilde{}}
+\DocumentationTok{\#\#  5 https://www.wg{-}gesucht\textasciitilde{} 20m²    800€  3er WG (1w,1m\textasciitilde{}}
+\DocumentationTok{\#\#  6 https://www.wg{-}gesucht\textasciitilde{} 25m²    900€  3er WG (1w,1m\textasciitilde{}}
+\DocumentationTok{\#\#  7 https://www.wg{-}gesucht\textasciitilde{} 25m²    800€  2er WG (1w,0m\textasciitilde{}}
+\DocumentationTok{\#\#  8 https://www.wg{-}gesucht\textasciitilde{} 20m²    900€  3er WG (1w,1m\textasciitilde{}}
+\DocumentationTok{\#\#  9 https://www.wg{-}gesucht\textasciitilde{} 52m²    1090€ 2er WG (0w,1m\textasciitilde{}}
+\DocumentationTok{\#\# 10 https://www.wg{-}gesucht\textasciitilde{} 38m²    870€  2er WG (0w,1m\textasciitilde{}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{aufbereiten}{%
+\subsection{Aufbereiten}\label{aufbereiten}}
+
+Um mit den Daten sinnvoll weiterzuarbeiten müssen sie in ein numerisches Format gebracht werden. Das funktioniert z. T. am besten mit regulären Ausdrücken (``regex''), denen wir uns in der nächsten Sitzung widmen werden.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wgs}\SpecialCharTok{$}\NormalTok{bewohnerinnen}
+\DocumentationTok{\#\#  [1] "3er WG (1w,1m,0d)" "5er WG (2w,2m,0d)"}
+\DocumentationTok{\#\#  [3] "3er WG (1w,1m,0d)" "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\#  [5] "3er WG (1w,1m,0d)" "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\#  [7] "2er WG (1w,0m,0d)" "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\#  [9] "2er WG (0w,1m,0d)" "2er WG (0w,1m,0d)"}
+
+\NormalTok{wgs }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{flaeche =} \FunctionTok{parse\_number}\NormalTok{(flaeche),}
+         \AttributeTok{preis =} \FunctionTok{parse\_number}\NormalTok{(preis),}
+         \AttributeTok{bw\_gesamt =} \FunctionTok{parse\_number}\NormalTok{(bewohnerinnen),}
+         \AttributeTok{bw\_w =} \FunctionTok{str\_extract}\NormalTok{(bewohnerinnen, }\StringTok{"[0{-}9]+w"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{parse\_number}\NormalTok{(),}
+         \AttributeTok{bw\_m =} \FunctionTok{str\_extract}\NormalTok{(bewohnerinnen, }\StringTok{"[0{-}9]+m"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{parse\_number}\NormalTok{(),}
+         \AttributeTok{bw\_d =} \FunctionTok{str\_extract}\NormalTok{(bewohnerinnen, }\StringTok{"[0{-}9]+d"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{parse\_number}\NormalTok{())}
+\DocumentationTok{\#\# \# A tibble: 10 x 8}
+\DocumentationTok{\#\#    link  flaeche preis bewohnerinnen bw\_gesamt  bw\_w}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}   \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}chr\textgreater{}             \textless{}dbl\textgreater{} \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 http\textasciitilde{}      30  1000 3er WG (1w,1\textasciitilde{}         3     1}
+\DocumentationTok{\#\#  2 http\textasciitilde{}      16   380 5er WG (2w,2\textasciitilde{}         5     2}
+\DocumentationTok{\#\#  3 http\textasciitilde{}      30   800 3er WG (1w,1\textasciitilde{}         3     1}
+\DocumentationTok{\#\#  4 http\textasciitilde{}      35   800 3er WG (1w,1\textasciitilde{}         3     1}
+\DocumentationTok{\#\#  5 http\textasciitilde{}      20   800 3er WG (1w,1\textasciitilde{}         3     1}
+\DocumentationTok{\#\#  6 http\textasciitilde{}      25   900 3er WG (1w,1\textasciitilde{}         3     1}
+\DocumentationTok{\#\#  7 http\textasciitilde{}      25   800 2er WG (1w,0\textasciitilde{}         2     1}
+\DocumentationTok{\#\#  8 http\textasciitilde{}      20   900 3er WG (1w,1\textasciitilde{}         3     1}
+\DocumentationTok{\#\#  9 http\textasciitilde{}      52  1090 2er WG (0w,1\textasciitilde{}         2     0}
+\DocumentationTok{\#\# 10 http\textasciitilde{}      38   870 2er WG (0w,1\textasciitilde{}         2     0}
+\DocumentationTok{\#\# \# ... with 2 more variables: bw\_m \textless{}dbl\textgreater{}, bw\_d \textless{}dbl\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{text-breuer-2005}{%
+\section{Text: Breuer 2005}\label{text-breuer-2005}}
+
+\hypertarget{lesetext-3}{%
+\subsubsection{Lesetext}\label{lesetext-3}}
+
+Breuer, Ingo. 2005. Statistiken oder: Wie werden „Nomaden`` in Marokko gemacht? In: Gertel, Jörg (Hrsg). \emph{Methoden als Aspekte der Wissenskonstruktion. Fallstudien zur Nomadismusforschung.} Halle: Orientwissenschaftliches Zentrum der Martin-Luther-Universität Halle-Wittenberg. S. 55--73.
+
+\hypertarget{fragen-an-den-text-4}{%
+\subsubsection{Fragen an den Text}\label{fragen-an-den-text-4}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Um welche Art von Text handelt es sich? Wer ist der Autor, und an wen wendet er sich?
+\item
+  Was ist das zentrale Anliegen des Texts? Wo steht/stehen die Fragestellung/en?
+\item
+  Was macht den Begriff des „Nomaden`` so schwierig? Was den Begriff des „Haushalts``?
+\item
+  Was ist an dem Argument spezifisch für den empirischen Kontext? Was lässt sich auf andere Kontexte übertragen?
+\item
+  Welche Schlüsse zieht der Autor aus der Untersuchung? Ist dies überzeugend?
+\end{enumerate}
 
 \end{document}
