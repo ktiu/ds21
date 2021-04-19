@@ -3655,9 +3655,9 @@ Beide Zielsetzungen können in folgende Schritte unterteilt werden:
 \hypertarget{schritt-1-an-einem-beispiel-konkret-ausfuxfchren}{%
 \subsubsection{Schritt 1: An einem Beispiel konkret ausführen}\label{schritt-1-an-einem-beispiel-konkret-ausfuxfchren}}
 
-In \href{../11_web_scraping/}{Lektion 11} haben wir gelernt, wie mit dem Paket \texttt{rvest} HTML-Seiten in R geladen und einzelne Elemente angesporchen werden können.
+In \protect\hyperlink{web-scraping}{Sitzung 11} haben wir gelernt, wie mit dem Paket \texttt{rvest} HTML-Seiten in R geladen und einzelne Elemente angesporchen werden können.
 
-Wenn man sich die \href{https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html}{erste Listenansicht} genau anschaut (mit Developer Tools / Inspect Element vom Browser), wird deutlich, dass die \texttt{\textless{}tr\textgreater{}}-Tags mit \texttt{class=offer\_list\_elemnt} die einzelnen Anzeigen enthalten. Ebenfalls im \texttt{\textless{}tr\textgreater{}}-Element enthält das Attribuit \texttt{adid} den entscheidenden Teil der Anzeigen-URL.
+Wenn man sich die \href{https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html}{erste Listenansicht} genau anschaut (mit Developer Tools / Inspect Element vom Browser), wird deutlich, dass die \texttt{\textless{}tr\textgreater{}}-Tags mit \texttt{class=offer\_list\_item} die einzelnen Anzeigen enthalten. Ebenfalls im \texttt{\textless{}tr\textgreater{}}-Element enthält das Attribuit \texttt{adid} den entscheidenden Teil der Anzeigen-URL.
 
 Deshalb können wir schreiben:
 

@@ -32,9 +32,9 @@ Beide Zielsetzungen können in folgende Schritte unterteilt werden:
 
 ### Schritt 1: An einem Beispiel konkret ausführen
 
-In [Lektion 11](../11_web_scraping/) haben wir gelernt, wie mit dem Paket `rvest` HTML-Seiten in R geladen und einzelne Elemente angesporchen werden können.
+In [Sitzung 11](#web-scraping) haben wir gelernt, wie mit dem Paket `rvest` HTML-Seiten in R geladen und einzelne Elemente angesporchen werden können.
 
-Wenn man sich die [erste Listenansicht](https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html) genau anschaut (mit Developer Tools / Inspect Element vom Browser), wird deutlich, dass die `<tr>`-Tags mit `class=offer_list_elemnt` die einzelnen Anzeigen enthalten. Ebenfalls im `<tr>`-Element enthält das Attribuit `adid` den entscheidenden Teil der Anzeigen-URL.
+Wenn man sich die [erste Listenansicht](https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main.41.0.0.0.html) genau anschaut (mit Developer Tools / Inspect Element vom Browser), wird deutlich, dass die `<tr>`-Tags mit `class=offer_list_item` die einzelnen Anzeigen enthalten. Ebenfalls im `<tr>`-Element enthält das Attribuit `adid` den entscheidenden Teil der Anzeigen-URL.
 
 Deshalb können wir schreiben:
 
