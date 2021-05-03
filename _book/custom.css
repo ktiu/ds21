@@ -25,10 +25,6 @@
     font-family: "Source Serif Pro",Georgia, serif;
 }
 
-.book .book-body .page-wrapper .page-inner section.normal code, .book .book-body .page-wrapper .page-inner section.normal pre {
-    font-family: "Source Code Pro",Consolas,"Liberation Mono",Menlo,Courier,monospace;
-  }
-
 q {
   quotes: auto
 }
