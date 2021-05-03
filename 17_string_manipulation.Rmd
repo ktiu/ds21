@@ -70,7 +70,7 @@ relevante_tabellen[[3]] %>%
   mutate(across(c(2, 3), as.character))
 ```
 
-Über mehrere Tabellen, mit gleichzeitigem kombinieren:
+Über mehrere Tabellen, mit gleichzeitigem Kombinieren:
 
 ```{r}
 relevante_tabellen %>%

@@ -55,5 +55,10 @@
   https://danielfett.de/en/tutorials/tutorial-regulare-ausdrucke/  
   Deutschsprachige Einführung zu regulären Ausdrücken
 
+- **Reguläre Ausdrücke testen**  
+  https://www.regexpal.com/  
+  Online-Sandkasten um reguläre Ausdrücke auszuproblieren
+  
+
 - **Übersicht CSS-Selektoren**  
   https://www.w3schools.com/cssref/css_selectors.asp
