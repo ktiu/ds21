@@ -2,6 +2,7 @@ repo: https://github.com/ktiu/ds21/
 view: https://github.com/ktiu/ds21/blob/master/%s
 edit: https://github.com/ktiu/ds21/edit/master/%s
 clean: ["resources"]
+delete_merged_file: true
 language:
   ui:
     chapter_name: "Sitzung "

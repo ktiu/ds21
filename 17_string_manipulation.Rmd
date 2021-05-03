@@ -1,0 +1,206 @@
+# String manipulation
+
+## Vorbereitung
+
+Für diese Lektion brauchen wir folgende Pakete:
+
+```{r message=F, warning=F}
+library(tidyverse)
+library(rvest)
+library(sf)
+library(rnaturalearth)
+```
+
+## Aufgabe
+
+Ziel soll sein, aus Wikipedia eine [Liste der Vulkane in Japan](https://en.wikipedia.org/wiki/List_of_volcanoes_in_Japan) auszulesen und diese in einer Karte zu visualisieren, die mehr Informationen enthält als die auf Wikipedia angebotenen Optionen.
+
+
+## Tabellen aus Wikipedia laden
+
+Mit `rvest` lässt sich eine Liste der Tabellen auslesen:
+
+```{r}
+"https://en.wikipedia.org/wiki/List_of_volcanoes_in_Japan" %>%
+  read_html %>%
+  html_table -> alle_tabellen
+```
+
+## Tabellen kombinieren
+
+Die Tabellen 1, 2 und 9 sind dabei ergänzende Elemente auf der Wikipedia-Seite und hier uninteressant:
+
+```{r}
+alle_tabellen[c(1:2, 9)]
+```
+
+Mit den restlichen Tabellen (3--8) wollen wir weiterarbeiten:
+
+```{r}
+relevante_tabellen <- alle_tabellen[-c(1:2, 9)]
+```
+
+Zunächst sollen sie "untereinder" (zeilenweise) in einen Datensatz kombiniert werden.
+
+Das geht eigentlich mit dem Befehl `bind_rows()` ganz gut — allerdings müssen dafür die Spalten die selben Namen (hier gegeben) und die selben Typen haben (hier *nicht* gegeben).
+
+```{r, error=T}
+relevante_tabellen %>%
+  bind_rows()
+```
+
+In der 3. und 4. Tabelle haben nämlich die Spalten `Elevation (m)` und `Elevation (ft)` den Typ `int`, während sonst alles den Typ `chr` hat:
+
+```{r}
+walk(relevante_tabellen, str, vec.len = 0)
+```
+
+Hier ist es zunächst das einfachste, die Spalten in character strings umzuwandeln, um sie kombinieren zu können.
+
+Für eine Spalte hieße das:
+
+```{r}
+as.character(relevante_tabellen[[3]]$`Elevation (m)`)
+```
+
+Für eine Tabelle:
+
+```{r}
+relevante_tabellen[[3]] %>%
+  mutate(across(c(2, 3), as.character))
+```
+
+Über mehrere Tabellen, mit gleichzeitigem kombinieren:
+
+```{r}
+relevante_tabellen %>%
+  map(mutate, across(c(2, 3), as.character)) %>%
+  bind_rows() -> komplett
+
+komplett
+```
+
+## Tabellen säubern
+
+### Parse number
+
+Für einige Spalten (Höhe, Koordinaten, letzte Aktivtät) ist ein numerisches Format aber eigentlich tatsächlich wünschenswert.
+
+Eine robuste Möglichkeit dafür ist `parse_number()`:
+
+```{r}
+parse_number("Temperatur: -8° C")
+```
+
+Mit dem Befehl `mutate()` lassen sich neue Spalten erstellen, oder vorhandene Spalten überschreiben. Mit `select()` können Spalten selektiert oder (mit einem `-`) ,gelöscht‘ werden.
+
+Der folgende Befehl wandelt die Spalte `Elevation (m)` in Zahlen um, gibt dieser neuen Spalte den Namen `elevation_m` und selektiert dann alles außer den alten `Elevation`-Spalten:
+
+```{r}
+komplett %>%
+  mutate(elevation_m = parse_number(`Elevation (m)`)) %>%
+  select(-`Elevation (m)`, -`Elevation (ft)`)  -> vulkane_elev
+```
+
+Wobei das Attribut "problems" darauf hinweist, dass in manchen Strings keine Zahl gefunden wurde. Funktioniert hat es trotzdem (mit `NA` für fehlende Werte).
+
+```{r}
+vulkane_elev
+```
+
+### Reguläre Ausdrücke
+
+Spalten des Typs `chr` können außerdem mit Befehlen aus dem `stringr`-Paket (Teil von `tidyverse`) bearbeitet werden:
+
+- `str_remove_all()` entfernt Teile, die einem Muster entsprechen
+- `str_extract_all()` behält nur die Teile, die dem Muster entsprechen
+- `str_detect()` gibt `TRUE` aus, wenn das Muster gefunden wird, sonst `FALSE`
+- `str_replace_all()` ersetzt Teile, die dem Muster entsprechen, durch etwas anderes
+- etc.
+
+Die Muster müssen dabei im RegEx-Format (regular expressions, reguläre Ausdrücke) angegeben werden. Reguläre Ausdrücke sind nicht R-spezifisch, sonderen kommen in allen geläufigen Programmiersprachen zum Einsatz.
+
+Es kann eine große Herausforderung sein, ein RegEx-Muster zu basteln, das genau das macht, was man will. Dabei können browserbasierte Testumgebungen wie https://www.regexpal.com/ behilflich sein. Für einen systematischeren Zugang empfiehlt es sich, ein Tutorial wie https://regexone.com/ durchzuarbeiten.
+
+Im folgenden Befehl werden reguläre Ausdrücke direkt in Kombination mit `mutate()` benutzt, um metrische Koordinaten zu extrahieren:
+
+```{r}
+vulkane_elev %>%
+  mutate(Coordinates = str_extract(Coordinates, "[0-9.]+; [0-9.]+"),
+         latitude = str_remove(Coordinates, "; [0-9.]+") %>% as.numeric,
+         longitude = str_remove(Coordinates, "[0-9.]+; ") %>% as.numeric) %>%
+  select(-Coordinates) -> vulkane_geo
+
+vulkane_geo
+```
+
+Es gibt mehrere Formate, in denen die letzte Aktivität für die meisten Vulkane angegeben ist:
+
+- AD ... (Jahrszahl)
+- ... ka BP (vor soundsoviel tausend Jahren)
+- ... Ma BP (vor soundsoviel Millionen Jahren)
+
+Einige Werte fallen dabei aus dem Rahmen, damit können wir aber leben.Außerdem können auch Zeiträume angegeben sein, oder verschiedene Werte von verschiedenen Bergen. Hier soll es aber darum gehen, nach Möglichkeit *einen* der angegebenen Werte auszulesen.
+
+Für jedes mögliche Format wird dabei zunächst eine eigene numerische Spalte angelegt und umgerechnet in "Jahre seit dem letzten Ausbruch". Mit `str_match` können dafür Teile eines gefundenen Patterns extrahiert werden.
+
+Schließlich wird mit `pmin` das Minimum der so gefundenen Werte ermittelt.
+
+```{r}
+vulkane_geo %>%
+  mutate(ad_year = 2019 - str_match(`Last eruption`,
+                                    "AD ([0-9]+)")[,2] %>%
+                     parse_number,
+         years_bp = str_match(tolower(`Last eruption`),
+                              "([.0-9]+) bp")[,2] %>%
+                      parse_number,
+         ka_bp = str_match(tolower(`Last eruption`),
+                           "([.0-9]+) ka bp")[,2] %>% 
+                   as.numeric * 1000,
+         ma_bp = str_match(tolower(`Last eruption`),
+                           "([.0-9]+) ma bp")[,2] %>%
+                   as.numeric * 1000 * 1000,
+         years_since_last_eruption = pmin(ad_year,
+                                          years_bp,
+                                          ka_bp,
+                                          ma_bp,
+                                          na.rm = TRUE)) %>%
+  select(Name,
+         elevation_m,
+         latitude,
+         longitude,
+         years_since_last_eruption) -> vulkane_clean
+```
+
+
+## Visualisierung
+
+Zunächst werden die Vulkane in eine Simple Feature Collection umgewandelt und das CRS gesetzt:
+
+```{r}
+vulkane_clean %>%
+  st_as_sf(coords = c("longitude", "latitude")) %>%
+  st_set_crs(4326) -> vulkane_sf
+```
+
+Das `rnaturalearth` Paket lässt uns einfach die Polygone für die japanischen Inseln laden:
+
+```{r}
+japan <- ne_countries(scale = "medium",
+                      country = "Japan",
+                      returnclass = "sf")
+```
+
+Dann lässt sich eine schnelle Karte zeichnen durch:
+
+```{r}
+ggplot() +
+  geom_sf(data = japan, fill = "gray", color = NA) +
+  geom_sf(data = vulkane_sf,
+          aes(color = years_since_last_eruption,
+              size  = elevation_m),
+          alpha = 0.2) +
+  scale_colour_viridis_c("Jahre seit der letzten Aktivität") +
+  scale_size_continuous("Höhe über NN")
+```
+

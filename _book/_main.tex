@@ -169,11 +169,11 @@ Datum & Sitzung & Inhalt \\
 12. April 2021 & 14 & \protect\hyperlink{apis}{APIs} \\
 19. April 2021 & 15 & \protect\hyperlink{serialisierung}{Serialisierung} \\
 26. April 2021 & 16 & \protect\hyperlink{text-breuer-2005}{Text: Breuer 2005} \\
-3. Mai 2021 & 17 & {[}Reguläre Ausdrücke{]} \\
-10. Mai 2021 & 18 & {[}Merging, Grouping{]} \\
+3. Mai 2021 & 17 & \protect\hyperlink{string-manipulation}{String manipulation} \\
+10. Mai 2021 & 18 & {[}Join und group{]} \\
 17. Mai 2021 & 19 & {[}Text: Bowker und Star 2003{]} \\
 \emph{24. Mai 2021} & 20 & \emph{Entfällt (Pfingstmontag)} \\
-31. Mai 2021 & 21 & {[}Datenmanagement und Kollaboration{]} \\
+31. Mai 2021 & 21 & {[}Rmarkdown und Kollaboration{]} \\
 7. Juni 2021 & 22 & {[}Clusteranalyse{]} \\
 14. Juni 2021 & 23 & {[}Text: Beer 2017{]} \\
 21. Juni 2021 & 24 & {[}ANOVA{]} \\
@@ -481,9 +481,9 @@ Kriterium & Gewichtung & Erläuterung \\
 \midrule
 \endhead
 Ziterweise und Formatierung & 10\% & Der Text erfüllt formale Anforderungen an Wissenschaftlichkeit. \\
-Ausdruck und Rechtschreibung & 10\% & Der Text ist sprachlich gelungen. \\
+Ausdruck und Rechtschreibung & 10\% & Der Text ist sprachlich gelungen; Abbildungen und Tabellen werden ggf. hilfreich eingesetzt. \\
 Roter Faden & 10\% & Der Text ist übersichtlich strukturiert und die Einzelteile greifen gut ineinander. \\
-Literatur & 10\% & Die zitierten Quellen sind für eine Einführung ins Thema geeignet und werden gut zusammengefasst. \\
+Recherche & 10\% & Die zitierten Quellen sind für eine Einführung ins Thema geeignet und werden gut zusammengefasst. \\
 Theorie & 10\% & Relevante wissenschaftliche Perspektiven werden anhand von geeigneter Fachliteratur aufgezeigt. \\
 Fragestellung & 10\% & Die Forschungsfrage ist für das Vorhaben geeignet und wird überzeugend hergeleitet. \\
 Datenquellen & 20\% & Die Datenquellen sind geeignet und detailliert beschrieben. \\
@@ -4010,5 +4010,388 @@ Breuer, Ingo. 2005. Statistiken oder: Wie werden „Nomaden`` in Marokko gemacht
 \item
   Welche Schlüsse zieht der Autor aus der Untersuchung? Ist dies überzeugend?
 \end{enumerate}
+
+\hypertarget{string-manipulation}{%
+\section{String manipulation}\label{string-manipulation}}
+
+\hypertarget{vorbereitung-6}{%
+\subsection{Vorbereitung}\label{vorbereitung-6}}
+
+Für diese Lektion brauchen wir folgende Pakete:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(rvest)}
+\FunctionTok{library}\NormalTok{(sf)}
+\FunctionTok{library}\NormalTok{(rnaturalearth)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{aufgabe}{%
+\subsection{Aufgabe}\label{aufgabe}}
+
+Ziel soll sein, aus Wikipedia eine \href{https://en.wikipedia.org/wiki/List_of_volcanoes_in_Japan}{Liste der Vulkane in Japan} auszulesen und diese in einer Karte zu visualisieren, die mehr Informationen enthält als die auf Wikipedia angebotenen Optionen.
+
+\hypertarget{tabellen-aus-wikipedia-laden}{%
+\subsection{Tabellen aus Wikipedia laden}\label{tabellen-aus-wikipedia-laden}}
+
+Mit \texttt{rvest} lässt sich eine Liste der Tabellen auslesen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"https://en.wikipedia.org/wiki/List\_of\_volcanoes\_in\_Japan"} \SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  read\_html }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  html\_table }\OtherTok{{-}\textgreater{}}\NormalTok{ alle\_tabellen}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tabellen-kombinieren}{%
+\subsection{Tabellen kombinieren}\label{tabellen-kombinieren}}
+
+Die Tabellen 1, 2 und 9 sind dabei ergänzende Elemente auf der Wikipedia-Seite und hier uninteressant:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alle\_tabellen[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{)]}
+\DocumentationTok{\#\# [[1]]}
+\DocumentationTok{\#\# \# A tibble: 2 x 1}
+\DocumentationTok{\#\#   X1                                      }
+\DocumentationTok{\#\#   \textless{}chr\textgreater{}                                   }
+\DocumentationTok{\#\# 1 Map all coordinates using: OpenStreetMap}
+\DocumentationTok{\#\# 2 Download coordinates as: KML            }
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[2]]}
+\DocumentationTok{\#\# \# A tibble: 1 x 2}
+\DocumentationTok{\#\#   X1    X2                                                                      }
+\DocumentationTok{\#\#   \textless{}lgl\textgreater{} \textless{}chr\textgreater{}                                                                   }
+\DocumentationTok{\#\# 1 NA    This article is actively undergoing a major edit for a short while. To \textasciitilde{}}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [[3]]}
+\DocumentationTok{\#\# \# A tibble: 4 x 2}
+\DocumentationTok{\#\#   \textasciigrave{}.mw{-}parser{-}output .navbar\{display:inl\textasciitilde{} \textasciigrave{}.mw{-}parser{-}output .navbar\{display:in\textasciitilde{}}
+\DocumentationTok{\#\#   \textless{}chr\textgreater{}                                   \textless{}chr\textgreater{}                                 }
+\DocumentationTok{\#\# 1 "Sovereign states"                      "Afghanistan\textbackslash{}nArmenia\textbackslash{}nAzerbaijan\textbackslash{}nBa\textasciitilde{}}
+\DocumentationTok{\#\# 2 "States withlimited recognition"        "Abkhazia\textbackslash{}nArtsakh\textbackslash{}nNorthern Cyprus\textbackslash{}n\textasciitilde{}}
+\DocumentationTok{\#\# 3 "Dependencies andother territories"     "British Indian Ocean Territory\textbackslash{}nChri\textasciitilde{}}
+\DocumentationTok{\#\# 4 "Category\textbackslash{}nAsia portal"                 "Category\textbackslash{}nAsia portal"}
+\end{Highlighting}
+\end{Shaded}
+
+Mit den restlichen Tabellen (3--8) wollen wir weiterarbeiten:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{relevante\_tabellen }\OtherTok{\textless{}{-}}\NormalTok{ alle\_tabellen[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+Zunächst sollen sie ``untereinder'' (zeilenweise) in einen Datensatz kombiniert werden.
+
+Das geht eigentlich mit dem Befehl \texttt{bind\_rows()} ganz gut --- allerdings müssen dafür die Spalten die selben Namen (hier gegeben) und die selben Typen haben (hier \emph{nicht} gegeben).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{relevante\_tabellen }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{bind\_rows}\NormalTok{()}
+\DocumentationTok{\#\# Error: Can\textquotesingle{}t combine \textasciigrave{}..1$Elevation (m)\textasciigrave{} \textless{}character\textgreater{} and \textasciigrave{}..3$Elevation (m)\textasciigrave{} \textless{}integer\textgreater{}.}
+\end{Highlighting}
+\end{Shaded}
+
+In der 3. und 4. Tabelle haben nämlich die Spalten \texttt{Elevation\ (m)} und \texttt{Elevation\ (ft)} den Typ \texttt{int}, während sonst alles den Typ \texttt{chr} hat:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{walk}\NormalTok{(relevante\_tabellen, str, }\AttributeTok{vec.len =} \DecValTok{0}\NormalTok{)}
+\DocumentationTok{\#\# tibble [33 x 5] (S3: tbl\_df/tbl/data.frame)}
+\DocumentationTok{\#\#  $ Name          : chr [1:33]  ...}
+\DocumentationTok{\#\#  $ Elevation (m) : chr [1:33]  ...}
+\DocumentationTok{\#\#  $ Elevation (ft): chr [1:33]  ...}
+\DocumentationTok{\#\#  $ Coordinates   : chr [1:33]  ...}
+\DocumentationTok{\#\#  $ Last eruption : chr [1:33]  ...}
+\DocumentationTok{\#\# tibble [87 x 5] (S3: tbl\_df/tbl/data.frame)}
+\DocumentationTok{\#\#  $ Name          : chr [1:87]  ...}
+\DocumentationTok{\#\#  $ Elevation (m) : chr [1:87]  ...}
+\DocumentationTok{\#\#  $ Elevation (ft): chr [1:87]  ...}
+\DocumentationTok{\#\#  $ Coordinates   : chr [1:87]  ...}
+\DocumentationTok{\#\#  $ Last eruption : chr [1:87]  ...}
+\DocumentationTok{\#\# tibble [14 x 5] (S3: tbl\_df/tbl/data.frame)}
+\DocumentationTok{\#\#  $ Name          : chr [1:14]  ...}
+\DocumentationTok{\#\#  $ Elevation (m) : int [1:14] NULL ...}
+\DocumentationTok{\#\#  $ Elevation (ft): int [1:14] NULL ...}
+\DocumentationTok{\#\#  $ Coordinates   : chr [1:14]  ...}
+\DocumentationTok{\#\#  $ Last eruption : chr [1:14]  ...}
+\DocumentationTok{\#\# tibble [15 x 5] (S3: tbl\_df/tbl/data.frame)}
+\DocumentationTok{\#\#  $ Name          : chr [1:15]  ...}
+\DocumentationTok{\#\#  $ Elevation (m) : int [1:15] NULL ...}
+\DocumentationTok{\#\#  $ Elevation (ft): int [1:15] NULL ...}
+\DocumentationTok{\#\#  $ Coordinates   : chr [1:15]  ...}
+\DocumentationTok{\#\#  $ Last eruption : chr [1:15]  ...}
+\DocumentationTok{\#\# tibble [24 x 5] (S3: tbl\_df/tbl/data.frame)}
+\DocumentationTok{\#\#  $ Name          : chr [1:24]  ...}
+\DocumentationTok{\#\#  $ Elevation (m) : chr [1:24]  ...}
+\DocumentationTok{\#\#  $ Elevation (ft): chr [1:24]  ...}
+\DocumentationTok{\#\#  $ Coordinates   : chr [1:24]  ...}
+\DocumentationTok{\#\#  $ Last eruption : chr [1:24]  ...}
+\DocumentationTok{\#\# tibble [11 x 5] (S3: tbl\_df/tbl/data.frame)}
+\DocumentationTok{\#\#  $ Name          : chr [1:11]  ...}
+\DocumentationTok{\#\#  $ Elevation (m) : chr [1:11]  ...}
+\DocumentationTok{\#\#  $ Elevation (ft): chr [1:11]  ...}
+\DocumentationTok{\#\#  $ Coordinates   : chr [1:11]  ...}
+\DocumentationTok{\#\#  $ Last eruption : chr [1:11]  ...}
+\end{Highlighting}
+\end{Shaded}
+
+Hier ist es zunächst das einfachste, die Spalten in character strings umzuwandeln, um sie kombinieren zu können.
+
+Für eine Spalte hieße das:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.character}\NormalTok{(relevante\_tabellen[[}\DecValTok{3}\NormalTok{]]}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Elevation (m)}\StringTok{\textasciigrave{}}\NormalTok{)}
+\DocumentationTok{\#\#  [1] "423"  "11"   "854"  "758"  "574"  "{-}110" "851"  "813"  "{-}50"  "432" }
+\DocumentationTok{\#\# [11] "99"   "136"  "508"  "394"}
+\end{Highlighting}
+\end{Shaded}
+
+Für eine Tabelle:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{relevante\_tabellen[[}\DecValTok{3}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{), as.character))}
+\DocumentationTok{\#\# \# A tibble: 14 x 5}
+\DocumentationTok{\#\#    Name     \textasciigrave{}Elevation (m)\textasciigrave{} \textasciigrave{}Elevation (ft)\textasciigrave{} Coordinates        \textasciigrave{}Last eruption\textasciigrave{} }
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}    \textless{}chr\textgreater{}           \textless{}chr\textgreater{}            \textless{}chr\textgreater{}              \textless{}chr\textgreater{}           }
+\DocumentationTok{\#\#  1 Aogashi\textasciitilde{} 423             1388             32°27′N 139°46′E﻿\textasciitilde{}  AD 1785[† 1]    }
+\DocumentationTok{\#\#  2 Bayonna\textasciitilde{} 11              36               31°53′17″N 139°55\textasciitilde{} AD 1970[† 14]   }
+\DocumentationTok{\#\#  3 Hachijō\textasciitilde{} 854             2802             33°08′N 139°46′E﻿\textasciitilde{}  AD 1605[† 1]    }
+\DocumentationTok{\#\#  4 Izu{-}Ōsh\textasciitilde{} 758             2507             34°43′34″N 139°23\textasciitilde{} Mt. Mihara: AD \textasciitilde{}}
+\DocumentationTok{\#\#  5 Kōzushi\textasciitilde{} 574             1877             34°13′N 139°09′E﻿\textasciitilde{}  AD 838[† 1]     }
+\DocumentationTok{\#\#  6 Kurose   {-}110            {-}361             33°24′N 139°41′E﻿\textasciitilde{}  Caldera: older \textasciitilde{}}
+\DocumentationTok{\#\#  7 Mikuraj\textasciitilde{} 851             2792             33°52′16″N 139°36\textasciitilde{} 6.3 ka BP[† 1]  }
+\DocumentationTok{\#\#  8 Miyakej\textasciitilde{} 813             2674             34°05′10″N 139°31\textasciitilde{} AD 2013[† 16]   }
+\DocumentationTok{\#\#  9 Myōjins\textasciitilde{} {-}50             {-}164             31°55′05″N 140°01\textasciitilde{} AD 1970[† 1]    }
+\DocumentationTok{\#\# 10 Niijima  432             1417             34°22′N 139°16′E﻿\textasciitilde{}  Mt. Mukaiyama: \textasciitilde{}}
+\DocumentationTok{\#\# 11 Sofugan\textasciitilde{} 99              325              29°47′35″N 140°20\textasciitilde{} (Discolored wat\textasciitilde{}}
+\DocumentationTok{\#\# 12 Sumisuj\textasciitilde{} 136             446              31°26′20″N 140°03\textasciitilde{} AD 1916[† 1]    }
+\DocumentationTok{\#\# 13 Toshima  508             1667             34°31′N 139°17′E﻿\textasciitilde{}  9.1{-}4.0 ka BP[†\textasciitilde{}}
+\DocumentationTok{\#\# 14 Torishi\textasciitilde{} 394             1293             30°29′02″N 140°18\textasciitilde{} AD 2002[† 1]}
+\end{Highlighting}
+\end{Shaded}
+
+Über mehrere Tabellen, mit gleichzeitigem kombinieren:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{relevante\_tabellen }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(mutate, }\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{), as.character)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{bind\_rows}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ komplett}
+
+\NormalTok{komplett}
+\DocumentationTok{\#\# \# A tibble: 184 x 5}
+\DocumentationTok{\#\#    Name     \textasciigrave{}Elevation (m)\textasciigrave{} \textasciigrave{}Elevation (ft)\textasciigrave{} Coordinates         \textasciigrave{}Last eruption\textasciigrave{}}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}    \textless{}chr\textgreater{}           \textless{}chr\textgreater{}            \textless{}chr\textgreater{}               \textless{}chr\textgreater{}          }
+\DocumentationTok{\#\#  1 Akaigaw\textasciitilde{} 725             2379             .mw{-}parser{-}output \textasciitilde{} 1.3 Ma BP[† 1] }
+\DocumentationTok{\#\#  2 Mount A\textasciitilde{} 512             1680             43°36′36″N 144°26′\textasciitilde{} 1000{-}200 BP[† \textasciitilde{}}
+\DocumentationTok{\#\#  3 Daisets\textasciitilde{} 2290            7513             43°39′47″N 142°51′\textasciitilde{} AD 1739[† 1]   }
+\DocumentationTok{\#\#  4 Mount E\textasciitilde{} 1320            4331             42°47′35″N 141°17′\textasciitilde{} 17th century[†\textasciitilde{}}
+\DocumentationTok{\#\#  5 Mount E\textasciitilde{} 613             2028             41°48′14″N 141°09′\textasciitilde{} AD 1874[† 1]   }
+\DocumentationTok{\#\#  6 Akan Ca\textasciitilde{} {-}               {-}                43°27′04″N 144°06′\textasciitilde{} 0.25 Ma BP[† 1]}
+\DocumentationTok{\#\#  7 Mount M\textasciitilde{} 1499            4916             43°23′10″N 144°00′\textasciitilde{} AD 2008[† 1]   }
+\DocumentationTok{\#\#  8 Mount O\textasciitilde{} 1370            4495             43°27′11″N 144°09′\textasciitilde{} 5{-}2.5 ka BP[† \textasciitilde{}}
+\DocumentationTok{\#\#  9 Mount Iō 1563            5128             44°07′52″N 145°09′\textasciitilde{} AD 1936[† 1]   }
+\DocumentationTok{\#\# 10 Kusshar\textasciitilde{} {-}               {-}                43°37′16″N 144°20′\textasciitilde{} 2.3 ka BP[† 1] }
+\DocumentationTok{\#\# \# ... with 174 more rows}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tabellen-suxe4ubern}{%
+\subsection{Tabellen säubern}\label{tabellen-suxe4ubern}}
+
+\hypertarget{parse-number}{%
+\subsubsection{Parse number}\label{parse-number}}
+
+Für einige Spalten (Höhe, Koordinaten, letzte Aktivtät) ist ein numerisches Format aber eigentlich tatsächlich wünschenswert.
+
+Eine robuste Möglichkeit dafür ist \texttt{parse\_number()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{parse\_number}\NormalTok{(}\StringTok{"Temperatur: {-}8° C"}\NormalTok{)}
+\DocumentationTok{\#\# [1] {-}8}
+\end{Highlighting}
+\end{Shaded}
+
+Mit dem Befehl \texttt{mutate()} lassen sich neue Spalten erstellen, oder vorhandene Spalten überschreiben. Mit \texttt{select()} können Spalten selektiert oder (mit einem \texttt{-}) ,gelöscht` werden.
+
+Der folgende Befehl wandelt die Spalte \texttt{Elevation\ (m)} in Zahlen um, gibt dieser neuen Spalte den Namen \texttt{elevation\_m} und selektiert dann alles außer den alten \texttt{Elevation}-Spalten:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komplett }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{elevation\_m =} \FunctionTok{parse\_number}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Elevation (m)}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\StringTok{\textasciigrave{}}\AttributeTok{Elevation (m)}\StringTok{\textasciigrave{}}\NormalTok{, }\SpecialCharTok{{-}}\StringTok{\textasciigrave{}}\AttributeTok{Elevation (ft)}\StringTok{\textasciigrave{}}\NormalTok{)  }\OtherTok{{-}\textgreater{}}\NormalTok{ vulkane\_elev}
+\end{Highlighting}
+\end{Shaded}
+
+Wobei das Attribut ``problems'' darauf hinweist, dass in manchen Strings keine Zahl gefunden wurde. Funktioniert hat es trotzdem (mit \texttt{NA} für fehlende Werte).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vulkane\_elev}
+\DocumentationTok{\#\# \# A tibble: 184 x 4}
+\DocumentationTok{\#\#    Name          Coordinates                         \textasciigrave{}Last eruption\textasciigrave{} elevation\_m}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}         \textless{}chr\textgreater{}                               \textless{}chr\textgreater{}                 \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 Akaigawa Cal\textasciitilde{} .mw{-}parser{-}output .geo{-}default,.mw\textasciitilde{} 1.3 Ma BP[† 1]          725}
+\DocumentationTok{\#\#  2 Mount Atosan\textasciitilde{} 43°36′36″N 144°26′17″E﻿ / ﻿43.610°\textasciitilde{}   1000{-}200 BP[† \textasciitilde{}         512}
+\DocumentationTok{\#\#  3 Daisetsuzan \textasciitilde{} 43°39′47″N 142°51′14″E﻿ / ﻿43.663°\textasciitilde{}   AD 1739[† 1]           2290}
+\DocumentationTok{\#\#  4 Mount Eniwa   42°47′35″N 141°17′06″E﻿ / ﻿42.793°\textasciitilde{}   17th century[†\textasciitilde{}        1320}
+\DocumentationTok{\#\#  5 Mount Esan    41°48′14″N 141°09′58″E﻿ / ﻿41.804°\textasciitilde{}   AD 1874[† 1]            613}
+\DocumentationTok{\#\#  6 Akan Caldera\textasciitilde{} 43°27′04″N 144°06′36″E﻿ / ﻿43.451°\textasciitilde{}   0.25 Ma BP[† 1]          NA}
+\DocumentationTok{\#\#  7 Mount Meakan  43°23′10″N 144°00′29″E﻿ / ﻿43.386°\textasciitilde{}   AD 2008[† 1]           1499}
+\DocumentationTok{\#\#  8 Mount Oakan   43°27′11″N 144°09′47″E﻿ / ﻿43.453°\textasciitilde{}   5{-}2.5 ka BP[† \textasciitilde{}        1370}
+\DocumentationTok{\#\#  9 Mount Iō      44°07′52″N 145°09′54″E﻿ / ﻿44.131°\textasciitilde{}   AD 1936[† 1]           1563}
+\DocumentationTok{\#\# 10 Kussharo Cal\textasciitilde{} 43°37′16″N 144°20′10″E﻿ / ﻿43.621°\textasciitilde{}   2.3 ka BP[† 1]           NA}
+\DocumentationTok{\#\# \# ... with 174 more rows}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{reguluxe4re-ausdruxfccke}{%
+\subsubsection{Reguläre Ausdrücke}\label{reguluxe4re-ausdruxfccke}}
+
+Spalten des Typs \texttt{chr} können außerdem mit Befehlen aus dem \texttt{stringr}-Paket (Teil von \texttt{tidyverse}) bearbeitet werden:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{str\_remove\_all()} entfernt Teile, die einem Muster entsprechen
+\item
+  \texttt{str\_extract\_all()} behält nur die Teile, die dem Muster entsprechen
+\item
+  \texttt{str\_detect()} gibt \texttt{TRUE} aus, wenn das Muster gefunden wird, sonst \texttt{FALSE}
+\item
+  \texttt{str\_replace\_all()} ersetzt Teile, die dem Muster entsprechen, durch etwas anderes
+\item
+  etc.
+\end{itemize}
+
+Die Muster müssen dabei im RegEx-Format (regular expressions, reguläre Ausdrücke) angegeben werden. Reguläre Ausdrücke sind nicht R-spezifisch, sonderen kommen in allen geläufigen Programmiersprachen zum Einsatz.
+
+Es kann eine große Herausforderung sein, ein RegEx-Muster zu basteln, das genau das macht, was man will. Dabei können browserbasierte Testumgebungen wie \url{https://www.regexpal.com/} behilflich sein. Für einen systematischeren Zugang empfiehlt es sich, ein Tutorial wie \url{https://regexone.com/} durchzuarbeiten.
+
+Im folgenden Befehl werden reguläre Ausdrücke direkt in Kombination mit \texttt{mutate()} benutzt, um metrische Koordinaten zu extrahieren:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vulkane\_elev }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Coordinates =} \FunctionTok{str\_extract}\NormalTok{(Coordinates, }\StringTok{"[0{-}9.]+; [0{-}9.]+"}\NormalTok{),}
+         \AttributeTok{latitude =} \FunctionTok{str\_remove}\NormalTok{(Coordinates, }\StringTok{"; [0{-}9.]+"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ as.numeric,}
+         \AttributeTok{longitude =} \FunctionTok{str\_remove}\NormalTok{(Coordinates, }\StringTok{"[0{-}9.]+; "}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ as.numeric) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Coordinates) }\OtherTok{{-}\textgreater{}}\NormalTok{ vulkane\_geo}
+
+\NormalTok{vulkane\_geo}
+\DocumentationTok{\#\# \# A tibble: 184 x 5}
+\DocumentationTok{\#\#    Name                       \textasciigrave{}Last eruption\textasciigrave{}   elevation\_m latitude longitude}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}                      \textless{}chr\textgreater{}                   \textless{}dbl\textgreater{}    \textless{}dbl\textgreater{}     \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 Akaigawa Caldera           1.3 Ma BP[† 1]            725     43.1      141.}
+\DocumentationTok{\#\#  2 Mount Atosanupuri          1000{-}200 BP[† 1]          512     43.6      144.}
+\DocumentationTok{\#\#  3 Daisetsuzan Volcanic Group AD 1739[† 1]             2290     43.7      143.}
+\DocumentationTok{\#\#  4 Mount Eniwa                17th century[† 1]        1320     42.8      141.}
+\DocumentationTok{\#\#  5 Mount Esan                 AD 1874[† 1]              613     41.8      141.}
+\DocumentationTok{\#\#  6 Akan Caldera [ja]          0.25 Ma BP[† 1]            NA     43.5      144.}
+\DocumentationTok{\#\#  7 Mount Meakan               AD 2008[† 1]             1499     43.4      144.}
+\DocumentationTok{\#\#  8 Mount Oakan                5{-}2.5 ka BP[† 1]         1370     43.5      144.}
+\DocumentationTok{\#\#  9 Mount Iō                   AD 1936[† 1]             1563     44.1      145.}
+\DocumentationTok{\#\# 10 Kussharo Caldera           2.3 ka BP[† 1]             NA     43.6      144.}
+\DocumentationTok{\#\# \# ... with 174 more rows}
+\end{Highlighting}
+\end{Shaded}
+
+Es gibt mehrere Formate, in denen die letzte Aktivität für die meisten Vulkane angegeben ist:
+
+\begin{itemize}
+\tightlist
+\item
+  AD \ldots{} (Jahrszahl)
+\item
+  \ldots{} ka BP (vor soundsoviel tausend Jahren)
+\item
+  \ldots{} Ma BP (vor soundsoviel Millionen Jahren)
+\end{itemize}
+
+Einige Werte fallen dabei aus dem Rahmen, damit können wir aber leben.Außerdem können auch Zeiträume angegeben sein, oder verschiedene Werte von verschiedenen Bergen. Hier soll es aber darum gehen, nach Möglichkeit \emph{einen} der angegebenen Werte auszulesen.
+
+Für jedes mögliche Format wird dabei zunächst eine eigene numerische Spalte angelegt und umgerechnet in ``Jahre seit dem letzten Ausbruch''. Mit \texttt{str\_match} können dafür Teile eines gefundenen Patterns extrahiert werden.
+
+Schließlich wird mit \texttt{pmin} das Minimum der so gefundenen Werte ermittelt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vulkane\_geo }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{ad\_year =} \DecValTok{2019} \SpecialCharTok{{-}} \FunctionTok{str\_match}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Last eruption}\StringTok{\textasciigrave{}}\NormalTok{,}
+                                    \StringTok{"AD ([0{-}9]+)"}\NormalTok{)[,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                     parse\_number,}
+         \AttributeTok{years\_bp =} \FunctionTok{str\_match}\NormalTok{(}\FunctionTok{tolower}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Last eruption}\StringTok{\textasciigrave{}}\NormalTok{),}
+                              \StringTok{"([.0{-}9]+) bp"}\NormalTok{)[,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                      parse\_number,}
+         \AttributeTok{ka\_bp =} \FunctionTok{str\_match}\NormalTok{(}\FunctionTok{tolower}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Last eruption}\StringTok{\textasciigrave{}}\NormalTok{),}
+                           \StringTok{"([.0{-}9]+) ka bp"}\NormalTok{)[,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{                   as.numeric }\SpecialCharTok{*} \DecValTok{1000}\NormalTok{,}
+         \AttributeTok{ma\_bp =} \FunctionTok{str\_match}\NormalTok{(}\FunctionTok{tolower}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Last eruption}\StringTok{\textasciigrave{}}\NormalTok{),}
+                           \StringTok{"([.0{-}9]+) ma bp"}\NormalTok{)[,}\DecValTok{2}\NormalTok{] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                   as.numeric }\SpecialCharTok{*} \DecValTok{1000} \SpecialCharTok{*} \DecValTok{1000}\NormalTok{,}
+         \AttributeTok{years\_since\_last\_eruption =} \FunctionTok{pmin}\NormalTok{(ad\_year,}
+\NormalTok{                                          years\_bp,}
+\NormalTok{                                          ka\_bp,}
+\NormalTok{                                          ma\_bp,}
+                                          \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Name,}
+\NormalTok{         elevation\_m,}
+\NormalTok{         latitude,}
+\NormalTok{         longitude,}
+\NormalTok{         years\_since\_last\_eruption) }\OtherTok{{-}\textgreater{}}\NormalTok{ vulkane\_clean}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{visualisierung}{%
+\subsection{Visualisierung}\label{visualisierung}}
+
+Zunächst werden die Vulkane in eine Simple Feature Collection umgewandelt und das CRS gesetzt:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vulkane\_clean }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_as\_sf}\NormalTok{(}\AttributeTok{coords =} \FunctionTok{c}\NormalTok{(}\StringTok{"longitude"}\NormalTok{, }\StringTok{"latitude"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{st\_set\_crs}\NormalTok{(}\DecValTok{4326}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ vulkane\_sf}
+\end{Highlighting}
+\end{Shaded}
+
+Das \texttt{rnaturalearth} Paket lässt uns einfach die Polygone für die japanischen Inseln laden:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{japan }\OtherTok{\textless{}{-}} \FunctionTok{ne\_countries}\NormalTok{(}\AttributeTok{scale =} \StringTok{"medium"}\NormalTok{,}
+                      \AttributeTok{country =} \StringTok{"Japan"}\NormalTok{,}
+                      \AttributeTok{returnclass =} \StringTok{"sf"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Dann lässt sich eine schnelle Karte zeichnen durch:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data =}\NormalTok{ japan, }\AttributeTok{fill =} \StringTok{"gray"}\NormalTok{, }\AttributeTok{color =} \ConstantTok{NA}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data =}\NormalTok{ vulkane\_sf,}
+          \FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ years\_since\_last\_eruption,}
+              \AttributeTok{size  =}\NormalTok{ elevation\_m),}
+          \AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_viridis\_c}\NormalTok{(}\StringTok{"Jahre seit der letzten Aktivität"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_size\_continuous}\NormalTok{(}\StringTok{"Höhe über NN"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-182-1.png}
 
 \end{document}

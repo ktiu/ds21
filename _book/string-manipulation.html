@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sitzung 17 String manipulation | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sitzung 17 String manipulation | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sitzung 17 String manipulation | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="text-breuer-2005.html"/>
+
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link rel="icon" href="https://www.uni-frankfurt.de/favicon.ico" type="image/x-icon">
+<script src="solutions.js"></script>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé-wise"><i class="fa fa-check"></i><b>1.3.1</b> Exposé (WiSe)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#projektbericht-sose"><i class="fa fa-check"></i><b>1.3.2</b> Projektbericht (SoSe)</a></li>
+<li class="chapter" data-level="1.3.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.3</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.6</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
+<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="geodaten.html"><a href="geodaten.html#lernziele-dieser-sitzung-2"><i class="fa fa-check"></i><b>7.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="7.2" data-path="geodaten.html"><a href="geodaten.html#voraussetzungen-1"><i class="fa fa-check"></i><b>7.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="7.3" data-path="geodaten.html"><a href="geodaten.html#exkurs-pipes"><i class="fa fa-check"></i><b>7.3</b> Exkurs: Pipes</a></li>
+<li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
+<li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-3"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="choroplethen.html"><a href="choroplethen.html"><i class="fa fa-check"></i><b>8</b> Choroplethen</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="choroplethen.html"><a href="choroplethen.html#lernziele"><i class="fa fa-check"></i><b>8.1</b> Lernziele</a></li>
+<li class="chapter" data-level="8.2" data-path="choroplethen.html"><a href="choroplethen.html#vorbereitung-1"><i class="fa fa-check"></i><b>8.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="8.3" data-path="choroplethen.html"><a href="choroplethen.html#ziel"><i class="fa fa-check"></i><b>8.3</b> Ziel</a></li>
+<li class="chapter" data-level="8.4" data-path="choroplethen.html"><a href="choroplethen.html#grundkarte"><i class="fa fa-check"></i><b>8.4</b> Grundkarte</a></li>
+<li class="chapter" data-level="8.5" data-path="choroplethen.html"><a href="choroplethen.html#osm-daten"><i class="fa fa-check"></i><b>8.5</b> OSM-Daten</a></li>
+<li class="chapter" data-level="8.6" data-path="choroplethen.html"><a href="choroplethen.html#koordinatenreferenzsysteme"><i class="fa fa-check"></i><b>8.6</b> Koordinatenreferenzsysteme</a></li>
+<li class="chapter" data-level="8.7" data-path="choroplethen.html"><a href="choroplethen.html#verschneiden"><i class="fa fa-check"></i><b>8.7</b> Verschneiden</a></li>
+<li class="chapter" data-level="8.8" data-path="choroplethen.html"><a href="choroplethen.html#aufgaben-4"><i class="fa fa-check"></i><b>8.8</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html"><i class="fa fa-check"></i><b>9</b> Text: Chandra 2014</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#lesetext-2"><i class="fa fa-check"></i><b>9.1</b> Lesetext</a></li>
+<li class="chapter" data-level="9.2" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#fragen-an-den-text-2"><i class="fa fa-check"></i><b>9.2</b> Fragen an den Text</a></li>
+<li class="chapter" data-level="9.3" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#themenfindung"><i class="fa fa-check"></i><b>9.3</b> Themenfindung</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="html-tabellen.html"><a href="html-tabellen.html"><i class="fa fa-check"></i><b>10</b> HTML-Tabellen</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="html-tabellen.html"><a href="html-tabellen.html#lernziele-dieser-sitzung-3"><i class="fa fa-check"></i><b>10.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="10.2" data-path="html-tabellen.html"><a href="html-tabellen.html#vorbereitung-2"><i class="fa fa-check"></i><b>10.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="10.3" data-path="html-tabellen.html"><a href="html-tabellen.html#datenbeschaffung"><i class="fa fa-check"></i><b>10.3</b> Datenbeschaffung</a></li>
+<li class="chapter" data-level="10.4" data-path="html-tabellen.html"><a href="html-tabellen.html#datenformatierung"><i class="fa fa-check"></i><b>10.4</b> Datenformatierung</a></li>
+<li class="chapter" data-level="10.5" data-path="html-tabellen.html"><a href="html-tabellen.html#datenaufbereitung"><i class="fa fa-check"></i><b>10.5</b> Datenaufbereitung</a></li>
+<li class="chapter" data-level="10.6" data-path="html-tabellen.html"><a href="html-tabellen.html#datenvisualisierung"><i class="fa fa-check"></i><b>10.6</b> Datenvisualisierung</a></li>
+<li class="chapter" data-level="10.7" data-path="html-tabellen.html"><a href="html-tabellen.html#aufgaben-5"><i class="fa fa-check"></i><b>10.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>11</b> Web scraping</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="web-scraping.html"><a href="web-scraping.html#lernziele-dieser-sitzung-4"><i class="fa fa-check"></i><b>11.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="11.2" data-path="web-scraping.html"><a href="web-scraping.html#vorbereitung-3"><i class="fa fa-check"></i><b>11.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="11.3" data-path="web-scraping.html"><a href="web-scraping.html#exkurs-html"><i class="fa fa-check"></i><b>11.3</b> Exkurs: HTML</a></li>
+<li class="chapter" data-level="11.4" data-path="web-scraping.html"><a href="web-scraping.html#seite-laden"><i class="fa fa-check"></i><b>11.4</b> Seite laden</a></li>
+<li class="chapter" data-level="11.5" data-path="web-scraping.html"><a href="web-scraping.html#elemente-suchen"><i class="fa fa-check"></i><b>11.5</b> Elemente suchen</a></li>
+<li class="chapter" data-level="11.6" data-path="web-scraping.html"><a href="web-scraping.html#elemente-reinigen"><i class="fa fa-check"></i><b>11.6</b> Elemente reinigen</a></li>
+<li class="chapter" data-level="11.7" data-path="web-scraping.html"><a href="web-scraping.html#aufgaben-6"><i class="fa fa-check"></i><b>11.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="text-straube-2021.html"><a href="text-straube-2021.html"><i class="fa fa-check"></i><b>12</b> Text: Straube 2021</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="text-straube-2021.html"><a href="text-straube-2021.html#lesetexte"><i class="fa fa-check"></i><b>12.1</b> Lesetexte</a></li>
+<li class="chapter" data-level="12.2" data-path="text-straube-2021.html"><a href="text-straube-2021.html#fragen-an-den-text-3"><i class="fa fa-check"></i><b>12.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="präsentationen.html"><a href="präsentationen.html"><i class="fa fa-check"></i><b>13</b> Präsentationen</a></li>
+<li class="chapter" data-level="14" data-path="apis.html"><a href="apis.html"><i class="fa fa-check"></i><b>14</b> APIs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="apis.html"><a href="apis.html#vorbereitung-4"><i class="fa fa-check"></i><b>14.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="14.2" data-path="apis.html"><a href="apis.html#swapi"><i class="fa fa-check"></i><b>14.2</b> SWAPI</a></li>
+<li class="chapter" data-level="14.3" data-path="apis.html"><a href="apis.html#exkurs-funktionen-schreiben"><i class="fa fa-check"></i><b>14.3</b> Exkurs: Funktionen schreiben</a></li>
+<li class="chapter" data-level="14.4" data-path="apis.html"><a href="apis.html#abfragefunktion"><i class="fa fa-check"></i><b>14.4</b> Abfragefunktion</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="serialisierung.html"><a href="serialisierung.html"><i class="fa fa-check"></i><b>15</b> Serialisierung</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="serialisierung.html"><a href="serialisierung.html#vorbereitung-5"><i class="fa fa-check"></i><b>15.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="15.2" data-path="serialisierung.html"><a href="serialisierung.html#zielsetzung"><i class="fa fa-check"></i><b>15.2</b> Zielsetzung</a></li>
+<li class="chapter" data-level="15.3" data-path="serialisierung.html"><a href="serialisierung.html#urls-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.3</b> URLs der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen"><i class="fa fa-check"></i><b>15.3.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.3.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren"><i class="fa fa-check"></i><b>15.3.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.3.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen"><i class="fa fa-check"></i><b>15.3.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.3.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen"><i class="fa fa-check"></i><b>15.3.4</b> Schritt 4: Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="serialisierung.html"><a href="serialisierung.html#informationen-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.4</b> Informationen der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen-1"><i class="fa fa-check"></i><b>15.4.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.4.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren-1"><i class="fa fa-check"></i><b>15.4.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.4.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen-1"><i class="fa fa-check"></i><b>15.4.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.4.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen-1"><i class="fa fa-check"></i><b>15.4.4</b> Schritt 4: Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="serialisierung.html"><a href="serialisierung.html#aufbereiten"><i class="fa fa-check"></i><b>15.5</b> Aufbereiten</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html"><i class="fa fa-check"></i><b>16</b> Text: Breuer 2005</a>
+<ul>
+<li class="chapter" data-level="16.0.1" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#lesetext-3"><i class="fa fa-check"></i><b>16.0.1</b> Lesetext</a></li>
+<li class="chapter" data-level="16.0.2" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#fragen-an-den-text-4"><i class="fa fa-check"></i><b>16.0.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="string-manipulation.html"><a href="string-manipulation.html"><i class="fa fa-check"></i><b>17</b> String manipulation</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="string-manipulation.html"><a href="string-manipulation.html#vorbereitung-6"><i class="fa fa-check"></i><b>17.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="17.2" data-path="string-manipulation.html"><a href="string-manipulation.html#aufgabe"><i class="fa fa-check"></i><b>17.2</b> Aufgabe</a></li>
+<li class="chapter" data-level="17.3" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-aus-wikipedia-laden"><i class="fa fa-check"></i><b>17.3</b> Tabellen aus Wikipedia laden</a></li>
+<li class="chapter" data-level="17.4" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-kombinieren"><i class="fa fa-check"></i><b>17.4</b> Tabellen kombinieren</a></li>
+<li class="chapter" data-level="17.5" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-säubern"><i class="fa fa-check"></i><b>17.5</b> Tabellen säubern</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="string-manipulation.html"><a href="string-manipulation.html#parse-number"><i class="fa fa-check"></i><b>17.5.1</b> Parse number</a></li>
+<li class="chapter" data-level="17.5.2" data-path="string-manipulation.html"><a href="string-manipulation.html#reguläre-ausdrücke"><i class="fa fa-check"></i><b>17.5.2</b> Reguläre Ausdrücke</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="string-manipulation.html"><a href="string-manipulation.html#visualisierung"><i class="fa fa-check"></i><b>17.6</b> Visualisierung</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="string-manipulation" class="section level1" number="17">
+<h1><span class="header-section-number">Sitzung 17</span> String manipulation</h1>
+<div id="vorbereitung-6" class="section level2" number="17.1">
+<h2><span class="header-section-number">17.1</span> Vorbereitung</h2>
+<p>Für diese Lektion brauchen wir folgende Pakete:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="string-manipulation.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb166-2"><a href="string-manipulation.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb166-3"><a href="string-manipulation.html#cb166-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb166-4"><a href="string-manipulation.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span></code></pre></div>
+</div>
+<div id="aufgabe" class="section level2" number="17.2">
+<h2><span class="header-section-number">17.2</span> Aufgabe</h2>
+<p>Ziel soll sein, aus Wikipedia eine <a href="https://en.wikipedia.org/wiki/List_of_volcanoes_in_Japan">Liste der Vulkane in Japan</a> auszulesen und diese in einer Karte zu visualisieren, die mehr Informationen enthält als die auf Wikipedia angebotenen Optionen.</p>
+</div>
+<div id="tabellen-aus-wikipedia-laden" class="section level2" number="17.3">
+<h2><span class="header-section-number">17.3</span> Tabellen aus Wikipedia laden</h2>
+<p>Mit <code>rvest</code> lässt sich eine Liste der Tabellen auslesen:</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="string-manipulation.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;https://en.wikipedia.org/wiki/List_of_volcanoes_in_Japan&quot;</span> <span class="sc">%&gt;%</span></span>
+<span id="cb167-2"><a href="string-manipulation.html#cb167-2" aria-hidden="true" tabindex="-1"></a>  read_html <span class="sc">%&gt;%</span></span>
+<span id="cb167-3"><a href="string-manipulation.html#cb167-3" aria-hidden="true" tabindex="-1"></a>  html_table <span class="ot">-&gt;</span> alle_tabellen</span></code></pre></div>
+</div>
+<div id="tabellen-kombinieren" class="section level2" number="17.4">
+<h2><span class="header-section-number">17.4</span> Tabellen kombinieren</h2>
+<p>Die Tabellen 1, 2 und 9 sind dabei ergänzende Elemente auf der Wikipedia-Seite und hier uninteressant:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="string-manipulation.html#cb168-1" aria-hidden="true" tabindex="-1"></a>alle_tabellen[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">9</span>)]</span>
+<span id="cb168-2"><a href="string-manipulation.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [[1]]</span></span>
+<span id="cb168-3"><a href="string-manipulation.html#cb168-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 x 1</span></span>
+<span id="cb168-4"><a href="string-manipulation.html#cb168-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   X1                                      </span></span>
+<span id="cb168-5"><a href="string-manipulation.html#cb168-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;                                   </span></span>
+<span id="cb168-6"><a href="string-manipulation.html#cb168-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Map all coordinates using: OpenStreetMap</span></span>
+<span id="cb168-7"><a href="string-manipulation.html#cb168-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Download coordinates as: KML            </span></span>
+<span id="cb168-8"><a href="string-manipulation.html#cb168-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb168-9"><a href="string-manipulation.html#cb168-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [[2]]</span></span>
+<span id="cb168-10"><a href="string-manipulation.html#cb168-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 1 x 2</span></span>
+<span id="cb168-11"><a href="string-manipulation.html#cb168-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   X1    X2                                                                      </span></span>
+<span id="cb168-12"><a href="string-manipulation.html#cb168-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;lgl&gt; &lt;chr&gt;                                                                   </span></span>
+<span id="cb168-13"><a href="string-manipulation.html#cb168-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 NA    This article is actively undergoing a major edit for a short while. To …</span></span>
+<span id="cb168-14"><a href="string-manipulation.html#cb168-14" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb168-15"><a href="string-manipulation.html#cb168-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [[3]]</span></span>
+<span id="cb168-16"><a href="string-manipulation.html#cb168-16" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 4 x 2</span></span>
+<span id="cb168-17"><a href="string-manipulation.html#cb168-17" aria-hidden="true" tabindex="-1"></a><span class="do">##   `.mw-parser-output .navbar{display:inl… `.mw-parser-output .navbar{display:in…</span></span>
+<span id="cb168-18"><a href="string-manipulation.html#cb168-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;                                   &lt;chr&gt;                                 </span></span>
+<span id="cb168-19"><a href="string-manipulation.html#cb168-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 &quot;Sovereign states&quot;                      &quot;Afghanistan\nArmenia\nAzerbaijan\nBa…</span></span>
+<span id="cb168-20"><a href="string-manipulation.html#cb168-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 &quot;States withlimited recognition&quot;        &quot;Abkhazia\nArtsakh\nNorthern Cyprus\n…</span></span>
+<span id="cb168-21"><a href="string-manipulation.html#cb168-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 &quot;Dependencies andother territories&quot;     &quot;British Indian Ocean Territory\nChri…</span></span>
+<span id="cb168-22"><a href="string-manipulation.html#cb168-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 &quot;Category\nAsia portal&quot;                 &quot;Category\nAsia portal&quot;</span></span></code></pre></div>
+<p>Mit den restlichen Tabellen (3–8) wollen wir weiterarbeiten:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="string-manipulation.html#cb169-1" aria-hidden="true" tabindex="-1"></a>relevante_tabellen <span class="ot">&lt;-</span> alle_tabellen[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">9</span>)]</span></code></pre></div>
+<p>Zunächst sollen sie <q>untereinder</q> (zeilenweise) in einen Datensatz kombiniert werden.</p>
+<p>Das geht eigentlich mit dem Befehl <code>bind_rows()</code> ganz gut — allerdings müssen dafür die Spalten die selben Namen (hier gegeben) und die selben Typen haben (hier <em>nicht</em> gegeben).</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="string-manipulation.html#cb170-1" aria-hidden="true" tabindex="-1"></a>relevante_tabellen <span class="sc">%&gt;%</span></span>
+<span id="cb170-2"><a href="string-manipulation.html#cb170-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span>
+<span id="cb170-3"><a href="string-manipulation.html#cb170-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Error: Can&#39;t combine `..1$Elevation (m)` &lt;character&gt; and `..3$Elevation (m)` &lt;integer&gt;.</span></span></code></pre></div>
+<p>In der 3. und 4. Tabelle haben nämlich die Spalten <code>Elevation (m)</code> und <code>Elevation (ft)</code> den Typ <code>int</code>, während sonst alles den Typ <code>chr</code> hat:</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="string-manipulation.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(relevante_tabellen, str, <span class="at">vec.len =</span> <span class="dv">0</span>)</span>
+<span id="cb171-2"><a href="string-manipulation.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [33 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb171-3"><a href="string-manipulation.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Name          : chr [1:33]  ...</span></span>
+<span id="cb171-4"><a href="string-manipulation.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (m) : chr [1:33]  ...</span></span>
+<span id="cb171-5"><a href="string-manipulation.html#cb171-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (ft): chr [1:33]  ...</span></span>
+<span id="cb171-6"><a href="string-manipulation.html#cb171-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Coordinates   : chr [1:33]  ...</span></span>
+<span id="cb171-7"><a href="string-manipulation.html#cb171-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Last eruption : chr [1:33]  ...</span></span>
+<span id="cb171-8"><a href="string-manipulation.html#cb171-8" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [87 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb171-9"><a href="string-manipulation.html#cb171-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Name          : chr [1:87]  ...</span></span>
+<span id="cb171-10"><a href="string-manipulation.html#cb171-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (m) : chr [1:87]  ...</span></span>
+<span id="cb171-11"><a href="string-manipulation.html#cb171-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (ft): chr [1:87]  ...</span></span>
+<span id="cb171-12"><a href="string-manipulation.html#cb171-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Coordinates   : chr [1:87]  ...</span></span>
+<span id="cb171-13"><a href="string-manipulation.html#cb171-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Last eruption : chr [1:87]  ...</span></span>
+<span id="cb171-14"><a href="string-manipulation.html#cb171-14" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [14 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb171-15"><a href="string-manipulation.html#cb171-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Name          : chr [1:14]  ...</span></span>
+<span id="cb171-16"><a href="string-manipulation.html#cb171-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (m) : int [1:14] NULL ...</span></span>
+<span id="cb171-17"><a href="string-manipulation.html#cb171-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (ft): int [1:14] NULL ...</span></span>
+<span id="cb171-18"><a href="string-manipulation.html#cb171-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Coordinates   : chr [1:14]  ...</span></span>
+<span id="cb171-19"><a href="string-manipulation.html#cb171-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Last eruption : chr [1:14]  ...</span></span>
+<span id="cb171-20"><a href="string-manipulation.html#cb171-20" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [15 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb171-21"><a href="string-manipulation.html#cb171-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Name          : chr [1:15]  ...</span></span>
+<span id="cb171-22"><a href="string-manipulation.html#cb171-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (m) : int [1:15] NULL ...</span></span>
+<span id="cb171-23"><a href="string-manipulation.html#cb171-23" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (ft): int [1:15] NULL ...</span></span>
+<span id="cb171-24"><a href="string-manipulation.html#cb171-24" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Coordinates   : chr [1:15]  ...</span></span>
+<span id="cb171-25"><a href="string-manipulation.html#cb171-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Last eruption : chr [1:15]  ...</span></span>
+<span id="cb171-26"><a href="string-manipulation.html#cb171-26" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [24 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb171-27"><a href="string-manipulation.html#cb171-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Name          : chr [1:24]  ...</span></span>
+<span id="cb171-28"><a href="string-manipulation.html#cb171-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (m) : chr [1:24]  ...</span></span>
+<span id="cb171-29"><a href="string-manipulation.html#cb171-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (ft): chr [1:24]  ...</span></span>
+<span id="cb171-30"><a href="string-manipulation.html#cb171-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Coordinates   : chr [1:24]  ...</span></span>
+<span id="cb171-31"><a href="string-manipulation.html#cb171-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Last eruption : chr [1:24]  ...</span></span>
+<span id="cb171-32"><a href="string-manipulation.html#cb171-32" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [11 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb171-33"><a href="string-manipulation.html#cb171-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Name          : chr [1:11]  ...</span></span>
+<span id="cb171-34"><a href="string-manipulation.html#cb171-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (m) : chr [1:11]  ...</span></span>
+<span id="cb171-35"><a href="string-manipulation.html#cb171-35" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Elevation (ft): chr [1:11]  ...</span></span>
+<span id="cb171-36"><a href="string-manipulation.html#cb171-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Coordinates   : chr [1:11]  ...</span></span>
+<span id="cb171-37"><a href="string-manipulation.html#cb171-37" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ Last eruption : chr [1:11]  ...</span></span></code></pre></div>
+<p>Hier ist es zunächst das einfachste, die Spalten in character strings umzuwandeln, um sie kombinieren zu können.</p>
+<p>Für eine Spalte hieße das:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="string-manipulation.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(relevante_tabellen[[<span class="dv">3</span>]]<span class="sc">$</span><span class="st">`</span><span class="at">Elevation (m)</span><span class="st">`</span>)</span>
+<span id="cb172-2"><a href="string-manipulation.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;423&quot;  &quot;11&quot;   &quot;854&quot;  &quot;758&quot;  &quot;574&quot;  &quot;-110&quot; &quot;851&quot;  &quot;813&quot;  &quot;-50&quot;  &quot;432&quot; </span></span>
+<span id="cb172-3"><a href="string-manipulation.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [11] &quot;99&quot;   &quot;136&quot;  &quot;508&quot;  &quot;394&quot;</span></span></code></pre></div>
+<p>Für eine Tabelle:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="string-manipulation.html#cb173-1" aria-hidden="true" tabindex="-1"></a>relevante_tabellen[[<span class="dv">3</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb173-2"><a href="string-manipulation.html#cb173-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), as.character))</span>
+<span id="cb173-3"><a href="string-manipulation.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 14 x 5</span></span>
+<span id="cb173-4"><a href="string-manipulation.html#cb173-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    Name     `Elevation (m)` `Elevation (ft)` Coordinates        `Last eruption` </span></span>
+<span id="cb173-5"><a href="string-manipulation.html#cb173-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;              &lt;chr&gt;           </span></span>
+<span id="cb173-6"><a href="string-manipulation.html#cb173-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Aogashi… 423             1388             32°27′N 139°46′E﻿…  AD 1785[† 1]    </span></span>
+<span id="cb173-7"><a href="string-manipulation.html#cb173-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Bayonna… 11              36               31°53′17″N 139°55… AD 1970[† 14]   </span></span>
+<span id="cb173-8"><a href="string-manipulation.html#cb173-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Hachijō… 854             2802             33°08′N 139°46′E﻿…  AD 1605[† 1]    </span></span>
+<span id="cb173-9"><a href="string-manipulation.html#cb173-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Izu-Ōsh… 758             2507             34°43′34″N 139°23… Mt. Mihara: AD …</span></span>
+<span id="cb173-10"><a href="string-manipulation.html#cb173-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Kōzushi… 574             1877             34°13′N 139°09′E﻿…  AD 838[† 1]     </span></span>
+<span id="cb173-11"><a href="string-manipulation.html#cb173-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Kurose   -110            -361             33°24′N 139°41′E﻿…  Caldera: older …</span></span>
+<span id="cb173-12"><a href="string-manipulation.html#cb173-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Mikuraj… 851             2792             33°52′16″N 139°36… 6.3 ka BP[† 1]  </span></span>
+<span id="cb173-13"><a href="string-manipulation.html#cb173-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Miyakej… 813             2674             34°05′10″N 139°31… AD 2013[† 16]   </span></span>
+<span id="cb173-14"><a href="string-manipulation.html#cb173-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Myōjins… -50             -164             31°55′05″N 140°01… AD 1970[† 1]    </span></span>
+<span id="cb173-15"><a href="string-manipulation.html#cb173-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Niijima  432             1417             34°22′N 139°16′E﻿…  Mt. Mukaiyama: …</span></span>
+<span id="cb173-16"><a href="string-manipulation.html#cb173-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 Sofugan… 99              325              29°47′35″N 140°20… (Discolored wat…</span></span>
+<span id="cb173-17"><a href="string-manipulation.html#cb173-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 Sumisuj… 136             446              31°26′20″N 140°03… AD 1916[† 1]    </span></span>
+<span id="cb173-18"><a href="string-manipulation.html#cb173-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 Toshima  508             1667             34°31′N 139°17′E﻿…  9.1-4.0 ka BP[†…</span></span>
+<span id="cb173-19"><a href="string-manipulation.html#cb173-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 14 Torishi… 394             1293             30°29′02″N 140°18… AD 2002[† 1]</span></span></code></pre></div>
+<p>Über mehrere Tabellen, mit gleichzeitigem kombinieren:</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="string-manipulation.html#cb174-1" aria-hidden="true" tabindex="-1"></a>relevante_tabellen <span class="sc">%&gt;%</span></span>
+<span id="cb174-2"><a href="string-manipulation.html#cb174-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(mutate, <span class="fu">across</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), as.character)) <span class="sc">%&gt;%</span></span>
+<span id="cb174-3"><a href="string-manipulation.html#cb174-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>() <span class="ot">-&gt;</span> komplett</span>
+<span id="cb174-4"><a href="string-manipulation.html#cb174-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-5"><a href="string-manipulation.html#cb174-5" aria-hidden="true" tabindex="-1"></a>komplett</span>
+<span id="cb174-6"><a href="string-manipulation.html#cb174-6" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 184 x 5</span></span>
+<span id="cb174-7"><a href="string-manipulation.html#cb174-7" aria-hidden="true" tabindex="-1"></a><span class="do">##    Name     `Elevation (m)` `Elevation (ft)` Coordinates         `Last eruption`</span></span>
+<span id="cb174-8"><a href="string-manipulation.html#cb174-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;               &lt;chr&gt;          </span></span>
+<span id="cb174-9"><a href="string-manipulation.html#cb174-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Akaigaw… 725             2379             .mw-parser-output … 1.3 Ma BP[† 1] </span></span>
+<span id="cb174-10"><a href="string-manipulation.html#cb174-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Mount A… 512             1680             43°36′36″N 144°26′… 1000-200 BP[† …</span></span>
+<span id="cb174-11"><a href="string-manipulation.html#cb174-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Daisets… 2290            7513             43°39′47″N 142°51′… AD 1739[† 1]   </span></span>
+<span id="cb174-12"><a href="string-manipulation.html#cb174-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Mount E… 1320            4331             42°47′35″N 141°17′… 17th century[†…</span></span>
+<span id="cb174-13"><a href="string-manipulation.html#cb174-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Mount E… 613             2028             41°48′14″N 141°09′… AD 1874[† 1]   </span></span>
+<span id="cb174-14"><a href="string-manipulation.html#cb174-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Akan Ca… -               -                43°27′04″N 144°06′… 0.25 Ma BP[† 1]</span></span>
+<span id="cb174-15"><a href="string-manipulation.html#cb174-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Mount M… 1499            4916             43°23′10″N 144°00′… AD 2008[† 1]   </span></span>
+<span id="cb174-16"><a href="string-manipulation.html#cb174-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Mount O… 1370            4495             43°27′11″N 144°09′… 5-2.5 ka BP[† …</span></span>
+<span id="cb174-17"><a href="string-manipulation.html#cb174-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Mount Iō 1563            5128             44°07′52″N 145°09′… AD 1936[† 1]   </span></span>
+<span id="cb174-18"><a href="string-manipulation.html#cb174-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Kusshar… -               -                43°37′16″N 144°20′… 2.3 ka BP[† 1] </span></span>
+<span id="cb174-19"><a href="string-manipulation.html#cb174-19" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 174 more rows</span></span></code></pre></div>
+</div>
+<div id="tabellen-säubern" class="section level2" number="17.5">
+<h2><span class="header-section-number">17.5</span> Tabellen säubern</h2>
+<div id="parse-number" class="section level3" number="17.5.1">
+<h3><span class="header-section-number">17.5.1</span> Parse number</h3>
+<p>Für einige Spalten (Höhe, Koordinaten, letzte Aktivtät) ist ein numerisches Format aber eigentlich tatsächlich wünschenswert.</p>
+<p>Eine robuste Möglichkeit dafür ist <code>parse_number()</code>:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="string-manipulation.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_number</span>(<span class="st">&quot;Temperatur: -8° C&quot;</span>)</span>
+<span id="cb175-2"><a href="string-manipulation.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -8</span></span></code></pre></div>
+<p>Mit dem Befehl <code>mutate()</code> lassen sich neue Spalten erstellen, oder vorhandene Spalten überschreiben. Mit <code>select()</code> können Spalten selektiert oder (mit einem <code>-</code>) ,gelöscht‘ werden.</p>
+<p>Der folgende Befehl wandelt die Spalte <code>Elevation (m)</code> in Zahlen um, gibt dieser neuen Spalte den Namen <code>elevation_m</code> und selektiert dann alles außer den alten <code>Elevation</code>-Spalten:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="string-manipulation.html#cb176-1" aria-hidden="true" tabindex="-1"></a>komplett <span class="sc">%&gt;%</span></span>
+<span id="cb176-2"><a href="string-manipulation.html#cb176-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">elevation_m =</span> <span class="fu">parse_number</span>(<span class="st">`</span><span class="at">Elevation (m)</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb176-3"><a href="string-manipulation.html#cb176-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Elevation (m)</span><span class="st">`</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Elevation (ft)</span><span class="st">`</span>)  <span class="ot">-&gt;</span> vulkane_elev</span></code></pre></div>
+<p>Wobei das Attribut <q>problems</q> darauf hinweist, dass in manchen Strings keine Zahl gefunden wurde. Funktioniert hat es trotzdem (mit <code>NA</code> für fehlende Werte).</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="string-manipulation.html#cb177-1" aria-hidden="true" tabindex="-1"></a>vulkane_elev</span>
+<span id="cb177-2"><a href="string-manipulation.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 184 x 4</span></span>
+<span id="cb177-3"><a href="string-manipulation.html#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    Name          Coordinates                         `Last eruption` elevation_m</span></span>
+<span id="cb177-4"><a href="string-manipulation.html#cb177-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;         &lt;chr&gt;                               &lt;chr&gt;                 &lt;dbl&gt;</span></span>
+<span id="cb177-5"><a href="string-manipulation.html#cb177-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Akaigawa Cal… .mw-parser-output .geo-default,.mw… 1.3 Ma BP[† 1]          725</span></span>
+<span id="cb177-6"><a href="string-manipulation.html#cb177-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Mount Atosan… 43°36′36″N 144°26′17″E﻿ / ﻿43.610°…   1000-200 BP[† …         512</span></span>
+<span id="cb177-7"><a href="string-manipulation.html#cb177-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Daisetsuzan … 43°39′47″N 142°51′14″E﻿ / ﻿43.663°…   AD 1739[† 1]           2290</span></span>
+<span id="cb177-8"><a href="string-manipulation.html#cb177-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Mount Eniwa   42°47′35″N 141°17′06″E﻿ / ﻿42.793°…   17th century[†…        1320</span></span>
+<span id="cb177-9"><a href="string-manipulation.html#cb177-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Mount Esan    41°48′14″N 141°09′58″E﻿ / ﻿41.804°…   AD 1874[† 1]            613</span></span>
+<span id="cb177-10"><a href="string-manipulation.html#cb177-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Akan Caldera… 43°27′04″N 144°06′36″E﻿ / ﻿43.451°…   0.25 Ma BP[† 1]          NA</span></span>
+<span id="cb177-11"><a href="string-manipulation.html#cb177-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Mount Meakan  43°23′10″N 144°00′29″E﻿ / ﻿43.386°…   AD 2008[† 1]           1499</span></span>
+<span id="cb177-12"><a href="string-manipulation.html#cb177-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Mount Oakan   43°27′11″N 144°09′47″E﻿ / ﻿43.453°…   5-2.5 ka BP[† …        1370</span></span>
+<span id="cb177-13"><a href="string-manipulation.html#cb177-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Mount Iō      44°07′52″N 145°09′54″E﻿ / ﻿44.131°…   AD 1936[† 1]           1563</span></span>
+<span id="cb177-14"><a href="string-manipulation.html#cb177-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Kussharo Cal… 43°37′16″N 144°20′10″E﻿ / ﻿43.621°…   2.3 ka BP[† 1]           NA</span></span>
+<span id="cb177-15"><a href="string-manipulation.html#cb177-15" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 174 more rows</span></span></code></pre></div>
+</div>
+<div id="reguläre-ausdrücke" class="section level3" number="17.5.2">
+<h3><span class="header-section-number">17.5.2</span> Reguläre Ausdrücke</h3>
+<p>Spalten des Typs <code>chr</code> können außerdem mit Befehlen aus dem <code>stringr</code>-Paket (Teil von <code>tidyverse</code>) bearbeitet werden:</p>
+<ul>
+<li><code>str_remove_all()</code> entfernt Teile, die einem Muster entsprechen</li>
+<li><code>str_extract_all()</code> behält nur die Teile, die dem Muster entsprechen</li>
+<li><code>str_detect()</code> gibt <code>TRUE</code> aus, wenn das Muster gefunden wird, sonst <code>FALSE</code></li>
+<li><code>str_replace_all()</code> ersetzt Teile, die dem Muster entsprechen, durch etwas anderes</li>
+<li>etc.</li>
+</ul>
+<p>Die Muster müssen dabei im RegEx-Format (regular expressions, reguläre Ausdrücke) angegeben werden. Reguläre Ausdrücke sind nicht R-spezifisch, sonderen kommen in allen geläufigen Programmiersprachen zum Einsatz.</p>
+<p>Es kann eine große Herausforderung sein, ein RegEx-Muster zu basteln, das genau das macht, was man will. Dabei können browserbasierte Testumgebungen wie <a href="https://www.regexpal.com/" class="uri">https://www.regexpal.com/</a> behilflich sein. Für einen systematischeren Zugang empfiehlt es sich, ein Tutorial wie <a href="https://regexone.com/" class="uri">https://regexone.com/</a> durchzuarbeiten.</p>
+<p>Im folgenden Befehl werden reguläre Ausdrücke direkt in Kombination mit <code>mutate()</code> benutzt, um metrische Koordinaten zu extrahieren:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="string-manipulation.html#cb178-1" aria-hidden="true" tabindex="-1"></a>vulkane_elev <span class="sc">%&gt;%</span></span>
+<span id="cb178-2"><a href="string-manipulation.html#cb178-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Coordinates =</span> <span class="fu">str_extract</span>(Coordinates, <span class="st">&quot;[0-9.]+; [0-9.]+&quot;</span>),</span>
+<span id="cb178-3"><a href="string-manipulation.html#cb178-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">latitude =</span> <span class="fu">str_remove</span>(Coordinates, <span class="st">&quot;; [0-9.]+&quot;</span>) <span class="sc">%&gt;%</span> as.numeric,</span>
+<span id="cb178-4"><a href="string-manipulation.html#cb178-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">longitude =</span> <span class="fu">str_remove</span>(Coordinates, <span class="st">&quot;[0-9.]+; &quot;</span>) <span class="sc">%&gt;%</span> as.numeric) <span class="sc">%&gt;%</span></span>
+<span id="cb178-5"><a href="string-manipulation.html#cb178-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Coordinates) <span class="ot">-&gt;</span> vulkane_geo</span>
+<span id="cb178-6"><a href="string-manipulation.html#cb178-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-7"><a href="string-manipulation.html#cb178-7" aria-hidden="true" tabindex="-1"></a>vulkane_geo</span>
+<span id="cb178-8"><a href="string-manipulation.html#cb178-8" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 184 x 5</span></span>
+<span id="cb178-9"><a href="string-manipulation.html#cb178-9" aria-hidden="true" tabindex="-1"></a><span class="do">##    Name                       `Last eruption`   elevation_m latitude longitude</span></span>
+<span id="cb178-10"><a href="string-manipulation.html#cb178-10" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;                      &lt;chr&gt;                   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb178-11"><a href="string-manipulation.html#cb178-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Akaigawa Caldera           1.3 Ma BP[† 1]            725     43.1      141.</span></span>
+<span id="cb178-12"><a href="string-manipulation.html#cb178-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Mount Atosanupuri          1000-200 BP[† 1]          512     43.6      144.</span></span>
+<span id="cb178-13"><a href="string-manipulation.html#cb178-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Daisetsuzan Volcanic Group AD 1739[† 1]             2290     43.7      143.</span></span>
+<span id="cb178-14"><a href="string-manipulation.html#cb178-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Mount Eniwa                17th century[† 1]        1320     42.8      141.</span></span>
+<span id="cb178-15"><a href="string-manipulation.html#cb178-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Mount Esan                 AD 1874[† 1]              613     41.8      141.</span></span>
+<span id="cb178-16"><a href="string-manipulation.html#cb178-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Akan Caldera [ja]          0.25 Ma BP[† 1]            NA     43.5      144.</span></span>
+<span id="cb178-17"><a href="string-manipulation.html#cb178-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Mount Meakan               AD 2008[† 1]             1499     43.4      144.</span></span>
+<span id="cb178-18"><a href="string-manipulation.html#cb178-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Mount Oakan                5-2.5 ka BP[† 1]         1370     43.5      144.</span></span>
+<span id="cb178-19"><a href="string-manipulation.html#cb178-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Mount Iō                   AD 1936[† 1]             1563     44.1      145.</span></span>
+<span id="cb178-20"><a href="string-manipulation.html#cb178-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Kussharo Caldera           2.3 ka BP[† 1]             NA     43.6      144.</span></span>
+<span id="cb178-21"><a href="string-manipulation.html#cb178-21" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 174 more rows</span></span></code></pre></div>
+<p>Es gibt mehrere Formate, in denen die letzte Aktivität für die meisten Vulkane angegeben ist:</p>
+<ul>
+<li>AD … (Jahrszahl)</li>
+<li>… ka BP (vor soundsoviel tausend Jahren)</li>
+<li>… Ma BP (vor soundsoviel Millionen Jahren)</li>
+</ul>
+<p>Einige Werte fallen dabei aus dem Rahmen, damit können wir aber leben.Außerdem können auch Zeiträume angegeben sein, oder verschiedene Werte von verschiedenen Bergen. Hier soll es aber darum gehen, nach Möglichkeit <em>einen</em> der angegebenen Werte auszulesen.</p>
+<p>Für jedes mögliche Format wird dabei zunächst eine eigene numerische Spalte angelegt und umgerechnet in <q>Jahre seit dem letzten Ausbruch</q>. Mit <code>str_match</code> können dafür Teile eines gefundenen Patterns extrahiert werden.</p>
+<p>Schließlich wird mit <code>pmin</code> das Minimum der so gefundenen Werte ermittelt.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="string-manipulation.html#cb179-1" aria-hidden="true" tabindex="-1"></a>vulkane_geo <span class="sc">%&gt;%</span></span>
+<span id="cb179-2"><a href="string-manipulation.html#cb179-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ad_year =</span> <span class="dv">2019</span> <span class="sc">-</span> <span class="fu">str_match</span>(<span class="st">`</span><span class="at">Last eruption</span><span class="st">`</span>,</span>
+<span id="cb179-3"><a href="string-manipulation.html#cb179-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;AD ([0-9]+)&quot;</span>)[,<span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb179-4"><a href="string-manipulation.html#cb179-4" aria-hidden="true" tabindex="-1"></a>                     parse_number,</span>
+<span id="cb179-5"><a href="string-manipulation.html#cb179-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">years_bp =</span> <span class="fu">str_match</span>(<span class="fu">tolower</span>(<span class="st">`</span><span class="at">Last eruption</span><span class="st">`</span>),</span>
+<span id="cb179-6"><a href="string-manipulation.html#cb179-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;([.0-9]+) bp&quot;</span>)[,<span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb179-7"><a href="string-manipulation.html#cb179-7" aria-hidden="true" tabindex="-1"></a>                      parse_number,</span>
+<span id="cb179-8"><a href="string-manipulation.html#cb179-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">ka_bp =</span> <span class="fu">str_match</span>(<span class="fu">tolower</span>(<span class="st">`</span><span class="at">Last eruption</span><span class="st">`</span>),</span>
+<span id="cb179-9"><a href="string-manipulation.html#cb179-9" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;([.0-9]+) ka bp&quot;</span>)[,<span class="dv">2</span>] <span class="sc">%&gt;%</span> </span>
+<span id="cb179-10"><a href="string-manipulation.html#cb179-10" aria-hidden="true" tabindex="-1"></a>                   as.numeric <span class="sc">*</span> <span class="dv">1000</span>,</span>
+<span id="cb179-11"><a href="string-manipulation.html#cb179-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">ma_bp =</span> <span class="fu">str_match</span>(<span class="fu">tolower</span>(<span class="st">`</span><span class="at">Last eruption</span><span class="st">`</span>),</span>
+<span id="cb179-12"><a href="string-manipulation.html#cb179-12" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;([.0-9]+) ma bp&quot;</span>)[,<span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb179-13"><a href="string-manipulation.html#cb179-13" aria-hidden="true" tabindex="-1"></a>                   as.numeric <span class="sc">*</span> <span class="dv">1000</span> <span class="sc">*</span> <span class="dv">1000</span>,</span>
+<span id="cb179-14"><a href="string-manipulation.html#cb179-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">years_since_last_eruption =</span> <span class="fu">pmin</span>(ad_year,</span>
+<span id="cb179-15"><a href="string-manipulation.html#cb179-15" aria-hidden="true" tabindex="-1"></a>                                          years_bp,</span>
+<span id="cb179-16"><a href="string-manipulation.html#cb179-16" aria-hidden="true" tabindex="-1"></a>                                          ka_bp,</span>
+<span id="cb179-17"><a href="string-manipulation.html#cb179-17" aria-hidden="true" tabindex="-1"></a>                                          ma_bp,</span>
+<span id="cb179-18"><a href="string-manipulation.html#cb179-18" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb179-19"><a href="string-manipulation.html#cb179-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name,</span>
+<span id="cb179-20"><a href="string-manipulation.html#cb179-20" aria-hidden="true" tabindex="-1"></a>         elevation_m,</span>
+<span id="cb179-21"><a href="string-manipulation.html#cb179-21" aria-hidden="true" tabindex="-1"></a>         latitude,</span>
+<span id="cb179-22"><a href="string-manipulation.html#cb179-22" aria-hidden="true" tabindex="-1"></a>         longitude,</span>
+<span id="cb179-23"><a href="string-manipulation.html#cb179-23" aria-hidden="true" tabindex="-1"></a>         years_since_last_eruption) <span class="ot">-&gt;</span> vulkane_clean</span></code></pre></div>
+</div>
+</div>
+<div id="visualisierung" class="section level2" number="17.6">
+<h2><span class="header-section-number">17.6</span> Visualisierung</h2>
+<p>Zunächst werden die Vulkane in eine Simple Feature Collection umgewandelt und das CRS gesetzt:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="string-manipulation.html#cb180-1" aria-hidden="true" tabindex="-1"></a>vulkane_clean <span class="sc">%&gt;%</span></span>
+<span id="cb180-2"><a href="string-manipulation.html#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb180-3"><a href="string-manipulation.html#cb180-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">4326</span>) <span class="ot">-&gt;</span> vulkane_sf</span></code></pre></div>
+<p>Das <code>rnaturalearth</code> Paket lässt uns einfach die Polygone für die japanischen Inseln laden:</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="string-manipulation.html#cb181-1" aria-hidden="true" tabindex="-1"></a>japan <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">scale =</span> <span class="st">&quot;medium&quot;</span>,</span>
+<span id="cb181-2"><a href="string-manipulation.html#cb181-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">country =</span> <span class="st">&quot;Japan&quot;</span>,</span>
+<span id="cb181-3"><a href="string-manipulation.html#cb181-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">returnclass =</span> <span class="st">&quot;sf&quot;</span>)</span></code></pre></div>
+<p>Dann lässt sich eine schnelle Karte zeichnen durch:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="string-manipulation.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb182-2"><a href="string-manipulation.html#cb182-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> japan, <span class="at">fill =</span> <span class="st">&quot;gray&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb182-3"><a href="string-manipulation.html#cb182-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> vulkane_sf,</span>
+<span id="cb182-4"><a href="string-manipulation.html#cb182-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">color =</span> years_since_last_eruption,</span>
+<span id="cb182-5"><a href="string-manipulation.html#cb182-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">size  =</span> elevation_m),</span>
+<span id="cb182-6"><a href="string-manipulation.html#cb182-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb182-7"><a href="string-manipulation.html#cb182-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_c</span>(<span class="st">&quot;Jahre seit der letzten Aktivität&quot;</span>) <span class="sc">+</span></span>
+<span id="cb182-8"><a href="string-manipulation.html#cb182-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="st">&quot;Höhe über NN&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="text-breuer-2005.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ktiu/ds21/edit/master/17_string_manipulation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ktiu/ds21/blob/master/17_string_manipulation.Rmd",
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

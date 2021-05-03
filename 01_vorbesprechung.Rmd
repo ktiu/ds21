@@ -103,9 +103,9 @@ Alle Kriterien werden mit einer (runden) Schulnote bewertet. Der gewichtete Schn
 Kriterium                    | Gewichtung   | Erläuterung
 -------------------          | -------:     | ----------------------------------------
 Ziterweise und Formatierung  | 10%          | Der Text erfüllt formale Anforderungen an Wissenschaftlichkeit.
-Ausdruck und Rechtschreibung | 10%          | Der Text ist sprachlich gelungen.
+Ausdruck und Rechtschreibung | 10%          | Der Text ist sprachlich gelungen; Abbildungen und Tabellen werden ggf. hilfreich eingesetzt.
 Roter Faden                  | 10%          | Der Text ist übersichtlich strukturiert und die Einzelteile greifen gut ineinander.
-Literatur                    | 10%          | Die zitierten Quellen sind für eine Einführung ins Thema geeignet und werden gut zusammengefasst.
+Recherche                    | 10%          | Die zitierten Quellen sind für eine Einführung ins Thema geeignet und werden gut zusammengefasst.
 Theorie                      | 10%          | Relevante wissenschaftliche Perspektiven werden anhand von geeigneter Fachliteratur aufgezeigt.
 Fragestellung                | 10%          | Die Forschungsfrage ist für das Vorhaben geeignet und wird überzeugend hergeleitet.
 Datenquellen                 | 20%          | Die Datenquellen sind geeignet und detailliert beschrieben.
