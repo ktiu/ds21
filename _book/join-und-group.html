@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sitzung 18 Join und group | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sitzung 18 Join und group | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sitzung 18 Join und group | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="string-manipulation.html"/>
+
+<script src="assets/header-attrs-2.6/header-attrs.js"></script>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link rel="icon" href="https://www.uni-frankfurt.de/favicon.ico" type="image/x-icon">
+<script src="solutions.js"></script>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé-wise"><i class="fa fa-check"></i><b>1.3.1</b> Exposé (WiSe)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#projektbericht-sose"><i class="fa fa-check"></i><b>1.3.2</b> Projektbericht (SoSe)</a></li>
+<li class="chapter" data-level="1.3.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.3</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.6</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
+<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="geodaten.html"><a href="geodaten.html#lernziele-dieser-sitzung-2"><i class="fa fa-check"></i><b>7.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="7.2" data-path="geodaten.html"><a href="geodaten.html#voraussetzungen-1"><i class="fa fa-check"></i><b>7.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="7.3" data-path="geodaten.html"><a href="geodaten.html#exkurs-pipes"><i class="fa fa-check"></i><b>7.3</b> Exkurs: Pipes</a></li>
+<li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
+<li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-3"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="choroplethen.html"><a href="choroplethen.html"><i class="fa fa-check"></i><b>8</b> Choroplethen</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="choroplethen.html"><a href="choroplethen.html#lernziele"><i class="fa fa-check"></i><b>8.1</b> Lernziele</a></li>
+<li class="chapter" data-level="8.2" data-path="choroplethen.html"><a href="choroplethen.html#vorbereitung-1"><i class="fa fa-check"></i><b>8.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="8.3" data-path="choroplethen.html"><a href="choroplethen.html#ziel"><i class="fa fa-check"></i><b>8.3</b> Ziel</a></li>
+<li class="chapter" data-level="8.4" data-path="choroplethen.html"><a href="choroplethen.html#grundkarte"><i class="fa fa-check"></i><b>8.4</b> Grundkarte</a></li>
+<li class="chapter" data-level="8.5" data-path="choroplethen.html"><a href="choroplethen.html#osm-daten"><i class="fa fa-check"></i><b>8.5</b> OSM-Daten</a></li>
+<li class="chapter" data-level="8.6" data-path="choroplethen.html"><a href="choroplethen.html#koordinatenreferenzsysteme"><i class="fa fa-check"></i><b>8.6</b> Koordinatenreferenzsysteme</a></li>
+<li class="chapter" data-level="8.7" data-path="choroplethen.html"><a href="choroplethen.html#verschneiden"><i class="fa fa-check"></i><b>8.7</b> Verschneiden</a></li>
+<li class="chapter" data-level="8.8" data-path="choroplethen.html"><a href="choroplethen.html#aufgaben-4"><i class="fa fa-check"></i><b>8.8</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html"><i class="fa fa-check"></i><b>9</b> Text: Chandra 2014</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#lesetext-2"><i class="fa fa-check"></i><b>9.1</b> Lesetext</a></li>
+<li class="chapter" data-level="9.2" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#fragen-an-den-text-2"><i class="fa fa-check"></i><b>9.2</b> Fragen an den Text</a></li>
+<li class="chapter" data-level="9.3" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#themenfindung"><i class="fa fa-check"></i><b>9.3</b> Themenfindung</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="html-tabellen.html"><a href="html-tabellen.html"><i class="fa fa-check"></i><b>10</b> HTML-Tabellen</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="html-tabellen.html"><a href="html-tabellen.html#lernziele-dieser-sitzung-3"><i class="fa fa-check"></i><b>10.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="10.2" data-path="html-tabellen.html"><a href="html-tabellen.html#vorbereitung-2"><i class="fa fa-check"></i><b>10.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="10.3" data-path="html-tabellen.html"><a href="html-tabellen.html#datenbeschaffung"><i class="fa fa-check"></i><b>10.3</b> Datenbeschaffung</a></li>
+<li class="chapter" data-level="10.4" data-path="html-tabellen.html"><a href="html-tabellen.html#datenformatierung"><i class="fa fa-check"></i><b>10.4</b> Datenformatierung</a></li>
+<li class="chapter" data-level="10.5" data-path="html-tabellen.html"><a href="html-tabellen.html#datenaufbereitung"><i class="fa fa-check"></i><b>10.5</b> Datenaufbereitung</a></li>
+<li class="chapter" data-level="10.6" data-path="html-tabellen.html"><a href="html-tabellen.html#datenvisualisierung"><i class="fa fa-check"></i><b>10.6</b> Datenvisualisierung</a></li>
+<li class="chapter" data-level="10.7" data-path="html-tabellen.html"><a href="html-tabellen.html#aufgaben-5"><i class="fa fa-check"></i><b>10.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>11</b> Web scraping</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="web-scraping.html"><a href="web-scraping.html#lernziele-dieser-sitzung-4"><i class="fa fa-check"></i><b>11.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="11.2" data-path="web-scraping.html"><a href="web-scraping.html#vorbereitung-3"><i class="fa fa-check"></i><b>11.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="11.3" data-path="web-scraping.html"><a href="web-scraping.html#exkurs-html"><i class="fa fa-check"></i><b>11.3</b> Exkurs: HTML</a></li>
+<li class="chapter" data-level="11.4" data-path="web-scraping.html"><a href="web-scraping.html#seite-laden"><i class="fa fa-check"></i><b>11.4</b> Seite laden</a></li>
+<li class="chapter" data-level="11.5" data-path="web-scraping.html"><a href="web-scraping.html#elemente-suchen"><i class="fa fa-check"></i><b>11.5</b> Elemente suchen</a></li>
+<li class="chapter" data-level="11.6" data-path="web-scraping.html"><a href="web-scraping.html#elemente-reinigen"><i class="fa fa-check"></i><b>11.6</b> Elemente reinigen</a></li>
+<li class="chapter" data-level="11.7" data-path="web-scraping.html"><a href="web-scraping.html#aufgaben-6"><i class="fa fa-check"></i><b>11.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="text-straube-2021.html"><a href="text-straube-2021.html"><i class="fa fa-check"></i><b>12</b> Text: Straube 2021</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="text-straube-2021.html"><a href="text-straube-2021.html#lesetexte"><i class="fa fa-check"></i><b>12.1</b> Lesetexte</a></li>
+<li class="chapter" data-level="12.2" data-path="text-straube-2021.html"><a href="text-straube-2021.html#fragen-an-den-text-3"><i class="fa fa-check"></i><b>12.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="präsentationen.html"><a href="präsentationen.html"><i class="fa fa-check"></i><b>13</b> Präsentationen</a></li>
+<li class="chapter" data-level="14" data-path="apis.html"><a href="apis.html"><i class="fa fa-check"></i><b>14</b> APIs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="apis.html"><a href="apis.html#vorbereitung-4"><i class="fa fa-check"></i><b>14.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="14.2" data-path="apis.html"><a href="apis.html#swapi"><i class="fa fa-check"></i><b>14.2</b> SWAPI</a></li>
+<li class="chapter" data-level="14.3" data-path="apis.html"><a href="apis.html#exkurs-funktionen-schreiben"><i class="fa fa-check"></i><b>14.3</b> Exkurs: Funktionen schreiben</a></li>
+<li class="chapter" data-level="14.4" data-path="apis.html"><a href="apis.html#abfragefunktion"><i class="fa fa-check"></i><b>14.4</b> Abfragefunktion</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="serialisierung.html"><a href="serialisierung.html"><i class="fa fa-check"></i><b>15</b> Serialisierung</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="serialisierung.html"><a href="serialisierung.html#vorbereitung-5"><i class="fa fa-check"></i><b>15.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="15.2" data-path="serialisierung.html"><a href="serialisierung.html#zielsetzung"><i class="fa fa-check"></i><b>15.2</b> Zielsetzung</a></li>
+<li class="chapter" data-level="15.3" data-path="serialisierung.html"><a href="serialisierung.html#urls-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.3</b> URLs der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen"><i class="fa fa-check"></i><b>15.3.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.3.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren"><i class="fa fa-check"></i><b>15.3.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.3.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen"><i class="fa fa-check"></i><b>15.3.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.3.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen"><i class="fa fa-check"></i><b>15.3.4</b> Schritt 4: Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="serialisierung.html"><a href="serialisierung.html#informationen-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.4</b> Informationen der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen-1"><i class="fa fa-check"></i><b>15.4.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.4.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren-1"><i class="fa fa-check"></i><b>15.4.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.4.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen-1"><i class="fa fa-check"></i><b>15.4.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.4.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen-1"><i class="fa fa-check"></i><b>15.4.4</b> Schritt 4: Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="serialisierung.html"><a href="serialisierung.html#aufbereiten"><i class="fa fa-check"></i><b>15.5</b> Aufbereiten</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html"><i class="fa fa-check"></i><b>16</b> Text: Breuer 2005</a>
+<ul>
+<li class="chapter" data-level="16.0.1" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#lesetext-3"><i class="fa fa-check"></i><b>16.0.1</b> Lesetext</a></li>
+<li class="chapter" data-level="16.0.2" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#fragen-an-den-text-4"><i class="fa fa-check"></i><b>16.0.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="string-manipulation.html"><a href="string-manipulation.html"><i class="fa fa-check"></i><b>17</b> String manipulation</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="string-manipulation.html"><a href="string-manipulation.html#vorbereitung-6"><i class="fa fa-check"></i><b>17.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="17.2" data-path="string-manipulation.html"><a href="string-manipulation.html#aufgabe"><i class="fa fa-check"></i><b>17.2</b> Aufgabe</a></li>
+<li class="chapter" data-level="17.3" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-aus-wikipedia-laden"><i class="fa fa-check"></i><b>17.3</b> Tabellen aus Wikipedia laden</a></li>
+<li class="chapter" data-level="17.4" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-kombinieren"><i class="fa fa-check"></i><b>17.4</b> Tabellen kombinieren</a></li>
+<li class="chapter" data-level="17.5" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-säubern"><i class="fa fa-check"></i><b>17.5</b> Tabellen säubern</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="string-manipulation.html"><a href="string-manipulation.html#parse-number"><i class="fa fa-check"></i><b>17.5.1</b> Parse number</a></li>
+<li class="chapter" data-level="17.5.2" data-path="string-manipulation.html"><a href="string-manipulation.html#reguläre-ausdrücke"><i class="fa fa-check"></i><b>17.5.2</b> Reguläre Ausdrücke</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="string-manipulation.html"><a href="string-manipulation.html#visualisierung"><i class="fa fa-check"></i><b>17.6</b> Visualisierung</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="join-und-group.html"><a href="join-und-group.html"><i class="fa fa-check"></i><b>18</b> Join und group</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="join-und-group.html"><a href="join-und-group.html#vorbereitung-7"><i class="fa fa-check"></i><b>18.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="18.2" data-path="join-und-group.html"><a href="join-und-group.html#aufgabe-1"><i class="fa fa-check"></i><b>18.2</b> Aufgabe</a></li>
+<li class="chapter" data-level="18.3" data-path="join-und-group.html"><a href="join-und-group.html#daten-einlesen"><i class="fa fa-check"></i><b>18.3</b> Daten einlesen</a></li>
+<li class="chapter" data-level="18.4" data-path="join-und-group.html"><a href="join-und-group.html#überblick-verschaffen-1"><i class="fa fa-check"></i><b>18.4</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="18.5" data-path="join-und-group.html"><a href="join-und-group.html#zusammenfassen"><i class="fa fa-check"></i><b>18.5</b> Zusammenfassen</a></li>
+<li class="chapter" data-level="18.6" data-path="join-und-group.html"><a href="join-und-group.html#verschneiden-1"><i class="fa fa-check"></i><b>18.6</b> Verschneiden</a></li>
+<li class="chapter" data-level="18.7" data-path="join-und-group.html"><a href="join-und-group.html#kartieren"><i class="fa fa-check"></i><b>18.7</b> Kartieren</a></li>
+<li class="chapter" data-level="18.8" data-path="join-und-group.html"><a href="join-und-group.html#choroplethen-1"><i class="fa fa-check"></i><b>18.8</b> Choroplethen</a></li>
+<li class="chapter" data-level="18.9" data-path="join-und-group.html"><a href="join-und-group.html#räumliches-verschneiden"><i class="fa fa-check"></i><b>18.9</b> Räumliches Verschneiden</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="join-und-group" class="section level1" number="18">
+<h1><span class="header-section-number">Sitzung 18</span> Join und group</h1>
+<div id="vorbereitung-7" class="section level2" number="18.1">
+<h2><span class="header-section-number">18.1</span> Vorbereitung</h2>
+<p>Für diese Lektion brauchen wir folgende Pakete:</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="join-und-group.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb183-2"><a href="join-und-group.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb183-3"><a href="join-und-group.html#cb183-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code></pre></div>
+</div>
+<div id="aufgabe-1" class="section level2" number="18.2">
+<h2><span class="header-section-number">18.2</span> Aufgabe</h2>
+<p>Ziel soll sein, eine Deutschlandkarte mit Tankstellenpreisen für Diesel zu erstellen.</p>
+</div>
+<div id="daten-einlesen" class="section level2" number="18.3">
+<h2><span class="header-section-number">18.3</span> Daten einlesen</h2>
+<p>Das <q>Tankerkönig</q>-Projekt veröffentlicht aktuelle Tankstellenpreise über eine API, und stellt historische Preise hier bereit: <a href="https://dev.azure.com/tankerkoenig/_git/tankerkoenig-data" class="uri">https://dev.azure.com/tankerkoenig/_git/tankerkoenig-data</a></p>
+<p>Wir laden die Dateien für <code>prices</code> und <code>stations</code> von einem Tag (hier: 26.5.2019) herunter und speichern sie im Unterordner <code>resources</code> des Projektordners.</p>
+<p>Dann können wir sie einlesen:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="join-und-group.html#cb184-1" aria-hidden="true" tabindex="-1"></a>preise <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;resources/2019-05-26-prices.csv&quot;</span>)</span>
+<span id="cb184-2"><a href="join-und-group.html#cb184-2" aria-hidden="true" tabindex="-1"></a>preise</span></code></pre></div>
+<pre><code>## # A tibble: 231,174 x 8
+##    date                station_uuid diesel    e5   e10 dieselchange e5change
+##    &lt;dttm&gt;              &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
+##  1 2019-05-25 22:01:06 51e171d0-1a…   1.37  1.58  1.56            1        1
+##  2 2019-05-25 22:02:06 8a796af1-8d…   1.32  1.56  1.54            1        1
+##  3 2019-05-25 22:02:06 2d658127-11…   1.28  1.52  0               0        1
+##  4 2019-05-25 22:03:06 904d3a45-df…   1.32  1.54  1.52            1        1
+##  5 2019-05-25 22:03:06 a98ed5d0-26…   1.34  1.57  1.55            1        1
+##  6 2019-05-25 22:04:06 7671d5ad-4c…   1.30  1.54  0               1        1
+##  7 2019-05-25 22:04:06 44fa4d12-55…   1.34  1.58  1.56            1        1
+##  8 2019-05-25 22:04:06 da9abcda-32…   1.38  1.52  1.50            0        1
+##  9 2019-05-25 22:04:06 bcba0c2b-fb…   1.35  1.55  1.53            0        1
+## 10 2019-05-25 22:04:06 00061000-00…   1.20  1.48  1.46            1        1
+## # … with 231,164 more rows, and 1 more variable: e10change &lt;dbl&gt;</code></pre>
+</div>
+<div id="überblick-verschaffen-1" class="section level2" number="18.4">
+<h2><span class="header-section-number">18.4</span> Überblick verschaffen</h2>
+<p>Beim nähreren Betrachten fällt auf, dass im Datensatz <code>preise</code> 231.174 Zeilen enthalten sind, in <code>stations</code> nur 15.668. Das liegt daran, das für jede Station <em>mehrere</em> Preisupdates im Datensatz <code>preise</code> stehen, jedoch nur <em>einmal</em> die gleichbleibenden Informationen (Name, Marke, Adresse, Koordinaten) in <code>stations</code>.</p>
+<p>Beide Datensätze sind über einen eindeutigen „Key“ verbunden: In <code>preise</code> heißt er <code>station_uuid</code>, in <code>stations</code> einfach nur <code>uuid</code>.</p>
+<p>Um ein besseres Gefühl für den Datensatz zu bekommen, könnten wir uns z. B. anschauen, zu welcher Uhrzeit wie viele Preise aktualisiert wurden:</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="join-und-group.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(preise) <span class="sc">+</span></span>
+<span id="cb186-2"><a href="join-und-group.html#cb186-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> date))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-186-1.png" width="672" /></p>
+</div>
+<div id="zusammenfassen" class="section level2" number="18.5">
+<h2><span class="header-section-number">18.5</span> Zusammenfassen</h2>
+<p>Eine weitere Frage könnte sein: Wie sieht die Verteilung der Anzahl der Preisupdates je Tankstelle aus? Hierfür müssen wir den Datensatz <code>preise</code> anhand der Spalte <code>station_uuid</code> zusammenfassen und die Einträge zählen. Das geht mit <code>group_by()</code> und <code>summarize()</code>:</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="join-und-group.html#cb187-1" aria-hidden="true" tabindex="-1"></a>preise <span class="sc">%&gt;%</span></span>
+<span id="cb187-2"><a href="join-und-group.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(station_uuid) <span class="sc">%&gt;%</span></span>
+<span id="cb187-3"><a href="join-und-group.html#cb187-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">anzahl_updates =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb187-4"><a href="join-und-group.html#cb187-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb187-5"><a href="join-und-group.html#cb187-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> anzahl_updates))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
+<p>Um unserem Ziel der Dieselkarte etwas näher zu kommen, sollten wir aber nicht die Anzahl der Updates zusammenfassen, sondern den Dieselpreis.
+Aber nach welchem Schema?
+Einfach nur den Durchschnitt (mit <code>mean()</code>) zu nehmen, könnte das Bild verfälschen: Man stelle sich z. B. vor, ein besonders teurer (oder günstiger) Preis sei nur wenige Sekunden gültig gewesen.</p>
+<p>Wir orientieren uns einfach an der Börse und nehmen einfach den letzten gültigen Preis (wie der Aktienwert bei Börsenschluss).
+Dafür müssen wir den Datensatz erst mit <code>arrange()</code> chronologisch sortieren, dann entsprechend gruppieren und mit <code>last()</code> zusammenfassen:</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="join-und-group.html#cb188-1" aria-hidden="true" tabindex="-1"></a>preise <span class="sc">%&gt;%</span></span>
+<span id="cb188-2"><a href="join-und-group.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date) <span class="sc">%&gt;%</span></span>
+<span id="cb188-3"><a href="join-und-group.html#cb188-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(station_uuid) <span class="sc">%&gt;%</span></span>
+<span id="cb188-4"><a href="join-und-group.html#cb188-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">dieselpreis =</span> <span class="fu">last</span>(diesel),</span>
+<span id="cb188-5"><a href="join-und-group.html#cb188-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">e5preis     =</span> <span class="fu">last</span>(e5),</span>
+<span id="cb188-6"><a href="join-und-group.html#cb188-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">e10preis    =</span> <span class="fu">last</span>(e10)) <span class="ot">-&gt;</span></span>
+<span id="cb188-7"><a href="join-und-group.html#cb188-7" aria-hidden="true" tabindex="-1"></a>  preise_nach_tankstelle</span>
+<span id="cb188-8"><a href="join-und-group.html#cb188-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-9"><a href="join-und-group.html#cb188-9" aria-hidden="true" tabindex="-1"></a>preise_nach_tankstelle</span>
+<span id="cb188-10"><a href="join-und-group.html#cb188-10" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 13,701 x 4</span></span>
+<span id="cb188-11"><a href="join-und-group.html#cb188-11" aria-hidden="true" tabindex="-1"></a><span class="do">##    station_uuid                         dieselpreis e5preis e10preis</span></span>
+<span id="cb188-12"><a href="join-und-group.html#cb188-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  * &lt;chr&gt;                                      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb188-13"><a href="join-und-group.html#cb188-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 00006210-0037-4444-8888-acdc00006210        1.33    1.55     1.53</span></span>
+<span id="cb188-14"><a href="join-und-group.html#cb188-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 00016899-3247-4444-8888-acdc00000007        1.31    1.53     1.51</span></span>
+<span id="cb188-15"><a href="join-und-group.html#cb188-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 00060001-d387-4444-8888-acdc00000001        1.37    1.62     1.60</span></span>
+<span id="cb188-16"><a href="join-und-group.html#cb188-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 00060009-3adf-4444-8888-acdc00000001        1.35    1.64     1.62</span></span>
+<span id="cb188-17"><a href="join-und-group.html#cb188-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 00060014-b0d9-4444-8888-acdc00000002        1.32    1.61     1.59</span></span>
+<span id="cb188-18"><a href="join-und-group.html#cb188-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 00060015-0090-4444-8888-acdc00000090        1.27    1.52     1.50</span></span>
+<span id="cb188-19"><a href="join-und-group.html#cb188-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 00060016-ed96-4444-8888-acdc00000001        1.35    1.57     1.55</span></span>
+<span id="cb188-20"><a href="join-und-group.html#cb188-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 00060034-0011-4444-8888-acdc00000011        1.37    1.61     1.59</span></span>
+<span id="cb188-21"><a href="join-und-group.html#cb188-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 00060051-533e-75a1-87f9-8a9f00060051        1.25    1.50     1.48</span></span>
+<span id="cb188-22"><a href="join-und-group.html#cb188-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 00060055-0001-4444-8888-acdc00000001        1.26    1.53     1.51</span></span>
+<span id="cb188-23"><a href="join-und-group.html#cb188-23" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 13,691 more rows</span></span></code></pre></div>
+</div>
+<div id="verschneiden-1" class="section level2" number="18.6">
+<h2><span class="header-section-number">18.6</span> Verschneiden</h2>
+<p>Jetzt haben wir für jede Station nur noch eine Zeile mit den Preisen.
+Um das zu kartieren, fehlen noch die Informationen zu den Tankstellen. Dafür laden wir auch den <code>stations</code>-Datensatz für den richtigen Tag herunter und importieren ihn in R:</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="join-und-group.html#cb189-1" aria-hidden="true" tabindex="-1"></a>tankstellen <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;resources/2019-05-26-stations.csv&quot;</span>)</span>
+<span id="cb189-2"><a href="join-und-group.html#cb189-2" aria-hidden="true" tabindex="-1"></a>tankstellen</span></code></pre></div>
+<pre><code>## # A tibble: 15,668 x 11
+##    uuid  name  brand street house_number post_code city  latitude longitude
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 0e18… OIL!… OIL!  Evers… &lt;NA&gt;         80999     Münc…     48.2     11.5 
+##  2 ad81… bft … bft   Godes… 55           53175     Bonn      50.7      7.14
+##  3 44e2… bft … &lt;NA&gt;  Schel… 53           36304     Alsf…     50.8      9.28
+##  4 1a8e… Hess… Hess… Frank… 65           61279     Gräv…     50.4      8.46
+##  5 0050… star… STAR  Leipz… 11           06217     Mers…     51.4     12.0 
+##  6 d435… ROSD… Shell A7 GÖ… &lt;NA&gt;         37124     Rosd…     51.5      9.88
+##  7 88a2… AVIA… AVIA  Burgs… 8            63637     Joss…     50.2      9.48
+##  8 f0e9… Aral… ARAL  Eicke… 357          41063     Mönc…     51.2      6.45
+##  9 0050… star… STAR  Celle… 55           29303     Berg…     52.8      9.97
+## 10 8e47… Aral… ARAL  Crail… 32           74532     Ilsh…     49.2      9.93
+## # … with 15,658 more rows, and 2 more variables: first_active &lt;dttm&gt;,
+## #   openingtimes_json &lt;chr&gt;</code></pre>
+<p>Wir verschneiden mit <code>inner_join()</code> unter Angabe der relevanten Spaltennamen und wählen die Spalten aus, mit denen wir weiterarbeiten wollen:</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="join-und-group.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(preise_nach_tankstelle, tankstellen,</span>
+<span id="cb191-2"><a href="join-und-group.html#cb191-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;station_uuid&quot;</span> <span class="ot">=</span> <span class="st">&quot;uuid&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb191-3"><a href="join-und-group.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dieselpreis, e5preis, e10preis, name, brand, latitude, longitude) <span class="ot">-&gt;</span></span>
+<span id="cb191-4"><a href="join-und-group.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  preise_geo</span>
+<span id="cb191-5"><a href="join-und-group.html#cb191-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-6"><a href="join-und-group.html#cb191-6" aria-hidden="true" tabindex="-1"></a>preise_geo</span>
+<span id="cb191-7"><a href="join-und-group.html#cb191-7" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 13,700 x 7</span></span>
+<span id="cb191-8"><a href="join-und-group.html#cb191-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    dieselpreis e5preis e10preis name              brand       latitude longitude</span></span>
+<span id="cb191-9"><a href="join-und-group.html#cb191-9" aria-hidden="true" tabindex="-1"></a><span class="do">##          &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb191-10"><a href="join-und-group.html#cb191-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  1        1.33    1.55     1.53 Beducker - Quali… Beducker        48.6     10.9 </span></span>
+<span id="cb191-11"><a href="join-und-group.html#cb191-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  2        1.31    1.53     1.51 Röttenbach        BFT Pickel…     49.7     10.9 </span></span>
+<span id="cb191-12"><a href="join-und-group.html#cb191-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  3        1.37    1.62     1.60 Haisch Mineralöl… TankCenter…     48.0      7.59</span></span>
+<span id="cb191-13"><a href="join-und-group.html#cb191-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  4        1.35    1.64     1.62 Tank-Kontor Wilh… &lt;NA&gt;            47.9      9.42</span></span>
+<span id="cb191-14"><a href="join-und-group.html#cb191-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  5        1.32    1.61     1.59 Tank-Kontor Baie… &lt;NA&gt;            47.8      9.65</span></span>
+<span id="cb191-15"><a href="join-und-group.html#cb191-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  6        1.27    1.52     1.50 Schindele, Lochb… &lt;NA&gt;            47.7      9.53</span></span>
+<span id="cb191-16"><a href="join-und-group.html#cb191-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  7        1.35    1.57     1.55 bft-Tankstelle H… BFT             48.1      7.78</span></span>
+<span id="cb191-17"><a href="join-und-group.html#cb191-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  8        1.37    1.61     1.59 EXTROL Tank- &amp; W… EXTROL          48.0      7.79</span></span>
+<span id="cb191-18"><a href="join-und-group.html#cb191-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  9        1.25    1.50     1.48 Wingenfeld Energ… Wingenfeld…     50.8     10.2 </span></span>
+<span id="cb191-19"><a href="join-und-group.html#cb191-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 10        1.26    1.53     1.51 Wilhlem Heim GmbH Oel - Heim      48.6      9.03</span></span>
+<span id="cb191-20"><a href="join-und-group.html#cb191-20" aria-hidden="true" tabindex="-1"></a><span class="do">## # … with 13,690 more rows</span></span></code></pre></div>
+<p><code>inner_join</code> hat die Besonderheit, dass nur Zeilen im kombinierten Datensatz übrigbleiben, deren Key in <em>beiden</em> Datensätzen gefunden wurde. Mit <code>left_join</code> würden hier alle Preise behalten werden (und die fehlenden Koordinaten mit <code>NA</code> ergänzt), mit <code>right_join</code> würden alle Stationen behalten werden (und fehlende Preise mit <code>NA</code> ergänzt). <code>full_join</code> löscht gar keine Informationen.</p>
+</div>
+<div id="kartieren" class="section level2" number="18.7">
+<h2><span class="header-section-number">18.7</span> Kartieren</h2>
+<p>Den georeferenzierten Datensatz der Preise wandeln wir in eine Simple Feature Collection um:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="join-und-group.html#cb192-1" aria-hidden="true" tabindex="-1"></a>preise_geo <span class="sc">%&gt;%</span></span>
+<span id="cb192-2"><a href="join-und-group.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)) <span class="ot">-&gt;</span> preise_sf</span></code></pre></div>
+<p><code>ggplot()</code> kartiert so einen großen Datensatz nur langsam. Wir nehmen stattdessen das Paket <code>tmap()</code> zur Hand, das mit einer ähnlichen Grammatik funktioniert.</p>
+<p>Interaktive Karten lassen sich mit <code>tmap</code> produzieren, wenn die Option</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="join-und-group.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</span></code></pre></div>
+<p>gesetzt ist. Aus technischen Gründen wird an dieser Stelle im Skript darauf verzichtet und wir bleiben beim <code>plot</code>-Modus:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="join-und-group.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(preise_sf) <span class="sc">+</span></span>
+<span id="cb194-2"><a href="join-und-group.html#cb194-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
+<p>Zwei Koordinaten sind quatsch! Wir finden ihre ungefähren Werte mit <code>summary</code>:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="join-und-group.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(preise_geo<span class="sc">$</span>longitude)</span>
+<span id="cb195-2"><a href="join-und-group.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb195-3"><a href="join-und-group.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   5.901   8.021   9.275   9.607  11.058  97.364</span></span></code></pre></div>
+<p>Und filtern sie raus, und wiederholen die Umwandlung (diesmal auch mit CRS)</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="join-und-group.html#cb196-1" aria-hidden="true" tabindex="-1"></a>preise_geo <span class="sc">%&gt;%</span></span>
+<span id="cb196-2"><a href="join-und-group.html#cb196-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(longitude <span class="sc">&lt;</span> <span class="dv">80</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb196-3"><a href="join-und-group.html#cb196-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb196-4"><a href="join-und-group.html#cb196-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">4326</span>) <span class="ot">-&gt;</span> preise_sf</span></code></pre></div>
+<p>Dann mappen wir nochmal:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="join-und-group.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(preise_sf) <span class="sc">+</span></span>
+<span id="cb197-2"><a href="join-und-group.html#cb197-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="st">&quot;dieselpreis&quot;</span>, <span class="at">style =</span> <span class="st">&quot;cont&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-197-1.png" width="672" /></p>
+<p>Schon ganz hübsch, aber die Skala wird nun verzerrt durch sehr teure Autobahntankstellen einerseits, und falsche Null-werte andererseits:</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="join-und-group.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(preise_sf<span class="sc">$</span>dieselpreis)</span>
+<span id="cb198-2"><a href="join-und-group.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb198-3"><a href="join-und-group.html#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   0.000   1.249   1.289   1.290   1.329   1.679</span></span></code></pre></div>
+</div>
+<div id="choroplethen-1" class="section level2" number="18.8">
+<h2><span class="header-section-number">18.8</span> Choroplethen</h2>
+<p>Eine Lösung wäre, die Daten auf Kreisebene zusammenzufassen, und zwar anhand ihres Medians. Damit würden diese Ausreißer keine Role mehr spielen.</p>
+<p>Das <code>eurostat</code>-Paket macht es einfach, diese Geodaten einzulesen. NUTS3 ist die Ebene der Stadt- und Landkreise bzw. ihrer europäischen Equivalente.</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="join-und-group.html#cb199-1" aria-hidden="true" tabindex="-1"></a>kreise <span class="ot">&lt;-</span> eurostat<span class="sc">::</span><span class="fu">get_eurostat_geospatial</span>(<span class="at">nuts_level =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb199-2"><a href="join-und-group.html#cb199-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CNTR_CODE <span class="sc">==</span> <span class="st">&quot;DE&quot;</span>)</span></code></pre></div>
+<p>Mal schauen wie es aussieht:</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="join-und-group.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(kreise) <span class="sc">+</span></span>
+<span id="cb200-2"><a href="join-und-group.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
+</div>
+<div id="räumliches-verschneiden" class="section level2" number="18.9">
+<h2><span class="header-section-number">18.9</span> Räumliches Verschneiden</h2>
+<p>mit <code>st_join</code> werden Datensätze nicht mit einem Key verschnitten, sondern anhand ihrer Geolokation. Dann können wir wieder ganz normal <code>group_by</code> und <code>summarise</code> verwenden:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="join-und-group.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_join</span>(kreise, preise_sf) <span class="sc">%&gt;%</span></span>
+<span id="cb201-2"><a href="join-und-group.html#cb201-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(NUTS_ID) <span class="sc">%&gt;%</span></span>
+<span id="cb201-3"><a href="join-und-group.html#cb201-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">dieselpreis =</span> <span class="fu">median</span>(dieselpreis),</span>
+<span id="cb201-4"><a href="join-und-group.html#cb201-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">e5preis     =</span> <span class="fu">median</span>(e5preis),</span>
+<span id="cb201-5"><a href="join-und-group.html#cb201-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">e10preis    =</span> <span class="fu">median</span>(e10preis)) <span class="ot">-&gt;</span> preise_kreise</span></code></pre></div>
+<p>Und so könnte vielleicht ein vorläufiges Ergebnis aussehen:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="join-und-group.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(preise_kreise) <span class="sc">+</span></span>
+<span id="cb202-2"><a href="join-und-group.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="st">&quot;dieselpreis&quot;</span>,</span>
+<span id="cb202-3"><a href="join-und-group.html#cb202-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">&quot;Median der Dieselpreise&quot;</span>,</span>
+<span id="cb202-4"><a href="join-und-group.html#cb202-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">&quot;cont&quot;</span>,</span>
+<span id="cb202-5"><a href="join-und-group.html#cb202-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb202-6"><a href="join-und-group.html#cb202-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.outside =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="string-manipulation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ktiu/ds21/edit/master/18_join_und_group.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ktiu/ds21/blob/master/18_join_und_group.Rmd",
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

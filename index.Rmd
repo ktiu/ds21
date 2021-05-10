@@ -1,6 +1,6 @@
 --- 
 title: "Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R"
-subtitle: "Konzeption quantitativer Forschung"
+subtitle: Projektseminar Konzeption quantitativer Forschung
 author:
   - name: Till Straube
     url: https://user.uni-frankfurt.de/~tstraube
