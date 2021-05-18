@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Sitzung 6 Text: Shelton et al. 2014 | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <title>Sitzung 19 Rmarkdown und Kollaboration | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
   <meta name="description" content="Projektseminar" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Sitzung 6 Text: Shelton et al. 2014 | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:title" content="Sitzung 19 Rmarkdown und Kollaboration | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Sitzung 6 Text: Shelton et al. 2014 | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta name="twitter:title" content="Sitzung 19 Rmarkdown und Kollaboration | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
   
   <meta name="twitter:description" content="Projektseminar" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="visualisierungen.html"/>
-<link rel="next" href="geodaten.html"/>
+<link rel="prev" href="join-und-group.html"/>
+<link rel="next" href="text-bowker-und-star-1999.html"/>
 <script src="assets/header-attrs-2.8/header-attrs.js"></script>
 <script src="assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,22 +388,219 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="text-shelton-et-al.-2014" class="section level1" number="6">
-<h1><span class="header-section-number">Sitzung 6</span> Text: Shelton et al. 2014</h1>
-<div id="lesetext-1" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Lesetext</h2>
-<p>Shelton, Taylor, Ate Poorthuis, Mark Graham und Matthew Zook. 2014. Mapping the Data Shadows of Hurricane Sandy. Uncovering the Sociospatial Dimensions of <q>Big Data</q>. <em>Geoforum 52.</em> 167–79.</p>
+<div id="rmarkdown-und-kollaboration" class="section level1" number="19">
+<h1><span class="header-section-number">Sitzung 19</span> Rmarkdown und Kollaboration</h1>
+<div id="kollaboration" class="section level2" number="19.1">
+<h2><span class="header-section-number">19.1</span> Kollaboration</h2>
+<p>Im Folgenden sind einige Überlegungen und Tools aufgeführt, die bei der Kollaboration an einem Gruppenprojekt hilfreich sein könnten.</p>
+<div id="find-your-workflow" class="section level3" number="19.1.1">
+<h3><span class="header-section-number">19.1.1</span> Find <u>your</u> workflow</h3>
+<p>Es gibt zwar effiziente und weniger effiziente Praktiken, sowie hilfreiche und weniger hilfreiche Tools – es gibt jedoch keinesfalls <em>den einen</em> perfekten Workflow. Letztendlich kommt es darauf an, sich gemeinsam für einen Workflow zu entscheiden und diesen klar festzulegen, oder sogar irgendwie festzuhalten.</p>
+<p>Dazu gehört es z. B. auch, sich auf Formate von Dateinamen oder R-Objekten zu einigen, und einen ,offiziellen‘ Kanal für die Gruppenkommunikation festzulegen – sei es E-Mail, Slack oder WhatsApp.</p>
 </div>
-<div id="fragen-an-den-text-1" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Fragen an den Text</h2>
-<ol style="list-style-type: decimal">
-<li>Um welche Art von Text handelt es sich? Wer sind die Autoren, und an wen wenden sie sich?</li>
-<li>Was war Hurricane Sandy, von dem der Text erzählt? Warum wird ausgerechnet dieser Hurricane herangezogen?</li>
-<li>Welche Methoden wenden die Autoren an, und zu welchen Ergebnissen kommen sie?</li>
-<li>Im Abstract versprechen die Autoren: <q>We also seek to fill a conceptual lacuna…</q> Was heißt das, und wie geht der Text das an?</li>
-<li>In welchen Punkten finden Sie den Text überzeugend? Welche Kritik haben Sie am Text?</li>
-</ol>
+<div id="zwischenstände-speichern" class="section level3" number="19.1.2">
+<h3><span class="header-section-number">19.1.2</span> Zwischenstände speichern</h3>
+<p>Wenn z. B. ein (längeres) Script einen (größeren) Datensatz generiert und ihn dem Objektnamen <code>mein_datensatz</code> zuweist, dann erscheint der Datensatz im lokalen Environment. Um den Datensatz mit anderen zu teilen, muss er irgendwie exportiert werden. Hierfür ist es ratsam, die <code>save()</code>-Funktion zu nutzen:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="rmarkdown-und-kollaboration.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(mein_datensatz, <span class="at">file =</span> <span class="st">&quot;zwischenstand_mein_datensatz.Rdata&quot;</span>)</span></code></pre></div>
+<p>So wird eine Datei erstellt, die den Datensatz enthält und verschoben oder geteilt werden kann. Eine solche Datei kann auch andere Objekte (Funktionen, Listen, …) und mehrere Objekte auf einmal enthalten. Die Dateiendung ist dabei eigentlich egal, <code>.Rdata</code> scheint aber Usus zu sein.</p>
+<p>Aus der Datei können Objekte dann jederzeit wieder ins Environment geladen werden mit dem Befehl:</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="rmarkdown-und-kollaboration.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;zwischenstand_mein_datensatz.Rdata&quot;</span>)</span></code></pre></div>
+<p>Auch wenn ein Skript auf einmal nicht mehr funktioniert (etwa weil die API sich ändert), ist es hilfreich, auf solche Zwischenstände zurückgreifen zu können.</p>
+</div>
+<div id="rstudio-cloud" class="section level3" number="19.1.3">
+<h3><span class="header-section-number">19.1.3</span> RStudio Cloud</h3>
+<p>Im Seminar haben wir <a href="https://rstudio.cloud/">RStudio Cloud</a> über den Browser genutzt. Eine gute Möglichkeit der Kollaboration ist, ein Cloud-Projekt miteinander zu teilen. Aber Achtung: Dabei wird beim Teilen immer eine Kopie erstellt – daher kann es schwierig werden, gleichzeitig vorgenommene Änderungen wieder zusammenzuführen.</p>
+<p>Wer die Cloud im Rahmen des Projektseminars nutzt, sollte keine vertraulichen Daten verarbeiten und sich sorgfältig absprechen, wer gerade an welcher Version des Projekts wie weiterarbeitet.</p>
+</div>
+<div id="file-sharing" class="section level3" number="19.1.4">
+<h3><span class="header-section-number">19.1.4</span> File sharing</h3>
+<p>Mit File-Sharing-Plattformen wie Dropbox (oder Google Drive, OneDrive, …) können ganze Ordner leicht zwischen verschiedenen Rechnern synchronisiert werden. Hierbei ist es jedoch keine gute Idee, den Projektordner (das <em>working directory</em>) selbst zu synchronisieren – dabei sind Probleme vorprogrammiert! Stattdessen ist es vielleicht eine Idee, einen Unterordner anzulegen, der dann mit diesen Diensten verknüpft werden kann.</p>
+<p><strong>Aber Vorsicht:</strong> Wenn mit vertraulichen Daten gearbeitet wird, ist der Austausch der Daten über diese Programme nicht zulässig!</p>
+</div>
+<div id="e-mail" class="section level3" number="19.1.5">
+<h3><span class="header-section-number">19.1.5</span> E-Mail</h3>
+<p>Der Austausch von Scripts, Datensätzen, zip-Dateien etc. über E-Mail ist vielleicht umständlich, aber im Zweifel eine praktikable Lösung. Nur bei sehr großen Datensätzen ist man vielleicht irgendwann auf File-Sharing-Dienste wie <a href="https://wetransfer.com/">WeTransfer</a> angewiesen – aber auch hier mit den gleichen datenschutzrechtlichen Bedenken.</p>
+</div>
+<div id="git" class="section level3" number="19.1.6">
+<h3><span class="header-section-number">19.1.6</span> Git</h3>
+<p><a href="https://git-scm.com/">Git</a> ist ein mächtiges Tool für Version Control, und war lange aufgrund seiner etwas steilen Lernkurve berüchtigt. Mit dem richtigen Interface (RStudio bietet z. B. eine GUI an) ist das aber alles gar nicht so schwierig, und Portale wie <a href="https://github.com">Github</a> oder <a href="https://bitbucket.org/">Bitbucket</a> erleichtern die zentrale Verwaltung von Repositories.</p>
+<p>Git hat eine steile Lernkurve und erleichtert die Arbeit erst, wenn man damit sicher umgehen kann.
+Aber Git ist zurecht ein absolutes Standardwerkzeug für Entwickler*innen, und wer jemals ernsthaft in einer Gruppe (oder auch alleine!) an Code arbeiten will, sollte sich mit Git auseinandersetzen.</p>
+<p>Eine ausführliche Anleitung für die Verknüpfung von RStudio und GitHub findet sich hier: <a href="https://happygitwithr.com/" class="uri">https://happygitwithr.com/</a></p>
+</div>
+<div id="trello" class="section level3" number="19.1.7">
+<h3><span class="header-section-number">19.1.7</span> Trello</h3>
+<p><a href="https://trello.com/de">Trello</a> ist ein flexibles Projektmanagement-Tool, in dem man gemeinsame Listen anlegen kann.</p>
+<p>Neben einer gemeinsamen To-do-Liste bietet es sich gerade bei größeren Teams an, wer gerade an was arbeitet (Liste: „Till arbeitet an…“).</p>
+<p>Es ist erfahrungsgemäß ratsam, nicht nur kryptische Stichpunkte festzuhalten, sondern die gewünschten Resultate als „Stories“ zu beschreiben:</p>
+<ul>
+<li>„Wir haben ein API-Passwort“</li>
+<li>„Datensatz x ist mit Datensatz y verschnitten“</li>
+<li>„Wir haben fünf Quellen für den Theorieteil“</li>
+<li>…</li>
+</ul>
+</div>
+</div>
+<div id="rmarkdown" class="section level2" number="19.2">
+<h2><span class="header-section-number">19.2</span> Rmarkdown</h2>
+<div id="text-formatieren" class="section level3" number="19.2.1">
+<h3><span class="header-section-number">19.2.1</span> Text formatieren</h3>
+<p>Wir arbeiten schon von Anfang an mit im Rmarkdown-Format. Wie Überschriften, Links, Bilder usw. in Rmarkdown genau funktionieren, ist in <a href="https://rmarkdown.rstudio.com/authoring_basics.html">dieser Übersicht</a> und auf <a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">diesem Cheat Sheet (Punkt: Pandoc’s Markdown)</a> gut festgehalten.</p>
+</div>
+<div id="der-knit-button" class="section level3" number="19.2.2">
+<h3><span class="header-section-number">19.2.2</span> Der Knit-Button</h3>
+<p>Wenn wir im <a href="https://de.wikipedia.org/wiki/YAML">YAML</a>-Header die Zeile</p>
+<pre><code>output: html_document</code></pre>
+<p>setzen, erscheint (nach Abspeichern) ein „Knit“-Button in der GUI. Durch Drücken auf diesen Knopf passiert folgendes:</p>
+<ul>
+<li>R erstellt („strickt“) ein HTML-Dokument aus dem vorliegenden Markdown und den Code Chunks</li>
+<li>Dabei spielen „gespeicherte“ Objekte keine Rolle, die Chunks werden einfach der Reihe nach (in einem neuen Environment) ausgeführt</li>
+<li>Externe Datensätze o. ä. müssen also am Anfang des Dokuments explizit geladen werden (etwa mit <code>load()</code>). Für den Abschlussbericht ist es ratsam, einen vorbereiteten Datensatz am Anfang des Rmarkdown-Dokuments so zu laden.</li>
+</ul>
+<p>Im YAML-Header können noch viele weitere Angaben gemacht werden, die das Resultat verändern. Hier eine gute Dokumentation: <a href="https://bookdown.org/yihui/rmarkdown/html-document.html" class="uri">https://bookdown.org/yihui/rmarkdown/html-document.html</a></p>
+</div>
+<div id="kable" class="section level3" number="19.2.3">
+<h3><span class="header-section-number">19.2.3</span> Kable</h3>
+<p>Im <code>knitr</code>-Paket sorgt der Befehl <code>kable()</code> für eine schöne Darstellung von Tabellen:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="rmarkdown-und-kollaboration.html#cb206-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span>diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb206-2"><a href="rmarkdown-und-kollaboration.html#cb206-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb206-3"><a href="rmarkdown-und-kollaboration.html#cb206-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">carat</th>
+<th align="left">cut</th>
+<th align="left">color</th>
+<th align="left">clarity</th>
+<th align="right">depth</th>
+<th align="right">table</th>
+<th align="right">price</th>
+<th align="right">x</th>
+<th align="right">y</th>
+<th align="right">z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.23</td>
+<td align="left">Ideal</td>
+<td align="left">E</td>
+<td align="left">SI2</td>
+<td align="right">61.5</td>
+<td align="right">55</td>
+<td align="right">326</td>
+<td align="right">3.95</td>
+<td align="right">3.98</td>
+<td align="right">2.43</td>
+</tr>
+<tr class="even">
+<td align="right">0.21</td>
+<td align="left">Premium</td>
+<td align="left">E</td>
+<td align="left">SI1</td>
+<td align="right">59.8</td>
+<td align="right">61</td>
+<td align="right">326</td>
+<td align="right">3.89</td>
+<td align="right">3.84</td>
+<td align="right">2.31</td>
+</tr>
+<tr class="odd">
+<td align="right">0.23</td>
+<td align="left">Good</td>
+<td align="left">E</td>
+<td align="left">VS1</td>
+<td align="right">56.9</td>
+<td align="right">65</td>
+<td align="right">327</td>
+<td align="right">4.05</td>
+<td align="right">4.07</td>
+<td align="right">2.31</td>
+</tr>
+<tr class="even">
+<td align="right">0.29</td>
+<td align="left">Premium</td>
+<td align="left">I</td>
+<td align="left">VS2</td>
+<td align="right">62.4</td>
+<td align="right">58</td>
+<td align="right">334</td>
+<td align="right">4.20</td>
+<td align="right">4.23</td>
+<td align="right">2.63</td>
+</tr>
+<tr class="odd">
+<td align="right">0.31</td>
+<td align="left">Good</td>
+<td align="left">J</td>
+<td align="left">SI2</td>
+<td align="right">63.3</td>
+<td align="right">58</td>
+<td align="right">335</td>
+<td align="right">4.34</td>
+<td align="right">4.35</td>
+<td align="right">2.75</td>
+</tr>
+<tr class="even">
+<td align="right">0.24</td>
+<td align="left">Very Good</td>
+<td align="left">J</td>
+<td align="left">VVS2</td>
+<td align="right">62.8</td>
+<td align="right">57</td>
+<td align="right">336</td>
+<td align="right">3.94</td>
+<td align="right">3.96</td>
+<td align="right">2.48</td>
+</tr>
+</tbody>
+</table>
+<p>Auch hier gibt es wieder vielfältige Möglichkeiten zur visuellen Gestaltung. Diesen Post finde ich immer besonders hilfreich: <a href="https://haozhu233.github.io/kableExtra/awesome_table_in_html.html" class="uri">https://haozhu233.github.io/kableExtra/awesome_table_in_html.html</a></p>
+</div>
+<div id="chunk-options" class="section level3" number="19.2.4">
+<h3><span class="header-section-number">19.2.4</span> Chunk Options</h3>
+<p>Am Anfang eines Code Chunks kann genau festgelegt werden, ob der Code ausgeführt werden soll, ob er im finalen Dokument erscheinen soll, ob Warnungen oder Fehler ausgegeben werden sollen, etc. Wenn zum Beispiel Libraries „versteckt“ geladen werden sollen, geht das mit diesem Code Chunk:</p>
+<pre><code>```{r, include = FALSE}
+library(tidyverse)
+library(rvest)
+```</code></pre>
+<p>Ein überblick über die Chunk-Optionen findet sich hier: <a href="https://bookdown.org/yihui/rmarkdown/r-code.html" class="uri">https://bookdown.org/yihui/rmarkdown/r-code.html</a></p>
+</div>
+<div id="wissenschaftliches-zitieren" class="section level3" number="19.2.5">
+<h3><span class="header-section-number">19.2.5</span> Wissenschaftliches Zitieren</h3>
+<p>Wer die Vorzüge von Literaturverwaltungssoftware (wie Citavi, Zotero, …) schon schätzen gelernt hat, kann in Rmarkdown folgendermaßen vorgehen:</p>
+<div id="schritt-1-exportieren" class="section level4" number="19.2.5.1">
+<h4><span class="header-section-number">19.2.5.1</span> Schritt 1: Exportieren</h4>
+<p>Die relevante Literatur in eine BibTex-Datei im R-Arbeitsverzeichnis exportieren, z.B. <code>literatur.bib</code>. BibTex (bzw. BibLatex) ist ein bewährtes und gut dokumentiertes Format. Ein Eintrag sieht dann z.B. so aus, wobei <code>bortz</code> der „Name“ des Eintrags ist, den wir frei wählen können:</p>
+<pre><code>@book{bortz,
+  author = {Bortz, J{\&quot;u}rgen and Schuster, Christof},
+  title = {{Statistik f{\&quot;u}r Human- und Sozialwissenschaftler}},
+  publisher = {Springer},
+  year = {2010},
+  address = {Berlin},
+  edition = {7},
+}</code></pre>
+</div>
+<div id="schritt-2-verlinken" class="section level4" number="19.2.5.2">
+<h4><span class="header-section-number">19.2.5.2</span> Schritt 2: Verlinken</h4>
+<p>Im YAML-Header des Rmarkdown-dokuments die Angabe ergänzen:</p>
+<pre><code>bibliography: literatur.bib</code></pre>
+<p>Damit weiß der „Knit“-Befehl, wo er nach Literatur suchen soll.</p>
+</div>
+<div id="schritt-3-zitieren" class="section level4" number="19.2.5.3">
+<h4><span class="header-section-number">19.2.5.3</span> Schritt 3: Zitieren</h4>
+<p>Im Text kann dann z. B. so zitiert werden:</p>
+<pre><code>Das zentrale Grenzwerttheorem besagt, dass die Stichprobenverteilung von
+$\bar{x}$ mit steigender Stichprobengröße $n$ in eine Normalverteilung übergeht
+[@bortz: 86].</code></pre>
+</div>
+<div id="schritt-4-stricken" class="section level4" number="19.2.5.4">
+<h4><span class="header-section-number">19.2.5.4</span> Schritt 4: Stricken</h4>
+<p>Beim „Knit“-Befehl wird ein Literaturverzeichnis automatisch erstellt und ans Ende des Dokuments gehängt. Deshalb beendet man das Dokument am besten mit der Zeile:</p>
+<pre><code>## Literaturverzeichnis</code></pre>
 
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -411,8 +608,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="visualisierungen.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="geodaten.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="join-und-group.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="text-bowker-und-star-1999.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -444,7 +641,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ktiu/ds21/edit/master/06_text_shelton_et_al_2014.Rmd",
+"link": "https://github.com/ktiu/ds21/edit/master/19_Rmarkdown_und_Kollaboration.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -452,7 +649,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/ktiu/ds21/blob/master/06_text_shelton_et_al_2014.Rmd",
+"link": "https://github.com/ktiu/ds21/blob/master/19_Rmarkdown_und_Kollaboration.Rmd",
 "text": null
 },
 "download": ["_main.pdf"],

@@ -171,11 +171,11 @@ Datum & Sitzung & Inhalt \\
 26. April 2021 & 16 & \protect\hyperlink{text-breuer-2005}{Text: Breuer 2005} \\
 3. Mai 2021 & 17 & \protect\hyperlink{string-manipulation}{String manipulation} \\
 10. Mai 2021 & 18 & \protect\hyperlink{join-und-group}{Join und group} \\
-17. Mai 2021 & 19 & {[}Rmarkdown und Kollaboration{]} \\
+17. Mai 2021 & 19 & \protect\hyperlink{rmarkdown-und-kollaboration}{Rmarkdown und Kollaboration} \\
 \emph{24. Mai 2021} & & \emph{Entfällt (Pfingstmontag)} \\
-31. Mai 2021 & 20 & {[}Text: Bowker und Star 2003{]} \\
+31. Mai 2021 & 20 & \protect\hyperlink{text-bowker-und-star-1999}{Text: Bowker und Star 1999} \\
 7. Juni 2021 & 21 & {[}Clusteranalyse{]} \\
-14. Juni 2021 & 22 & {[}Rmarkdown{]} \\
+14. Juni 2021 & 22 & \protect\hyperlink{rmarkdown}{Rmarkdown} \\
 21. Juni 2021 & 23 & {[}ANOVA{]} \\
 28. Juni 2021 & 24 & {[}Text: Beer 2017{]} \\
 5. Juli 2021 & 25 & \protect\hyperlink{pruxe4sentationen}{Präsentationen} \\
@@ -4711,5 +4711,253 @@ Und so könnte vielleicht ein vorläufiges Ergebnis aussehen:
 \end{Shaded}
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-202-1.png}
+
+\hypertarget{rmarkdown-und-kollaboration}{%
+\section{Rmarkdown und Kollaboration}\label{rmarkdown-und-kollaboration}}
+
+\hypertarget{kollaboration}{%
+\subsection{Kollaboration}\label{kollaboration}}
+
+Im Folgenden sind einige Überlegungen und Tools aufgeführt, die bei der Kollaboration an einem Gruppenprojekt hilfreich sein könnten.
+
+\hypertarget{find-your-workflow}{%
+\subsubsection{Find your workflow}\label{find-your-workflow}}
+
+Es gibt zwar effiziente und weniger effiziente Praktiken, sowie hilfreiche und weniger hilfreiche Tools -- es gibt jedoch keinesfalls \emph{den einen} perfekten Workflow. Letztendlich kommt es darauf an, sich gemeinsam für einen Workflow zu entscheiden und diesen klar festzulegen, oder sogar irgendwie festzuhalten.
+
+Dazu gehört es z.~B. auch, sich auf Formate von Dateinamen oder R-Objekten zu einigen, und einen ,offiziellen` Kanal für die Gruppenkommunikation festzulegen -- sei es E-Mail, Slack oder WhatsApp.
+
+\hypertarget{zwischenstuxe4nde-speichern}{%
+\subsubsection{Zwischenstände speichern}\label{zwischenstuxe4nde-speichern}}
+
+Wenn z.~B. ein (längeres) Script einen (größeren) Datensatz generiert und ihn dem Objektnamen \texttt{mein\_datensatz} zuweist, dann erscheint der Datensatz im lokalen Environment. Um den Datensatz mit anderen zu teilen, muss er irgendwie exportiert werden. Hierfür ist es ratsam, die \texttt{save()}-Funktion zu nutzen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{save}\NormalTok{(mein\_datensatz, }\AttributeTok{file =} \StringTok{"zwischenstand\_mein\_datensatz.Rdata"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+So wird eine Datei erstellt, die den Datensatz enthält und verschoben oder geteilt werden kann. Eine solche Datei kann auch andere Objekte (Funktionen, Listen, \ldots) und mehrere Objekte auf einmal enthalten. Die Dateiendung ist dabei eigentlich egal, \texttt{.Rdata} scheint aber Usus zu sein.
+
+Aus der Datei können Objekte dann jederzeit wieder ins Environment geladen werden mit dem Befehl:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{load}\NormalTok{(}\StringTok{"zwischenstand\_mein\_datensatz.Rdata"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Auch wenn ein Skript auf einmal nicht mehr funktioniert (etwa weil die API sich ändert), ist es hilfreich, auf solche Zwischenstände zurückgreifen zu können.
+
+\hypertarget{rstudio-cloud}{%
+\subsubsection{RStudio Cloud}\label{rstudio-cloud}}
+
+Im Seminar haben wir \href{https://rstudio.cloud/}{RStudio Cloud} über den Browser genutzt. Eine gute Möglichkeit der Kollaboration ist, ein Cloud-Projekt miteinander zu teilen. Aber Achtung: Dabei wird beim Teilen immer eine Kopie erstellt -- daher kann es schwierig werden, gleichzeitig vorgenommene Änderungen wieder zusammenzuführen.
+
+Wer die Cloud im Rahmen des Projektseminars nutzt, sollte keine vertraulichen Daten verarbeiten und sich sorgfältig absprechen, wer gerade an welcher Version des Projekts wie weiterarbeitet.
+
+\hypertarget{file-sharing}{%
+\subsubsection{File sharing}\label{file-sharing}}
+
+Mit File-Sharing-Plattformen wie Dropbox (oder Google Drive, OneDrive, \ldots) können ganze Ordner leicht zwischen verschiedenen Rechnern synchronisiert werden. Hierbei ist es jedoch keine gute Idee, den Projektordner (das \emph{working directory}) selbst zu synchronisieren -- dabei sind Probleme vorprogrammiert! Stattdessen ist es vielleicht eine Idee, einen Unterordner anzulegen, der dann mit diesen Diensten verknüpft werden kann.
+
+\textbf{Aber Vorsicht:} Wenn mit vertraulichen Daten gearbeitet wird, ist der Austausch der Daten über diese Programme nicht zulässig!
+
+\hypertarget{e-mail}{%
+\subsubsection{E-Mail}\label{e-mail}}
+
+Der Austausch von Scripts, Datensätzen, zip-Dateien etc. über E-Mail ist vielleicht umständlich, aber im Zweifel eine praktikable Lösung. Nur bei sehr großen Datensätzen ist man vielleicht irgendwann auf File-Sharing-Dienste wie \href{https://wetransfer.com/}{WeTransfer} angewiesen -- aber auch hier mit den gleichen datenschutzrechtlichen Bedenken.
+
+\hypertarget{git}{%
+\subsubsection{Git}\label{git}}
+
+\href{https://git-scm.com/}{Git} ist ein mächtiges Tool für Version Control, und war lange aufgrund seiner etwas steilen Lernkurve berüchtigt. Mit dem richtigen Interface (RStudio bietet z.~B. eine GUI an) ist das aber alles gar nicht so schwierig, und Portale wie \href{https://github.com}{Github} oder \href{https://bitbucket.org/}{Bitbucket} erleichtern die zentrale Verwaltung von Repositories.
+
+Git hat eine steile Lernkurve und erleichtert die Arbeit erst, wenn man damit sicher umgehen kann.
+Aber Git ist zurecht ein absolutes Standardwerkzeug für Entwickler*innen, und wer jemals ernsthaft in einer Gruppe (oder auch alleine!) an Code arbeiten will, sollte sich mit Git auseinandersetzen.
+
+Eine ausführliche Anleitung für die Verknüpfung von RStudio und GitHub findet sich hier: \url{https://happygitwithr.com/}
+
+\hypertarget{trello}{%
+\subsubsection{Trello}\label{trello}}
+
+\href{https://trello.com/de}{Trello} ist ein flexibles Projektmanagement-Tool, in dem man gemeinsame Listen anlegen kann.
+
+Neben einer gemeinsamen To-do-Liste bietet es sich gerade bei größeren Teams an, wer gerade an was arbeitet (Liste: „Till arbeitet an\ldots``).
+
+Es ist erfahrungsgemäß ratsam, nicht nur kryptische Stichpunkte festzuhalten, sondern die gewünschten Resultate als „Stories`` zu beschreiben:
+
+\begin{itemize}
+\tightlist
+\item
+  „Wir haben ein API-Passwort``
+\item
+  „Datensatz x ist mit Datensatz y verschnitten``
+\item
+  „Wir haben fünf Quellen für den Theorieteil``
+\item
+  \ldots{}
+\end{itemize}
+
+\hypertarget{rmarkdown}{%
+\subsection{Rmarkdown}\label{rmarkdown}}
+
+\hypertarget{text-formatieren}{%
+\subsubsection{Text formatieren}\label{text-formatieren}}
+
+Wir arbeiten schon von Anfang an mit im Rmarkdown-Format. Wie Überschriften, Links, Bilder usw. in Rmarkdown genau funktionieren, ist in \href{https://rmarkdown.rstudio.com/authoring_basics.html}{dieser Übersicht} und auf \href{https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf}{diesem Cheat Sheet (Punkt: Pandoc's Markdown)} gut festgehalten.
+
+\hypertarget{der-knit-button}{%
+\subsubsection{Der Knit-Button}\label{der-knit-button}}
+
+Wenn wir im \href{https://de.wikipedia.org/wiki/YAML}{YAML}-Header die Zeile
+
+\begin{verbatim}
+output: html_document
+\end{verbatim}
+
+setzen, erscheint (nach Abspeichern) ein „Knit``-Button in der GUI. Durch Drücken auf diesen Knopf passiert folgendes:
+
+\begin{itemize}
+\tightlist
+\item
+  R erstellt („strickt``) ein HTML-Dokument aus dem vorliegenden Markdown und den Code Chunks
+\item
+  Dabei spielen „gespeicherte`` Objekte keine Rolle, die Chunks werden einfach der Reihe nach (in einem neuen Environment) ausgeführt
+\item
+  Externe Datensätze o.~ä. müssen also am Anfang des Dokuments explizit geladen werden (etwa mit \texttt{load()}). Für den Abschlussbericht ist es ratsam, einen vorbereiteten Datensatz am Anfang des Rmarkdown-Dokuments so zu laden.
+\end{itemize}
+
+Im YAML-Header können noch viele weitere Angaben gemacht werden, die das Resultat verändern. Hier eine gute Dokumentation: \url{https://bookdown.org/yihui/rmarkdown/html-document.html}
+
+\hypertarget{kable}{%
+\subsubsection{Kable}\label{kable}}
+
+Im \texttt{knitr}-Paket sorgt der Befehl \texttt{kable()} für eine schöne Darstellung von Tabellen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ggplot2}\SpecialCharTok{::}\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{r|l|l|l|r|r|r|r|r|r}
+\hline
+carat & cut & color & clarity & depth & table & price & x & y & z\\
+\hline
+0.23 & Ideal & E & SI2 & 61.5 & 55 & 326 & 3.95 & 3.98 & 2.43\\
+\hline
+0.21 & Premium & E & SI1 & 59.8 & 61 & 326 & 3.89 & 3.84 & 2.31\\
+\hline
+0.23 & Good & E & VS1 & 56.9 & 65 & 327 & 4.05 & 4.07 & 2.31\\
+\hline
+0.29 & Premium & I & VS2 & 62.4 & 58 & 334 & 4.20 & 4.23 & 2.63\\
+\hline
+0.31 & Good & J & SI2 & 63.3 & 58 & 335 & 4.34 & 4.35 & 2.75\\
+\hline
+0.24 & Very Good & J & VVS2 & 62.8 & 57 & 336 & 3.94 & 3.96 & 2.48\\
+\hline
+\end{tabular}
+
+Auch hier gibt es wieder vielfältige Möglichkeiten zur visuellen Gestaltung. Diesen Post finde ich immer besonders hilfreich: \url{https://haozhu233.github.io/kableExtra/awesome_table_in_html.html}
+
+\hypertarget{chunk-options}{%
+\subsubsection{Chunk Options}\label{chunk-options}}
+
+Am Anfang eines Code Chunks kann genau festgelegt werden, ob der Code ausgeführt werden soll, ob er im finalen Dokument erscheinen soll, ob Warnungen oder Fehler ausgegeben werden sollen, etc. Wenn zum Beispiel Libraries „versteckt`` geladen werden sollen, geht das mit diesem Code Chunk:
+
+\begin{verbatim}
+```{r, include = FALSE}
+library(tidyverse)
+library(rvest)
+```
+\end{verbatim}
+
+Ein überblick über die Chunk-Optionen findet sich hier: \url{https://bookdown.org/yihui/rmarkdown/r-code.html}
+
+\hypertarget{wissenschaftliches-zitieren}{%
+\subsubsection{Wissenschaftliches Zitieren}\label{wissenschaftliches-zitieren}}
+
+Wer die Vorzüge von Literaturverwaltungssoftware (wie Citavi, Zotero, \ldots) schon schätzen gelernt hat, kann in Rmarkdown folgendermaßen vorgehen:
+
+\hypertarget{schritt-1-exportieren}{%
+\paragraph{Schritt 1: Exportieren}\label{schritt-1-exportieren}}
+
+Die relevante Literatur in eine BibTex-Datei im R-Arbeitsverzeichnis exportieren, z.B. \texttt{literatur.bib}. BibTex (bzw. BibLatex) ist ein bewährtes und gut dokumentiertes Format. Ein Eintrag sieht dann z.B. so aus, wobei \texttt{bortz} der „Name`` des Eintrags ist, den wir frei wählen können:
+
+\begin{verbatim}
+@book{bortz,
+  author = {Bortz, J{\"u}rgen and Schuster, Christof},
+  title = {{Statistik f{\"u}r Human- und Sozialwissenschaftler}},
+  publisher = {Springer},
+  year = {2010},
+  address = {Berlin},
+  edition = {7},
+}
+\end{verbatim}
+
+\hypertarget{schritt-2-verlinken}{%
+\paragraph{Schritt 2: Verlinken}\label{schritt-2-verlinken}}
+
+Im YAML-Header des Rmarkdown-dokuments die Angabe ergänzen:
+
+\begin{verbatim}
+bibliography: literatur.bib
+\end{verbatim}
+
+Damit weiß der „Knit``-Befehl, wo er nach Literatur suchen soll.
+
+\hypertarget{schritt-3-zitieren}{%
+\paragraph{Schritt 3: Zitieren}\label{schritt-3-zitieren}}
+
+Im Text kann dann z.~B. so zitiert werden:
+
+\begin{verbatim}
+Das zentrale Grenzwerttheorem besagt, dass die Stichprobenverteilung von
+$\bar{x}$ mit steigender Stichprobengröße $n$ in eine Normalverteilung übergeht
+[@bortz: 86].
+\end{verbatim}
+
+\hypertarget{schritt-4-stricken}{%
+\paragraph{Schritt 4: Stricken}\label{schritt-4-stricken}}
+
+Beim „Knit``-Befehl wird ein Literaturverzeichnis automatisch erstellt und ans Ende des Dokuments gehängt. Deshalb beendet man das Dokument am besten mit der Zeile:
+
+\begin{verbatim}
+## Literaturverzeichnis
+\end{verbatim}
+
+\hypertarget{text-bowker-und-star-1999}{%
+\section{Text: Bowker und Star 1999}\label{text-bowker-und-star-1999}}
+
+\hypertarget{lesetext-4}{%
+\subsubsection{Lesetext}\label{lesetext-4}}
+
+Bowker, Geoffrey C. und Susan Leigh Star. 1999. Introduction: To classify is human. In: \emph{Sorting things out: Classification and its consequences.} Cambridge: MIT Press. S. 1--32.
+
+\hypertarget{fragen-an-den-text-5}{%
+\subsubsection{Fragen an den Text}\label{fragen-an-den-text-5}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Um welche Art von Text handelt es sich? Wer sind die Autor*innen, und an wen wenden sie sich?
+\item
+  Was ist das zentrale Anliegen des Texts? Wo genau steht das?
+\item
+  Was meinen die Autor*innen, wenn sie von Infrastruktur sprechen?
+\item
+  Was sind zwei Beispiele für Kategorisierung (im Sinne des Texts) aus Ihren Alltagserfahrungen?
+\item
+  Jeweils: Wer sortiert? Würden Sie sagen, dass diese Praxis politisch ist?
+\item
+  Auf Seite 11 behaupten die Autor*innen, dass kein Klassifizierungssystem drei einfachen Anforderungen genügen würde. Sehen Sie das auch so? Prüfen Sie Ihre Beispiele!
+\item
+  Der letzte Abschnitt zieht einen ziemlich kryptischen Vergleich mit einem Wald\ldots{} was wollen die Autor*innen uns damit sagen?
+\end{enumerate}
 
 \end{document}
