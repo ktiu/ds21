@@ -52,7 +52,7 @@ tm_shape(nc) +
 
 Wenn wir den `tmap_mode` einmal wechseln,
 
-```{r}
+```{r cache = F}
 tmap_mode("view")
 ```
 
