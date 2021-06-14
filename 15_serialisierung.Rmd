@@ -102,7 +102,7 @@ Auch hier gehen wir für die Automatisierung in den drei Schritten vor.
 Zunächst eine Beispielanzeige laden und zwischenspeichern:
 
 ```{r}
-"https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main-Nied.7651909.html" %>%
+"https://www.wg-gesucht.de/wg-zimmer-in-Frankfurt-am-Main-Ginnheim.7659434.html" %>%
   read_html() -> site
 ```
 

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sitzung 21 Interaktive Visualisierungen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sitzung 21 Interaktive Visualisierungen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sitzung 21 Interaktive Visualisierungen | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="text-bowker-und-star-1999.html"/>
+<link rel="next" href="clusteranalyse.html"/>
+<script src="assets/header-attrs-2.8/header-attrs.js"></script>
+<script src="assets/jquery-3.5.1/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="assets/plotly-binding-4.9.4/plotly.js"></script>
+<script src="assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="assets/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="assets/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="assets/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link rel="icon" href="https://www.uni-frankfurt.de/favicon.ico" type="image/x-icon">
+<script src="solutions.js"></script>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé-wise"><i class="fa fa-check"></i><b>1.3.1</b> Exposé (WiSe)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#projektbericht-sose"><i class="fa fa-check"></i><b>1.3.2</b> Projektbericht (SoSe)</a></li>
+<li class="chapter" data-level="1.3.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.3</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.6</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
+<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="geodaten.html"><a href="geodaten.html#lernziele-dieser-sitzung-2"><i class="fa fa-check"></i><b>7.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="7.2" data-path="geodaten.html"><a href="geodaten.html#voraussetzungen-1"><i class="fa fa-check"></i><b>7.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="7.3" data-path="geodaten.html"><a href="geodaten.html#exkurs-pipes"><i class="fa fa-check"></i><b>7.3</b> Exkurs: Pipes</a></li>
+<li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
+<li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-3"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="choroplethen.html"><a href="choroplethen.html"><i class="fa fa-check"></i><b>8</b> Choroplethen</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="choroplethen.html"><a href="choroplethen.html#lernziele"><i class="fa fa-check"></i><b>8.1</b> Lernziele</a></li>
+<li class="chapter" data-level="8.2" data-path="choroplethen.html"><a href="choroplethen.html#vorbereitung-1"><i class="fa fa-check"></i><b>8.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="8.3" data-path="choroplethen.html"><a href="choroplethen.html#ziel"><i class="fa fa-check"></i><b>8.3</b> Ziel</a></li>
+<li class="chapter" data-level="8.4" data-path="choroplethen.html"><a href="choroplethen.html#grundkarte"><i class="fa fa-check"></i><b>8.4</b> Grundkarte</a></li>
+<li class="chapter" data-level="8.5" data-path="choroplethen.html"><a href="choroplethen.html#osm-daten"><i class="fa fa-check"></i><b>8.5</b> OSM-Daten</a></li>
+<li class="chapter" data-level="8.6" data-path="choroplethen.html"><a href="choroplethen.html#koordinatenreferenzsysteme"><i class="fa fa-check"></i><b>8.6</b> Koordinatenreferenzsysteme</a></li>
+<li class="chapter" data-level="8.7" data-path="choroplethen.html"><a href="choroplethen.html#verschneiden"><i class="fa fa-check"></i><b>8.7</b> Verschneiden</a></li>
+<li class="chapter" data-level="8.8" data-path="choroplethen.html"><a href="choroplethen.html#aufgaben-4"><i class="fa fa-check"></i><b>8.8</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html"><i class="fa fa-check"></i><b>9</b> Text: Chandra 2014</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#lesetext-2"><i class="fa fa-check"></i><b>9.1</b> Lesetext</a></li>
+<li class="chapter" data-level="9.2" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#fragen-an-den-text-2"><i class="fa fa-check"></i><b>9.2</b> Fragen an den Text</a></li>
+<li class="chapter" data-level="9.3" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#themenfindung"><i class="fa fa-check"></i><b>9.3</b> Themenfindung</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="html-tabellen.html"><a href="html-tabellen.html"><i class="fa fa-check"></i><b>10</b> HTML-Tabellen</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="html-tabellen.html"><a href="html-tabellen.html#lernziele-dieser-sitzung-3"><i class="fa fa-check"></i><b>10.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="10.2" data-path="html-tabellen.html"><a href="html-tabellen.html#vorbereitung-2"><i class="fa fa-check"></i><b>10.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="10.3" data-path="html-tabellen.html"><a href="html-tabellen.html#datenbeschaffung"><i class="fa fa-check"></i><b>10.3</b> Datenbeschaffung</a></li>
+<li class="chapter" data-level="10.4" data-path="html-tabellen.html"><a href="html-tabellen.html#datenformatierung"><i class="fa fa-check"></i><b>10.4</b> Datenformatierung</a></li>
+<li class="chapter" data-level="10.5" data-path="html-tabellen.html"><a href="html-tabellen.html#datenaufbereitung"><i class="fa fa-check"></i><b>10.5</b> Datenaufbereitung</a></li>
+<li class="chapter" data-level="10.6" data-path="html-tabellen.html"><a href="html-tabellen.html#datenvisualisierung"><i class="fa fa-check"></i><b>10.6</b> Datenvisualisierung</a></li>
+<li class="chapter" data-level="10.7" data-path="html-tabellen.html"><a href="html-tabellen.html#aufgaben-5"><i class="fa fa-check"></i><b>10.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>11</b> Web scraping</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="web-scraping.html"><a href="web-scraping.html#lernziele-dieser-sitzung-4"><i class="fa fa-check"></i><b>11.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="11.2" data-path="web-scraping.html"><a href="web-scraping.html#vorbereitung-3"><i class="fa fa-check"></i><b>11.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="11.3" data-path="web-scraping.html"><a href="web-scraping.html#exkurs-html"><i class="fa fa-check"></i><b>11.3</b> Exkurs: HTML</a></li>
+<li class="chapter" data-level="11.4" data-path="web-scraping.html"><a href="web-scraping.html#seite-laden"><i class="fa fa-check"></i><b>11.4</b> Seite laden</a></li>
+<li class="chapter" data-level="11.5" data-path="web-scraping.html"><a href="web-scraping.html#elemente-suchen"><i class="fa fa-check"></i><b>11.5</b> Elemente suchen</a></li>
+<li class="chapter" data-level="11.6" data-path="web-scraping.html"><a href="web-scraping.html#elemente-reinigen"><i class="fa fa-check"></i><b>11.6</b> Elemente reinigen</a></li>
+<li class="chapter" data-level="11.7" data-path="web-scraping.html"><a href="web-scraping.html#aufgaben-6"><i class="fa fa-check"></i><b>11.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="text-straube-2021.html"><a href="text-straube-2021.html"><i class="fa fa-check"></i><b>12</b> Text: Straube 2021</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="text-straube-2021.html"><a href="text-straube-2021.html#lesetexte"><i class="fa fa-check"></i><b>12.1</b> Lesetexte</a></li>
+<li class="chapter" data-level="12.2" data-path="text-straube-2021.html"><a href="text-straube-2021.html#fragen-an-den-text-3"><i class="fa fa-check"></i><b>12.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="präsentationen.html"><a href="präsentationen.html"><i class="fa fa-check"></i><b>13</b> Präsentationen</a></li>
+<li class="chapter" data-level="14" data-path="apis.html"><a href="apis.html"><i class="fa fa-check"></i><b>14</b> APIs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="apis.html"><a href="apis.html#vorbereitung-4"><i class="fa fa-check"></i><b>14.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="14.2" data-path="apis.html"><a href="apis.html#swapi"><i class="fa fa-check"></i><b>14.2</b> SWAPI</a></li>
+<li class="chapter" data-level="14.3" data-path="apis.html"><a href="apis.html#exkurs-funktionen-schreiben"><i class="fa fa-check"></i><b>14.3</b> Exkurs: Funktionen schreiben</a></li>
+<li class="chapter" data-level="14.4" data-path="apis.html"><a href="apis.html#abfragefunktion"><i class="fa fa-check"></i><b>14.4</b> Abfragefunktion</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="serialisierung.html"><a href="serialisierung.html"><i class="fa fa-check"></i><b>15</b> Serialisierung</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="serialisierung.html"><a href="serialisierung.html#vorbereitung-5"><i class="fa fa-check"></i><b>15.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="15.2" data-path="serialisierung.html"><a href="serialisierung.html#zielsetzung"><i class="fa fa-check"></i><b>15.2</b> Zielsetzung</a></li>
+<li class="chapter" data-level="15.3" data-path="serialisierung.html"><a href="serialisierung.html#urls-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.3</b> URLs der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen"><i class="fa fa-check"></i><b>15.3.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.3.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren"><i class="fa fa-check"></i><b>15.3.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.3.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen"><i class="fa fa-check"></i><b>15.3.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.3.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen"><i class="fa fa-check"></i><b>15.3.4</b> Schritt 4: Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="serialisierung.html"><a href="serialisierung.html#informationen-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.4</b> Informationen der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen-1"><i class="fa fa-check"></i><b>15.4.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.4.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren-1"><i class="fa fa-check"></i><b>15.4.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.4.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen-1"><i class="fa fa-check"></i><b>15.4.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.4.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen-1"><i class="fa fa-check"></i><b>15.4.4</b> Schritt 4: Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="serialisierung.html"><a href="serialisierung.html#aufbereiten"><i class="fa fa-check"></i><b>15.5</b> Aufbereiten</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html"><i class="fa fa-check"></i><b>16</b> Text: Breuer 2005</a>
+<ul>
+<li class="chapter" data-level="16.0.1" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#lesetext-3"><i class="fa fa-check"></i><b>16.0.1</b> Lesetext</a></li>
+<li class="chapter" data-level="16.0.2" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#fragen-an-den-text-4"><i class="fa fa-check"></i><b>16.0.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="string-manipulation.html"><a href="string-manipulation.html"><i class="fa fa-check"></i><b>17</b> String manipulation</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="string-manipulation.html"><a href="string-manipulation.html#vorbereitung-6"><i class="fa fa-check"></i><b>17.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="17.2" data-path="string-manipulation.html"><a href="string-manipulation.html#aufgabe"><i class="fa fa-check"></i><b>17.2</b> Aufgabe</a></li>
+<li class="chapter" data-level="17.3" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-aus-wikipedia-laden"><i class="fa fa-check"></i><b>17.3</b> Tabellen aus Wikipedia laden</a></li>
+<li class="chapter" data-level="17.4" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-kombinieren"><i class="fa fa-check"></i><b>17.4</b> Tabellen kombinieren</a></li>
+<li class="chapter" data-level="17.5" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-säubern"><i class="fa fa-check"></i><b>17.5</b> Tabellen säubern</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="string-manipulation.html"><a href="string-manipulation.html#parse-number"><i class="fa fa-check"></i><b>17.5.1</b> Parse number</a></li>
+<li class="chapter" data-level="17.5.2" data-path="string-manipulation.html"><a href="string-manipulation.html#reguläre-ausdrücke"><i class="fa fa-check"></i><b>17.5.2</b> Reguläre Ausdrücke</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="string-manipulation.html"><a href="string-manipulation.html#visualisierung"><i class="fa fa-check"></i><b>17.6</b> Visualisierung</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="join-und-group.html"><a href="join-und-group.html"><i class="fa fa-check"></i><b>18</b> Join und group</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="join-und-group.html"><a href="join-und-group.html#vorbereitung-7"><i class="fa fa-check"></i><b>18.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="18.2" data-path="join-und-group.html"><a href="join-und-group.html#aufgabe-1"><i class="fa fa-check"></i><b>18.2</b> Aufgabe</a></li>
+<li class="chapter" data-level="18.3" data-path="join-und-group.html"><a href="join-und-group.html#daten-einlesen"><i class="fa fa-check"></i><b>18.3</b> Daten einlesen</a></li>
+<li class="chapter" data-level="18.4" data-path="join-und-group.html"><a href="join-und-group.html#überblick-verschaffen-1"><i class="fa fa-check"></i><b>18.4</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="18.5" data-path="join-und-group.html"><a href="join-und-group.html#zusammenfassen"><i class="fa fa-check"></i><b>18.5</b> Zusammenfassen</a></li>
+<li class="chapter" data-level="18.6" data-path="join-und-group.html"><a href="join-und-group.html#verschneiden-1"><i class="fa fa-check"></i><b>18.6</b> Verschneiden</a></li>
+<li class="chapter" data-level="18.7" data-path="join-und-group.html"><a href="join-und-group.html#kartieren"><i class="fa fa-check"></i><b>18.7</b> Kartieren</a></li>
+<li class="chapter" data-level="18.8" data-path="join-und-group.html"><a href="join-und-group.html#choroplethen-1"><i class="fa fa-check"></i><b>18.8</b> Choroplethen</a></li>
+<li class="chapter" data-level="18.9" data-path="join-und-group.html"><a href="join-und-group.html#räumliches-verschneiden"><i class="fa fa-check"></i><b>18.9</b> Räumliches Verschneiden</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html"><i class="fa fa-check"></i><b>19</b> Rmarkdown und Kollaboration</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#kollaboration"><i class="fa fa-check"></i><b>19.1</b> Kollaboration</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#find-your-workflow"><i class="fa fa-check"></i><b>19.1.1</b> Find <u>your</u> workflow</a></li>
+<li class="chapter" data-level="19.1.2" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#zwischenstände-speichern"><i class="fa fa-check"></i><b>19.1.2</b> Zwischenstände speichern</a></li>
+<li class="chapter" data-level="19.1.3" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#rstudio-cloud"><i class="fa fa-check"></i><b>19.1.3</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="19.1.4" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#file-sharing"><i class="fa fa-check"></i><b>19.1.4</b> File sharing</a></li>
+<li class="chapter" data-level="19.1.5" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#e-mail"><i class="fa fa-check"></i><b>19.1.5</b> E-Mail</a></li>
+<li class="chapter" data-level="19.1.6" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#git"><i class="fa fa-check"></i><b>19.1.6</b> Git</a></li>
+<li class="chapter" data-level="19.1.7" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#trello"><i class="fa fa-check"></i><b>19.1.7</b> Trello</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#rmarkdown"><i class="fa fa-check"></i><b>19.2</b> Rmarkdown</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#text-formatieren"><i class="fa fa-check"></i><b>19.2.1</b> Text formatieren</a></li>
+<li class="chapter" data-level="19.2.2" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#der-knit-button"><i class="fa fa-check"></i><b>19.2.2</b> Der Knit-Button</a></li>
+<li class="chapter" data-level="19.2.3" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#kable"><i class="fa fa-check"></i><b>19.2.3</b> Kable</a></li>
+<li class="chapter" data-level="19.2.4" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#chunk-options"><i class="fa fa-check"></i><b>19.2.4</b> Chunk Options</a></li>
+<li class="chapter" data-level="19.2.5" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#wissenschaftliches-zitieren"><i class="fa fa-check"></i><b>19.2.5</b> Wissenschaftliches Zitieren</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="text-bowker-und-star-1999.html"><a href="text-bowker-und-star-1999.html"><i class="fa fa-check"></i><b>20</b> Text: Bowker und Star 1999</a>
+<ul>
+<li class="chapter" data-level="20.0.1" data-path="text-bowker-und-star-1999.html"><a href="text-bowker-und-star-1999.html#lesetext-4"><i class="fa fa-check"></i><b>20.0.1</b> Lesetext</a></li>
+<li class="chapter" data-level="20.0.2" data-path="text-bowker-und-star-1999.html"><a href="text-bowker-und-star-1999.html#fragen-an-den-text-5"><i class="fa fa-check"></i><b>20.0.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html"><i class="fa fa-check"></i><b>21</b> Interaktive Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#einleitende-bemerkungen"><i class="fa fa-check"></i><b>21.1</b> Einleitende Bemerkungen</a></li>
+<li class="chapter" data-level="21.2" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#interaktive-karten-mit-tmap"><i class="fa fa-check"></i><b>21.2</b> Interaktive Karten mit <code>tmap</code></a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#vorbereitung-8"><i class="fa fa-check"></i><b>21.2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="21.2.2" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#bisher-karten-mit-ggpot2"><i class="fa fa-check"></i><b>21.2.2</b> Bisher: Karten mit <code>ggpot2</code></a></li>
+<li class="chapter" data-level="21.2.3" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#neu-karten-mit-tmap"><i class="fa fa-check"></i><b>21.2.3</b> Neu: Karten mit <code>tmap</code></a></li>
+<li class="chapter" data-level="21.2.4" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#interaktive-karten"><i class="fa fa-check"></i><b>21.2.4</b> Interaktive Karten</a></li>
+<li class="chapter" data-level="21.2.5" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#weitere-informationen"><i class="fa fa-check"></i><b>21.2.5</b> Weitere Informationen:</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#interaktive-plots-mit-plotly"><i class="fa fa-check"></i><b>21.3</b> Interaktive Plots mit <code>plotly</code></a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#bisher-scatterplot-mit-ggplot2"><i class="fa fa-check"></i><b>21.3.1</b> Bisher: Scatterplot mit <code>ggplot2</code></a></li>
+<li class="chapter" data-level="21.3.2" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#neu-3d-mit-plotly"><i class="fa fa-check"></i><b>21.3.2</b> Neu: 3D mit <code>plotly</code></a></li>
+<li class="chapter" data-level="21.3.3" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#weitere-informationen-1"><i class="fa fa-check"></i><b>21.3.3</b> Weitere Informationen</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#web-apps-mit-shiny"><i class="fa fa-check"></i><b>21.4</b> Web apps mit <code>shiny</code></a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#weitere-informationen-2"><i class="fa fa-check"></i><b>21.4.1</b> Weitere Informationen</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="clusteranalyse.html"><a href="clusteranalyse.html"><i class="fa fa-check"></i><b>22</b> Clusteranalyse</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="clusteranalyse.html"><a href="clusteranalyse.html#voraussetzungen-2"><i class="fa fa-check"></i><b>22.1</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="22.2" data-path="clusteranalyse.html"><a href="clusteranalyse.html#datensatz-und-überblick"><i class="fa fa-check"></i><b>22.2</b> Datensatz und Überblick</a></li>
+<li class="chapter" data-level="22.3" data-path="clusteranalyse.html"><a href="clusteranalyse.html#clusteranalyse-1"><i class="fa fa-check"></i><b>22.3</b> Clusteranalyse</a></li>
+<li class="chapter" data-level="22.4" data-path="clusteranalyse.html"><a href="clusteranalyse.html#visualisierung-1"><i class="fa fa-check"></i><b>22.4</b> Visualisierung</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="interaktive-visualisierungen" class="section level1" number="21">
+<h1><span class="header-section-number">Sitzung 21</span> Interaktive Visualisierungen</h1>
+<div id="einleitende-bemerkungen" class="section level2" number="21.1">
+<h2><span class="header-section-number">21.1</span> Einleitende Bemerkungen</h2>
+<p>Bei den drei vorgestellten Paketen handelt es sich um sehr flexible Frameworks, deren ausführliche Besprechung (so wie ggplot2) problemlos ein eigenes Seminar füllen könnten.
+Hier werden sie nur anhand von einfachsten Beispielen schnell vorgestellt.
+Bei der weiterführenden Anwendung im Rahmen eines Projekts ist es sinnvoll, sich noch einmal zielgerichtet zu beraten.</p>
+</div>
+<div id="interaktive-karten-mit-tmap" class="section level2" number="21.2">
+<h2><span class="header-section-number">21.2</span> Interaktive Karten mit <code>tmap</code></h2>
+<div id="vorbereitung-8" class="section level3" number="21.2.1">
+<h3><span class="header-section-number">21.2.1</span> Vorbereitung</h3>
+<p>Wir laden <code>tmap</code> und importieren einen Beispieldatensatz (simple features) mit medizinische Statistiken aus North Carolina:</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="interaktive-visualisierungen.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb210-2"><a href="interaktive-visualisierungen.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb210-3"><a href="interaktive-visualisierungen.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="fu">demo</span>(nc, <span class="at">ask =</span> F, <span class="at">echo =</span> F)</span>
+<span id="cb210-4"><a href="interaktive-visualisierungen.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading layer `nc.gpkg&#39; from data source </span></span>
+<span id="cb210-5"><a href="interaktive-visualisierungen.html#cb210-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   `/usr/local/lib/R/4.1/site-library/sf/gpkg/nc.gpkg&#39; using driver `GPKG&#39;</span></span>
+<span id="cb210-6"><a href="interaktive-visualisierungen.html#cb210-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Simple feature collection with 100 features and 14 fields</span></span>
+<span id="cb210-7"><a href="interaktive-visualisierungen.html#cb210-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Attribute-geometry relationship: 0 constant, 8 aggregate, 6 identity</span></span>
+<span id="cb210-8"><a href="interaktive-visualisierungen.html#cb210-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Geometry type: MULTIPOLYGON</span></span>
+<span id="cb210-9"><a href="interaktive-visualisierungen.html#cb210-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Dimension:     XY</span></span>
+<span id="cb210-10"><a href="interaktive-visualisierungen.html#cb210-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965</span></span>
+<span id="cb210-11"><a href="interaktive-visualisierungen.html#cb210-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Geodetic CRS:  NAD27</span></span></code></pre></div>
+</div>
+<div id="bisher-karten-mit-ggpot2" class="section level3" number="21.2.2">
+<h3><span class="header-section-number">21.2.2</span> Bisher: Karten mit <code>ggpot2</code></h3>
+<p>Wir haben schon gelernt, wie man mit dem Befehl <code>ggplot()</code> Karten erstellt.
+Zur Wiederholung zeichnen wir eine Choropletenkarte mit den Geburtsraten der Counties von 1974:</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="interaktive-visualisierungen.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb211-2"><a href="interaktive-visualisierungen.html#cb211-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-3"><a href="interaktive-visualisierungen.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nc) <span class="sc">+</span></span>
+<span id="cb211-4"><a href="interaktive-visualisierungen.html#cb211-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> BIR74))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-208-1.png" width="672" /></p>
+</div>
+<div id="neu-karten-mit-tmap" class="section level3" number="21.2.3">
+<h3><span class="header-section-number">21.2.3</span> Neu: Karten mit <code>tmap</code></h3>
+<p>Der Befehl <code>qtm()</code> (<q>quick thematic map</q>) ist ideal um Geodaten schnell zu visualisieren:</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="interaktive-visualisierungen.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qtm</span>(nc, <span class="at">fill =</span> <span class="st">&quot;BIR74&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-209-1.png" width="672" /></p>
+<p>Für ausführlichere Karten folgt <code>tmap</code> einer sehr ähnlichen Logik wie <code>ggplot2</code>, hat aber einige Unterschiede in der <q>Grammatik</q>:</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="interaktive-visualisierungen.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(nc) <span class="sc">+</span></span>
+<span id="cb213-2"><a href="interaktive-visualisierungen.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;BIR74&quot;</span>, <span class="st">&quot;BIR79&quot;</span>), <span class="at">title =</span> <span class="st">&quot;Geburten&quot;</span>) <span class="sc">+</span></span>
+<span id="cb213-3"><a href="interaktive-visualisierungen.html#cb213-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_facets</span>() <span class="sc">+</span></span>
+<span id="cb213-4"><a href="interaktive-visualisierungen.html#cb213-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">panel.show =</span> T,</span>
+<span id="cb213-5"><a href="interaktive-visualisierungen.html#cb213-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">panel.labels =</span> <span class="fu">c</span>(<span class="st">&quot;1974&quot;</span>, <span class="st">&quot;1979&quot;</span>),</span>
+<span id="cb213-6"><a href="interaktive-visualisierungen.html#cb213-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside =</span> T, <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;center&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
+</div>
+<div id="interaktive-karten" class="section level3" number="21.2.4">
+<h3><span class="header-section-number">21.2.4</span> Interaktive Karten</h3>
+<p>Wenn wir den <code>tmap_mode</code> einmal wechseln,</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="interaktive-visualisierungen.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</span></code></pre></div>
+<p>zeichnen wir ab sofort interaktive Karten:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="interaktive-visualisierungen.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qtm</span>(nc)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
+<p>Hier lassen sich dann auch interaktive Elemente wie Popups, Layer und die Hintergrundkarte bearbeiten. (Hier nur als technische Demonstration, besonders hilfreich finde ich es nicht:)</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="interaktive-visualisierungen.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(nc, <span class="at">cache =</span> F) <span class="sc">+</span></span>
+<span id="cb216-2"><a href="interaktive-visualisierungen.html#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_basemap</span>(<span class="st">&quot;OpenStreetMap&quot;</span>) <span class="sc">+</span></span>
+<span id="cb216-3"><a href="interaktive-visualisierungen.html#cb216-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;BIR74&quot;</span>, <span class="st">&quot;BIR79&quot;</span>), <span class="at">id =</span> <span class="st">&quot;NAME&quot;</span>, <span class="at">popup.vars =</span> <span class="fu">c</span>(<span class="st">&quot;AREA&quot;</span>, <span class="st">&quot;CNTY_ID&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb216-4"><a href="interaktive-visualisierungen.html#cb216-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_facets</span>(<span class="at">as.layers =</span> T)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-213-1.png" width="672" /></p>
+</div>
+<div id="weitere-informationen" class="section level3" number="21.2.5">
+<h3><span class="header-section-number">21.2.5</span> Weitere Informationen:</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html">tmap: get started!</a></li>
+<li><a href="https://bookdown.org/nicohahn/making_maps_with_r5/docs/tmap.html">Making maps with R: tmap</a></li>
+</ul>
+</div>
+</div>
+<div id="interaktive-plots-mit-plotly" class="section level2" number="21.3">
+<h2><span class="header-section-number">21.3</span> Interaktive Plots mit <code>plotly</code></h2>
+<p>Plotly ist ein kommerzielles Produkt, das Framework lässt sich aber offen nutzen. (Verkauft werden sollen dann Dashboards, Beratungsleistungen und Infrastruktur für Firmenkunden.)</p>
+<div id="bisher-scatterplot-mit-ggplot2" class="section level3" number="21.3.1">
+<h3><span class="header-section-number">21.3.1</span> Bisher: Scatterplot mit <code>ggplot2</code></h3>
+<p>Wir plotten den Beispieldatensatz <code>iris</code>:</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="interaktive-visualisierungen.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris) <span class="sc">+</span></span>
+<span id="cb217-2"><a href="interaktive-visualisierungen.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width, <span class="at">color =</span> Petal.Length))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-214-1.png" width="672" /></p>
+</div>
+<div id="neu-3d-mit-plotly" class="section level3" number="21.3.2">
+<h3><span class="header-section-number">21.3.2</span> Neu: 3D mit <code>plotly</code></h3>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="interaktive-visualisierungen.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb218-2"><a href="interaktive-visualisierungen.html#cb218-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-3"><a href="interaktive-visualisierungen.html#cb218-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(iris, <span class="at">x =</span> <span class="sc">~</span> Sepal.Length, <span class="at">y =</span> <span class="sc">~</span> Sepal.Width, <span class="at">z =</span> <span class="sc">~</span> Petal.Width, <span class="at">color =</span> <span class="sc">~</span> Petal.Length)</span></code></pre></div>
+<div id="htmlwidget-31c7e4d44ba4abc9da81" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-31c7e4d44ba4abc9da81">{"x":{"visdat":{"247d595aa581":["function () ","plotlyVisDat"]},"cur_data":"247d595aa581","attrs":{"247d595aa581":{"x":{},"y":{},"z":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Sepal.Length"},"yaxis":{"title":"Sepal.Width"},"zaxis":{"title":"Petal.Width"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"y":[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],"z":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],"type":"scatter3d","mode":"markers","marker":{"colorbar":{"title":"Petal.Length","ticklen":2},"cmin":1,"cmax":6.9,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"line":{"colorbar":{"title":"","ticklen":2},"cmin":1,"cmax":6.9,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1]}},"frame":null},{"x":[4.3,7.9],"y":[2,4.4],"type":"scatter3d","mode":"markers","opacity":0,"hoverinfo":"none","showlegend":false,"marker":{"colorbar":{"title":"Petal.Length","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"cmin":1,"cmax":6.9,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"color":[1,6.9],"line":{"color":"rgba(255,127,14,1)"}},"z":[0.1,2.5],"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="weitere-informationen-1" class="section level3" number="21.3.3">
+<h3><span class="header-section-number">21.3.3</span> Weitere Informationen</h3>
+<ul>
+<li><a href="https://plotly.com/r/">Plotly R Open Source Graphing Library</a></li>
+<li><a href="https://plotly.com/r/getting-started/">Getting Started with Plotly in R</a></li>
+</ul>
+</div>
+</div>
+<div id="web-apps-mit-shiny" class="section level2" number="21.4">
+<h2><span class="header-section-number">21.4</span> Web apps mit <code>shiny</code></h2>
+<p>Shiny ist das umfangreichste und flexibelste der hier vorgestellten Pakete und für das Erstellen von Web-Apps zur interaktiven Visualisierung von Datensätzen gedacht.</p>
+<p>Visualisierungen mit Shniny können jedoch nicht als Teil einer statischen HTML-Seite angezeigt werden, sondern müssen zur Ansicht auf einem entsprechend konfigurierten Server laufen.</p>
+<p>Wir haben in der Sitzung eine einfache Shiny-App erstellt und lokal angesehen, zur Veröffentlichung müsste sie jedoch z. B. auf <a href="https://shinyapps.io" class="uri">https://shinyapps.io</a> hochgeladen werden.</p>
+<div id="weitere-informationen-2" class="section level3" number="21.4.1">
+<h3><span class="header-section-number">21.4.1</span> Weitere Informationen</h3>
+<ul>
+<li><a href="https://shiny.rstudio.com/tutorial/">Learn Shiny</a></li>
+<li><a href="https://mastering-shiny.org/">Mastering Shiny</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="text-bowker-und-star-1999.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="clusteranalyse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ktiu/ds21/edit/master/21_interaktive_visualisierungen.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ktiu/ds21/blob/master/21_interaktive_visualisierungen.Rmd",
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

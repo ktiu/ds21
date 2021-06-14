@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="de" xml:lang="de">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Sitzung 22 Clusteranalyse | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</title>
+  <meta name="description" content="Projektseminar" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Sitzung 22 Clusteranalyse | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projektseminar" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sitzung 22 Clusteranalyse | Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R" />
+  
+  <meta name="twitter:description" content="Projektseminar" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="interaktive-visualisierungen.html"/>
+
+<script src="assets/header-attrs-2.8/header-attrs.js"></script>
+<script src="assets/jquery-3.5.1/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="assets/plotly-binding-4.9.4/plotly.js"></script>
+<script src="assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="assets/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="assets/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="assets/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="assets/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link rel="icon" href="https://www.uni-frankfurt.de/favicon.ico" type="image/x-icon">
+<script src="solutions.js"></script>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Terminüberblick</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html"><i class="fa fa-check"></i>Online-Ressourcen</a>
+<ul>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#r-tutorials-und-ebooks"><i class="fa fa-check"></i>R Tutorials und eBooks</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#inspiration-für-visualisierungen"><i class="fa fa-check"></i>Inspiration für Visualisierungen</a></li>
+<li class="chapter" data-level="" data-path="online-ressourcen.html"><a href="online-ressourcen.html#spezialthemen"><i class="fa fa-check"></i>Spezialthemen</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="vorbesprechung.html"><a href="vorbesprechung.html"><i class="fa fa-check"></i><b>1</b> Vorbesprechung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#überblick"><i class="fa fa-check"></i><b>1.1</b> Überblick</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminar-im-curriculum"><i class="fa fa-check"></i><b>1.1.1</b> Seminar im Curriculum</a></li>
+<li class="chapter" data-level="1.1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lernziele-für-das-wintersemester"><i class="fa fa-check"></i><b>1.1.2</b> Lernziele für das Wintersemester</a></li>
+<li class="chapter" data-level="1.1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#technische-anforderungen"><i class="fa fa-check"></i><b>1.1.3</b> Technische Anforderungen</a></li>
+<li class="chapter" data-level="1.1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#unterstützung-im-corona-semester"><i class="fa fa-check"></i><b>1.1.4</b> Unterstützung im Corona-Semester</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#seminarformat"><i class="fa fa-check"></i><b>1.2</b> Seminarformat</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#input-und-plenum"><i class="fa fa-check"></i><b>1.2.1</b> Input und Plenum</a></li>
+<li class="chapter" data-level="1.2.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#think-pair-share"><i class="fa fa-check"></i><b>1.2.2</b> Think-pair-share</a></li>
+<li class="chapter" data-level="1.2.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#follow-the-recipe"><i class="fa fa-check"></i><b>1.2.3</b> Follow the recipe</a></li>
+<li class="chapter" data-level="1.2.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#hands-on-session"><i class="fa fa-check"></i><b>1.2.4</b> Hands-on session</a></li>
+<li class="chapter" data-level="1.2.5" data-path="vorbesprechung.html"><a href="vorbesprechung.html#share-your-work"><i class="fa fa-check"></i><b>1.2.5</b> Share your work</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#leistungsnachweise"><i class="fa fa-check"></i><b>1.3</b> Leistungsnachweise</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#exposé-wise"><i class="fa fa-check"></i><b>1.3.1</b> Exposé (WiSe)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#projektbericht-sose"><i class="fa fa-check"></i><b>1.3.2</b> Projektbericht (SoSe)</a></li>
+<li class="chapter" data-level="1.3.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#anwesenheit"><i class="fa fa-check"></i><b>1.3.3</b> Anwesenheit</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#lehrphilosophie"><i class="fa fa-check"></i><b>1.4</b> Lehrphilosophie</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="vorbesprechung.html"><a href="vorbesprechung.html#transparenz"><i class="fa fa-check"></i><b>1.4.1</b> Transparenz</a></li>
+<li class="chapter" data-level="1.4.2" data-path="vorbesprechung.html"><a href="vorbesprechung.html#praktische-übungen"><i class="fa fa-check"></i><b>1.4.2</b> Praktische Übungen</a></li>
+<li class="chapter" data-level="1.4.3" data-path="vorbesprechung.html"><a href="vorbesprechung.html#geschützte-räume"><i class="fa fa-check"></i><b>1.4.3</b> Geschützte Räume</a></li>
+<li class="chapter" data-level="1.4.4" data-path="vorbesprechung.html"><a href="vorbesprechung.html#kritische-reflexion"><i class="fa fa-check"></i><b>1.4.4</b> Kritische Reflexion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="erste-schritte.html"><a href="erste-schritte.html"><i class="fa fa-check"></i><b>2</b> Erste Schritte</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="erste-schritte.html"><a href="erste-schritte.html#vorbereitung"><i class="fa fa-check"></i><b>2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="2.2" data-path="erste-schritte.html"><a href="erste-schritte.html#lernziele-für-diese-sitzung"><i class="fa fa-check"></i><b>2.2</b> Lernziele für diese Sitzung</a></li>
+<li class="chapter" data-level="2.3" data-path="erste-schritte.html"><a href="erste-schritte.html#operatoren"><i class="fa fa-check"></i><b>2.3</b> Operatoren</a></li>
+<li class="chapter" data-level="2.4" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen"><i class="fa fa-check"></i><b>2.4</b> Variablen</a></li>
+<li class="chapter" data-level="2.5" data-path="erste-schritte.html"><a href="erste-schritte.html#konstanten"><i class="fa fa-check"></i><b>2.5</b> Konstanten</a></li>
+<li class="chapter" data-level="2.6" data-path="erste-schritte.html"><a href="erste-schritte.html#funktionen"><i class="fa fa-check"></i><b>2.6</b> Funktionen</a></li>
+<li class="chapter" data-level="2.7" data-path="erste-schritte.html"><a href="erste-schritte.html#strings"><i class="fa fa-check"></i><b>2.7</b> Strings</a></li>
+<li class="chapter" data-level="2.8" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen"><i class="fa fa-check"></i><b>2.8</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9" data-path="erste-schritte.html"><a href="erste-schritte.html#aufgaben"><i class="fa fa-check"></i><b>2.9</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="erste-schritte.html"><a href="erste-schritte.html#rechnen"><i class="fa fa-check"></i><b>2.9.1</b> Rechnen</a></li>
+<li class="chapter" data-level="2.9.2" data-path="erste-schritte.html"><a href="erste-schritte.html#variablen-1"><i class="fa fa-check"></i><b>2.9.2</b> Variablen</a></li>
+<li class="chapter" data-level="2.9.3" data-path="erste-schritte.html"><a href="erste-schritte.html#datentypen-1"><i class="fa fa-check"></i><b>2.9.3</b> Datentypen</a></li>
+<li class="chapter" data-level="2.9.4" data-path="erste-schritte.html"><a href="erste-schritte.html#swirl"><i class="fa fa-check"></i><b>2.9.4</b> Swirl</a></li>
+<li class="chapter" data-level="2.9.5" data-path="erste-schritte.html"><a href="erste-schritte.html#recherche"><i class="fa fa-check"></i><b>2.9.5</b> Recherche</a></li>
+<li class="chapter" data-level="2.9.6" data-path="erste-schritte.html"><a href="erste-schritte.html#kniffliges"><i class="fa fa-check"></i><b>2.9.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html"><i class="fa fa-check"></i><b>3</b> Text: Anderson 2008</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#lesetext"><i class="fa fa-check"></i><b>3.1</b> Lesetext</a></li>
+<li class="chapter" data-level="3.2" data-path="text-anderson-2008.html"><a href="text-anderson-2008.html#fragen-an-den-text"><i class="fa fa-check"></i><b>3.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="datenstrukturen.html"><a href="datenstrukturen.html"><i class="fa fa-check"></i><b>4</b> Datenstrukturen</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#lernziele-dieser-sitzung"><i class="fa fa-check"></i><b>4.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="4.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren"><i class="fa fa-check"></i><b>4.2</b> Vektoren</a></li>
+<li class="chapter" data-level="4.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#matritzen"><i class="fa fa-check"></i><b>4.3</b> Matritzen</a></li>
+<li class="chapter" data-level="4.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#listen"><i class="fa fa-check"></i><b>4.4</b> Listen</a></li>
+<li class="chapter" data-level="4.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#data-frames"><i class="fa fa-check"></i><b>4.5</b> Data Frames</a></li>
+<li class="chapter" data-level="4.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles"><i class="fa fa-check"></i><b>4.6</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7" data-path="datenstrukturen.html"><a href="datenstrukturen.html#aufgaben-1"><i class="fa fa-check"></i><b>4.7</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="datenstrukturen.html"><a href="datenstrukturen.html#vektoren-1"><i class="fa fa-check"></i><b>4.7.1</b> Vektoren</a></li>
+<li class="chapter" data-level="4.7.2" data-path="datenstrukturen.html"><a href="datenstrukturen.html#tibbles-1"><i class="fa fa-check"></i><b>4.7.2</b> Tibbles</a></li>
+<li class="chapter" data-level="4.7.3" data-path="datenstrukturen.html"><a href="datenstrukturen.html#statistik"><i class="fa fa-check"></i><b>4.7.3</b> Statistik</a></li>
+<li class="chapter" data-level="4.7.4" data-path="datenstrukturen.html"><a href="datenstrukturen.html#swirl-1"><i class="fa fa-check"></i><b>4.7.4</b> Swirl</a></li>
+<li class="chapter" data-level="4.7.5" data-path="datenstrukturen.html"><a href="datenstrukturen.html#recherche-1"><i class="fa fa-check"></i><b>4.7.5</b> Recherche</a></li>
+<li class="chapter" data-level="4.7.6" data-path="datenstrukturen.html"><a href="datenstrukturen.html#kniffliges-1"><i class="fa fa-check"></i><b>4.7.6</b> Kniffliges</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisierungen.html"><a href="visualisierungen.html"><i class="fa fa-check"></i><b>5</b> Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="visualisierungen.html"><a href="visualisierungen.html#lernziele-dieser-sitzung-1"><i class="fa fa-check"></i><b>5.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisierungen.html"><a href="visualisierungen.html#voraussetzungen"><i class="fa fa-check"></i><b>5.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisierungen.html"><a href="visualisierungen.html#überblick-1"><i class="fa fa-check"></i><b>5.3</b> Überblick</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-dem-standardpaket"><i class="fa fa-check"></i><b>5.4</b> Visualisierung mit dem Standardpaket</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisierungen.html"><a href="visualisierungen.html#visualisierung-mit-ggplot"><i class="fa fa-check"></i><b>5.5</b> Visualisierung mit <code>ggplot()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="visualisierungen.html"><a href="visualisierungen.html#aufgaben-2"><i class="fa fa-check"></i><b>5.6</b> Aufgaben</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="visualisierungen.html"><a href="visualisierungen.html#r-for-data-science"><i class="fa fa-check"></i><b>5.6.1</b> R for Data Science</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html"><i class="fa fa-check"></i><b>6</b> Text: Shelton et al. 2014</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#lesetext-1"><i class="fa fa-check"></i><b>6.1</b> Lesetext</a></li>
+<li class="chapter" data-level="6.2" data-path="text-shelton-et-al-2014.html"><a href="text-shelton-et-al-2014.html#fragen-an-den-text-1"><i class="fa fa-check"></i><b>6.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geodaten.html"><a href="geodaten.html"><i class="fa fa-check"></i><b>7</b> Geodaten</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="geodaten.html"><a href="geodaten.html#lernziele-dieser-sitzung-2"><i class="fa fa-check"></i><b>7.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="7.2" data-path="geodaten.html"><a href="geodaten.html#voraussetzungen-1"><i class="fa fa-check"></i><b>7.2</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="7.3" data-path="geodaten.html"><a href="geodaten.html#exkurs-pipes"><i class="fa fa-check"></i><b>7.3</b> Exkurs: Pipes</a></li>
+<li class="chapter" data-level="7.4" data-path="geodaten.html"><a href="geodaten.html#daten-importieren"><i class="fa fa-check"></i><b>7.4</b> Daten importieren</a></li>
+<li class="chapter" data-level="7.5" data-path="geodaten.html"><a href="geodaten.html#überblick-verschaffen"><i class="fa fa-check"></i><b>7.5</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="7.6" data-path="geodaten.html"><a href="geodaten.html#visualisieren"><i class="fa fa-check"></i><b>7.6</b> Visualisieren</a></li>
+<li class="chapter" data-level="7.7" data-path="geodaten.html"><a href="geodaten.html#aufgaben-3"><i class="fa fa-check"></i><b>7.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="choroplethen.html"><a href="choroplethen.html"><i class="fa fa-check"></i><b>8</b> Choroplethen</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="choroplethen.html"><a href="choroplethen.html#lernziele"><i class="fa fa-check"></i><b>8.1</b> Lernziele</a></li>
+<li class="chapter" data-level="8.2" data-path="choroplethen.html"><a href="choroplethen.html#vorbereitung-1"><i class="fa fa-check"></i><b>8.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="8.3" data-path="choroplethen.html"><a href="choroplethen.html#ziel"><i class="fa fa-check"></i><b>8.3</b> Ziel</a></li>
+<li class="chapter" data-level="8.4" data-path="choroplethen.html"><a href="choroplethen.html#grundkarte"><i class="fa fa-check"></i><b>8.4</b> Grundkarte</a></li>
+<li class="chapter" data-level="8.5" data-path="choroplethen.html"><a href="choroplethen.html#osm-daten"><i class="fa fa-check"></i><b>8.5</b> OSM-Daten</a></li>
+<li class="chapter" data-level="8.6" data-path="choroplethen.html"><a href="choroplethen.html#koordinatenreferenzsysteme"><i class="fa fa-check"></i><b>8.6</b> Koordinatenreferenzsysteme</a></li>
+<li class="chapter" data-level="8.7" data-path="choroplethen.html"><a href="choroplethen.html#verschneiden"><i class="fa fa-check"></i><b>8.7</b> Verschneiden</a></li>
+<li class="chapter" data-level="8.8" data-path="choroplethen.html"><a href="choroplethen.html#aufgaben-4"><i class="fa fa-check"></i><b>8.8</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html"><i class="fa fa-check"></i><b>9</b> Text: Chandra 2014</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#lesetext-2"><i class="fa fa-check"></i><b>9.1</b> Lesetext</a></li>
+<li class="chapter" data-level="9.2" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#fragen-an-den-text-2"><i class="fa fa-check"></i><b>9.2</b> Fragen an den Text</a></li>
+<li class="chapter" data-level="9.3" data-path="text-chandra-2014.html"><a href="text-chandra-2014.html#themenfindung"><i class="fa fa-check"></i><b>9.3</b> Themenfindung</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="html-tabellen.html"><a href="html-tabellen.html"><i class="fa fa-check"></i><b>10</b> HTML-Tabellen</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="html-tabellen.html"><a href="html-tabellen.html#lernziele-dieser-sitzung-3"><i class="fa fa-check"></i><b>10.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="10.2" data-path="html-tabellen.html"><a href="html-tabellen.html#vorbereitung-2"><i class="fa fa-check"></i><b>10.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="10.3" data-path="html-tabellen.html"><a href="html-tabellen.html#datenbeschaffung"><i class="fa fa-check"></i><b>10.3</b> Datenbeschaffung</a></li>
+<li class="chapter" data-level="10.4" data-path="html-tabellen.html"><a href="html-tabellen.html#datenformatierung"><i class="fa fa-check"></i><b>10.4</b> Datenformatierung</a></li>
+<li class="chapter" data-level="10.5" data-path="html-tabellen.html"><a href="html-tabellen.html#datenaufbereitung"><i class="fa fa-check"></i><b>10.5</b> Datenaufbereitung</a></li>
+<li class="chapter" data-level="10.6" data-path="html-tabellen.html"><a href="html-tabellen.html#datenvisualisierung"><i class="fa fa-check"></i><b>10.6</b> Datenvisualisierung</a></li>
+<li class="chapter" data-level="10.7" data-path="html-tabellen.html"><a href="html-tabellen.html#aufgaben-5"><i class="fa fa-check"></i><b>10.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>11</b> Web scraping</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="web-scraping.html"><a href="web-scraping.html#lernziele-dieser-sitzung-4"><i class="fa fa-check"></i><b>11.1</b> Lernziele dieser Sitzung</a></li>
+<li class="chapter" data-level="11.2" data-path="web-scraping.html"><a href="web-scraping.html#vorbereitung-3"><i class="fa fa-check"></i><b>11.2</b> Vorbereitung</a></li>
+<li class="chapter" data-level="11.3" data-path="web-scraping.html"><a href="web-scraping.html#exkurs-html"><i class="fa fa-check"></i><b>11.3</b> Exkurs: HTML</a></li>
+<li class="chapter" data-level="11.4" data-path="web-scraping.html"><a href="web-scraping.html#seite-laden"><i class="fa fa-check"></i><b>11.4</b> Seite laden</a></li>
+<li class="chapter" data-level="11.5" data-path="web-scraping.html"><a href="web-scraping.html#elemente-suchen"><i class="fa fa-check"></i><b>11.5</b> Elemente suchen</a></li>
+<li class="chapter" data-level="11.6" data-path="web-scraping.html"><a href="web-scraping.html#elemente-reinigen"><i class="fa fa-check"></i><b>11.6</b> Elemente reinigen</a></li>
+<li class="chapter" data-level="11.7" data-path="web-scraping.html"><a href="web-scraping.html#aufgaben-6"><i class="fa fa-check"></i><b>11.7</b> Aufgaben</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="text-straube-2021.html"><a href="text-straube-2021.html"><i class="fa fa-check"></i><b>12</b> Text: Straube 2021</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="text-straube-2021.html"><a href="text-straube-2021.html#lesetexte"><i class="fa fa-check"></i><b>12.1</b> Lesetexte</a></li>
+<li class="chapter" data-level="12.2" data-path="text-straube-2021.html"><a href="text-straube-2021.html#fragen-an-den-text-3"><i class="fa fa-check"></i><b>12.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="präsentationen.html"><a href="präsentationen.html"><i class="fa fa-check"></i><b>13</b> Präsentationen</a></li>
+<li class="chapter" data-level="14" data-path="apis.html"><a href="apis.html"><i class="fa fa-check"></i><b>14</b> APIs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="apis.html"><a href="apis.html#vorbereitung-4"><i class="fa fa-check"></i><b>14.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="14.2" data-path="apis.html"><a href="apis.html#swapi"><i class="fa fa-check"></i><b>14.2</b> SWAPI</a></li>
+<li class="chapter" data-level="14.3" data-path="apis.html"><a href="apis.html#exkurs-funktionen-schreiben"><i class="fa fa-check"></i><b>14.3</b> Exkurs: Funktionen schreiben</a></li>
+<li class="chapter" data-level="14.4" data-path="apis.html"><a href="apis.html#abfragefunktion"><i class="fa fa-check"></i><b>14.4</b> Abfragefunktion</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="serialisierung.html"><a href="serialisierung.html"><i class="fa fa-check"></i><b>15</b> Serialisierung</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="serialisierung.html"><a href="serialisierung.html#vorbereitung-5"><i class="fa fa-check"></i><b>15.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="15.2" data-path="serialisierung.html"><a href="serialisierung.html#zielsetzung"><i class="fa fa-check"></i><b>15.2</b> Zielsetzung</a></li>
+<li class="chapter" data-level="15.3" data-path="serialisierung.html"><a href="serialisierung.html#urls-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.3</b> URLs der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen"><i class="fa fa-check"></i><b>15.3.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.3.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren"><i class="fa fa-check"></i><b>15.3.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.3.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen"><i class="fa fa-check"></i><b>15.3.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.3.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen"><i class="fa fa-check"></i><b>15.3.4</b> Schritt 4: Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="serialisierung.html"><a href="serialisierung.html#informationen-der-anzeigen-auslesen"><i class="fa fa-check"></i><b>15.4</b> Informationen der Anzeigen auslesen</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="serialisierung.html"><a href="serialisierung.html#schritt-1-an-einem-beispiel-konkret-ausführen-1"><i class="fa fa-check"></i><b>15.4.1</b> Schritt 1: An einem Beispiel konkret ausführen</a></li>
+<li class="chapter" data-level="15.4.2" data-path="serialisierung.html"><a href="serialisierung.html#schritt-2-abstrahieren-1"><i class="fa fa-check"></i><b>15.4.2</b> Schritt 2: Abstrahieren</a></li>
+<li class="chapter" data-level="15.4.3" data-path="serialisierung.html"><a href="serialisierung.html#schritt-3-testen-1"><i class="fa fa-check"></i><b>15.4.3</b> Schritt 3: Testen</a></li>
+<li class="chapter" data-level="15.4.4" data-path="serialisierung.html"><a href="serialisierung.html#schritt-4-serialisiert-ausführen-1"><i class="fa fa-check"></i><b>15.4.4</b> Schritt 4: Serialisiert ausführen</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="serialisierung.html"><a href="serialisierung.html#aufbereiten"><i class="fa fa-check"></i><b>15.5</b> Aufbereiten</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html"><i class="fa fa-check"></i><b>16</b> Text: Breuer 2005</a>
+<ul>
+<li class="chapter" data-level="16.0.1" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#lesetext-3"><i class="fa fa-check"></i><b>16.0.1</b> Lesetext</a></li>
+<li class="chapter" data-level="16.0.2" data-path="text-breuer-2005.html"><a href="text-breuer-2005.html#fragen-an-den-text-4"><i class="fa fa-check"></i><b>16.0.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="string-manipulation.html"><a href="string-manipulation.html"><i class="fa fa-check"></i><b>17</b> String manipulation</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="string-manipulation.html"><a href="string-manipulation.html#vorbereitung-6"><i class="fa fa-check"></i><b>17.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="17.2" data-path="string-manipulation.html"><a href="string-manipulation.html#aufgabe"><i class="fa fa-check"></i><b>17.2</b> Aufgabe</a></li>
+<li class="chapter" data-level="17.3" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-aus-wikipedia-laden"><i class="fa fa-check"></i><b>17.3</b> Tabellen aus Wikipedia laden</a></li>
+<li class="chapter" data-level="17.4" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-kombinieren"><i class="fa fa-check"></i><b>17.4</b> Tabellen kombinieren</a></li>
+<li class="chapter" data-level="17.5" data-path="string-manipulation.html"><a href="string-manipulation.html#tabellen-säubern"><i class="fa fa-check"></i><b>17.5</b> Tabellen säubern</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="string-manipulation.html"><a href="string-manipulation.html#parse-number"><i class="fa fa-check"></i><b>17.5.1</b> Parse number</a></li>
+<li class="chapter" data-level="17.5.2" data-path="string-manipulation.html"><a href="string-manipulation.html#reguläre-ausdrücke"><i class="fa fa-check"></i><b>17.5.2</b> Reguläre Ausdrücke</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="string-manipulation.html"><a href="string-manipulation.html#visualisierung"><i class="fa fa-check"></i><b>17.6</b> Visualisierung</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="join-und-group.html"><a href="join-und-group.html"><i class="fa fa-check"></i><b>18</b> Join und group</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="join-und-group.html"><a href="join-und-group.html#vorbereitung-7"><i class="fa fa-check"></i><b>18.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="18.2" data-path="join-und-group.html"><a href="join-und-group.html#aufgabe-1"><i class="fa fa-check"></i><b>18.2</b> Aufgabe</a></li>
+<li class="chapter" data-level="18.3" data-path="join-und-group.html"><a href="join-und-group.html#daten-einlesen"><i class="fa fa-check"></i><b>18.3</b> Daten einlesen</a></li>
+<li class="chapter" data-level="18.4" data-path="join-und-group.html"><a href="join-und-group.html#überblick-verschaffen-1"><i class="fa fa-check"></i><b>18.4</b> Überblick verschaffen</a></li>
+<li class="chapter" data-level="18.5" data-path="join-und-group.html"><a href="join-und-group.html#zusammenfassen"><i class="fa fa-check"></i><b>18.5</b> Zusammenfassen</a></li>
+<li class="chapter" data-level="18.6" data-path="join-und-group.html"><a href="join-und-group.html#verschneiden-1"><i class="fa fa-check"></i><b>18.6</b> Verschneiden</a></li>
+<li class="chapter" data-level="18.7" data-path="join-und-group.html"><a href="join-und-group.html#kartieren"><i class="fa fa-check"></i><b>18.7</b> Kartieren</a></li>
+<li class="chapter" data-level="18.8" data-path="join-und-group.html"><a href="join-und-group.html#choroplethen-1"><i class="fa fa-check"></i><b>18.8</b> Choroplethen</a></li>
+<li class="chapter" data-level="18.9" data-path="join-und-group.html"><a href="join-und-group.html#räumliches-verschneiden"><i class="fa fa-check"></i><b>18.9</b> Räumliches Verschneiden</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html"><i class="fa fa-check"></i><b>19</b> Rmarkdown und Kollaboration</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#kollaboration"><i class="fa fa-check"></i><b>19.1</b> Kollaboration</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#find-your-workflow"><i class="fa fa-check"></i><b>19.1.1</b> Find <u>your</u> workflow</a></li>
+<li class="chapter" data-level="19.1.2" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#zwischenstände-speichern"><i class="fa fa-check"></i><b>19.1.2</b> Zwischenstände speichern</a></li>
+<li class="chapter" data-level="19.1.3" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#rstudio-cloud"><i class="fa fa-check"></i><b>19.1.3</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="19.1.4" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#file-sharing"><i class="fa fa-check"></i><b>19.1.4</b> File sharing</a></li>
+<li class="chapter" data-level="19.1.5" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#e-mail"><i class="fa fa-check"></i><b>19.1.5</b> E-Mail</a></li>
+<li class="chapter" data-level="19.1.6" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#git"><i class="fa fa-check"></i><b>19.1.6</b> Git</a></li>
+<li class="chapter" data-level="19.1.7" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#trello"><i class="fa fa-check"></i><b>19.1.7</b> Trello</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#rmarkdown"><i class="fa fa-check"></i><b>19.2</b> Rmarkdown</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#text-formatieren"><i class="fa fa-check"></i><b>19.2.1</b> Text formatieren</a></li>
+<li class="chapter" data-level="19.2.2" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#der-knit-button"><i class="fa fa-check"></i><b>19.2.2</b> Der Knit-Button</a></li>
+<li class="chapter" data-level="19.2.3" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#kable"><i class="fa fa-check"></i><b>19.2.3</b> Kable</a></li>
+<li class="chapter" data-level="19.2.4" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#chunk-options"><i class="fa fa-check"></i><b>19.2.4</b> Chunk Options</a></li>
+<li class="chapter" data-level="19.2.5" data-path="rmarkdown-und-kollaboration.html"><a href="rmarkdown-und-kollaboration.html#wissenschaftliches-zitieren"><i class="fa fa-check"></i><b>19.2.5</b> Wissenschaftliches Zitieren</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="text-bowker-und-star-1999.html"><a href="text-bowker-und-star-1999.html"><i class="fa fa-check"></i><b>20</b> Text: Bowker und Star 1999</a>
+<ul>
+<li class="chapter" data-level="20.0.1" data-path="text-bowker-und-star-1999.html"><a href="text-bowker-und-star-1999.html#lesetext-4"><i class="fa fa-check"></i><b>20.0.1</b> Lesetext</a></li>
+<li class="chapter" data-level="20.0.2" data-path="text-bowker-und-star-1999.html"><a href="text-bowker-und-star-1999.html#fragen-an-den-text-5"><i class="fa fa-check"></i><b>20.0.2</b> Fragen an den Text</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html"><i class="fa fa-check"></i><b>21</b> Interaktive Visualisierungen</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#einleitende-bemerkungen"><i class="fa fa-check"></i><b>21.1</b> Einleitende Bemerkungen</a></li>
+<li class="chapter" data-level="21.2" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#interaktive-karten-mit-tmap"><i class="fa fa-check"></i><b>21.2</b> Interaktive Karten mit <code>tmap</code></a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#vorbereitung-8"><i class="fa fa-check"></i><b>21.2.1</b> Vorbereitung</a></li>
+<li class="chapter" data-level="21.2.2" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#bisher-karten-mit-ggpot2"><i class="fa fa-check"></i><b>21.2.2</b> Bisher: Karten mit <code>ggpot2</code></a></li>
+<li class="chapter" data-level="21.2.3" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#neu-karten-mit-tmap"><i class="fa fa-check"></i><b>21.2.3</b> Neu: Karten mit <code>tmap</code></a></li>
+<li class="chapter" data-level="21.2.4" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#interaktive-karten"><i class="fa fa-check"></i><b>21.2.4</b> Interaktive Karten</a></li>
+<li class="chapter" data-level="21.2.5" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#weitere-informationen"><i class="fa fa-check"></i><b>21.2.5</b> Weitere Informationen:</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#interaktive-plots-mit-plotly"><i class="fa fa-check"></i><b>21.3</b> Interaktive Plots mit <code>plotly</code></a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#bisher-scatterplot-mit-ggplot2"><i class="fa fa-check"></i><b>21.3.1</b> Bisher: Scatterplot mit <code>ggplot2</code></a></li>
+<li class="chapter" data-level="21.3.2" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#neu-3d-mit-plotly"><i class="fa fa-check"></i><b>21.3.2</b> Neu: 3D mit <code>plotly</code></a></li>
+<li class="chapter" data-level="21.3.3" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#weitere-informationen-1"><i class="fa fa-check"></i><b>21.3.3</b> Weitere Informationen</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#web-apps-mit-shiny"><i class="fa fa-check"></i><b>21.4</b> Web apps mit <code>shiny</code></a>
+<ul>
+<li class="chapter" data-level="21.4.1" data-path="interaktive-visualisierungen.html"><a href="interaktive-visualisierungen.html#weitere-informationen-2"><i class="fa fa-check"></i><b>21.4.1</b> Weitere Informationen</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="clusteranalyse.html"><a href="clusteranalyse.html"><i class="fa fa-check"></i><b>22</b> Clusteranalyse</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="clusteranalyse.html"><a href="clusteranalyse.html#voraussetzungen-2"><i class="fa fa-check"></i><b>22.1</b> Voraussetzungen</a></li>
+<li class="chapter" data-level="22.2" data-path="clusteranalyse.html"><a href="clusteranalyse.html#datensatz-und-überblick"><i class="fa fa-check"></i><b>22.2</b> Datensatz und Überblick</a></li>
+<li class="chapter" data-level="22.3" data-path="clusteranalyse.html"><a href="clusteranalyse.html#clusteranalyse-1"><i class="fa fa-check"></i><b>22.3</b> Clusteranalyse</a></li>
+<li class="chapter" data-level="22.4" data-path="clusteranalyse.html"><a href="clusteranalyse.html#visualisierung-1"><i class="fa fa-check"></i><b>22.4</b> Visualisierung</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="clusteranalyse" class="section level1" number="22">
+<h1><span class="header-section-number">Sitzung 22</span> Clusteranalyse</h1>
+<div id="voraussetzungen-2" class="section level2" number="22.1">
+<h2><span class="header-section-number">22.1</span> Voraussetzungen</h2>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="clusteranalyse.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb219-2"><a href="clusteranalyse.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb219-3"><a href="clusteranalyse.html#cb219-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdendro)</span></code></pre></div>
+</div>
+<div id="datensatz-und-überblick" class="section level2" number="22.2">
+<h2><span class="header-section-number">22.2</span> Datensatz und Überblick</h2>
+<p>Mitgeliefert in R ist ein beliebter Beispieldatensatz mit Daten aus einem Automagazin:</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="clusteranalyse.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb220-2"><a href="clusteranalyse.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span>
+<span id="cb220-3"><a href="clusteranalyse.html#cb220-3" aria-hidden="true" tabindex="-1"></a><span class="do">##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span></span>
+<span id="cb220-4"><a href="clusteranalyse.html#cb220-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span></span>
+<span id="cb220-5"><a href="clusteranalyse.html#cb220-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span></span>
+<span id="cb220-6"><a href="clusteranalyse.html#cb220-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span></span>
+<span id="cb220-7"><a href="clusteranalyse.html#cb220-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span></span>
+<span id="cb220-8"><a href="clusteranalyse.html#cb220-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span></span>
+<span id="cb220-9"><a href="clusteranalyse.html#cb220-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</span></span></code></pre></div>
+<p>Im Folgenden geht es um die technischen Aspekte einer Clusteranalyse, und diese Daten dienen zur Veranschaulichung.</p>
+<p>Einen ersten Überblick über den Datensatz kriegen wir mit:</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="clusteranalyse.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span>
+<span id="cb221-2"><a href="clusteranalyse.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="do">##       mpg             cyl             disp             hp       </span></span>
+<span id="cb221-3"><a href="clusteranalyse.html#cb221-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  </span></span>
+<span id="cb221-4"><a href="clusteranalyse.html#cb221-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  </span></span>
+<span id="cb221-5"><a href="clusteranalyse.html#cb221-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  Median :19.20   Median :6.000   Median :196.3   Median :123.0  </span></span>
+<span id="cb221-6"><a href="clusteranalyse.html#cb221-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  </span></span>
+<span id="cb221-7"><a href="clusteranalyse.html#cb221-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  </span></span>
+<span id="cb221-8"><a href="clusteranalyse.html#cb221-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  </span></span>
+<span id="cb221-9"><a href="clusteranalyse.html#cb221-9" aria-hidden="true" tabindex="-1"></a><span class="do">##       drat             wt             qsec             vs        </span></span>
+<span id="cb221-10"><a href="clusteranalyse.html#cb221-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  </span></span>
+<span id="cb221-11"><a href="clusteranalyse.html#cb221-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  </span></span>
+<span id="cb221-12"><a href="clusteranalyse.html#cb221-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  </span></span>
+<span id="cb221-13"><a href="clusteranalyse.html#cb221-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  </span></span>
+<span id="cb221-14"><a href="clusteranalyse.html#cb221-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  </span></span>
+<span id="cb221-15"><a href="clusteranalyse.html#cb221-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  </span></span>
+<span id="cb221-16"><a href="clusteranalyse.html#cb221-16" aria-hidden="true" tabindex="-1"></a><span class="do">##        am              gear            carb      </span></span>
+<span id="cb221-17"><a href="clusteranalyse.html#cb221-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  Min.   :0.0000   Min.   :3.000   Min.   :1.000  </span></span>
+<span id="cb221-18"><a href="clusteranalyse.html#cb221-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  </span></span>
+<span id="cb221-19"><a href="clusteranalyse.html#cb221-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  Median :0.0000   Median :4.000   Median :2.000  </span></span>
+<span id="cb221-20"><a href="clusteranalyse.html#cb221-20" aria-hidden="true" tabindex="-1"></a><span class="do">##  Mean   :0.4062   Mean   :3.688   Mean   :2.812  </span></span>
+<span id="cb221-21"><a href="clusteranalyse.html#cb221-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  </span></span>
+<span id="cb221-22"><a href="clusteranalyse.html#cb221-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  Max.   :1.0000   Max.   :5.000   Max.   :8.000</span></span></code></pre></div>
+<p>Oder mit Scatterplots in verschiedenen denkbaren Variationen:</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="clusteranalyse.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
+<span id="cb222-2"><a href="clusteranalyse.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y =</span> disp, <span class="at">label =</span> <span class="fu">rownames</span>(mtcars)), <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
+</div>
+<div id="clusteranalyse-1" class="section level2" number="22.3">
+<h2><span class="header-section-number">22.3</span> Clusteranalyse</h2>
+<p>Grundüberlegung der Clusteranalyse ist, in wie viele und welche Gruppen die Merkmalsträger (hier: die Autos) einer (multivariaten) Verteilung sinnvoll eingeteilt werden können. Dabei gibt es viele verschiedene mathematische Methoden – hier soll nur die Grundvariante (<span class="math inline">\(k\)</span>-means-Clustering anhand euklidischer Distanz) besprochen werden.</p>
+<p>Zunächst führen wir mit <code>scale()</code> eine <span class="math inline">\(z\)</span>-Transformation aller Variablen durch, damit werden sie alle gleich stark gewichtet:</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="clusteranalyse.html#cb223-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb223-2"><a href="clusteranalyse.html#cb223-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb223-3"><a href="clusteranalyse.html#cb223-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
+<span id="cb223-4"><a href="clusteranalyse.html#cb223-4" aria-hidden="true" tabindex="-1"></a><span class="do">##                          mpg        cyl        disp         hp       drat</span></span>
+<span id="cb223-5"><a href="clusteranalyse.html#cb223-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Mazda RX4          0.1508848 -0.1049878 -0.57061982 -0.5350928  0.5675137</span></span>
+<span id="cb223-6"><a href="clusteranalyse.html#cb223-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Mazda RX4 Wag      0.1508848 -0.1049878 -0.57061982 -0.5350928  0.5675137</span></span>
+<span id="cb223-7"><a href="clusteranalyse.html#cb223-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Datsun 710         0.4495434 -1.2248578 -0.99018209 -0.7830405  0.4739996</span></span>
+<span id="cb223-8"><a href="clusteranalyse.html#cb223-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Hornet 4 Drive     0.2172534 -0.1049878  0.22009369 -0.5350928 -0.9661175</span></span>
+<span id="cb223-9"><a href="clusteranalyse.html#cb223-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Hornet Sportabout -0.2307345  1.0148821  1.04308123  0.4129422 -0.8351978</span></span>
+<span id="cb223-10"><a href="clusteranalyse.html#cb223-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Valiant           -0.3302874 -0.1049878 -0.04616698 -0.6080186 -1.5646078</span></span>
+<span id="cb223-11"><a href="clusteranalyse.html#cb223-11" aria-hidden="true" tabindex="-1"></a><span class="do">##                             wt       qsec         vs         am       gear</span></span>
+<span id="cb223-12"><a href="clusteranalyse.html#cb223-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Mazda RX4         -0.610399567 -0.7771651 -0.8680278  1.1899014  0.4235542</span></span>
+<span id="cb223-13"><a href="clusteranalyse.html#cb223-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Mazda RX4 Wag     -0.349785269 -0.4637808 -0.8680278  1.1899014  0.4235542</span></span>
+<span id="cb223-14"><a href="clusteranalyse.html#cb223-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Datsun 710        -0.917004624  0.4260068  1.1160357  1.1899014  0.4235542</span></span>
+<span id="cb223-15"><a href="clusteranalyse.html#cb223-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Hornet 4 Drive    -0.002299538  0.8904872  1.1160357 -0.8141431 -0.9318192</span></span>
+<span id="cb223-16"><a href="clusteranalyse.html#cb223-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Hornet Sportabout  0.227654255 -0.4637808 -0.8680278 -0.8141431 -0.9318192</span></span>
+<span id="cb223-17"><a href="clusteranalyse.html#cb223-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Valiant            0.248094592  1.3269868  1.1160357 -0.8141431 -0.9318192</span></span>
+<span id="cb223-18"><a href="clusteranalyse.html#cb223-18" aria-hidden="true" tabindex="-1"></a><span class="do">##                         carb</span></span>
+<span id="cb223-19"><a href="clusteranalyse.html#cb223-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Mazda RX4          0.7352031</span></span>
+<span id="cb223-20"><a href="clusteranalyse.html#cb223-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Mazda RX4 Wag      0.7352031</span></span>
+<span id="cb223-21"><a href="clusteranalyse.html#cb223-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Datsun 710        -1.1221521</span></span>
+<span id="cb223-22"><a href="clusteranalyse.html#cb223-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Hornet 4 Drive    -1.1221521</span></span>
+<span id="cb223-23"><a href="clusteranalyse.html#cb223-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Hornet Sportabout -0.5030337</span></span>
+<span id="cb223-24"><a href="clusteranalyse.html#cb223-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Valiant           -1.1221521</span></span></code></pre></div>
+<p>Dann wird mit dem <code>dist()</code>-Befehl anhand der vier Variablen eine „Distanz“ zwischen den Staaten berechnet, mit <code>hclust()</code> mögliche Cluster berechnet und mit <code>ggdendrogram()</code> eine Visualisierung von mögliche Clusteranordnungen ausgegeben:</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="clusteranalyse.html#cb224-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb224-2"><a href="clusteranalyse.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb224-3"><a href="clusteranalyse.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb224-4"><a href="clusteranalyse.html#cb224-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hclust</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb224-5"><a href="clusteranalyse.html#cb224-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggdendrogram</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
+<p>Dabei befindet sich auf der y-Achse die Distanz, bei der verschiedene Cluster zusammenfallen. Ganz unten sind es 32 Cluster mit je einem Staat, dann werden nach und nach Cluster zusammengefasst, bis es ganz oben nur noch ein Cluster mit 32 Autos ist. Je länger die parallelen Vertikalen Striche, desto beständiger die Cluster.</p>
+<p>Hier würden sich vier oder fünf Cluster anbieten, wir entscheiden uns für 5 Cluster.</p>
+<p>Mit <code>kmeans()</code> bilden wir die Cluster (nach <span class="math inline">\(z\)</span>-Transformation) und können direkt Größe, Charakteristika und <q>Mitglieder</q> der Cluster einsehen:</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="clusteranalyse.html#cb225-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb225-2"><a href="clusteranalyse.html#cb225-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb225-3"><a href="clusteranalyse.html#cb225-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kmeans</span>(<span class="dv">4</span>)</span>
+<span id="cb225-4"><a href="clusteranalyse.html#cb225-4" aria-hidden="true" tabindex="-1"></a><span class="do">## K-means clustering with 4 clusters of sizes 11, 4, 14, 3</span></span>
+<span id="cb225-5"><a href="clusteranalyse.html#cb225-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb225-6"><a href="clusteranalyse.html#cb225-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Cluster means:</span></span>
+<span id="cb225-7"><a href="clusteranalyse.html#cb225-7" aria-hidden="true" tabindex="-1"></a><span class="do">##           mpg        cyl       disp         hp       drat          wt</span></span>
+<span id="cb225-8"><a href="clusteranalyse.html#cb225-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  0.98501724 -0.9194387 -0.9711844 -0.7472405  0.9058647 -1.00220367</span></span>
+<span id="cb225-9"><a href="clusteranalyse.html#cb225-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  0.15918090 -0.6649228 -0.6055161 -0.6700055  0.4973781  0.08968198</span></span>
+<span id="cb225-10"><a href="clusteranalyse.html#cb225-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 -0.82805177  1.0148821  0.9874085  0.9119628 -0.6869112  0.79918068</span></span>
+<span id="cb225-11"><a href="clusteranalyse.html#cb225-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  0.04027052 -0.4782778 -0.2395422 -0.6226038 -0.7790893 -0.17433904</span></span>
+<span id="cb225-12"><a href="clusteranalyse.html#cb225-12" aria-hidden="true" tabindex="-1"></a><span class="do">##          qsec         vs         am       gear       carb</span></span>
+<span id="cb225-13"><a href="clusteranalyse.html#cb225-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  0.01240056  0.3945581  1.1899014  0.7932015 -0.2778997</span></span>
+<span id="cb225-14"><a href="clusteranalyse.html#cb225-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  1.21786185  1.1160357 -0.8141431  0.4235542  0.1160847</span></span>
+<span id="cb225-15"><a href="clusteranalyse.html#cb225-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 -0.60248536 -0.8680278 -0.5278510 -0.5445697  0.4256439</span></span>
+<span id="cb225-16"><a href="clusteranalyse.html#cb225-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  1.14231385  1.1160357 -0.8141431 -0.9318192 -1.1221521</span></span>
+<span id="cb225-17"><a href="clusteranalyse.html#cb225-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb225-18"><a href="clusteranalyse.html#cb225-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Clustering vector:</span></span>
+<span id="cb225-19"><a href="clusteranalyse.html#cb225-19" aria-hidden="true" tabindex="-1"></a><span class="do">##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive </span></span>
+<span id="cb225-20"><a href="clusteranalyse.html#cb225-20" aria-hidden="true" tabindex="-1"></a><span class="do">##                   1                   1                   1                   4 </span></span>
+<span id="cb225-21"><a href="clusteranalyse.html#cb225-21" aria-hidden="true" tabindex="-1"></a><span class="do">##   Hornet Sportabout             Valiant          Duster 360           Merc 240D </span></span>
+<span id="cb225-22"><a href="clusteranalyse.html#cb225-22" aria-hidden="true" tabindex="-1"></a><span class="do">##                   3                   4                   3                   2 </span></span>
+<span id="cb225-23"><a href="clusteranalyse.html#cb225-23" aria-hidden="true" tabindex="-1"></a><span class="do">##            Merc 230            Merc 280           Merc 280C          Merc 450SE </span></span>
+<span id="cb225-24"><a href="clusteranalyse.html#cb225-24" aria-hidden="true" tabindex="-1"></a><span class="do">##                   2                   2                   2                   3 </span></span>
+<span id="cb225-25"><a href="clusteranalyse.html#cb225-25" aria-hidden="true" tabindex="-1"></a><span class="do">##          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental </span></span>
+<span id="cb225-26"><a href="clusteranalyse.html#cb225-26" aria-hidden="true" tabindex="-1"></a><span class="do">##                   3                   3                   3                   3 </span></span>
+<span id="cb225-27"><a href="clusteranalyse.html#cb225-27" aria-hidden="true" tabindex="-1"></a><span class="do">##   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla </span></span>
+<span id="cb225-28"><a href="clusteranalyse.html#cb225-28" aria-hidden="true" tabindex="-1"></a><span class="do">##                   3                   1                   1                   1 </span></span>
+<span id="cb225-29"><a href="clusteranalyse.html#cb225-29" aria-hidden="true" tabindex="-1"></a><span class="do">##       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 </span></span>
+<span id="cb225-30"><a href="clusteranalyse.html#cb225-30" aria-hidden="true" tabindex="-1"></a><span class="do">##                   4                   3                   3                   3 </span></span>
+<span id="cb225-31"><a href="clusteranalyse.html#cb225-31" aria-hidden="true" tabindex="-1"></a><span class="do">##    Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa </span></span>
+<span id="cb225-32"><a href="clusteranalyse.html#cb225-32" aria-hidden="true" tabindex="-1"></a><span class="do">##                   3                   1                   1                   1 </span></span>
+<span id="cb225-33"><a href="clusteranalyse.html#cb225-33" aria-hidden="true" tabindex="-1"></a><span class="do">##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E </span></span>
+<span id="cb225-34"><a href="clusteranalyse.html#cb225-34" aria-hidden="true" tabindex="-1"></a><span class="do">##                   3                   1                   3                   1 </span></span>
+<span id="cb225-35"><a href="clusteranalyse.html#cb225-35" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb225-36"><a href="clusteranalyse.html#cb225-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Within cluster sum of squares by cluster:</span></span>
+<span id="cb225-37"><a href="clusteranalyse.html#cb225-37" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 50.640639  8.273577 64.934413  3.996899</span></span>
+<span id="cb225-38"><a href="clusteranalyse.html#cb225-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  (between_SS / total_SS =  62.5 %)</span></span>
+<span id="cb225-39"><a href="clusteranalyse.html#cb225-39" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb225-40"><a href="clusteranalyse.html#cb225-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Available components:</span></span>
+<span id="cb225-41"><a href="clusteranalyse.html#cb225-41" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb225-42"><a href="clusteranalyse.html#cb225-42" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;</span></span>
+<span id="cb225-43"><a href="clusteranalyse.html#cb225-43" aria-hidden="true" tabindex="-1"></a><span class="do">## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</span></span></code></pre></div>
+<p>Damit R die Clusterzugehörigkeit (1 bis 5) im Folgenden nicht als metrische sondern als nominalskalierte Variable versteht, ziehen wir sie aus dem Ergebnis heraus und wandeln sie in einen Factor um (s. [Exkurs Factors]).</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="clusteranalyse.html#cb226-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb226-2"><a href="clusteranalyse.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  scale <span class="sc">%&gt;%</span></span>
+<span id="cb226-3"><a href="clusteranalyse.html#cb226-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kmeans</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb226-4"><a href="clusteranalyse.html#cb226-4" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>cluster <span class="sc">%&gt;%</span></span>
+<span id="cb226-5"><a href="clusteranalyse.html#cb226-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>() <span class="ot">-&gt;</span> memberships</span></code></pre></div>
+<p>Diesen „faktorierten“ Cluster-Vektor fügen wir dem Datensatz hinzu:</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="clusteranalyse.html#cb227-1" aria-hidden="true" tabindex="-1"></a>mtcars_cluster <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb227-2"><a href="clusteranalyse.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  scale <span class="sc">%&gt;%</span></span>
+<span id="cb227-3"><a href="clusteranalyse.html#cb227-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb227-4"><a href="clusteranalyse.html#cb227-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cluster =</span> memberships)</span></code></pre></div>
+</div>
+<div id="visualisierung-1" class="section level2" number="22.4">
+<h2><span class="header-section-number">22.4</span> Visualisierung</h2>
+<p>Die verschiedenen Cluster lassen sich dann z.B. farblich voneinander abgrenzen:</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="clusteranalyse.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars_cluster, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> qsec, <span class="at">color =</span> cluster)) <span class="sc">+</span></span>
+<span id="cb228-2"><a href="clusteranalyse.html#cb228-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb228-3"><a href="clusteranalyse.html#cb228-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-225-1.png" width="672" /></p>
+<p>Zu einer Clusteranalyse würde dann auch noch gehören, die einzelnen Cluster anhand ihrer Charakteristika zu beschreiben.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="interaktive-visualisierungen.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ktiu/ds21/edit/master/22_clusteranalyse.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/ktiu/ds21/blob/master/22_clusteranalyse.Rmd",
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

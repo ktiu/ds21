@@ -1,4 +1,6 @@
 base
+tmap
+sf
 tidyverse
 ggplot2
 tibble
@@ -8,9 +10,8 @@ purrr
 dplyr
 stringr
 forcats
-sf
-xml2
 rvest
 rnaturalearth
 jsonlite
-tmap
+plotly
+ggdendro

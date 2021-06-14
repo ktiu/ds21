@@ -5,6 +5,17 @@
 \documentclass[
   ngerman,
 ]{article}
+\title{Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Projektseminar Konzeption quantitativer Forschung}
+\author{true}
+\date{Winter- und Sommersemester 2020/21}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -123,17 +134,6 @@
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 
-\title{Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R}
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-\subtitle{Projektseminar Konzeption quantitativer Forschung}
-\author{true}
-\date{Winter- und Sommersemester 2020/21}
-
 \begin{document}
 \maketitle
 
@@ -174,9 +174,9 @@ Datum & Sitzung & Inhalt \\
 17. Mai 2021 & 19 & \protect\hyperlink{rmarkdown-und-kollaboration}{Rmarkdown und Kollaboration} \\
 \emph{24. Mai 2021} & & \emph{Entfällt (Pfingstmontag)} \\
 31. Mai 2021 & 20 & \protect\hyperlink{text-bowker-und-star-1999}{Text: Bowker und Star 1999} \\
-7. Juni 2021 & 21 & {[}Clusteranalyse{]} \\
-14. Juni 2021 & 22 & \protect\hyperlink{rmarkdown}{Rmarkdown} \\
-21. Juni 2021 & 23 & {[}ANOVA{]} \\
+7. Juni 2021 & 21 & \protect\hyperlink{interaktive-visualisierungen}{Interaktive Visualisierungen} \\
+14. Juni 2021 & 22 & \protect\hyperlink{clusteranalyse-1}{Clusteranalyse} \\
+21. Juni 2021 & 23 & {[}Varianzanalyse{]} \\
 28. Juni 2021 & 24 & {[}Text: Beer 2017{]} \\
 5. Juli 2021 & 25 & \protect\hyperlink{pruxe4sentationen}{Präsentationen} \\
 12. Juli 2021 & 26 & \protect\hyperlink{pruxe4sentationen}{Präsentationen} \\
@@ -1176,13 +1176,11 @@ Buchstaben sind als Vektor in R eingebaut:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{letters}
-\DocumentationTok{\#\#  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l"}
-\DocumentationTok{\#\# [13] "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x"}
-\DocumentationTok{\#\# [25] "y" "z"}
+\DocumentationTok{\#\#  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"}
+\DocumentationTok{\#\# [20] "t" "u" "v" "w" "x" "y" "z"}
 \NormalTok{LETTERS}
-\DocumentationTok{\#\#  [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L"}
-\DocumentationTok{\#\# [13] "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X"}
-\DocumentationTok{\#\# [25] "Y" "Z"}
+\DocumentationTok{\#\#  [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S"}
+\DocumentationTok{\#\# [20] "T" "U" "V" "W" "X" "Y" "Z"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1215,9 +1213,8 @@ Elemente von Vektoren können mit eckigen Klammern einzeln oder selektiv angespr
 \NormalTok{letters[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
 \DocumentationTok{\#\# [1] "b" "c"}
 \NormalTok{letters[}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{]}
-\DocumentationTok{\#\#  [1] "a" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"}
-\DocumentationTok{\#\# [13] "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y"}
-\DocumentationTok{\#\# [25] "z"}
+\DocumentationTok{\#\#  [1] "a" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"}
+\DocumentationTok{\#\# [20] "u" "v" "w" "x" "y" "z"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1228,9 +1225,8 @@ Vektoren können wie Variablen benutzt werden:
 \DecValTok{2018} \SpecialCharTok{{-}}\NormalTok{ alter}
 \DocumentationTok{\#\# [1] 1979 1969 1955 1974 1978}
 \FunctionTok{paste}\NormalTok{(alter, }\StringTok{"ist ein gutes Alter"}\NormalTok{)}
-\DocumentationTok{\#\# [1] "39 ist ein gutes Alter" "49 ist ein gutes Alter"}
-\DocumentationTok{\#\# [3] "63 ist ein gutes Alter" "44 ist ein gutes Alter"}
-\DocumentationTok{\#\# [5] "40 ist ein gutes Alter"}
+\DocumentationTok{\#\# [1] "39 ist ein gutes Alter" "49 ist ein gutes Alter" "63 ist ein gutes Alter"}
+\DocumentationTok{\#\# [4] "44 ist ein gutes Alter" "40 ist ein gutes Alter"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1333,20 +1329,13 @@ Viele Beispieldatensätze sind in Form von data frames in R eingebaut.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{(mtcars)}
-\DocumentationTok{\#\#                    mpg cyl disp  hp drat    wt  qsec}
-\DocumentationTok{\#\# Mazda RX4         21.0   6  160 110 3.90 2.620 16.46}
-\DocumentationTok{\#\# Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02}
-\DocumentationTok{\#\# Datsun 710        22.8   4  108  93 3.85 2.320 18.61}
-\DocumentationTok{\#\# Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44}
-\DocumentationTok{\#\# Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02}
-\DocumentationTok{\#\# Valiant           18.1   6  225 105 2.76 3.460 20.22}
-\DocumentationTok{\#\#                   vs am gear carb}
-\DocumentationTok{\#\# Mazda RX4          0  1    4    4}
-\DocumentationTok{\#\# Mazda RX4 Wag      0  1    4    4}
-\DocumentationTok{\#\# Datsun 710         1  1    4    1}
-\DocumentationTok{\#\# Hornet 4 Drive     1  0    3    1}
-\DocumentationTok{\#\# Hornet Sportabout  0  0    3    2}
-\DocumentationTok{\#\# Valiant            1  0    3    1}
+\DocumentationTok{\#\#                    mpg cyl disp  hp drat    wt  qsec vs am gear carb}
+\DocumentationTok{\#\# Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4}
+\DocumentationTok{\#\# Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4}
+\DocumentationTok{\#\# Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1}
+\DocumentationTok{\#\# Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1}
+\DocumentationTok{\#\# Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2}
+\DocumentationTok{\#\# Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1369,20 +1358,19 @@ Ein Beispieldatensatz ist \texttt{diamonds}:
 \begin{Highlighting}[]
 \NormalTok{diamonds}
 \DocumentationTok{\#\# \# A tibble: 53,940 x 10}
-\DocumentationTok{\#\#    carat cut      color clarity depth table price     x}
-\DocumentationTok{\#\#    \textless{}dbl\textgreater{} \textless{}ord\textgreater{}    \textless{}ord\textgreater{} \textless{}ord\textgreater{}   \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}int\textgreater{} \textless{}dbl\textgreater{}}
-\DocumentationTok{\#\#  1 0.23  Ideal    E     SI2      61.5    55   326  3.95}
-\DocumentationTok{\#\#  2 0.21  Premium  E     SI1      59.8    61   326  3.89}
-\DocumentationTok{\#\#  3 0.23  Good     E     VS1      56.9    65   327  4.05}
-\DocumentationTok{\#\#  4 0.290 Premium  I     VS2      62.4    58   334  4.2 }
-\DocumentationTok{\#\#  5 0.31  Good     J     SI2      63.3    58   335  4.34}
-\DocumentationTok{\#\#  6 0.24  Very Go\textasciitilde{} J     VVS2     62.8    57   336  3.94}
-\DocumentationTok{\#\#  7 0.24  Very Go\textasciitilde{} I     VVS1     62.3    57   336  3.95}
-\DocumentationTok{\#\#  8 0.26  Very Go\textasciitilde{} H     SI1      61.9    55   337  4.07}
-\DocumentationTok{\#\#  9 0.22  Fair     E     VS2      65.1    61   337  3.87}
-\DocumentationTok{\#\# 10 0.23  Very Go\textasciitilde{} H     VS1      59.4    61   338  4   }
-\DocumentationTok{\#\# \# ... with 53,930 more rows, and 2 more variables:}
-\DocumentationTok{\#\# \#   y \textless{}dbl\textgreater{}, z \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#    carat cut       color clarity depth table price     x     y     z}
+\DocumentationTok{\#\#    \textless{}dbl\textgreater{} \textless{}ord\textgreater{}     \textless{}ord\textgreater{} \textless{}ord\textgreater{}   \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}int\textgreater{} \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43}
+\DocumentationTok{\#\#  2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31}
+\DocumentationTok{\#\#  3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31}
+\DocumentationTok{\#\#  4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63}
+\DocumentationTok{\#\#  5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75}
+\DocumentationTok{\#\#  6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48}
+\DocumentationTok{\#\#  7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47}
+\DocumentationTok{\#\#  8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53}
+\DocumentationTok{\#\#  9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49}
+\DocumentationTok{\#\# 10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39}
+\DocumentationTok{\#\# \# ... with 53,930 more rows}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1411,18 +1399,14 @@ Einzelne Spalten lassen sich mit \$ ansprechen und verhalten sich dann wie Vekto
 
 \begin{verbatim}
 ## [1]  TRUE FALSE FALSE
-##  [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE
-##  [9]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE
-## [17]  TRUE FALSE  TRUE FALSE
+##  [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE
+## [13]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE
 ##  [1]  2  4  6  8 10 12 14 16 18 20 22 24 26 28 30 32 34
-##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17
-## [18] 18 19 20
-##  [1] "Z" "Y" "X" "W" "V" "U" "T" "S" "R" "Q" "P" "O"
-## [13] "N" "M" "L" "K" "J" "I" "H" "G" "F" "E" "D" "C"
-## [25] "B" "A"
-##  [1] "aA" "bB" "cC" "dD" "eE" "fF" "gG" "hH" "iI" "jJ"
-## [11] "kK" "lL" "mM" "nN" "oO" "pP" "qQ" "rR" "sS" "tT"
-## [21] "uU" "vV" "wW" "xX" "yY" "zZ"
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+##  [1] "Z" "Y" "X" "W" "V" "U" "T" "S" "R" "Q" "P" "O" "N" "M" "L" "K" "J" "I" "H"
+## [20] "G" "F" "E" "D" "C" "B" "A"
+##  [1] "aA" "bB" "cC" "dD" "eE" "fF" "gG" "hH" "iI" "jJ" "kK" "lL" "mM" "nN" "oO"
+## [16] "pP" "qQ" "rR" "sS" "tT" "uU" "vV" "wW" "xX" "yY" "zZ"
 \end{verbatim}
 
 \begin{itemize}
@@ -1434,8 +1418,8 @@ Einzelne Spalten lassen sich mit \$ ansprechen und verhalten sich dann wie Vekto
 \begin{verbatim}
 ## [1] 1 0 0
 ##  [1] 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0
-##  [1] "2"  "4"  "6"  "8"  "10" "12" "14" "16" "18" "20"
-## [11] "22" "24" "26" "28" "30" "32" "34"
+##  [1] "2"  "4"  "6"  "8"  "10" "12" "14" "16" "18" "20" "22" "24" "26" "28" "30"
+## [16] "32" "34"
 \end{verbatim}
 
 \hypertarget{tibbles-1}{%
@@ -1546,20 +1530,19 @@ Und einen Datensatz, der in Form eines tibble vorliegt. Der Beispieldatensatz \t
 \begin{Highlighting}[]
 \NormalTok{diamonds}
 \DocumentationTok{\#\# \# A tibble: 53,940 x 10}
-\DocumentationTok{\#\#    carat cut      color clarity depth table price     x}
-\DocumentationTok{\#\#    \textless{}dbl\textgreater{} \textless{}ord\textgreater{}    \textless{}ord\textgreater{} \textless{}ord\textgreater{}   \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}int\textgreater{} \textless{}dbl\textgreater{}}
-\DocumentationTok{\#\#  1 0.23  Ideal    E     SI2      61.5    55   326  3.95}
-\DocumentationTok{\#\#  2 0.21  Premium  E     SI1      59.8    61   326  3.89}
-\DocumentationTok{\#\#  3 0.23  Good     E     VS1      56.9    65   327  4.05}
-\DocumentationTok{\#\#  4 0.290 Premium  I     VS2      62.4    58   334  4.2 }
-\DocumentationTok{\#\#  5 0.31  Good     J     SI2      63.3    58   335  4.34}
-\DocumentationTok{\#\#  6 0.24  Very Go\textasciitilde{} J     VVS2     62.8    57   336  3.94}
-\DocumentationTok{\#\#  7 0.24  Very Go\textasciitilde{} I     VVS1     62.3    57   336  3.95}
-\DocumentationTok{\#\#  8 0.26  Very Go\textasciitilde{} H     SI1      61.9    55   337  4.07}
-\DocumentationTok{\#\#  9 0.22  Fair     E     VS2      65.1    61   337  3.87}
-\DocumentationTok{\#\# 10 0.23  Very Go\textasciitilde{} H     VS1      59.4    61   338  4   }
-\DocumentationTok{\#\# \# ... with 53,930 more rows, and 2 more variables:}
-\DocumentationTok{\#\# \#   y \textless{}dbl\textgreater{}, z \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#    carat cut       color clarity depth table price     x     y     z}
+\DocumentationTok{\#\#    \textless{}dbl\textgreater{} \textless{}ord\textgreater{}     \textless{}ord\textgreater{} \textless{}ord\textgreater{}   \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}int\textgreater{} \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43}
+\DocumentationTok{\#\#  2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31}
+\DocumentationTok{\#\#  3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31}
+\DocumentationTok{\#\#  4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63}
+\DocumentationTok{\#\#  5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75}
+\DocumentationTok{\#\#  6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48}
+\DocumentationTok{\#\#  7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47}
+\DocumentationTok{\#\#  8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53}
+\DocumentationTok{\#\#  9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49}
+\DocumentationTok{\#\# 10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39}
+\DocumentationTok{\#\# \# ... with 53,930 more rows}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1606,30 +1589,22 @@ Einen Überblick über die wichtigsten statistischen Parameter erhalten wir mit:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{summary}\NormalTok{(diamonds)}
-\DocumentationTok{\#\#      carat               cut        color    }
-\DocumentationTok{\#\#  Min.   :0.2000   Fair     : 1610   D: 6775  }
-\DocumentationTok{\#\#  1st Qu.:0.4000   Good     : 4906   E: 9797  }
-\DocumentationTok{\#\#  Median :0.7000   Very Good:12082   F: 9542  }
-\DocumentationTok{\#\#  Mean   :0.7979   Premium  :13791   G:11292  }
-\DocumentationTok{\#\#  3rd Qu.:1.0400   Ideal    :21551   H: 8304  }
-\DocumentationTok{\#\#  Max.   :5.0100                     I: 5422  }
-\DocumentationTok{\#\#                                     J: 2808  }
-\DocumentationTok{\#\#     clarity          depth           table      }
-\DocumentationTok{\#\#  SI1    :13065   Min.   :43.00   Min.   :43.00  }
-\DocumentationTok{\#\#  VS2    :12258   1st Qu.:61.00   1st Qu.:56.00  }
-\DocumentationTok{\#\#  SI2    : 9194   Median :61.80   Median :57.00  }
-\DocumentationTok{\#\#  VS1    : 8171   Mean   :61.75   Mean   :57.46  }
-\DocumentationTok{\#\#  VVS2   : 5066   3rd Qu.:62.50   3rd Qu.:59.00  }
-\DocumentationTok{\#\#  VVS1   : 3655   Max.   :79.00   Max.   :95.00  }
-\DocumentationTok{\#\#  (Other): 2531                                  }
-\DocumentationTok{\#\#      price             x                y         }
-\DocumentationTok{\#\#  Min.   :  326   Min.   : 0.000   Min.   : 0.000  }
-\DocumentationTok{\#\#  1st Qu.:  950   1st Qu.: 4.710   1st Qu.: 4.720  }
-\DocumentationTok{\#\#  Median : 2401   Median : 5.700   Median : 5.710  }
-\DocumentationTok{\#\#  Mean   : 3933   Mean   : 5.731   Mean   : 5.735  }
-\DocumentationTok{\#\#  3rd Qu.: 5324   3rd Qu.: 6.540   3rd Qu.: 6.540  }
-\DocumentationTok{\#\#  Max.   :18823   Max.   :10.740   Max.   :58.900  }
-\DocumentationTok{\#\#                                                   }
+\DocumentationTok{\#\#      carat               cut        color        clarity          depth      }
+\DocumentationTok{\#\#  Min.   :0.2000   Fair     : 1610   D: 6775   SI1    :13065   Min.   :43.00  }
+\DocumentationTok{\#\#  1st Qu.:0.4000   Good     : 4906   E: 9797   VS2    :12258   1st Qu.:61.00  }
+\DocumentationTok{\#\#  Median :0.7000   Very Good:12082   F: 9542   SI2    : 9194   Median :61.80  }
+\DocumentationTok{\#\#  Mean   :0.7979   Premium  :13791   G:11292   VS1    : 8171   Mean   :61.75  }
+\DocumentationTok{\#\#  3rd Qu.:1.0400   Ideal    :21551   H: 8304   VVS2   : 5066   3rd Qu.:62.50  }
+\DocumentationTok{\#\#  Max.   :5.0100                     I: 5422   VVS1   : 3655   Max.   :79.00  }
+\DocumentationTok{\#\#                                     J: 2808   (Other): 2531                  }
+\DocumentationTok{\#\#      table           price             x                y         }
+\DocumentationTok{\#\#  Min.   :43.00   Min.   :  326   Min.   : 0.000   Min.   : 0.000  }
+\DocumentationTok{\#\#  1st Qu.:56.00   1st Qu.:  950   1st Qu.: 4.710   1st Qu.: 4.720  }
+\DocumentationTok{\#\#  Median :57.00   Median : 2401   Median : 5.700   Median : 5.710  }
+\DocumentationTok{\#\#  Mean   :57.46   Mean   : 3933   Mean   : 5.731   Mean   : 5.735  }
+\DocumentationTok{\#\#  3rd Qu.:59.00   3rd Qu.: 5324   3rd Qu.: 6.540   3rd Qu.: 6.540  }
+\DocumentationTok{\#\#  Max.   :95.00   Max.   :18823   Max.   :10.740   Max.   :58.900  }
+\DocumentationTok{\#\#                                                                   }
 \DocumentationTok{\#\#        z         }
 \DocumentationTok{\#\#  Min.   : 0.000  }
 \DocumentationTok{\#\#  1st Qu.: 2.910  }
@@ -1918,29 +1893,21 @@ Mit \texttt{summary()} lässt sich eine Zusammenfassung der Werte generieren:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{summary}\NormalTok{(baumkataster)}
-\DocumentationTok{\#\#  Gattung/Art/Deutscher Name   Baumnummer     }
-\DocumentationTok{\#\#  Length:118403              Min.   :    1.0  }
-\DocumentationTok{\#\#  Class :character           1st Qu.:   24.0  }
-\DocumentationTok{\#\#  Mode  :character           Median :   82.0  }
-\DocumentationTok{\#\#                             Mean   :  232.7  }
-\DocumentationTok{\#\#                             3rd Qu.:  270.0  }
-\DocumentationTok{\#\#                             Max.   :20158.0  }
-\DocumentationTok{\#\#                             NA\textquotesingle{}s   :1853     }
-\DocumentationTok{\#\#     Objekt            Pflanzjahr   Kronendurchmesser}
-\DocumentationTok{\#\#  Length:118403      Min.   :1645   Min.   : 2.000   }
-\DocumentationTok{\#\#  Class :character   1st Qu.:1970   1st Qu.: 4.000   }
-\DocumentationTok{\#\#  Mode  :character   Median :1982   Median : 6.000   }
-\DocumentationTok{\#\#                     Mean   :1979   Mean   : 6.688   }
-\DocumentationTok{\#\#                     3rd Qu.:1995   3rd Qu.: 9.000   }
-\DocumentationTok{\#\#                     Max.   :2017   Max.   :63.000   }
-\DocumentationTok{\#\#                                                     }
-\DocumentationTok{\#\#     HOCHWERT         RECHTSWERT    }
-\DocumentationTok{\#\#  Min.   :5545117   Min.   :463163  }
-\DocumentationTok{\#\#  1st Qu.:5550428   1st Qu.:472715  }
-\DocumentationTok{\#\#  Median :5552601   Median :475219  }
-\DocumentationTok{\#\#  Mean   :5552953   Mean   :475244  }
-\DocumentationTok{\#\#  3rd Qu.:5555165   3rd Qu.:478201  }
-\DocumentationTok{\#\#  Max.   :5563639   Max.   :485361  }
+\DocumentationTok{\#\#  Gattung/Art/Deutscher Name   Baumnummer         Objekt            Pflanzjahr  }
+\DocumentationTok{\#\#  Length:118403              Min.   :    1.0   Length:118403      Min.   :1645  }
+\DocumentationTok{\#\#  Class :character           1st Qu.:   24.0   Class :character   1st Qu.:1970  }
+\DocumentationTok{\#\#  Mode  :character           Median :   82.0   Mode  :character   Median :1982  }
+\DocumentationTok{\#\#                             Mean   :  232.7                      Mean   :1979  }
+\DocumentationTok{\#\#                             3rd Qu.:  270.0                      3rd Qu.:1995  }
+\DocumentationTok{\#\#                             Max.   :20158.0                      Max.   :2017  }
+\DocumentationTok{\#\#                             NA\textquotesingle{}s   :1853                                       }
+\DocumentationTok{\#\#  Kronendurchmesser    HOCHWERT         RECHTSWERT    }
+\DocumentationTok{\#\#  Min.   : 2.000    Min.   :5545117   Min.   :463163  }
+\DocumentationTok{\#\#  1st Qu.: 4.000    1st Qu.:5550428   1st Qu.:472715  }
+\DocumentationTok{\#\#  Median : 6.000    Median :5552601   Median :475219  }
+\DocumentationTok{\#\#  Mean   : 6.688    Mean   :5552953   Mean   :475244  }
+\DocumentationTok{\#\#  3rd Qu.: 9.000    3rd Qu.:5555165   3rd Qu.:478201  }
+\DocumentationTok{\#\#  Max.   :63.000    Max.   :5563639   Max.   :485361  }
 \DocumentationTok{\#\# }
 \end{Highlighting}
 \end{Shaded}
@@ -1977,21 +1944,20 @@ Der Befehl \texttt{mutate()} funktioniert sehr ähnlich, gibt aber den veränder
 \begin{Highlighting}[]
 \FunctionTok{mutate}\NormalTok{(baumkataster, }\AttributeTok{alter =} \DecValTok{2020} \SpecialCharTok{{-}}\NormalTok{ Pflanzjahr)}
 \DocumentationTok{\#\# \# A tibble: 118,403 x 8}
-\DocumentationTok{\#\#    \textasciigrave{}Gattung/Art/De\textasciitilde{} Baumnummer Objekt Pflanzjahr}
-\DocumentationTok{\#\#    \textless{}chr\textgreater{}                 \textless{}dbl\textgreater{} \textless{}chr\textgreater{}       \textless{}dbl\textgreater{}}
-\DocumentationTok{\#\#  1 Platanus x hisp\textasciitilde{}          1 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  2 Platanus x hisp\textasciitilde{}          2 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  3 Platanus x hisp\textasciitilde{}          3 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  4 Platanus x hisp\textasciitilde{}          4 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  5 Platanus x hisp\textasciitilde{}          5 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  6 Platanus x hisp\textasciitilde{}          6 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  7 Platanus x hisp\textasciitilde{}          7 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  8 Platanus x hisp\textasciitilde{}          8 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  9 Platanus x hisp\textasciitilde{}          9 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\# 10 Platanus x hisp\textasciitilde{}         10 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\# \# ... with 118,393 more rows, and 4 more variables:}
-\DocumentationTok{\#\# \#   Kronendurchmesser \textless{}dbl\textgreater{}, HOCHWERT \textless{}dbl\textgreater{},}
-\DocumentationTok{\#\# \#   RECHTSWERT \textless{}dbl\textgreater{}, alter \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#    \textasciigrave{}Gattung/Art/Deutsch\textasciitilde{} Baumnummer Objekt  Pflanzjahr Kronendurchmess\textasciitilde{} HOCHWERT}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}                      \textless{}dbl\textgreater{} \textless{}chr\textgreater{}        \textless{}dbl\textgreater{}            \textless{}dbl\textgreater{}    \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 Platanus x hispanica\textasciitilde{}          1 Ackerm\textasciitilde{}       1920                8 5549511.}
+\DocumentationTok{\#\#  2 Platanus x hispanica\textasciitilde{}          2 Ackerm\textasciitilde{}       1920                8 5549517.}
+\DocumentationTok{\#\#  3 Platanus x hispanica\textasciitilde{}          3 Ackerm\textasciitilde{}       1920                8 5549524.}
+\DocumentationTok{\#\#  4 Platanus x hispanica\textasciitilde{}          4 Ackerm\textasciitilde{}       1920                8 5549531 }
+\DocumentationTok{\#\#  5 Platanus x hispanica\textasciitilde{}          5 Ackerm\textasciitilde{}       1920                8 5549538.}
+\DocumentationTok{\#\#  6 Platanus x hispanica\textasciitilde{}          6 Ackerm\textasciitilde{}       1920                8 5549544.}
+\DocumentationTok{\#\#  7 Platanus x hispanica\textasciitilde{}          7 Ackerm\textasciitilde{}       1920                8 5549551.}
+\DocumentationTok{\#\#  8 Platanus x hispanica\textasciitilde{}          8 Ackerm\textasciitilde{}       1920                8 5549557.}
+\DocumentationTok{\#\#  9 Platanus x hispanica\textasciitilde{}          9 Ackerm\textasciitilde{}       1920                8 5549564.}
+\DocumentationTok{\#\# 10 Platanus x hispanica\textasciitilde{}         10 Ackerm\textasciitilde{}       1920                8 5549571.}
+\DocumentationTok{\#\# \# ... with 118,393 more rows, and 2 more variables: RECHTSWERT \textless{}dbl\textgreater{},}
+\DocumentationTok{\#\# \#   alter \textless{}dbl\textgreater{}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2002,21 +1968,20 @@ Derselbe Befehl mit dem Pipe-Operator:
 \NormalTok{baumkataster }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{alter =} \DecValTok{2020} \SpecialCharTok{{-}}\NormalTok{ Pflanzjahr)}
 \DocumentationTok{\#\# \# A tibble: 118,403 x 8}
-\DocumentationTok{\#\#    \textasciigrave{}Gattung/Art/De\textasciitilde{} Baumnummer Objekt Pflanzjahr}
-\DocumentationTok{\#\#    \textless{}chr\textgreater{}                 \textless{}dbl\textgreater{} \textless{}chr\textgreater{}       \textless{}dbl\textgreater{}}
-\DocumentationTok{\#\#  1 Platanus x hisp\textasciitilde{}          1 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  2 Platanus x hisp\textasciitilde{}          2 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  3 Platanus x hisp\textasciitilde{}          3 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  4 Platanus x hisp\textasciitilde{}          4 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  5 Platanus x hisp\textasciitilde{}          5 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  6 Platanus x hisp\textasciitilde{}          6 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  7 Platanus x hisp\textasciitilde{}          7 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  8 Platanus x hisp\textasciitilde{}          8 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\#  9 Platanus x hisp\textasciitilde{}          9 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\# 10 Platanus x hisp\textasciitilde{}         10 Acker\textasciitilde{}       1920}
-\DocumentationTok{\#\# \# ... with 118,393 more rows, and 4 more variables:}
-\DocumentationTok{\#\# \#   Kronendurchmesser \textless{}dbl\textgreater{}, HOCHWERT \textless{}dbl\textgreater{},}
-\DocumentationTok{\#\# \#   RECHTSWERT \textless{}dbl\textgreater{}, alter \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#    \textasciigrave{}Gattung/Art/Deutsch\textasciitilde{} Baumnummer Objekt  Pflanzjahr Kronendurchmess\textasciitilde{} HOCHWERT}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}                      \textless{}dbl\textgreater{} \textless{}chr\textgreater{}        \textless{}dbl\textgreater{}            \textless{}dbl\textgreater{}    \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 Platanus x hispanica\textasciitilde{}          1 Ackerm\textasciitilde{}       1920                8 5549511.}
+\DocumentationTok{\#\#  2 Platanus x hispanica\textasciitilde{}          2 Ackerm\textasciitilde{}       1920                8 5549517.}
+\DocumentationTok{\#\#  3 Platanus x hispanica\textasciitilde{}          3 Ackerm\textasciitilde{}       1920                8 5549524.}
+\DocumentationTok{\#\#  4 Platanus x hispanica\textasciitilde{}          4 Ackerm\textasciitilde{}       1920                8 5549531 }
+\DocumentationTok{\#\#  5 Platanus x hispanica\textasciitilde{}          5 Ackerm\textasciitilde{}       1920                8 5549538.}
+\DocumentationTok{\#\#  6 Platanus x hispanica\textasciitilde{}          6 Ackerm\textasciitilde{}       1920                8 5549544.}
+\DocumentationTok{\#\#  7 Platanus x hispanica\textasciitilde{}          7 Ackerm\textasciitilde{}       1920                8 5549551.}
+\DocumentationTok{\#\#  8 Platanus x hispanica\textasciitilde{}          8 Ackerm\textasciitilde{}       1920                8 5549557.}
+\DocumentationTok{\#\#  9 Platanus x hispanica\textasciitilde{}          9 Ackerm\textasciitilde{}       1920                8 5549564.}
+\DocumentationTok{\#\# 10 Platanus x hispanica\textasciitilde{}         10 Ackerm\textasciitilde{}       1920                8 5549571.}
+\DocumentationTok{\#\# \# ... with 118,393 more rows, and 2 more variables: RECHTSWERT \textless{}dbl\textgreater{},}
+\DocumentationTok{\#\# \#   alter \textless{}dbl\textgreater{}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2030,29 +1995,21 @@ So lassen sich auch hier verschiedene Befehle verknüpfen. \texttt{filter()} bes
 \NormalTok{  alte\_baeume}
 
 \FunctionTok{summary}\NormalTok{(alte\_baeume)}
-\DocumentationTok{\#\#  Gattung/Art/Deutscher Name   Baumnummer     }
-\DocumentationTok{\#\#  Length:73859               Min.   :    1.0  }
-\DocumentationTok{\#\#  Class :character           1st Qu.:   29.0  }
-\DocumentationTok{\#\#  Mode  :character           Median :   97.0  }
-\DocumentationTok{\#\#                             Mean   :  263.2  }
-\DocumentationTok{\#\#                             3rd Qu.:  314.0  }
-\DocumentationTok{\#\#                             Max.   :10489.0  }
-\DocumentationTok{\#\#                             NA\textquotesingle{}s   :684      }
-\DocumentationTok{\#\#     Objekt            Pflanzjahr   Kronendurchmesser}
-\DocumentationTok{\#\#  Length:73859       Min.   :1645   Min.   : 2.000   }
-\DocumentationTok{\#\#  Class :character   1st Qu.:1960   1st Qu.: 6.000   }
-\DocumentationTok{\#\#  Mode  :character   Median :1974   Median : 8.000   }
-\DocumentationTok{\#\#                     Mean   :1966   Mean   : 8.503   }
-\DocumentationTok{\#\#                     3rd Qu.:1980   3rd Qu.:10.000   }
-\DocumentationTok{\#\#                     Max.   :1989   Max.   :35.000   }
-\DocumentationTok{\#\#                                                     }
-\DocumentationTok{\#\#     HOCHWERT         RECHTSWERT         alter       }
-\DocumentationTok{\#\#  Min.   :5545117   Min.   :463163   Min.   : 31.00  }
-\DocumentationTok{\#\#  1st Qu.:5550415   1st Qu.:472667   1st Qu.: 40.00  }
-\DocumentationTok{\#\#  Median :5552480   Median :475708   Median : 46.00  }
-\DocumentationTok{\#\#  Mean   :5552593   Mean   :475402   Mean   : 53.54  }
-\DocumentationTok{\#\#  3rd Qu.:5554589   3rd Qu.:478539   3rd Qu.: 60.00  }
-\DocumentationTok{\#\#  Max.   :5563639   Max.   :485360   Max.   :375.00  }
+\DocumentationTok{\#\#  Gattung/Art/Deutscher Name   Baumnummer         Objekt            Pflanzjahr  }
+\DocumentationTok{\#\#  Length:73859               Min.   :    1.0   Length:73859       Min.   :1645  }
+\DocumentationTok{\#\#  Class :character           1st Qu.:   29.0   Class :character   1st Qu.:1960  }
+\DocumentationTok{\#\#  Mode  :character           Median :   97.0   Mode  :character   Median :1974  }
+\DocumentationTok{\#\#                             Mean   :  263.2                      Mean   :1966  }
+\DocumentationTok{\#\#                             3rd Qu.:  314.0                      3rd Qu.:1980  }
+\DocumentationTok{\#\#                             Max.   :10489.0                      Max.   :1989  }
+\DocumentationTok{\#\#                             NA\textquotesingle{}s   :684                                        }
+\DocumentationTok{\#\#  Kronendurchmesser    HOCHWERT         RECHTSWERT         alter       }
+\DocumentationTok{\#\#  Min.   : 2.000    Min.   :5545117   Min.   :463163   Min.   : 31.00  }
+\DocumentationTok{\#\#  1st Qu.: 6.000    1st Qu.:5550415   1st Qu.:472667   1st Qu.: 40.00  }
+\DocumentationTok{\#\#  Median : 8.000    Median :5552480   Median :475708   Median : 46.00  }
+\DocumentationTok{\#\#  Mean   : 8.503    Mean   :5552593   Mean   :475402   Mean   : 53.54  }
+\DocumentationTok{\#\#  3rd Qu.:10.000    3rd Qu.:5554589   3rd Qu.:478539   3rd Qu.: 60.00  }
+\DocumentationTok{\#\#  Max.   :35.000    Max.   :5563639   Max.   :485360   Max.   :375.00  }
 \DocumentationTok{\#\# }
 \end{Highlighting}
 \end{Shaded}
@@ -2177,12 +2134,14 @@ Dann importieren wir den Geodatensatz als Simple Features (Paket \texttt{sf}):
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{stadtteile }\OtherTok{\textless{}{-}} \FunctionTok{st\_read}\NormalTok{(}\StringTok{"resources/stadtteile/Stadtteile\_Frankfurt\_am\_Main.shp"}\NormalTok{)}
-\DocumentationTok{\#\# Reading layer \textasciigrave{}Stadtteile\_Frankfurt\_am\_Main\textquotesingle{} from data source \textasciigrave{}/Users/till/teaching/2020x21\_Data\_Science/public/resources/stadtteile/Stadtteile\_Frankfurt\_am\_Main.shp\textquotesingle{} using driver \textasciigrave{}ESRI Shapefile\textquotesingle{}}
+\DocumentationTok{\#\# Reading layer \textasciigrave{}Stadtteile\_Frankfurt\_am\_Main\textquotesingle{} from data source }
+\DocumentationTok{\#\#   \textasciigrave{}/Users/till/teaching/2020x21\_Data\_Science/skript/resources/stadtteile/Stadtteile\_Frankfurt\_am\_Main.shp\textquotesingle{} }
+\DocumentationTok{\#\#   using driver \textasciigrave{}ESRI Shapefile\textquotesingle{}}
 \DocumentationTok{\#\# Simple feature collection with 46 features and 2 fields}
-\DocumentationTok{\#\# geometry type:  POLYGON}
-\DocumentationTok{\#\# dimension:      XY}
-\DocumentationTok{\#\# bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
-\DocumentationTok{\#\# projected CRS:  ETRS89 / UTM zone 32N}
+\DocumentationTok{\#\# Geometry type: POLYGON}
+\DocumentationTok{\#\# Dimension:     XY}
+\DocumentationTok{\#\# Bounding box:  xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
+\DocumentationTok{\#\# Projected CRS: ETRS89 / UTM zone 32N}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2193,13 +2152,13 @@ Simple Features sind Datensätze, die eine Spalte \texttt{geometry} enthalten, i
 \FunctionTok{str}\NormalTok{(stadtteile)}
 \DocumentationTok{\#\# Classes \textquotesingle{}sf\textquotesingle{} and \textquotesingle{}data.frame\textquotesingle{}:   46 obs. of  3 variables:}
 \DocumentationTok{\#\#  $ STTLNR  : num  1 2 3 4 5 6 7 8 9 10 ...}
-\DocumentationTok{\#\#  $ STTLNAME: Factor w/ 46 levels "Altstadt","Bahnhofsviertel",..: 1 22 2 45 44 30 29 32 7 17 ...}
+\DocumentationTok{\#\#  $ STTLNAME: chr  "Altstadt" "Innenstadt" "Bahnhofsviertel" "Westend{-}Süd" ...}
 \DocumentationTok{\#\#  $ geometry:sfc\_POLYGON of length 46; first list element: List of 1}
 \DocumentationTok{\#\#   ..$ : num [1:46, 1:2] 476934 476890 476852 476813 476799 ...}
-\DocumentationTok{\#\#   ..{-} attr(*, "class")= chr  "XY" "POLYGON" "sfg"}
+\DocumentationTok{\#\#   ..{-} attr(*, "class")= chr [1:3] "XY" "POLYGON" "sfg"}
 \DocumentationTok{\#\#  {-} attr(*, "sf\_column")= chr "geometry"}
 \DocumentationTok{\#\#  {-} attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA}
-\DocumentationTok{\#\#   ..{-} attr(*, "names")= chr  "STTLNR" "STTLNAME"}
+\DocumentationTok{\#\#   ..{-} attr(*, "names")= chr [1:2] "STTLNR" "STTLNAME"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2227,12 +2186,14 @@ Schließlich importieren wir:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{kioske }\OtherTok{\textless{}{-}} \FunctionTok{st\_read}\NormalTok{(}\StringTok{"resources/kioske.geojson"}\NormalTok{)}
-\DocumentationTok{\#\# Reading layer \textasciigrave{}kioske\textquotesingle{} from data source \textasciigrave{}/Users/till/teaching/2020x21\_Data\_Science/public/resources/kioske.geojson\textquotesingle{} using driver \textasciigrave{}GeoJSON\textquotesingle{}}
+\DocumentationTok{\#\# Reading layer \textasciigrave{}kioske\textquotesingle{} from data source }
+\DocumentationTok{\#\#   \textasciigrave{}/Users/till/teaching/2020x21\_Data\_Science/skript/resources/kioske.geojson\textquotesingle{} }
+\DocumentationTok{\#\#   using driver \textasciigrave{}GeoJSON\textquotesingle{}}
 \DocumentationTok{\#\# Simple feature collection with 325 features and 74 fields}
-\DocumentationTok{\#\# geometry type:  GEOMETRY}
-\DocumentationTok{\#\# dimension:      XY}
-\DocumentationTok{\#\# bbox:           xmin: 8.505468 ymin: 50.04801 xmax: 8.789538 ymax: 50.20185}
-\DocumentationTok{\#\# geographic CRS: WGS 84}
+\DocumentationTok{\#\# Geometry type: GEOMETRY}
+\DocumentationTok{\#\# Dimension:     XY}
+\DocumentationTok{\#\# Bounding box:  xmin: 8.505468 ymin: 50.04801 xmax: 8.789538 ymax: 50.20185}
+\DocumentationTok{\#\# Geodetic CRS:  WGS 84}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2400,33 +2361,22 @@ Oder mit Pipes:
 \NormalTok{stadtteile }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{qkm =} \FunctionTok{st\_area}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.numeric}\NormalTok{() }\SpecialCharTok{/} \DecValTok{1000} \SpecialCharTok{/} \DecValTok{1000}\NormalTok{)}
 \DocumentationTok{\#\# Simple feature collection with 46 features and 4 fields}
-\DocumentationTok{\#\# geometry type:  POLYGON}
-\DocumentationTok{\#\# dimension:      XY}
-\DocumentationTok{\#\# bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
-\DocumentationTok{\#\# projected CRS:  ETRS89 / UTM zone 32N}
+\DocumentationTok{\#\# Geometry type: POLYGON}
+\DocumentationTok{\#\# Dimension:     XY}
+\DocumentationTok{\#\# Bounding box:  xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
+\DocumentationTok{\#\# Projected CRS: ETRS89 / UTM zone 32N}
 \DocumentationTok{\#\# First 10 features:}
-\DocumentationTok{\#\#    STTLNR        STTLNAME}
-\DocumentationTok{\#\# 1       1        Altstadt}
-\DocumentationTok{\#\# 2       2      Innenstadt}
-\DocumentationTok{\#\# 3       3 Bahnhofsviertel}
-\DocumentationTok{\#\# 4       4     Westend{-}Süd}
-\DocumentationTok{\#\# 5       5    Westend{-}Nord}
-\DocumentationTok{\#\# 6       6    Nordend{-}West}
-\DocumentationTok{\#\# 7       7     Nordend{-}Ost}
-\DocumentationTok{\#\# 8       8          Ostend}
-\DocumentationTok{\#\# 9       9        Bornheim}
-\DocumentationTok{\#\# 10     10  Gutleutviertel}
-\DocumentationTok{\#\#                          geometry anzahl\_kioske}
-\DocumentationTok{\#\# 1  POLYGON ((476934.3 5550541,...             5}
-\DocumentationTok{\#\# 2  POLYGON ((477611.9 5552034,...             5}
-\DocumentationTok{\#\# 3  POLYGON ((475831 5550785, 4...             7}
-\DocumentationTok{\#\# 4  POLYGON ((475745.4 5552373,...             6}
-\DocumentationTok{\#\# 5  POLYGON ((476497.9 5553910,...             3}
-\DocumentationTok{\#\# 6  POLYGON ((478362.5 5553898,...            10}
-\DocumentationTok{\#\# 7  POLYGON ((478397.9 5551924,...            17}
-\DocumentationTok{\#\# 8  POLYGON ((481955.2 5552141,...            15}
-\DocumentationTok{\#\# 9  POLYGON ((478959.8 5552336,...            14}
-\DocumentationTok{\#\# 10 POLYGON ((472942 5548802, 4...            11}
+\DocumentationTok{\#\#    STTLNR        STTLNAME                       geometry anzahl\_kioske}
+\DocumentationTok{\#\# 1       1        Altstadt POLYGON ((476934.3 5550541,...             5}
+\DocumentationTok{\#\# 2       2      Innenstadt POLYGON ((477611.9 5552034,...             5}
+\DocumentationTok{\#\# 3       3 Bahnhofsviertel POLYGON ((475831 5550785, 4...             7}
+\DocumentationTok{\#\# 4       4     Westend{-}Süd POLYGON ((475745.4 5552373,...             6}
+\DocumentationTok{\#\# 5       5    Westend{-}Nord POLYGON ((476497.9 5553910,...             3}
+\DocumentationTok{\#\# 6       6    Nordend{-}West POLYGON ((478362.5 5553898,...            10}
+\DocumentationTok{\#\# 7       7     Nordend{-}Ost POLYGON ((478397.9 5551924,...            17}
+\DocumentationTok{\#\# 8       8          Ostend POLYGON ((481955.2 5552141,...            15}
+\DocumentationTok{\#\# 9       9        Bornheim POLYGON ((478959.8 5552336,...            14}
+\DocumentationTok{\#\# 10     10  Gutleutviertel POLYGON ((472942 5548802, 4...            11}
 \DocumentationTok{\#\#          qkm}
 \DocumentationTok{\#\# 1  0.5065673}
 \DocumentationTok{\#\# 2  1.4902009}
@@ -2449,33 +2399,22 @@ Und dann die Kioskdichte:
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{qkm =} \FunctionTok{st\_area}\NormalTok{(.) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.numeric}\NormalTok{() }\SpecialCharTok{/} \DecValTok{1000} \SpecialCharTok{/} \DecValTok{1000}\NormalTok{,}
          \AttributeTok{kioskdichte =}\NormalTok{ anzahl\_kioske }\SpecialCharTok{/}\NormalTok{ qkm)}
 \DocumentationTok{\#\# Simple feature collection with 46 features and 5 fields}
-\DocumentationTok{\#\# geometry type:  POLYGON}
-\DocumentationTok{\#\# dimension:      XY}
-\DocumentationTok{\#\# bbox:           xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
-\DocumentationTok{\#\# projected CRS:  ETRS89 / UTM zone 32N}
+\DocumentationTok{\#\# Geometry type: POLYGON}
+\DocumentationTok{\#\# Dimension:     XY}
+\DocumentationTok{\#\# Bounding box:  xmin: 462292.7 ymin: 5540412 xmax: 485744.8 ymax: 5563925}
+\DocumentationTok{\#\# Projected CRS: ETRS89 / UTM zone 32N}
 \DocumentationTok{\#\# First 10 features:}
-\DocumentationTok{\#\#    STTLNR        STTLNAME}
-\DocumentationTok{\#\# 1       1        Altstadt}
-\DocumentationTok{\#\# 2       2      Innenstadt}
-\DocumentationTok{\#\# 3       3 Bahnhofsviertel}
-\DocumentationTok{\#\# 4       4     Westend{-}Süd}
-\DocumentationTok{\#\# 5       5    Westend{-}Nord}
-\DocumentationTok{\#\# 6       6    Nordend{-}West}
-\DocumentationTok{\#\# 7       7     Nordend{-}Ost}
-\DocumentationTok{\#\# 8       8          Ostend}
-\DocumentationTok{\#\# 9       9        Bornheim}
-\DocumentationTok{\#\# 10     10  Gutleutviertel}
-\DocumentationTok{\#\#                          geometry anzahl\_kioske}
-\DocumentationTok{\#\# 1  POLYGON ((476934.3 5550541,...             5}
-\DocumentationTok{\#\# 2  POLYGON ((477611.9 5552034,...             5}
-\DocumentationTok{\#\# 3  POLYGON ((475831 5550785, 4...             7}
-\DocumentationTok{\#\# 4  POLYGON ((475745.4 5552373,...             6}
-\DocumentationTok{\#\# 5  POLYGON ((476497.9 5553910,...             3}
-\DocumentationTok{\#\# 6  POLYGON ((478362.5 5553898,...            10}
-\DocumentationTok{\#\# 7  POLYGON ((478397.9 5551924,...            17}
-\DocumentationTok{\#\# 8  POLYGON ((481955.2 5552141,...            15}
-\DocumentationTok{\#\# 9  POLYGON ((478959.8 5552336,...            14}
-\DocumentationTok{\#\# 10 POLYGON ((472942 5548802, 4...            11}
+\DocumentationTok{\#\#    STTLNR        STTLNAME                       geometry anzahl\_kioske}
+\DocumentationTok{\#\# 1       1        Altstadt POLYGON ((476934.3 5550541,...             5}
+\DocumentationTok{\#\# 2       2      Innenstadt POLYGON ((477611.9 5552034,...             5}
+\DocumentationTok{\#\# 3       3 Bahnhofsviertel POLYGON ((475831 5550785, 4...             7}
+\DocumentationTok{\#\# 4       4     Westend{-}Süd POLYGON ((475745.4 5552373,...             6}
+\DocumentationTok{\#\# 5       5    Westend{-}Nord POLYGON ((476497.9 5553910,...             3}
+\DocumentationTok{\#\# 6       6    Nordend{-}West POLYGON ((478362.5 5553898,...            10}
+\DocumentationTok{\#\# 7       7     Nordend{-}Ost POLYGON ((478397.9 5551924,...            17}
+\DocumentationTok{\#\# 8       8          Ostend POLYGON ((481955.2 5552141,...            15}
+\DocumentationTok{\#\# 9       9        Bornheim POLYGON ((478959.8 5552336,...            14}
+\DocumentationTok{\#\# 10     10  Gutleutviertel POLYGON ((472942 5548802, 4...            11}
 \DocumentationTok{\#\#          qkm kioskdichte}
 \DocumentationTok{\#\# 1  0.5065673    9.870357}
 \DocumentationTok{\#\# 2  1.4902009    3.355252}
@@ -2625,7 +2564,7 @@ Der Befehl \texttt{html\_table()} ermöglicht das Auslesen \emph{aller} Tabellen
 \NormalTok{tables }\OtherTok{\textless{}{-}} \FunctionTok{html\_table}\NormalTok{(reply, }\AttributeTok{fill =} \ConstantTok{TRUE}\NormalTok{)}
 \FunctionTok{str}\NormalTok{(tables)}
 \DocumentationTok{\#\# List of 1}
-\DocumentationTok{\#\#  $ :\textquotesingle{}data.frame\textquotesingle{}:    266 obs. of  2 variables:}
+\DocumentationTok{\#\#  $ : tibble [266 x 2] (S3: tbl\_df/tbl/data.frame)}
 \DocumentationTok{\#\#   ..$ Country  : chr [1:266] "Afghanistan" "Akrotiri" "Albania" "Algeria" ...}
 \DocumentationTok{\#\#   ..$ Coastline: chr [1:266] "0 km\textbackslash{}n          (landlocked)" "56.3 km" "362 km" "998 km" ...}
 \end{Highlighting}
@@ -2683,60 +2622,44 @@ Die ausgewählten Muster (in unserem Fall Kommata und Text) können durch den Be
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{str\_replace\_all}\NormalTok{(km, }\StringTok{"[\^{}0{-}9.]"}\NormalTok{, }\StringTok{""}\NormalTok{)}
-\DocumentationTok{\#\#   [1] "0"       "56.3"    "362"     "998"     "116"    }
-\DocumentationTok{\#\#   [6] "0"       "1600"    "61"      "17968"   "153"    }
-\DocumentationTok{\#\#  [11] "45389"   "4989"    "0"       "68.5"    "74.1"   }
-\DocumentationTok{\#\#  [16] "111866"  "25760"   "0"       "0"       "3542"   }
-\DocumentationTok{\#\#  [21] "161"     "580"     "97"      "0"       "66.5"   }
-\DocumentationTok{\#\#  [26] "386"     "121"     "103"     "0"       "0"      }
-\DocumentationTok{\#\#  [31] "20"      "0"       "29.6"    "7491"    "698"    }
-\DocumentationTok{\#\#  [36] "80"      "161"     "354"     "0"       "1930"   }
-\DocumentationTok{\#\#  [41] "0"       "965"     "443"     "402"     "202080" }
-\DocumentationTok{\#\#  [46] "160"     "0"       "0"       "6435"    "14500"  }
-\DocumentationTok{\#\#  [51] "138.9"   "11.1"    "26"      "3208"    "340"    }
-\DocumentationTok{\#\#  [56] "37"      "169"     "120"     "3095"    "1290"   }
-\DocumentationTok{\#\#  [61] "515"     "5835"    "3735"    "364"     "648"    }
-\DocumentationTok{\#\#  [66] "0"       "7314"    "27.5"    "314"     "148"    }
-\DocumentationTok{\#\#  [71] "1288"    "2237"    "2450"    "307"     "296"    }
-\DocumentationTok{\#\#  [76] "2234"    "3794"    "0"       "0"       "65992.9"}
-\DocumentationTok{\#\#  [81] "1288"    "1117"    "1129"    "1250"    "4853"   }
-\DocumentationTok{\#\#  [86] "2525"    "28"      "885"     "80"      "40"     }
-\DocumentationTok{\#\#  [91] "310"     "2389"    "539"     "12"      "13676"  }
-\DocumentationTok{\#\#  [96] "44087"   "121"     "125.5"   "400"     "50"     }
-\DocumentationTok{\#\# [101] "320"     "350"     "459"     "1771"    "101.9"  }
-\DocumentationTok{\#\# [106] "0"       "823"     "733"     "6.4"     "0"      }
-\DocumentationTok{\#\# [111] "4970"    "7000"    "66526"   "54716"   "2440"   }
-\DocumentationTok{\#\# [116] "58"      "1448"    "160"     "273"     "7600"   }
-\DocumentationTok{\#\# [121] "1022"    "124.1"   "29751"   "8"       "70"     }
-\DocumentationTok{\#\# [126] "34"      "26"      "0"       "536"     "3"      }
-\DocumentationTok{\#\# [131] "1143"    "2495"    "2413"    "0"       "499"    }
-\DocumentationTok{\#\# [136] "0"       "0"       "498"     "225"     "0"      }
-\DocumentationTok{\#\# [141] "579"     "1770"    "0"       "90"      "0"      }
-\DocumentationTok{\#\# [146] "41"      "4828"    "0"       "4675"    "644"    }
-\DocumentationTok{\#\# [151] "0"       "196.8"   "370.4"   "754"     "177"    }
-\DocumentationTok{\#\# [156] "9330"    "6112"    "15"      "0"       "4.1"    }
-\DocumentationTok{\#\# [161] "0"       "293.5"   "40"      "1835"    "2470"   }
-\DocumentationTok{\#\# [166] "1572"    "30"      "8"       "0"       "451"    }
-\DocumentationTok{\#\# [171] "2254"    "15134"   "910"     "0"       "853"    }
-\DocumentationTok{\#\# [176] "64"      "32"      "0"       "1482"    "25148"  }
-\DocumentationTok{\#\# [181] "2092"    "135663"  "1046"    "1519"    "14.5"   }
-\DocumentationTok{\#\# [186] "2490"    "5152"    "518"     "0"       "2414"   }
-\DocumentationTok{\#\# [191] "36289"   "51"      "440"     "1793"    "501"    }
-\DocumentationTok{\#\# [196] "563"     "225"     "37653"   "0"       "60"     }
-\DocumentationTok{\#\# [201] "135"     "158"     "58.9"    "120"     "84"     }
-\DocumentationTok{\#\# [206] "403"     "0"       "209"     "2640"    "531"    }
-\DocumentationTok{\#\# [211] "0"       "491"     "402"     "193"     "58.9"   }
-\DocumentationTok{\#\# [216] "0"       "46.6"    "5313"    "3025"    "2798"   }
-\DocumentationTok{\#\# [221] NA        "0"       "17968"   "4964"    "926"    }
-\DocumentationTok{\#\# [226] "1340"    "853"     "386"     "3587"    "3218"   }
-\DocumentationTok{\#\# [231] "0"       "193"     "1566.3"  "0"       "1424"   }
-\DocumentationTok{\#\# [236] "3219"    "706"     "56"      "101"     "419"    }
-\DocumentationTok{\#\# [241] "362"     "1148"    "7200"    "0"       "389"    }
-\DocumentationTok{\#\# [246] "24"      "0"       "2782"    "1318"    "12429"  }
-\DocumentationTok{\#\# [251] "19924"   "4.8"     "660"     "0"       "2528"   }
-\DocumentationTok{\#\# [256] "2800"    "3444"    "188"     "19.3"    "129"    }
-\DocumentationTok{\#\# [261] "0"       "1110"    "356000"  "1906"    "0"      }
-\DocumentationTok{\#\# [266] "0"}
+\DocumentationTok{\#\#   [1] "0"       "56.3"    "362"     "998"     "116"     "0"       "1600"   }
+\DocumentationTok{\#\#   [8] "61"      "17968"   "153"     "45389"   "4989"    "0"       "68.5"   }
+\DocumentationTok{\#\#  [15] "74.1"    "111866"  "25760"   "0"       "0"       "3542"    "161"    }
+\DocumentationTok{\#\#  [22] "580"     "97"      "0"       "66.5"    "386"     "121"     "103"    }
+\DocumentationTok{\#\#  [29] "0"       "0"       "20"      "0"       "29.6"    "7491"    "698"    }
+\DocumentationTok{\#\#  [36] "80"      "161"     "354"     "0"       "1930"    "0"       "965"    }
+\DocumentationTok{\#\#  [43] "443"     "402"     "202080"  "160"     "0"       "0"       "6435"   }
+\DocumentationTok{\#\#  [50] "14500"   "138.9"   "11.1"    "26"      "3208"    "340"     "37"     }
+\DocumentationTok{\#\#  [57] "169"     "120"     "3095"    "1290"    "515"     "5835"    "3735"   }
+\DocumentationTok{\#\#  [64] "364"     "648"     "0"       "7314"    "27.5"    "314"     "148"    }
+\DocumentationTok{\#\#  [71] "1288"    "2237"    "2450"    "307"     "296"     "2234"    "3794"   }
+\DocumentationTok{\#\#  [78] "0"       "0"       "65992.9" "1288"    "1117"    "1129"    "1250"   }
+\DocumentationTok{\#\#  [85] "4853"    "2525"    "28"      "885"     "80"      "40"      "310"    }
+\DocumentationTok{\#\#  [92] "2389"    "539"     "12"      "13676"   "44087"   "121"     "125.5"  }
+\DocumentationTok{\#\#  [99] "400"     "50"      "320"     "350"     "459"     "1771"    "101.9"  }
+\DocumentationTok{\#\# [106] "0"       "823"     "733"     "6.4"     "0"       "4970"    "7000"   }
+\DocumentationTok{\#\# [113] "66526"   "54716"   "2440"    "58"      "1448"    "160"     "273"    }
+\DocumentationTok{\#\# [120] "7600"    "1022"    "124.1"   "29751"   "8"       "70"      "34"     }
+\DocumentationTok{\#\# [127] "26"      "0"       "536"     "3"       "1143"    "2495"    "2413"   }
+\DocumentationTok{\#\# [134] "0"       "499"     "0"       "0"       "498"     "225"     "0"      }
+\DocumentationTok{\#\# [141] "579"     "1770"    "0"       "90"      "0"       "41"      "4828"   }
+\DocumentationTok{\#\# [148] "0"       "4675"    "644"     "0"       "196.8"   "370.4"   "754"    }
+\DocumentationTok{\#\# [155] "177"     "9330"    "6112"    "15"      "0"       "4.1"     "0"      }
+\DocumentationTok{\#\# [162] "293.5"   "40"      "1835"    "2470"    "1572"    "30"      "8"      }
+\DocumentationTok{\#\# [169] "0"       "451"     "2254"    "15134"   "910"     "0"       "853"    }
+\DocumentationTok{\#\# [176] "64"      "32"      "0"       "1482"    "25148"   "2092"    "135663" }
+\DocumentationTok{\#\# [183] "1046"    "1519"    "14.5"    "2490"    "5152"    "518"     "0"      }
+\DocumentationTok{\#\# [190] "2414"    "36289"   "51"      "440"     "1793"    "501"     "563"    }
+\DocumentationTok{\#\# [197] "225"     "37653"   "0"       "60"      "135"     "158"     "58.9"   }
+\DocumentationTok{\#\# [204] "120"     "84"      "403"     "0"       "209"     "2640"    "531"    }
+\DocumentationTok{\#\# [211] "0"       "491"     "402"     "193"     "58.9"    "0"       "46.6"   }
+\DocumentationTok{\#\# [218] "5313"    "3025"    "2798"    NA        "0"       "17968"   "4964"   }
+\DocumentationTok{\#\# [225] "926"     "1340"    "853"     "386"     "3587"    "3218"    "0"      }
+\DocumentationTok{\#\# [232] "193"     "1566.3"  "0"       "1424"    "3219"    "706"     "56"     }
+\DocumentationTok{\#\# [239] "101"     "419"     "362"     "1148"    "7200"    "0"       "389"    }
+\DocumentationTok{\#\# [246] "24"      "0"       "2782"    "1318"    "12429"   "19924"   "4.8"    }
+\DocumentationTok{\#\# [253] "660"     "0"       "2528"    "2800"    "3444"    "188"     "19.3"   }
+\DocumentationTok{\#\# [260] "129"     "0"       "1110"    "356000"  "1906"    "0"       "0"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2761,18 +2684,18 @@ Mit dem Befehl \texttt{arrange()} kann die Tabelle sortiert werden. Zunächst au
 \NormalTok{coast }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{arrange}\NormalTok{(coast\_num)}
 \DocumentationTok{\#\# \# A tibble: 266 x 3}
-\DocumentationTok{\#\#    Country    Coastline                       coast\_num}
-\DocumentationTok{\#\#    \textless{}chr\textgreater{}      \textless{}chr\textgreater{}                               \textless{}dbl\textgreater{}}
-\DocumentationTok{\#\#  1 Afghanist\textasciitilde{} "0 km\textbackslash{}n          (landlocked)"          0}
-\DocumentationTok{\#\#  2 Andorra    "0 km\textbackslash{}n          (landlocked)"          0}
-\DocumentationTok{\#\#  3 Armenia    "0 km\textbackslash{}n          (landlocked)"          0}
-\DocumentationTok{\#\#  4 Austria    "0 km\textbackslash{}n          (landlocked)"          0}
-\DocumentationTok{\#\#  5 Azerbaijan "0 km\textbackslash{}n          (landlocked);\textasciitilde{}         0}
-\DocumentationTok{\#\#  6 Belarus    "0 km\textbackslash{}n          (landlocked)"          0}
-\DocumentationTok{\#\#  7 Bhutan     "0 km\textbackslash{}n          (landlocked)"          0}
-\DocumentationTok{\#\#  8 Bolivia    "0 km\textbackslash{}n          (landlocked)"          0}
-\DocumentationTok{\#\#  9 Botswana   "0 km\textbackslash{}n          (landlocked)"          0}
-\DocumentationTok{\#\# 10 Burkina F\textasciitilde{} "0 km\textbackslash{}n          (landlocked)"          0}
+\DocumentationTok{\#\#    Country     Coastline                                               coast\_num}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}       \textless{}chr\textgreater{}                                                       \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 Afghanistan "0 km\textbackslash{}n          (landlocked)"                                  0}
+\DocumentationTok{\#\#  2 Andorra     "0 km\textbackslash{}n          (landlocked)"                                  0}
+\DocumentationTok{\#\#  3 Armenia     "0 km\textbackslash{}n          (landlocked)"                                  0}
+\DocumentationTok{\#\#  4 Austria     "0 km\textbackslash{}n          (landlocked)"                                  0}
+\DocumentationTok{\#\#  5 Azerbaijan  "0 km\textbackslash{}n          (landlocked); note {-} Azerbaijan borde\textasciitilde{}         0}
+\DocumentationTok{\#\#  6 Belarus     "0 km\textbackslash{}n          (landlocked)"                                  0}
+\DocumentationTok{\#\#  7 Bhutan      "0 km\textbackslash{}n          (landlocked)"                                  0}
+\DocumentationTok{\#\#  8 Bolivia     "0 km\textbackslash{}n          (landlocked)"                                  0}
+\DocumentationTok{\#\#  9 Botswana    "0 km\textbackslash{}n          (landlocked)"                                  0}
+\DocumentationTok{\#\# 10 Burkina Fa\textasciitilde{} "0 km\textbackslash{}n          (landlocked)"                                  0}
 \DocumentationTok{\#\# \# ... with 256 more rows}
 \end{Highlighting}
 \end{Shaded}
@@ -2784,18 +2707,18 @@ und schließlich absteigend, sodass die größten Werte an erster Stelle stehen.
 \NormalTok{coast }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(coast\_num))}
 \DocumentationTok{\#\# \# A tibble: 266 x 3}
-\DocumentationTok{\#\#    Country     Coastline                      coast\_num}
-\DocumentationTok{\#\#    \textless{}chr\textgreater{}       \textless{}chr\textgreater{}                              \textless{}dbl\textgreater{}}
-\DocumentationTok{\#\#  1 World       "356,000 km\textbackslash{}n          \textbackslash{}n    \textasciitilde{}   356000 }
-\DocumentationTok{\#\#  2 Canada      "202,080 km\textbackslash{}n          \textbackslash{}n    \textasciitilde{}   202080 }
-\DocumentationTok{\#\#  3 Pacific Oc\textasciitilde{} "135,663 km"                     135663 }
-\DocumentationTok{\#\#  4 Atlantic O\textasciitilde{} "111,866 km"                     111866 }
-\DocumentationTok{\#\#  5 Indian Oce\textasciitilde{} "66,526 km"                       66526 }
-\DocumentationTok{\#\#  6 European U\textasciitilde{} "65,992.9 km"                     65993.}
-\DocumentationTok{\#\#  7 Indonesia   "54,716 km"                       54716 }
-\DocumentationTok{\#\#  8 Arctic Oce\textasciitilde{} "45,389 km"                       45389 }
-\DocumentationTok{\#\#  9 Greenland   "44,087 km"                       44087 }
-\DocumentationTok{\#\# 10 Russia      "37,653 km"                       37653 }
+\DocumentationTok{\#\#    Country      Coastline                                              coast\_num}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}        \textless{}chr\textgreater{}                                                      \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 World        "356,000 km\textbackslash{}n          \textbackslash{}n          \textbackslash{}n        \textbackslash{}n\textbackslash{}n  \textbackslash{}n\textasciitilde{}   356000 }
+\DocumentationTok{\#\#  2 Canada       "202,080 km\textbackslash{}n          \textbackslash{}n          \textbackslash{}n        \textbackslash{}n\textbackslash{}n  \textbackslash{}n\textasciitilde{}   202080 }
+\DocumentationTok{\#\#  3 Pacific Oce\textasciitilde{} "135,663 km"                                             135663 }
+\DocumentationTok{\#\#  4 Atlantic Oc\textasciitilde{} "111,866 km"                                             111866 }
+\DocumentationTok{\#\#  5 Indian Ocean "66,526 km"                                               66526 }
+\DocumentationTok{\#\#  6 European Un\textasciitilde{} "65,992.9 km"                                             65993.}
+\DocumentationTok{\#\#  7 Indonesia    "54,716 km"                                               54716 }
+\DocumentationTok{\#\#  8 Arctic Ocean "45,389 km"                                               45389 }
+\DocumentationTok{\#\#  9 Greenland    "44,087 km"                                               44087 }
+\DocumentationTok{\#\# 10 Russia       "37,653 km"                                               37653 }
 \DocumentationTok{\#\# \# ... with 256 more rows}
 \end{Highlighting}
 \end{Shaded}
@@ -2987,8 +2910,8 @@ Zunächst laden wir den Quelltext in R und nennen ihn \texttt{quelltext}:
 \NormalTok{quelltext}
 \DocumentationTok{\#\# \{html\_document\}}
 \DocumentationTok{\#\# \textless{}html lang="de" dir="ltr" class="no{-}js"\textgreater{}}
-\DocumentationTok{\#\# [1] \textless{}head\textgreater{}\textbackslash{}n\textless{}meta http{-}equiv="Content{-}Type" content= ...}
-\DocumentationTok{\#\# [2] \textless{}body id="p187" class="page{-}187 pagelevel{-}4 lang ...}
+\DocumentationTok{\#\# [1] \textless{}head\textgreater{}\textbackslash{}n\textless{}meta http{-}equiv="Content{-}Type" content="text/html; charset=UTF{-}8 ...}
+\DocumentationTok{\#\# [2] \textless{}body id="p187" class="page{-}187 pagelevel{-}4 language{-}0 backendlayout{-}wohn ...}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3007,7 +2930,7 @@ In R können wir dieses einzelne Element ansprechen mit:
   \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div\#c599"}\NormalTok{)}
 \DocumentationTok{\#\# \{html\_node\}}
 \DocumentationTok{\#\# \textless{}div id="c599" class="frame frame{-}default frame{-}type{-}text frame{-}layout{-}0 frame{-}background{-}none frame{-}no{-}backgroundimage frame{-}space{-}before{-}none frame{-}space{-}after{-}none"\textgreater{}}
-\DocumentationTok{\#\# [1] \textless{}div class="frame{-}container"\textgreater{}\textless{}div class="frame{-}i ...}
+\DocumentationTok{\#\# [1] \textless{}div class="frame{-}container"\textgreater{}\textless{}div class="frame{-}inner"\textgreater{}\textbackslash{}n\textless{}p\textgreater{}Kleine Seestra ...}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3021,9 +2944,9 @@ Dann gehen wir in der Hierarchie drei \texttt{\textless{}div\textgreater{}}- Ele
   \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div"}\NormalTok{)}
 \DocumentationTok{\#\# \{html\_node\}}
 \DocumentationTok{\#\# \textless{}div class="frame{-}inner"\textgreater{}}
-\DocumentationTok{\#\# [1] \textless{}p\textgreater{}Kleine Seestraße 11\textless{}br\textgreater{}60486 Frankfurt am Mai ...}
+\DocumentationTok{\#\# [1] \textless{}p\textgreater{}Kleine Seestraße 11\textless{}br\textgreater{}60486 Frankfurt am Main\textbackslash{}r\textless{}/p\textgreater{}\textbackslash{}n}
 \DocumentationTok{\#\# [2] \textless{}p\textgreater{}25 Wohnheimplätze\textless{}/p\textgreater{}\textbackslash{}n}
-\DocumentationTok{\#\# [3] \textless{}ul class="list{-}normal"\textgreater{}\textbackslash{}n\textless{}li\textgreater{}5 Wohnküchen\textless{}/li\textgreater{}\textbackslash{} ...}
+\DocumentationTok{\#\# [3] \textless{}ul class="list{-}normal"\textgreater{}\textbackslash{}n\textless{}li\textgreater{}5 Wohnküchen\textless{}/li\textgreater{}\textbackslash{}n\textless{}li\textgreater{}Wintergärten\textless{}/li\textgreater{}\textbackslash{}n\textless{} ...}
 \DocumentationTok{\#\# [4] \textless{}p\textgreater{}Baujahr\textless{}strong\textgreater{} \textless{}/strong\textgreater{}1995\textbackslash{}r\textless{}/p\textgreater{}\textbackslash{}n}
 \DocumentationTok{\#\# [5] \textless{}p\textgreater{}\textless{}strong\textgreater{}\textless{}/strong\textgreater{}\textless{}/p\textgreater{}}
 \end{Highlighting}
@@ -3038,9 +2961,9 @@ Alternativ könnten wir auch sagen: Darin das \texttt{div} mit \texttt{class="fr
   \FunctionTok{html\_node}\NormalTok{(}\StringTok{"div.frame{-}inner"}\NormalTok{)}
 \DocumentationTok{\#\# \{html\_node\}}
 \DocumentationTok{\#\# \textless{}div class="frame{-}inner"\textgreater{}}
-\DocumentationTok{\#\# [1] \textless{}p\textgreater{}Kleine Seestraße 11\textless{}br\textgreater{}60486 Frankfurt am Mai ...}
+\DocumentationTok{\#\# [1] \textless{}p\textgreater{}Kleine Seestraße 11\textless{}br\textgreater{}60486 Frankfurt am Main\textbackslash{}r\textless{}/p\textgreater{}\textbackslash{}n}
 \DocumentationTok{\#\# [2] \textless{}p\textgreater{}25 Wohnheimplätze\textless{}/p\textgreater{}\textbackslash{}n}
-\DocumentationTok{\#\# [3] \textless{}ul class="list{-}normal"\textgreater{}\textbackslash{}n\textless{}li\textgreater{}5 Wohnküchen\textless{}/li\textgreater{}\textbackslash{} ...}
+\DocumentationTok{\#\# [3] \textless{}ul class="list{-}normal"\textgreater{}\textbackslash{}n\textless{}li\textgreater{}5 Wohnküchen\textless{}/li\textgreater{}\textbackslash{}n\textless{}li\textgreater{}Wintergärten\textless{}/li\textgreater{}\textbackslash{}n\textless{} ...}
 \DocumentationTok{\#\# [4] \textless{}p\textgreater{}Baujahr\textless{}strong\textgreater{} \textless{}/strong\textgreater{}1995\textbackslash{}r\textless{}/p\textgreater{}\textbackslash{}n}
 \DocumentationTok{\#\# [5] \textless{}p\textgreater{}\textless{}strong\textgreater{}\textless{}/strong\textgreater{}\textless{}/p\textgreater{}}
 \end{Highlighting}
@@ -3102,8 +3025,8 @@ Wie diese Technik automatisiert auf eine Reihe von Seiten angewendet werden kann
 \NormalTok{quelltext}
 \DocumentationTok{\#\# \{html\_document\}}
 \DocumentationTok{\#\# \textless{}html lang="de" dir="ltr" class="no{-}js"\textgreater{}}
-\DocumentationTok{\#\# [1] \textless{}head\textgreater{}\textbackslash{}n\textless{}meta http{-}equiv="Content{-}Type" content= ...}
-\DocumentationTok{\#\# [2] \textless{}body id="p187" class="page{-}187 pagelevel{-}4 lang ...}
+\DocumentationTok{\#\# [1] \textless{}head\textgreater{}\textbackslash{}n\textless{}meta http{-}equiv="Content{-}Type" content="text/html; charset=UTF{-}8 ...}
+\DocumentationTok{\#\# [2] \textless{}body id="p187" class="page{-}187 pagelevel{-}4 language{-}0 backendlayout{-}wohn ...}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3328,20 +3251,19 @@ Wie diese Technik automatisiert auf eine Reihe von Seiten angewendet werden kann
 
 \NormalTok{liste}
 \DocumentationTok{\#\# \# A tibble: 133 x 8}
-\DocumentationTok{\#\#    Art   \textasciigrave{}Größe m²\textasciigrave{} Ausstattung \textasciigrave{}EUR*\textasciigrave{} strasse ort  }
-\DocumentationTok{\#\#    \textless{}chr\textgreater{} \textless{}chr\textgreater{}      \textless{}chr\textgreater{}       \textless{}chr\textgreater{}  \textless{}chr\textgreater{}   \textless{}chr\textgreater{}}
-\DocumentationTok{\#\#  1 "Ein\textasciitilde{} "16"       "unmöblier\textasciitilde{} "250,\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}}
-\DocumentationTok{\#\#  2 "Ein\textasciitilde{} "18{-}20"    "unmöblier\textasciitilde{} "311,\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}}
-\DocumentationTok{\#\#  3 "Ein\textasciitilde{} "24"       "barrieref\textasciitilde{} "295,\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}}
-\DocumentationTok{\#\#  4 ""    ""         ""          ""     Beetho\textasciitilde{} 6032\textasciitilde{}}
-\DocumentationTok{\#\#  5 "Ein\textasciitilde{} "9"        "möbliert,\textasciitilde{} "207,\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}}
-\DocumentationTok{\#\#  6 "Ein\textasciitilde{} "15"       "unmöblier\textasciitilde{} "236,\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}}
-\DocumentationTok{\#\#  7 "Zwe\textasciitilde{} "45"       "unmöblier\textasciitilde{} "Bele\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}}
-\DocumentationTok{\#\#  8 "Ein\textasciitilde{} "11 {-} 17"  "unmöblier\textasciitilde{} "256,\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}}
-\DocumentationTok{\#\#  9 "Ein\textasciitilde{} "11"       "möbliert,\textasciitilde{} "266,\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}}
-\DocumentationTok{\#\# 10 "Ein\textasciitilde{} "23"       "unmöblier\textasciitilde{} "315,\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}}
-\DocumentationTok{\#\# \# ... with 123 more rows, and 2 more variables:}
-\DocumentationTok{\#\# \#   baujahr \textless{}dbl\textgreater{}, anzahl\_plaetze \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#    Art     \textasciigrave{}Größe m²\textasciigrave{} Ausstattung   \textasciigrave{}EUR*\textasciigrave{}  strasse ort   baujahr anzahl\_plaetze}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}   \textless{}chr\textgreater{}      \textless{}chr\textgreater{}         \textless{}chr\textgreater{}   \textless{}chr\textgreater{}   \textless{}chr\textgreater{}   \textless{}dbl\textgreater{}          \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 "Einze\textasciitilde{} "16"       "unmöbliert,\textasciitilde{} "250,0\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}    1962             37}
+\DocumentationTok{\#\#  2 "Einzi\textasciitilde{} "18{-}20"    "unmöbliert,\textasciitilde{} "311,0\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}    1962             37}
+\DocumentationTok{\#\#  3 "Einzi\textasciitilde{} "24"       "barrierefre\textasciitilde{} "295,0\textasciitilde{} Beetho\textasciitilde{} 6032\textasciitilde{}    1962             37}
+\DocumentationTok{\#\#  4 ""      ""         ""            ""      Beetho\textasciitilde{} 6032\textasciitilde{}    1962             37}
+\DocumentationTok{\#\#  5 "Einze\textasciitilde{} "9"        "möbliert, S\textasciitilde{} "207,0\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}    1956             81}
+\DocumentationTok{\#\#  6 "Einze\textasciitilde{} "15"       "unmöbliert,\textasciitilde{} "236,0\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}    1956             81}
+\DocumentationTok{\#\#  7 "Zweiz\textasciitilde{} "45"       "unmöbliert,\textasciitilde{} "Beleg\textasciitilde{} Bocken\textasciitilde{} 6032\textasciitilde{}    1956             81}
+\DocumentationTok{\#\#  8 "Einze\textasciitilde{} "11 {-} 17"  "unmöbliert,\textasciitilde{} "256,0\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}    1960             36}
+\DocumentationTok{\#\#  9 "Einze\textasciitilde{} "11"       "möbliert, W\textasciitilde{} "266,0\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}    1960             36}
+\DocumentationTok{\#\# 10 "Einzi\textasciitilde{} "23"       "unmöbliert,\textasciitilde{} "315,0\textasciitilde{} Fröbel\textasciitilde{} 6048\textasciitilde{}    1960             36}
+\DocumentationTok{\#\# \# ... with 123 more rows}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3584,15 +3506,12 @@ Resultat ist eine Liste, die sich mit \texttt{unlist()} auch zu einem Vektor wan
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{map\_chr}\NormalTok{(return\_characters, get\_character\_name)}
-\DocumentationTok{\#\#  [1] "Luke Skywalker"        "C{-}3PO"                }
-\DocumentationTok{\#\#  [3] "R2{-}D2"                 "Darth Vader"          }
-\DocumentationTok{\#\#  [5] "Leia Organa"           "Obi{-}Wan Kenobi"       }
-\DocumentationTok{\#\#  [7] "Chewbacca"             "Han Solo"             }
-\DocumentationTok{\#\#  [9] "Jabba Desilijic Tiure" "Wedge Antilles"       }
-\DocumentationTok{\#\# [11] "Yoda"                  "Palpatine"            }
-\DocumentationTok{\#\# [13] "Boba Fett"             "Lando Calrissian"     }
-\DocumentationTok{\#\# [15] "Ackbar"                "Mon Mothma"           }
-\DocumentationTok{\#\# [17] "Arvel Crynyd"          "Wicket Systri Warrick"}
+\DocumentationTok{\#\#  [1] "Luke Skywalker"        "C{-}3PO"                 "R2{-}D2"                }
+\DocumentationTok{\#\#  [4] "Darth Vader"           "Leia Organa"           "Obi{-}Wan Kenobi"       }
+\DocumentationTok{\#\#  [7] "Chewbacca"             "Han Solo"              "Jabba Desilijic Tiure"}
+\DocumentationTok{\#\# [10] "Wedge Antilles"        "Yoda"                  "Palpatine"            }
+\DocumentationTok{\#\# [13] "Boba Fett"             "Lando Calrissian"      "Ackbar"               }
+\DocumentationTok{\#\# [16] "Mon Mothma"            "Arvel Crynyd"          "Wicket Systri Warrick"}
 \DocumentationTok{\#\# [19] "Nien Nunb"             "Bib Fortuna"}
 \end{Highlighting}
 \end{Shaded}
@@ -3671,26 +3590,26 @@ Deshalb können wir schreiben:
   \FunctionTok{read\_html}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"tr.offer\_list\_item"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{html\_attr}\NormalTok{(}\StringTok{"adid"}\NormalTok{)}
-\DocumentationTok{\#\#  [1] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8456057.html"  }
-\DocumentationTok{\#\#  [2] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Altstadt.8179908.html"    }
-\DocumentationTok{\#\#  [3] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8380602.html"}
-\DocumentationTok{\#\#  [4] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7743282.html"}
-\DocumentationTok{\#\#  [5] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8523213.html"}
-\DocumentationTok{\#\#  [6] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7952174.html"}
-\DocumentationTok{\#\#  [7] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.8369804.html"}
-\DocumentationTok{\#\#  [8] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8376022.html"  }
-\DocumentationTok{\#\#  [9] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.6936308.html"}
-\DocumentationTok{\#\# [10] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.6944572.html"}
-\DocumentationTok{\#\# [11] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Neu{-}Isenburg.8616014.html"}
-\DocumentationTok{\#\# [12] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7695069.html"}
-\DocumentationTok{\#\# [13] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7693038.html"}
-\DocumentationTok{\#\# [14] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Sud.8401007.html" }
-\DocumentationTok{\#\# [15] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8401016.html"}
-\DocumentationTok{\#\# [16] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Offenbach.5934645.html"   }
-\DocumentationTok{\#\# [17] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8591977.html"  }
-\DocumentationTok{\#\# [18] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Altstadt.6999237.html"    }
-\DocumentationTok{\#\# [19] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8376044.html"}
-\DocumentationTok{\#\# [20] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nied.4715523.html"}
+\DocumentationTok{\#\#  [1] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.6936308.html"    }
+\DocumentationTok{\#\#  [2] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.6944572.html"    }
+\DocumentationTok{\#\#  [3] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7952174.html"    }
+\DocumentationTok{\#\#  [4] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Bornheim{-}{-}Ostend.8718668.html"}
+\DocumentationTok{\#\#  [5] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7697498.html"    }
+\DocumentationTok{\#\#  [6] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Dornbusch.8713209.html"       }
+\DocumentationTok{\#\#  [7] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Bockenheim.8563767.html"      }
+\DocumentationTok{\#\#  [8] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.7695069.html"    }
+\DocumentationTok{\#\#  [9] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8181981.html"      }
+\DocumentationTok{\#\# [10] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Bockenheim.8545727.html"      }
+\DocumentationTok{\#\# [11] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8676840.html"    }
+\DocumentationTok{\#\# [12] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8704699.html"      }
+\DocumentationTok{\#\# [13] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8523043.html"    }
+\DocumentationTok{\#\# [14] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8555199.html"    }
+\DocumentationTok{\#\# [15] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Bockenheim.6348718.html"      }
+\DocumentationTok{\#\# [16] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.8369804.html"    }
+\DocumentationTok{\#\# [17] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8196826.html"      }
+\DocumentationTok{\#\# [18] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8395290.html"    }
+\DocumentationTok{\#\# [19] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8376022.html"      }
+\DocumentationTok{\#\# [20] "wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Nord.8376129.html"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3746,7 +3665,7 @@ Am Ende wird das Resultat mit \texttt{paste0()} an den Domainnamen gehängt und 
   \FunctionTok{paste0}\NormalTok{(}\StringTok{"https://www.wg{-}gesucht.de/"}\NormalTok{, .) }\OtherTok{{-}\textgreater{}}\NormalTok{ anzeige\_urls}
 
 \FunctionTok{str}\NormalTok{(anzeige\_urls)}
-\DocumentationTok{\#\#  chr [1:60] "https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Innenstadt.8456057.html" ...}
+\DocumentationTok{\#\#  chr [1:60] "https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nordend{-}West.6936308.html" ...}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3774,7 +3693,7 @@ Zunächst eine Beispielanzeige laden und zwischenspeichern:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Nied.7651909.html"} \SpecialCharTok{\%\textgreater{}\%}
+\StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Ginnheim.7659434.html"} \SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{read\_html}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ site}
 \end{Highlighting}
 \end{Shaded}
@@ -3791,9 +3710,9 @@ Dann lassen sich Quadratmeterzahl und Gesamtmiete recht einfach auslesen, weil b
 \NormalTok{  eur }\OtherTok{\textless{}{-}}\NormalTok{ key\_facts[}\DecValTok{2}\NormalTok{]}
 
 \NormalTok{qm}
-\DocumentationTok{\#\# [1] "16m²"}
+\DocumentationTok{\#\# [1] "26m²"}
 \NormalTok{eur}
-\DocumentationTok{\#\# [1] "400€"}
+\DocumentationTok{\#\# [1] "520€"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3808,7 +3727,7 @@ Die Information, wer dort wohnt, steckt in einem span title:
   \FunctionTok{html\_attr}\NormalTok{(}\StringTok{"title"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ bewohnerinnen}
 
 \NormalTok{bewohnerinnen}
-\DocumentationTok{\#\# [1] "3er WG (0w,2m,0d)"}
+\DocumentationTok{\#\# [1] "2er WG (0w,1m,0d)"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3817,8 +3736,7 @@ Geballt lassen sich die Daten für eine Anzeige so ausgeben:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{c}\NormalTok{(qm, eur, bewohnerinnen)}
-\DocumentationTok{\#\# [1] "16m²"              "400€"             }
-\DocumentationTok{\#\# [3] "3er WG (0w,2m,0d)"}
+\DocumentationTok{\#\# [1] "26m²"              "520€"              "2er WG (0w,1m,0d)"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3864,8 +3782,7 @@ Wir führen die Funktion probeweise für eine (andere) Anzeige aus:
 \begin{Highlighting}[]
 \StringTok{"https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfurt{-}am{-}Main{-}Westend{-}Sud.8401009.html"} \SpecialCharTok{\%\textgreater{}\%}
 \NormalTok{  get\_anzeige\_details}
-\DocumentationTok{\#\# [1] "20m²"              "800€"             }
-\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# [1] "20m²"              "800€"              "3er WG (1w,1m,0d)"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3884,44 +3801,34 @@ Jetzt noch der Trick, diese Funktion mit \texttt{map()} auf alle 60 URLs auszuf�
  
 \NormalTok{results}
 \DocumentationTok{\#\# [[1]]}
-\DocumentationTok{\#\# [1] "30m²"              "1000€"            }
-\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# [1] "52m²"              "1090€"             "2er WG (0w,1m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[2]]}
-\DocumentationTok{\#\# [1] "16m²"              "380€"             }
-\DocumentationTok{\#\# [3] "5er WG (2w,2m,0d)"}
+\DocumentationTok{\#\# [1] "38m²"              "850€"              "2er WG (0w,1m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[3]]}
-\DocumentationTok{\#\# [1] "30m²"              "800€"             }
-\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# [1] "25m²"              "800€"              "3er WG (1w,1m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[4]]}
-\DocumentationTok{\#\# [1] "35m²"              "800€"             }
-\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# [1] "13m²"              "648€"              "2er WG (1w,0m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[5]]}
-\DocumentationTok{\#\# [1] "20m²"              "800€"             }
-\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# [1] "25m²"              "800€"              "2er WG (1w,0m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[6]]}
-\DocumentationTok{\#\# [1] "25m²"              "900€"             }
-\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# [1] "22m²"              "550€"              "3er WG (2w,0m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[7]]}
-\DocumentationTok{\#\# [1] "25m²"              "800€"             }
-\DocumentationTok{\#\# [3] "2er WG (1w,0m,0d)"}
+\DocumentationTok{\#\# [1] "16m²"              "692€"              "4er WG (2w,1m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[8]]}
-\DocumentationTok{\#\# [1] "20m²"              "900€"             }
-\DocumentationTok{\#\# [3] "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# [1] "20m²"              "900€"              "2er WG (1w,0m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[9]]}
-\DocumentationTok{\#\# [1] "52m²"              "1090€"            }
-\DocumentationTok{\#\# [3] "2er WG (0w,1m,0d)"}
+\DocumentationTok{\#\# [1] "30m²"              "1000€"             "3er WG (1w,1m,0d)"}
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[10]]}
-\DocumentationTok{\#\# [1] "38m²"              "870€"             }
-\DocumentationTok{\#\# [3] "2er WG (0w,1m,0d)"}
+\DocumentationTok{\#\# [1] "13m²"              "374€"              "3er WG (2w,0m,0d)"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3936,18 +3843,18 @@ Mit \texttt{map\_chr()} können wir aus dem Ergebnis direkt einen tibble basteln
 
 \NormalTok{wgs}
 \DocumentationTok{\#\# \# A tibble: 10 x 4}
-\DocumentationTok{\#\#    link                    flaeche preis bewohnerinnen }
-\DocumentationTok{\#\#    \textless{}chr\textgreater{}                   \textless{}chr\textgreater{}   \textless{}chr\textgreater{} \textless{}chr\textgreater{}         }
-\DocumentationTok{\#\#  1 https://www.wg{-}gesucht\textasciitilde{} 30m²    1000€ 3er WG (1w,1m\textasciitilde{}}
-\DocumentationTok{\#\#  2 https://www.wg{-}gesucht\textasciitilde{} 16m²    380€  5er WG (2w,2m\textasciitilde{}}
-\DocumentationTok{\#\#  3 https://www.wg{-}gesucht\textasciitilde{} 30m²    800€  3er WG (1w,1m\textasciitilde{}}
-\DocumentationTok{\#\#  4 https://www.wg{-}gesucht\textasciitilde{} 35m²    800€  3er WG (1w,1m\textasciitilde{}}
-\DocumentationTok{\#\#  5 https://www.wg{-}gesucht\textasciitilde{} 20m²    800€  3er WG (1w,1m\textasciitilde{}}
-\DocumentationTok{\#\#  6 https://www.wg{-}gesucht\textasciitilde{} 25m²    900€  3er WG (1w,1m\textasciitilde{}}
-\DocumentationTok{\#\#  7 https://www.wg{-}gesucht\textasciitilde{} 25m²    800€  2er WG (1w,0m\textasciitilde{}}
-\DocumentationTok{\#\#  8 https://www.wg{-}gesucht\textasciitilde{} 20m²    900€  3er WG (1w,1m\textasciitilde{}}
-\DocumentationTok{\#\#  9 https://www.wg{-}gesucht\textasciitilde{} 52m²    1090€ 2er WG (0w,1m\textasciitilde{}}
-\DocumentationTok{\#\# 10 https://www.wg{-}gesucht\textasciitilde{} 38m²    870€  2er WG (0w,1m\textasciitilde{}}
+\DocumentationTok{\#\#    link                                            flaeche preis bewohnerinnen  }
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}                                           \textless{}chr\textgreater{}   \textless{}chr\textgreater{} \textless{}chr\textgreater{}          }
+\DocumentationTok{\#\#  1 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 52m²    1090€ 2er WG (0w,1m,\textasciitilde{}}
+\DocumentationTok{\#\#  2 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 38m²    850€  2er WG (0w,1m,\textasciitilde{}}
+\DocumentationTok{\#\#  3 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 25m²    800€  3er WG (1w,1m,\textasciitilde{}}
+\DocumentationTok{\#\#  4 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 13m²    648€  2er WG (1w,0m,\textasciitilde{}}
+\DocumentationTok{\#\#  5 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 25m²    800€  2er WG (1w,0m,\textasciitilde{}}
+\DocumentationTok{\#\#  6 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 22m²    550€  3er WG (2w,0m,\textasciitilde{}}
+\DocumentationTok{\#\#  7 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 16m²    692€  4er WG (2w,1m,\textasciitilde{}}
+\DocumentationTok{\#\#  8 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 20m²    900€  2er WG (1w,0m,\textasciitilde{}}
+\DocumentationTok{\#\#  9 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 30m²    1000€ 3er WG (1w,1m,\textasciitilde{}}
+\DocumentationTok{\#\# 10 https://www.wg{-}gesucht.de/wg{-}zimmer{-}in{-}Frankfu\textasciitilde{} 13m²    374€  3er WG (2w,0m,\textasciitilde{}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3959,11 +3866,10 @@ Um mit den Daten sinnvoll weiterzuarbeiten müssen sie in ein numerisches Format
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{wgs}\SpecialCharTok{$}\NormalTok{bewohnerinnen}
-\DocumentationTok{\#\#  [1] "3er WG (1w,1m,0d)" "5er WG (2w,2m,0d)"}
-\DocumentationTok{\#\#  [3] "3er WG (1w,1m,0d)" "3er WG (1w,1m,0d)"}
-\DocumentationTok{\#\#  [5] "3er WG (1w,1m,0d)" "3er WG (1w,1m,0d)"}
-\DocumentationTok{\#\#  [7] "2er WG (1w,0m,0d)" "3er WG (1w,1m,0d)"}
-\DocumentationTok{\#\#  [9] "2er WG (0w,1m,0d)" "2er WG (0w,1m,0d)"}
+\DocumentationTok{\#\#  [1] "2er WG (0w,1m,0d)" "2er WG (0w,1m,0d)" "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\#  [4] "2er WG (1w,0m,0d)" "2er WG (1w,0m,0d)" "3er WG (2w,0m,0d)"}
+\DocumentationTok{\#\#  [7] "4er WG (2w,1m,0d)" "2er WG (1w,0m,0d)" "3er WG (1w,1m,0d)"}
+\DocumentationTok{\#\# [10] "3er WG (2w,0m,0d)"}
 
 \NormalTok{wgs }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{flaeche =} \FunctionTok{parse\_number}\NormalTok{(flaeche),}
@@ -3973,19 +3879,18 @@ Um mit den Daten sinnvoll weiterzuarbeiten müssen sie in ein numerisches Format
          \AttributeTok{bw\_m =} \FunctionTok{str\_extract}\NormalTok{(bewohnerinnen, }\StringTok{"[0{-}9]+m"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{parse\_number}\NormalTok{(),}
          \AttributeTok{bw\_d =} \FunctionTok{str\_extract}\NormalTok{(bewohnerinnen, }\StringTok{"[0{-}9]+d"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{parse\_number}\NormalTok{())}
 \DocumentationTok{\#\# \# A tibble: 10 x 8}
-\DocumentationTok{\#\#    link  flaeche preis bewohnerinnen bw\_gesamt  bw\_w}
-\DocumentationTok{\#\#    \textless{}chr\textgreater{}   \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}chr\textgreater{}             \textless{}dbl\textgreater{} \textless{}dbl\textgreater{}}
-\DocumentationTok{\#\#  1 http\textasciitilde{}      30  1000 3er WG (1w,1\textasciitilde{}         3     1}
-\DocumentationTok{\#\#  2 http\textasciitilde{}      16   380 5er WG (2w,2\textasciitilde{}         5     2}
-\DocumentationTok{\#\#  3 http\textasciitilde{}      30   800 3er WG (1w,1\textasciitilde{}         3     1}
-\DocumentationTok{\#\#  4 http\textasciitilde{}      35   800 3er WG (1w,1\textasciitilde{}         3     1}
-\DocumentationTok{\#\#  5 http\textasciitilde{}      20   800 3er WG (1w,1\textasciitilde{}         3     1}
-\DocumentationTok{\#\#  6 http\textasciitilde{}      25   900 3er WG (1w,1\textasciitilde{}         3     1}
-\DocumentationTok{\#\#  7 http\textasciitilde{}      25   800 2er WG (1w,0\textasciitilde{}         2     1}
-\DocumentationTok{\#\#  8 http\textasciitilde{}      20   900 3er WG (1w,1\textasciitilde{}         3     1}
-\DocumentationTok{\#\#  9 http\textasciitilde{}      52  1090 2er WG (0w,1\textasciitilde{}         2     0}
-\DocumentationTok{\#\# 10 http\textasciitilde{}      38   870 2er WG (0w,1\textasciitilde{}         2     0}
-\DocumentationTok{\#\# \# ... with 2 more variables: bw\_m \textless{}dbl\textgreater{}, bw\_d \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#    link                  flaeche preis bewohnerinnen bw\_gesamt  bw\_w  bw\_m  bw\_d}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}                   \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}chr\textgreater{}             \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}dbl\textgreater{} \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#  1 https://www.wg{-}gesuc\textasciitilde{}      52  1090 2er WG (0w,1\textasciitilde{}         2     0     1     0}
+\DocumentationTok{\#\#  2 https://www.wg{-}gesuc\textasciitilde{}      38   850 2er WG (0w,1\textasciitilde{}         2     0     1     0}
+\DocumentationTok{\#\#  3 https://www.wg{-}gesuc\textasciitilde{}      25   800 3er WG (1w,1\textasciitilde{}         3     1     1     0}
+\DocumentationTok{\#\#  4 https://www.wg{-}gesuc\textasciitilde{}      13   648 2er WG (1w,0\textasciitilde{}         2     1     0     0}
+\DocumentationTok{\#\#  5 https://www.wg{-}gesuc\textasciitilde{}      25   800 2er WG (1w,0\textasciitilde{}         2     1     0     0}
+\DocumentationTok{\#\#  6 https://www.wg{-}gesuc\textasciitilde{}      22   550 3er WG (2w,0\textasciitilde{}         3     2     0     0}
+\DocumentationTok{\#\#  7 https://www.wg{-}gesuc\textasciitilde{}      16   692 4er WG (2w,1\textasciitilde{}         4     2     1     0}
+\DocumentationTok{\#\#  8 https://www.wg{-}gesuc\textasciitilde{}      20   900 2er WG (1w,0\textasciitilde{}         2     1     0     0}
+\DocumentationTok{\#\#  9 https://www.wg{-}gesuc\textasciitilde{}      30  1000 3er WG (1w,1\textasciitilde{}         3     1     1     0}
+\DocumentationTok{\#\# 10 https://www.wg{-}gesuc\textasciitilde{}      13   374 3er WG (2w,0\textasciitilde{}         3     2     0     0}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4053,11 +3958,11 @@ Mit \texttt{rvest} lässt sich eine Liste der Tabellen auslesen:
 \hypertarget{tabellen-kombinieren}{%
 \subsection{Tabellen kombinieren}\label{tabellen-kombinieren}}
 
-Die Tabellen 1, 2 und 9 sind dabei ergänzende Elemente auf der Wikipedia-Seite und hier uninteressant:
+Die Tabellen 1, und 8 sind dabei ergänzende Elemente auf der Wikipedia-Seite und hier uninteressant:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{alle\_tabellen[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{)]}
+\NormalTok{alle\_tabellen[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{)]}
 \DocumentationTok{\#\# [[1]]}
 \DocumentationTok{\#\# \# A tibble: 2 x 1}
 \DocumentationTok{\#\#   X1                                      }
@@ -4066,12 +3971,6 @@ Die Tabellen 1, 2 und 9 sind dabei ergänzende Elemente auf der Wikipedia-Seite 
 \DocumentationTok{\#\# 2 Download coordinates as: KML            }
 \DocumentationTok{\#\# }
 \DocumentationTok{\#\# [[2]]}
-\DocumentationTok{\#\# \# A tibble: 1 x 2}
-\DocumentationTok{\#\#   X1    X2                                                                      }
-\DocumentationTok{\#\#   \textless{}lgl\textgreater{} \textless{}chr\textgreater{}                                                                   }
-\DocumentationTok{\#\# 1 NA    This article is actively undergoing a major edit for a short while. To \textasciitilde{}}
-\DocumentationTok{\#\# }
-\DocumentationTok{\#\# [[3]]}
 \DocumentationTok{\#\# \# A tibble: 4 x 2}
 \DocumentationTok{\#\#   \textasciigrave{}.mw{-}parser{-}output .navbar\{display:inl\textasciitilde{} \textasciigrave{}.mw{-}parser{-}output .navbar\{display:in\textasciitilde{}}
 \DocumentationTok{\#\#   \textless{}chr\textgreater{}                                   \textless{}chr\textgreater{}                                 }
@@ -4082,15 +3981,15 @@ Die Tabellen 1, 2 und 9 sind dabei ergänzende Elemente auf der Wikipedia-Seite 
 \end{Highlighting}
 \end{Shaded}
 
-Mit den restlichen Tabellen (3--8) wollen wir weiterarbeiten:
+Mit den restlichen Tabellen (2--7) wollen wir weiterarbeiten:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{relevante\_tabellen }\OtherTok{\textless{}{-}}\NormalTok{ alle\_tabellen[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{)]}
+\NormalTok{relevante\_tabellen }\OtherTok{\textless{}{-}}\NormalTok{ alle\_tabellen[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{7}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
-Zunächst sollen sie ``untereinder'' (zeilenweise) in einen Datensatz kombiniert werden.
+Zunächst sollen sie ``untereinader'' (zeilenweise) in einen Datensatz kombiniert werden.
 
 Das geht eigentlich mit dem Befehl \texttt{bind\_rows()} ganz gut --- allerdings müssen dafür die Spalten die selben Namen (hier gegeben) und die selben Typen haben (hier \emph{nicht} gegeben).
 
@@ -4167,19 +4066,19 @@ Für eine Tabelle:
 \DocumentationTok{\#\# \# A tibble: 14 x 5}
 \DocumentationTok{\#\#    Name     \textasciigrave{}Elevation (m)\textasciigrave{} \textasciigrave{}Elevation (ft)\textasciigrave{} Coordinates        \textasciigrave{}Last eruption\textasciigrave{} }
 \DocumentationTok{\#\#    \textless{}chr\textgreater{}    \textless{}chr\textgreater{}           \textless{}chr\textgreater{}            \textless{}chr\textgreater{}              \textless{}chr\textgreater{}           }
-\DocumentationTok{\#\#  1 Aogashi\textasciitilde{} 423             1388             32°27′N 139°46′E﻿\textasciitilde{}  AD 1785[† 1]    }
+\DocumentationTok{\#\#  1 Aogashi\textasciitilde{} 423             1388             32°27′N 139°46′E﻿ \textasciitilde{} AD 1785[† 1]    }
 \DocumentationTok{\#\#  2 Bayonna\textasciitilde{} 11              36               31°53′17″N 139°55\textasciitilde{} AD 1970[† 14]   }
-\DocumentationTok{\#\#  3 Hachijō\textasciitilde{} 854             2802             33°08′N 139°46′E﻿\textasciitilde{}  AD 1605[† 1]    }
+\DocumentationTok{\#\#  3 Hachijō\textasciitilde{} 854             2802             33°08′N 139°46′E﻿ \textasciitilde{} AD 1605[† 1]    }
 \DocumentationTok{\#\#  4 Izu{-}Ōsh\textasciitilde{} 758             2507             34°43′34″N 139°23\textasciitilde{} Mt. Mihara: AD \textasciitilde{}}
-\DocumentationTok{\#\#  5 Kōzushi\textasciitilde{} 574             1877             34°13′N 139°09′E﻿\textasciitilde{}  AD 838[† 1]     }
-\DocumentationTok{\#\#  6 Kurose   {-}110            {-}361             33°24′N 139°41′E﻿\textasciitilde{}  Caldera: older \textasciitilde{}}
+\DocumentationTok{\#\#  5 Kōzushi\textasciitilde{} 574             1877             34°13′N 139°09′E﻿ \textasciitilde{} AD 838[† 1]     }
+\DocumentationTok{\#\#  6 Kurose   {-}110            {-}361             33°24′N 139°41′E﻿ \textasciitilde{} Caldera: older \textasciitilde{}}
 \DocumentationTok{\#\#  7 Mikuraj\textasciitilde{} 851             2792             33°52′16″N 139°36\textasciitilde{} 6.3 ka BP[† 1]  }
 \DocumentationTok{\#\#  8 Miyakej\textasciitilde{} 813             2674             34°05′10″N 139°31\textasciitilde{} AD 2013[† 16]   }
 \DocumentationTok{\#\#  9 Myōjins\textasciitilde{} {-}50             {-}164             31°55′05″N 140°01\textasciitilde{} AD 1970[† 1]    }
-\DocumentationTok{\#\# 10 Niijima  432             1417             34°22′N 139°16′E﻿\textasciitilde{}  Mt. Mukaiyama: \textasciitilde{}}
+\DocumentationTok{\#\# 10 Niijima  432             1417             34°22′N 139°16′E﻿ \textasciitilde{} Mt. Mukaiyama: \textasciitilde{}}
 \DocumentationTok{\#\# 11 Sofugan\textasciitilde{} 99              325              29°47′35″N 140°20\textasciitilde{} (Discolored wat\textasciitilde{}}
 \DocumentationTok{\#\# 12 Sumisuj\textasciitilde{} 136             446              31°26′20″N 140°03\textasciitilde{} AD 1916[† 1]    }
-\DocumentationTok{\#\# 13 Toshima  508             1667             34°31′N 139°17′E﻿\textasciitilde{}  9.1{-}4.0 ka BP[†\textasciitilde{}}
+\DocumentationTok{\#\# 13 Toshima  508             1667             34°31′N 139°17′E﻿ \textasciitilde{} 9.1{-}4.0 ka BP[†\textasciitilde{}}
 \DocumentationTok{\#\# 14 Torishi\textasciitilde{} 394             1293             30°29′02″N 140°18\textasciitilde{} AD 2002[† 1]}
 \end{Highlighting}
 \end{Shaded}
@@ -4248,15 +4147,15 @@ Wobei das Attribut ``problems'' darauf hinweist, dass in manchen Strings keine Z
 \DocumentationTok{\#\#    Name          Coordinates                         \textasciigrave{}Last eruption\textasciigrave{} elevation\_m}
 \DocumentationTok{\#\#    \textless{}chr\textgreater{}         \textless{}chr\textgreater{}                               \textless{}chr\textgreater{}                 \textless{}dbl\textgreater{}}
 \DocumentationTok{\#\#  1 Akaigawa Cal\textasciitilde{} .mw{-}parser{-}output .geo{-}default,.mw\textasciitilde{} 1.3 Ma BP[† 1]          725}
-\DocumentationTok{\#\#  2 Mount Atosan\textasciitilde{} 43°36′36″N 144°26′17″E﻿ / ﻿43.610°\textasciitilde{}   1000{-}200 BP[† \textasciitilde{}         512}
-\DocumentationTok{\#\#  3 Daisetsuzan \textasciitilde{} 43°39′47″N 142°51′14″E﻿ / ﻿43.663°\textasciitilde{}   AD 1739[† 1]           2290}
-\DocumentationTok{\#\#  4 Mount Eniwa   42°47′35″N 141°17′06″E﻿ / ﻿42.793°\textasciitilde{}   17th century[†\textasciitilde{}        1320}
-\DocumentationTok{\#\#  5 Mount Esan    41°48′14″N 141°09′58″E﻿ / ﻿41.804°\textasciitilde{}   AD 1874[† 1]            613}
-\DocumentationTok{\#\#  6 Akan Caldera\textasciitilde{} 43°27′04″N 144°06′36″E﻿ / ﻿43.451°\textasciitilde{}   0.25 Ma BP[† 1]          NA}
-\DocumentationTok{\#\#  7 Mount Meakan  43°23′10″N 144°00′29″E﻿ / ﻿43.386°\textasciitilde{}   AD 2008[† 1]           1499}
-\DocumentationTok{\#\#  8 Mount Oakan   43°27′11″N 144°09′47″E﻿ / ﻿43.453°\textasciitilde{}   5{-}2.5 ka BP[† \textasciitilde{}        1370}
-\DocumentationTok{\#\#  9 Mount Iō      44°07′52″N 145°09′54″E﻿ / ﻿44.131°\textasciitilde{}   AD 1936[† 1]           1563}
-\DocumentationTok{\#\# 10 Kussharo Cal\textasciitilde{} 43°37′16″N 144°20′10″E﻿ / ﻿43.621°\textasciitilde{}   2.3 ka BP[† 1]           NA}
+\DocumentationTok{\#\#  2 Mount Atosan\textasciitilde{} 43°36′36″N 144°26′17″E﻿ / ﻿43.610°N \textasciitilde{} 1000{-}200 BP[† \textasciitilde{}         512}
+\DocumentationTok{\#\#  3 Daisetsuzan \textasciitilde{} 43°39′47″N 142°51′14″E﻿ / ﻿43.663°N \textasciitilde{} AD 1739[† 1]           2290}
+\DocumentationTok{\#\#  4 Mount Eniwa   42°47′35″N 141°17′06″E﻿ / ﻿42.793°N \textasciitilde{} 17th century[†\textasciitilde{}        1320}
+\DocumentationTok{\#\#  5 Mount Esan    41°48′14″N 141°09′58″E﻿ / ﻿41.804°N \textasciitilde{} AD 1874[† 1]            613}
+\DocumentationTok{\#\#  6 Akan Caldera\textasciitilde{} 43°27′04″N 144°06′36″E﻿ / ﻿43.451°N \textasciitilde{} 0.25 Ma BP[† 1]          NA}
+\DocumentationTok{\#\#  7 Mount Meakan  43°23′10″N 144°00′29″E﻿ / ﻿43.386°N \textasciitilde{} AD 2008[† 1]           1499}
+\DocumentationTok{\#\#  8 Mount Oakan   43°27′11″N 144°09′47″E﻿ / ﻿43.453°N \textasciitilde{} 5{-}2.5 ka BP[† \textasciitilde{}        1370}
+\DocumentationTok{\#\#  9 Mount Iō      44°07′52″N 145°09′54″E﻿ / ﻿44.131°N \textasciitilde{} AD 1936[† 1]           1563}
+\DocumentationTok{\#\# 10 Kussharo Cal\textasciitilde{} 43°37′16″N 144°20′10″E﻿ / ﻿43.621°N \textasciitilde{} 2.3 ka BP[† 1]           NA}
 \DocumentationTok{\#\# \# ... with 174 more rows}
 \end{Highlighting}
 \end{Shaded}
@@ -4437,18 +4336,18 @@ Dann können wir sie einlesen:
 
 \begin{verbatim}
 ## # A tibble: 231,174 x 8
-##    date                station_uuid diesel    e5   e10 dieselchange e5change
-##    <dttm>              <chr>         <dbl> <dbl> <dbl>        <dbl>    <dbl>
-##  1 2019-05-25 22:01:06 51e171d0-1a~   1.37  1.58  1.56            1        1
-##  2 2019-05-25 22:02:06 8a796af1-8d~   1.32  1.56  1.54            1        1
-##  3 2019-05-25 22:02:06 2d658127-11~   1.28  1.52  0               0        1
-##  4 2019-05-25 22:03:06 904d3a45-df~   1.32  1.54  1.52            1        1
-##  5 2019-05-25 22:03:06 a98ed5d0-26~   1.34  1.57  1.55            1        1
-##  6 2019-05-25 22:04:06 7671d5ad-4c~   1.30  1.54  0               1        1
-##  7 2019-05-25 22:04:06 44fa4d12-55~   1.34  1.58  1.56            1        1
-##  8 2019-05-25 22:04:06 da9abcda-32~   1.38  1.52  1.50            0        1
-##  9 2019-05-25 22:04:06 bcba0c2b-fb~   1.35  1.55  1.53            0        1
-## 10 2019-05-25 22:04:06 00061000-00~   1.20  1.48  1.46            1        1
+##    date                station_uuid     diesel    e5   e10 dieselchange e5change
+##    <dttm>              <chr>             <dbl> <dbl> <dbl>        <dbl>    <dbl>
+##  1 2019-05-25 22:01:06 51e171d0-1a9c-4~   1.37  1.58  1.56            1        1
+##  2 2019-05-25 22:02:06 8a796af1-8d78-4~   1.32  1.56  1.54            1        1
+##  3 2019-05-25 22:02:06 2d658127-11b5-4~   1.28  1.52  0               0        1
+##  4 2019-05-25 22:03:06 904d3a45-df30-4~   1.32  1.54  1.52            1        1
+##  5 2019-05-25 22:03:06 a98ed5d0-261b-4~   1.34  1.57  1.55            1        1
+##  6 2019-05-25 22:04:06 7671d5ad-4c7d-4~   1.30  1.54  0               1        1
+##  7 2019-05-25 22:04:06 44fa4d12-5571-4~   1.34  1.58  1.56            1        1
+##  8 2019-05-25 22:04:06 da9abcda-3218-4~   1.38  1.52  1.50            0        1
+##  9 2019-05-25 22:04:06 bcba0c2b-fbe7-4~   1.35  1.55  1.53            0        1
+## 10 2019-05-25 22:04:06 00061000-0001-4~   1.20  1.48  1.46            1        1
 ## # ... with 231,164 more rows, and 1 more variable: e10change <dbl>
 \end{verbatim}
 
@@ -4507,7 +4406,7 @@ Dafür müssen wir den Datensatz erst mit \texttt{arrange()} chronologisch sorti
 \NormalTok{preise\_nach\_tankstelle}
 \DocumentationTok{\#\# \# A tibble: 13,701 x 4}
 \DocumentationTok{\#\#    station\_uuid                         dieselpreis e5preis e10preis}
-\DocumentationTok{\#\#  * \textless{}chr\textgreater{}                                      \textless{}dbl\textgreater{}   \textless{}dbl\textgreater{}    \textless{}dbl\textgreater{}}
+\DocumentationTok{\#\#    \textless{}chr\textgreater{}                                      \textless{}dbl\textgreater{}   \textless{}dbl\textgreater{}    \textless{}dbl\textgreater{}}
 \DocumentationTok{\#\#  1 00006210{-}0037{-}4444{-}8888{-}acdc00006210        1.33    1.55     1.53}
 \DocumentationTok{\#\#  2 00016899{-}3247{-}4444{-}8888{-}acdc00000007        1.31    1.53     1.51}
 \DocumentationTok{\#\#  3 00060001{-}d387{-}4444{-}8888{-}acdc00000001        1.37    1.62     1.60}
@@ -4537,18 +4436,18 @@ Um das zu kartieren, fehlen noch die Informationen zu den Tankstellen. Dafür la
 
 \begin{verbatim}
 ## # A tibble: 15,668 x 11
-##    uuid  name  brand street house_number post_code city  latitude longitude
-##    <chr> <chr> <chr> <chr>  <chr>        <chr>     <chr>    <dbl>     <dbl>
-##  1 0e18~ OIL!~ OIL!  Evers~ <NA>         80999     Münc~     48.2     11.5 
-##  2 ad81~ bft ~ bft   Godes~ 55           53175     Bonn      50.7      7.14
-##  3 44e2~ bft ~ <NA>  Schel~ 53           36304     Alsf~     50.8      9.28
-##  4 1a8e~ Hess~ Hess~ Frank~ 65           61279     Gräv~     50.4      8.46
-##  5 0050~ star~ STAR  Leipz~ 11           06217     Mers~     51.4     12.0 
-##  6 d435~ ROSD~ Shell A7 GÖ~ <NA>         37124     Rosd~     51.5      9.88
-##  7 88a2~ AVIA~ AVIA  Burgs~ 8            63637     Joss~     50.2      9.48
-##  8 f0e9~ Aral~ ARAL  Eicke~ 357          41063     Mönc~     51.2      6.45
-##  9 0050~ star~ STAR  Celle~ 55           29303     Berg~     52.8      9.97
-## 10 8e47~ Aral~ ARAL  Crail~ 32           74532     Ilsh~     49.2      9.93
+##    uuid    name    brand  street house_number post_code city  latitude longitude
+##    <chr>   <chr>   <chr>  <chr>  <chr>        <chr>     <chr>    <dbl>     <dbl>
+##  1 0e18d0~ OIL! T~ OIL!   Evers~ <NA>         80999     Münc~     48.2     11.5 
+##  2 ad8122~ bft Bo~ bft    Godes~ 55           53175     Bonn      50.7      7.14
+##  3 44e2bd~ bft Ta~ <NA>   Schel~ 53           36304     Alsf~     50.8      9.28
+##  4 1a8e4d~ Hessol  Hessol Frank~ 65           61279     Gräv~     50.4      8.46
+##  5 005056~ star T~ STAR   Leipz~ 11           06217     Mers~     51.4     12.0 
+##  6 d435f7~ ROSDOR~ Shell  A7 GÖ~ <NA>         37124     Rosd~     51.5      9.88
+##  7 88a23d~ AVIA T~ AVIA   Burgs~ 8            63637     Joss~     50.2      9.48
+##  8 f0e93f~ Aral T~ ARAL   Eicke~ 357          41063     Mönc~     51.2      6.45
+##  9 005056~ star T~ STAR   Celle~ 55           29303     Berg~     52.8      9.97
+## 10 8e47dd~ Aral T~ ARAL   Crail~ 32           74532     Ilsh~     49.2      9.93
 ## # ... with 15,658 more rows, and 2 more variables: first_active <dttm>,
 ## #   openingtimes_json <chr>
 \end{verbatim}
@@ -4959,5 +4858,405 @@ Bowker, Geoffrey C. und Susan Leigh Star. 1999. Introduction: To classify is hum
 \item
   Der letzte Abschnitt zieht einen ziemlich kryptischen Vergleich mit einem Wald\ldots{} was wollen die Autor*innen uns damit sagen?
 \end{enumerate}
+
+\hypertarget{interaktive-visualisierungen}{%
+\section{Interaktive Visualisierungen}\label{interaktive-visualisierungen}}
+
+\hypertarget{einleitende-bemerkungen}{%
+\subsection{Einleitende Bemerkungen}\label{einleitende-bemerkungen}}
+
+Bei den drei vorgestellten Paketen handelt es sich um sehr flexible Frameworks, deren ausführliche Besprechung (so wie ggplot2) problemlos ein eigenes Seminar füllen könnten.
+Hier werden sie nur anhand von einfachsten Beispielen schnell vorgestellt.
+Bei der weiterführenden Anwendung im Rahmen eines Projekts ist es sinnvoll, sich noch einmal zielgerichtet zu beraten.
+
+\hypertarget{interaktive-karten-mit-tmap}{%
+\subsection{\texorpdfstring{Interaktive Karten mit \texttt{tmap}}{Interaktive Karten mit tmap}}\label{interaktive-karten-mit-tmap}}
+
+\hypertarget{vorbereitung-8}{%
+\subsubsection{Vorbereitung}\label{vorbereitung-8}}
+
+Wir laden \texttt{tmap} und importieren einen Beispieldatensatz (simple features) mit medizinische Statistiken aus North Carolina:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tmap)}
+\FunctionTok{library}\NormalTok{(sf)}
+\FunctionTok{demo}\NormalTok{(nc, }\AttributeTok{ask =}\NormalTok{ F, }\AttributeTok{echo =}\NormalTok{ F)}
+\DocumentationTok{\#\# Reading layer \textasciigrave{}nc.gpkg\textquotesingle{} from data source }
+\DocumentationTok{\#\#   \textasciigrave{}/usr/local/lib/R/4.1/site{-}library/sf/gpkg/nc.gpkg\textquotesingle{} using driver \textasciigrave{}GPKG\textquotesingle{}}
+\DocumentationTok{\#\# Simple feature collection with 100 features and 14 fields}
+\DocumentationTok{\#\# Attribute{-}geometry relationship: 0 constant, 8 aggregate, 6 identity}
+\DocumentationTok{\#\# Geometry type: MULTIPOLYGON}
+\DocumentationTok{\#\# Dimension:     XY}
+\DocumentationTok{\#\# Bounding box:  xmin: {-}84.32385 ymin: 33.88199 xmax: {-}75.45698 ymax: 36.58965}
+\DocumentationTok{\#\# Geodetic CRS:  NAD27}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{bisher-karten-mit-ggpot2}{%
+\subsubsection{\texorpdfstring{Bisher: Karten mit \texttt{ggpot2}}{Bisher: Karten mit ggpot2}}\label{bisher-karten-mit-ggpot2}}
+
+Wir haben schon gelernt, wie man mit dem Befehl \texttt{ggplot()} Karten erstellt.
+Zur Wiederholung zeichnen wir eine Choropletenkarte mit den Geburtsraten der Counties von 1974:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\FunctionTok{ggplot}\NormalTok{(nc) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ BIR74))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-208-1.png}
+
+\hypertarget{neu-karten-mit-tmap}{%
+\subsubsection{\texorpdfstring{Neu: Karten mit \texttt{tmap}}{Neu: Karten mit tmap}}\label{neu-karten-mit-tmap}}
+
+Der Befehl \texttt{qtm()} (``quick thematic map'') ist ideal um Geodaten schnell zu visualisieren:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qtm}\NormalTok{(nc, }\AttributeTok{fill =} \StringTok{"BIR74"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-209-1.png}
+
+Für ausführlichere Karten folgt \texttt{tmap} einer sehr ähnlichen Logik wie \texttt{ggplot2}, hat aber einige Unterschiede in der ``Grammatik'':
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tm\_shape}\NormalTok{(nc) }\SpecialCharTok{+}
+  \FunctionTok{tm\_polygons}\NormalTok{(}\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"BIR74"}\NormalTok{, }\StringTok{"BIR79"}\NormalTok{), }\AttributeTok{title =} \StringTok{"Geburten"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{tm\_facets}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{tm\_layout}\NormalTok{(}\AttributeTok{panel.show =}\NormalTok{ T,}
+            \AttributeTok{panel.labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"1974"}\NormalTok{, }\StringTok{"1979"}\NormalTok{),}
+            \AttributeTok{legend.outside =}\NormalTok{ T, }\AttributeTok{legend.position =} \FunctionTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{, }\StringTok{"center"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-210-1.png}
+
+\hypertarget{interaktive-karten}{%
+\subsubsection{Interaktive Karten}\label{interaktive-karten}}
+
+Wenn wir den \texttt{tmap\_mode} einmal wechseln,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tmap\_mode}\NormalTok{(}\StringTok{"view"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+zeichnen wir ab sofort interaktive Karten:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qtm}\NormalTok{(nc)}
+\end{Highlighting}
+\end{Shaded}
+
+Hier lassen sich dann auch interaktive Elemente wie Popups, Layer und die Hintergrundkarte bearbeiten. (Hier nur als technische Demonstration, besonders hilfreich finde ich es nicht:)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tm\_shape}\NormalTok{(nc, }\AttributeTok{cache =}\NormalTok{ F) }\SpecialCharTok{+}
+  \FunctionTok{tm\_basemap}\NormalTok{(}\StringTok{"OpenStreetMap"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{tm\_polygons}\NormalTok{(}\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"BIR74"}\NormalTok{, }\StringTok{"BIR79"}\NormalTok{), }\AttributeTok{id =} \StringTok{"NAME"}\NormalTok{, }\AttributeTok{popup.vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"AREA"}\NormalTok{, }\StringTok{"CNTY\_ID"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{tm\_facets}\NormalTok{(}\AttributeTok{as.layers =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{weitere-informationen}{%
+\subsubsection{Weitere Informationen:}\label{weitere-informationen}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html}{tmap: get started!}
+\item
+  \href{https://bookdown.org/nicohahn/making_maps_with_r5/docs/tmap.html}{Making maps with R: tmap}
+\end{itemize}
+
+\hypertarget{interaktive-plots-mit-plotly}{%
+\subsection{\texorpdfstring{Interaktive Plots mit \texttt{plotly}}{Interaktive Plots mit plotly}}\label{interaktive-plots-mit-plotly}}
+
+Plotly ist ein kommerzielles Produkt, das Framework lässt sich aber offen nutzen. (Verkauft werden sollen dann Dashboards, Beratungsleistungen und Infrastruktur für Firmenkunden.)
+
+\hypertarget{bisher-scatterplot-mit-ggplot2}{%
+\subsubsection{\texorpdfstring{Bisher: Scatterplot mit \texttt{ggplot2}}{Bisher: Scatterplot mit ggplot2}}\label{bisher-scatterplot-mit-ggplot2}}
+
+Wir plotten den Beispieldatensatz \texttt{iris}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(iris) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Sepal.Length, }\AttributeTok{y =}\NormalTok{ Sepal.Width, }\AttributeTok{color =}\NormalTok{ Petal.Length))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-214-1.png}
+
+\hypertarget{neu-3d-mit-plotly}{%
+\subsubsection{\texorpdfstring{Neu: 3D mit \texttt{plotly}}{Neu: 3D mit plotly}}\label{neu-3d-mit-plotly}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(plotly)}
+
+\FunctionTok{plot\_ly}\NormalTok{(iris, }\AttributeTok{x =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Length, }\AttributeTok{y =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Width, }\AttributeTok{z =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ Petal.Width, }\AttributeTok{color =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ Petal.Length)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{weitere-informationen-1}{%
+\subsubsection{Weitere Informationen}\label{weitere-informationen-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://plotly.com/r/}{Plotly R Open Source Graphing Library}
+\item
+  \href{https://plotly.com/r/getting-started/}{Getting Started with Plotly in R}
+\end{itemize}
+
+\hypertarget{web-apps-mit-shiny}{%
+\subsection{\texorpdfstring{Web apps mit \texttt{shiny}}{Web apps mit shiny}}\label{web-apps-mit-shiny}}
+
+Shiny ist das umfangreichste und flexibelste der hier vorgestellten Pakete und für das Erstellen von Web-Apps zur interaktiven Visualisierung von Datensätzen gedacht.
+
+Visualisierungen mit Shniny können jedoch nicht als Teil einer statischen HTML-Seite angezeigt werden, sondern müssen zur Ansicht auf einem entsprechend konfigurierten Server laufen.
+
+Wir haben in der Sitzung eine einfache Shiny-App erstellt und lokal angesehen, zur Veröffentlichung müsste sie jedoch z.~B. auf \url{https://shinyapps.io} hochgeladen werden.
+
+\hypertarget{weitere-informationen-2}{%
+\subsubsection{Weitere Informationen}\label{weitere-informationen-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://shiny.rstudio.com/tutorial/}{Learn Shiny}
+\item
+  \href{https://mastering-shiny.org/}{Mastering Shiny}
+\end{itemize}
+
+\hypertarget{clusteranalyse}{%
+\section{Clusteranalyse}\label{clusteranalyse}}
+
+\hypertarget{voraussetzungen-2}{%
+\subsection{Voraussetzungen}\label{voraussetzungen-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(plotly)}
+\FunctionTok{library}\NormalTok{(ggdendro)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{datensatz-und-uxfcberblick}{%
+\subsection{Datensatz und Überblick}\label{datensatz-und-uxfcberblick}}
+
+Mitgeliefert in R ist ein beliebter Beispieldatensatz mit Daten aus einem Automagazin:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(mtcars)}
+\FunctionTok{head}\NormalTok{(mtcars)}
+\DocumentationTok{\#\#                    mpg cyl disp  hp drat    wt  qsec vs am gear carb}
+\DocumentationTok{\#\# Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4}
+\DocumentationTok{\#\# Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4}
+\DocumentationTok{\#\# Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1}
+\DocumentationTok{\#\# Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1}
+\DocumentationTok{\#\# Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2}
+\DocumentationTok{\#\# Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1}
+\end{Highlighting}
+\end{Shaded}
+
+Im Folgenden geht es um die technischen Aspekte einer Clusteranalyse, und diese Daten dienen zur Veranschaulichung.
+
+Einen ersten Überblick über den Datensatz kriegen wir mit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(mtcars)}
+\DocumentationTok{\#\#       mpg             cyl             disp             hp       }
+\DocumentationTok{\#\#  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  }
+\DocumentationTok{\#\#  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  }
+\DocumentationTok{\#\#  Median :19.20   Median :6.000   Median :196.3   Median :123.0  }
+\DocumentationTok{\#\#  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  }
+\DocumentationTok{\#\#  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  }
+\DocumentationTok{\#\#  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  }
+\DocumentationTok{\#\#       drat             wt             qsec             vs        }
+\DocumentationTok{\#\#  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  }
+\DocumentationTok{\#\#  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  }
+\DocumentationTok{\#\#  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  }
+\DocumentationTok{\#\#  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  }
+\DocumentationTok{\#\#  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  }
+\DocumentationTok{\#\#  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  }
+\DocumentationTok{\#\#        am              gear            carb      }
+\DocumentationTok{\#\#  Min.   :0.0000   Min.   :3.000   Min.   :1.000  }
+\DocumentationTok{\#\#  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  }
+\DocumentationTok{\#\#  Median :0.0000   Median :4.000   Median :2.000  }
+\DocumentationTok{\#\#  Mean   :0.4062   Mean   :3.688   Mean   :2.812  }
+\DocumentationTok{\#\#  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  }
+\DocumentationTok{\#\#  Max.   :1.0000   Max.   :5.000   Max.   :8.000}
+\end{Highlighting}
+\end{Shaded}
+
+Oder mit Scatterplots in verschiedenen denkbaren Variationen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars) }\SpecialCharTok{+}
+  \FunctionTok{geom\_label}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mpg, }\AttributeTok{y =}\NormalTok{ disp, }\AttributeTok{label =} \FunctionTok{rownames}\NormalTok{(mtcars)), }\AttributeTok{size =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-219-1.png}
+
+\hypertarget{clusteranalyse-1}{%
+\subsection{Clusteranalyse}\label{clusteranalyse-1}}
+
+Grundüberlegung der Clusteranalyse ist, in wie viele und welche Gruppen die Merkmalsträger (hier: die Autos) einer (multivariaten) Verteilung sinnvoll eingeteilt werden können. Dabei gibt es viele verschiedene mathematische Methoden -- hier soll nur die Grundvariante (\(k\)-means-Clustering anhand euklidischer Distanz) besprochen werden.
+
+Zunächst führen wir mit \texttt{scale()} eine \(z\)-Transformation aller Variablen durch, damit werden sie alle gleich stark gewichtet:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{scale}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{()}
+\DocumentationTok{\#\#                          mpg        cyl        disp         hp       drat}
+\DocumentationTok{\#\# Mazda RX4          0.1508848 {-}0.1049878 {-}0.57061982 {-}0.5350928  0.5675137}
+\DocumentationTok{\#\# Mazda RX4 Wag      0.1508848 {-}0.1049878 {-}0.57061982 {-}0.5350928  0.5675137}
+\DocumentationTok{\#\# Datsun 710         0.4495434 {-}1.2248578 {-}0.99018209 {-}0.7830405  0.4739996}
+\DocumentationTok{\#\# Hornet 4 Drive     0.2172534 {-}0.1049878  0.22009369 {-}0.5350928 {-}0.9661175}
+\DocumentationTok{\#\# Hornet Sportabout {-}0.2307345  1.0148821  1.04308123  0.4129422 {-}0.8351978}
+\DocumentationTok{\#\# Valiant           {-}0.3302874 {-}0.1049878 {-}0.04616698 {-}0.6080186 {-}1.5646078}
+\DocumentationTok{\#\#                             wt       qsec         vs         am       gear}
+\DocumentationTok{\#\# Mazda RX4         {-}0.610399567 {-}0.7771651 {-}0.8680278  1.1899014  0.4235542}
+\DocumentationTok{\#\# Mazda RX4 Wag     {-}0.349785269 {-}0.4637808 {-}0.8680278  1.1899014  0.4235542}
+\DocumentationTok{\#\# Datsun 710        {-}0.917004624  0.4260068  1.1160357  1.1899014  0.4235542}
+\DocumentationTok{\#\# Hornet 4 Drive    {-}0.002299538  0.8904872  1.1160357 {-}0.8141431 {-}0.9318192}
+\DocumentationTok{\#\# Hornet Sportabout  0.227654255 {-}0.4637808 {-}0.8680278 {-}0.8141431 {-}0.9318192}
+\DocumentationTok{\#\# Valiant            0.248094592  1.3269868  1.1160357 {-}0.8141431 {-}0.9318192}
+\DocumentationTok{\#\#                         carb}
+\DocumentationTok{\#\# Mazda RX4          0.7352031}
+\DocumentationTok{\#\# Mazda RX4 Wag      0.7352031}
+\DocumentationTok{\#\# Datsun 710        {-}1.1221521}
+\DocumentationTok{\#\# Hornet 4 Drive    {-}1.1221521}
+\DocumentationTok{\#\# Hornet Sportabout {-}0.5030337}
+\DocumentationTok{\#\# Valiant           {-}1.1221521}
+\end{Highlighting}
+\end{Shaded}
+
+Dann wird mit dem \texttt{dist()}-Befehl anhand der vier Variablen eine „Distanz`` zwischen den Staaten berechnet, mit \texttt{hclust()} mögliche Cluster berechnet und mit \texttt{ggdendrogram()} eine Visualisierung von mögliche Clusteranordnungen ausgegeben:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{scale}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{dist}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{hclust}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggdendrogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-221-1.png}
+
+Dabei befindet sich auf der y-Achse die Distanz, bei der verschiedene Cluster zusammenfallen. Ganz unten sind es 32 Cluster mit je einem Staat, dann werden nach und nach Cluster zusammengefasst, bis es ganz oben nur noch ein Cluster mit 32 Autos ist. Je länger die parallelen Vertikalen Striche, desto beständiger die Cluster.
+
+Hier würden sich vier oder fünf Cluster anbieten, wir entscheiden uns für 5 Cluster.
+
+Mit \texttt{kmeans()} bilden wir die Cluster (nach \(z\)-Transformation) und können direkt Größe, Charakteristika und ``Mitglieder'' der Cluster einsehen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{scale}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kmeans}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\DocumentationTok{\#\# K{-}means clustering with 4 clusters of sizes 12, 10, 7, 3}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# Cluster means:}
+\DocumentationTok{\#\#          mpg        cyl       disp         hp        drat          wt}
+\DocumentationTok{\#\# 1 {-}0.8363478  1.0148821  1.0238513  0.6924910 {-}0.88974768  0.90635862}
+\DocumentationTok{\#\# 2  1.0900003 {-}1.0008838 {-}0.9991381 {-}0.8632588  0.99206769 {-}1.05671433}
+\DocumentationTok{\#\# 3  0.1082193 {-}0.5849321 {-}0.4486701 {-}0.6496905 {-}0.04967936 {-}0.02346989}
+\DocumentationTok{\#\# 4 {-}0.5404546  0.6415922  0.2819522  1.6235100  0.36801694 {-}0.04829030}
+\DocumentationTok{\#\#         qsec         vs         am       gear       carb}
+\DocumentationTok{\#\# 1 {-}0.3952280 {-}0.8680278 {-}0.8141431 {-}0.9318192  0.1676779}
+\DocumentationTok{\#\# 2  0.1450802  0.5208167  1.1899014  0.6946289 {-}0.5030337}
+\DocumentationTok{\#\# 3  1.1854841  1.1160357 {-}0.8141431 {-}0.1573201 {-}0.4145882}
+\DocumentationTok{\#\# 4 {-}1.6688182 {-}0.8680278  1.1899014  1.7789276  1.9734398}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# Clustering vector:}
+\DocumentationTok{\#\#           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive }
+\DocumentationTok{\#\#                   2                   2                   2                   3 }
+\DocumentationTok{\#\#   Hornet Sportabout             Valiant          Duster 360           Merc 240D }
+\DocumentationTok{\#\#                   1                   3                   1                   3 }
+\DocumentationTok{\#\#            Merc 230            Merc 280           Merc 280C          Merc 450SE }
+\DocumentationTok{\#\#                   3                   3                   3                   1 }
+\DocumentationTok{\#\#          Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental }
+\DocumentationTok{\#\#                   1                   1                   1                   1 }
+\DocumentationTok{\#\#   Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla }
+\DocumentationTok{\#\#                   1                   2                   2                   2 }
+\DocumentationTok{\#\#       Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 }
+\DocumentationTok{\#\#                   3                   1                   1                   1 }
+\DocumentationTok{\#\#    Pontiac Firebird           Fiat X1{-}9       Porsche 914{-}2        Lotus Europa }
+\DocumentationTok{\#\#                   1                   2                   2                   2 }
+\DocumentationTok{\#\#      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E }
+\DocumentationTok{\#\#                   4                   4                   4                   2 }
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# Within cluster sum of squares by cluster:}
+\DocumentationTok{\#\# [1] 23.083489 35.653610 21.287980  9.978908}
+\DocumentationTok{\#\#  (between\_SS / total\_SS =  73.6 \%)}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# Available components:}
+\DocumentationTok{\#\# }
+\DocumentationTok{\#\# [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"}
+\DocumentationTok{\#\# [6] "betweenss"    "size"         "iter"         "ifault"}
+\end{Highlighting}
+\end{Shaded}
+
+Damit R die Clusterzugehörigkeit (1 bis 5) im Folgenden nicht als metrische sondern als nominalskalierte Variable versteht, ziehen wir sie aus dem Ergebnis heraus und wandeln sie in einen Factor um (s. {[}Exkurs Factors{]}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  scale }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kmeans}\NormalTok{(}\DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .}\SpecialCharTok{$}\NormalTok{cluster }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{factor}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ memberships}
+\end{Highlighting}
+\end{Shaded}
+
+Diesen „faktorierten`` Cluster-Vektor fügen wir dem Datensatz hinzu:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars\_cluster }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  scale }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cluster =}\NormalTok{ memberships)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{visualisierung-1}{%
+\subsection{Visualisierung}\label{visualisierung-1}}
+
+Die verschiedenen Cluster lassen sich dann z.B. farblich voneinander abgrenzen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars\_cluster, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ qsec, }\AttributeTok{color =}\NormalTok{ cluster)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{stat\_ellipse}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-225-1.png}
+
+Zu einer Clusteranalyse würde dann auch noch gehören, die einzelnen Cluster anhand ihrer Charakteristika zu beschreiben.
 
 \end{document}

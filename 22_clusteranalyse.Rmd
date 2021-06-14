@@ -1,0 +1,98 @@
+# Clusteranalyse
+
+## Voraussetzungen
+
+```{r message=F}
+library(tidyverse)
+library(plotly)
+library(ggdendro)
+```
+
+## Datensatz und Überblick
+
+Mitgeliefert in R ist ein beliebter Beispieldatensatz mit Daten aus einem Automagazin:
+
+```{r}
+data(mtcars)
+head(mtcars)
+```
+
+Im Folgenden geht es um die technischen Aspekte einer Clusteranalyse, und diese Daten dienen zur Veranschaulichung.
+
+Einen ersten Überblick über den Datensatz kriegen wir mit: 
+
+```{r}
+summary(mtcars)
+```
+
+Oder mit Scatterplots in verschiedenen denkbaren Variationen:
+
+```{r}
+ggplot(mtcars) +
+  geom_label(aes(x = mpg, y = disp, label = rownames(mtcars)), size = 3)
+```
+
+## Clusteranalyse
+
+Grundüberlegung der Clusteranalyse ist, in wie viele und welche Gruppen die Merkmalsträger (hier: die Autos) einer (multivariaten) Verteilung sinnvoll eingeteilt werden können. Dabei gibt es viele verschiedene mathematische Methoden -- hier soll nur die Grundvariante ($k$-means-Clustering anhand euklidischer Distanz) besprochen werden.
+
+Zunächst führen wir mit `scale()` eine $z$-Transformation aller Variablen durch, damit werden sie alle gleich stark gewichtet:
+
+```{r}
+mtcars %>%
+  scale() %>%
+  head()
+```
+
+Dann wird mit dem `dist()`-Befehl anhand der vier Variablen eine „Distanz“ zwischen den Staaten berechnet, mit `hclust()` mögliche Cluster berechnet und mit `ggdendrogram()` eine Visualisierung von mögliche Clusteranordnungen ausgegeben:
+
+```{r}
+mtcars %>%
+  scale() %>%
+  dist() %>%
+  hclust() %>%
+  ggdendrogram()
+```
+
+Dabei befindet sich auf der y-Achse die Distanz, bei der verschiedene Cluster zusammenfallen. Ganz unten sind es 32 Cluster mit je einem Staat, dann werden nach und nach Cluster zusammengefasst, bis es ganz oben nur noch ein Cluster mit 32 Autos ist. Je länger die parallelen Vertikalen Striche, desto beständiger die Cluster.
+
+Hier würden sich vier oder fünf Cluster anbieten, wir entscheiden uns für 5 Cluster.
+
+Mit `kmeans()` bilden wir die Cluster (nach $z$-Transformation) und können direkt Größe, Charakteristika und "Mitglieder" der Cluster einsehen:
+
+```{r}
+mtcars %>%
+  scale() %>%
+  kmeans(4)
+```
+
+Damit R die Clusterzugehörigkeit (1 bis 5) im Folgenden nicht als metrische sondern als nominalskalierte Variable versteht, ziehen wir sie aus dem Ergebnis heraus und wandeln sie in einen Factor um (s. [Exkurs Factors]).
+
+```{r}
+mtcars %>%
+  scale %>%
+  kmeans(5) %>%
+  .$cluster %>%
+  factor() -> memberships
+```
+
+Diesen „faktorierten“ Cluster-Vektor fügen wir dem Datensatz hinzu:
+
+```{r}
+mtcars_cluster <- mtcars %>%
+  scale %>%
+  as_tibble() %>%
+  mutate(cluster = memberships)
+```
+
+## Visualisierung
+
+Die verschiedenen Cluster lassen sich dann z.B. farblich voneinander abgrenzen:
+
+```{r}
+ggplot(mtcars_cluster, aes(x = wt, y = qsec, color = cluster)) +
+  geom_point() +
+  stat_ellipse()
+```
+
+Zu einer Clusteranalyse würde dann auch noch gehören, die einzelnen Cluster anhand ihrer Charakteristika zu beschreiben.

@@ -15,7 +15,6 @@ library(rnaturalearth)
 
 Ziel soll sein, aus Wikipedia eine [Liste der Vulkane in Japan](https://en.wikipedia.org/wiki/List_of_volcanoes_in_Japan) auszulesen und diese in einer Karte zu visualisieren, die mehr Informationen enthält als die auf Wikipedia angebotenen Optionen.
 
-
 ## Tabellen aus Wikipedia laden
 
 Mit `rvest` lässt sich eine Liste der Tabellen auslesen:
@@ -28,19 +27,19 @@ Mit `rvest` lässt sich eine Liste der Tabellen auslesen:
 
 ## Tabellen kombinieren
 
-Die Tabellen 1, 2 und 9 sind dabei ergänzende Elemente auf der Wikipedia-Seite und hier uninteressant:
+Die Tabellen 1, und 8 sind dabei ergänzende Elemente auf der Wikipedia-Seite und hier uninteressant:
 
 ```{r}
-alle_tabellen[c(1:2, 9)]
+alle_tabellen[c(1, 8)]
 ```
 
-Mit den restlichen Tabellen (3--8) wollen wir weiterarbeiten:
+Mit den restlichen Tabellen (2--7) wollen wir weiterarbeiten:
 
 ```{r}
-relevante_tabellen <- alle_tabellen[-c(1:2, 9)]
+relevante_tabellen <- alle_tabellen[2:7]
 ```
 
-Zunächst sollen sie "untereinder" (zeilenweise) in einen Datensatz kombiniert werden.
+Zunächst sollen sie "untereinader" (zeilenweise) in einen Datensatz kombiniert werden.
 
 Das geht eigentlich mit dem Befehl `bind_rows()` ganz gut — allerdings müssen dafür die Spalten die selben Namen (hier gegeben) und die selben Typen haben (hier *nicht* gegeben).
 

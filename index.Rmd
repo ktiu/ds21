@@ -1,4 +1,4 @@
---- 
+---
 title: "Data Science für die Humangeographie: Ein pragmatischer Einstieg mit R"
 subtitle: Projektseminar Konzeption quantitativer Forschung
 author:
@@ -25,6 +25,7 @@ knitr::opts_chunk$set(cache = T,
                       dev = 'png')
 
 solutions <- knitr::opts_knit$get("rmarkdown.pandoc.to") == "html"
+is_html <- knitr::opts_knit$get("rmarkdown.pandoc.to") == "html"
 ```
 
 # Terminüberblick {-}
