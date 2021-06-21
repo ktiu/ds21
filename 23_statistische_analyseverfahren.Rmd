@@ -1,0 +1,7 @@
+# Statistische Analyseverfahren
+
+Anhand von Testdatensätzen in R und den Unterlagen aus der Statistikvorlesung haben wir in dieser Sitzung wiederholend Techniken zur statistischen Analyse und deren Interpretation zusammengetragen:
+
+- Korrelation und mit `cor()` und Korrelationstest `cor.test()`
+- $t$-Test mit `t.test()` (1- und 2-Stichproben-Varianten)
+- $F$-Test mit `var.test()`

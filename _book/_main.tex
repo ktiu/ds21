@@ -176,7 +176,7 @@ Datum & Sitzung & Inhalt \\
 31. Mai 2021 & 20 & \protect\hyperlink{text-bowker-und-star-1999}{Text: Bowker und Star 1999} \\
 7. Juni 2021 & 21 & \protect\hyperlink{interaktive-visualisierungen}{Interaktive Visualisierungen} \\
 14. Juni 2021 & 22 & \protect\hyperlink{clusteranalyse-1}{Clusteranalyse} \\
-21. Juni 2021 & 23 & {[}Varianzanalyse{]} \\
+21. Juni 2021 & 23 & \protect\hyperlink{statistische-analyseverfahren}{Statistische Analyseverfahren} \\
 28. Juni 2021 & 24 & {[}Text: Beer 2017{]} \\
 5. Juli 2021 & 25 & \protect\hyperlink{pruxe4sentationen}{Präsentationen} \\
 12. Juli 2021 & 26 & \protect\hyperlink{pruxe4sentationen}{Präsentationen} \\
@@ -481,7 +481,13 @@ Alle Kriterien werden mit einer (runden) Schulnote bewertet. Der gewichtete Schn
   >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.12}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.60}}@{}}
 \toprule
-Kriterium & Gewichtung & Erläuterung \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Kriterium
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Gewichtung
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Erläuterung
+\end{minipage} \\
 \midrule
 \endhead
 Ziterweise und Formatierung & 10\% & Der Text erfüllt formale Anforderungen an Wissenschaftlichkeit. \\
@@ -584,7 +590,13 @@ Alle Kriterien werden mit einer (runden) Schulnote bewertet. Der gewichtete Schn
   >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.12}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.60}}@{}}
 \toprule
-Kriterium & Gewichtung & Erläuterung \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Kriterium
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Gewichtung
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Erläuterung
+\end{minipage} \\
 \midrule
 \endhead
 Ziterweise und Formatierung & 10\% & Der Text erfüllt formale Anforderungen an Wissenschaftlichkeit. \\
@@ -5258,5 +5270,69 @@ Die verschiedenen Cluster lassen sich dann z.B. farblich voneinander abgrenzen:
 \includegraphics{_main_files/figure-latex/unnamed-chunk-225-1.png}
 
 Zu einer Clusteranalyse würde dann auch noch gehören, die einzelnen Cluster anhand ihrer Charakteristika zu beschreiben.
+
+\hypertarget{statistische-analyseverfahren}{%
+\section{Statistische Analyseverfahren}\label{statistische-analyseverfahren}}
+
+Anhand von Testdatensätzen in R und den Unterlagen aus der Statistikvorlesung haben wir in dieser Sitzung wiederholend Techniken zur statistischen Analyse und deren Interpretation zusammengetragen:
+
+\begin{itemize}
+\tightlist
+\item
+  Korrelation und mit \texttt{cor()} und Korrelationstest \texttt{cor.test()}
+\item
+  \(t\)-Test mit \texttt{t.test()} (1- und 2-Stichproben-Varianten)
+\item
+  \(F\)-Test mit \texttt{var.test()}
+\end{itemize}
+
+\hypertarget{text-beer-2016}{%
+\section{Text: Beer 2016}\label{text-beer-2016}}
+
+\hypertarget{lesetext-5}{%
+\subsubsection{Lesetext}\label{lesetext-5}}
+
+Beer, David. 2016. Measurement. In: \emph{Metric Power.} London: Palgrave Macmillan. S.~37--75.
+
+Daraus: Seiten 37 -- 60
+
+\hypertarget{fragen-an-den-text-6}{%
+\subsubsection{Fragen an den Text:}\label{fragen-an-den-text-6}}
+
+\hypertarget{fragen-an-den-text-7}{%
+\subsubsection{Fragen an den Text}\label{fragen-an-den-text-7}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Wie ging es Ihnen mit dem Text? Was war vielleicht schwierig? Wie sind Sie damit umgegangen?
+\item
+  Um welche Art von Text handelt es sich? In welcher Form und wo ist er erschienen, wer ist der Autor, und an wen wendet er sich?
+\item
+  Was ist das zentrale Anliegen des Texts? Wo genau steht das?
+\item
+  Welche theoretischen Referenzen werden herangezogen? Was davon kommt Ihnen bekannt vor? Was können Sie wie einordnen?
+\item
+  Welche Entwicklung im späten 18. und frühen 19. Jahrhundert wird beschrieben? Wie war die Welt vorher?
+\item
+  Welche Rolle spielen im Text die folgenden Beriffe?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ``chance''
+  \item
+    ``comparison''
+  \item
+    ``norms''
+  \item
+    ``visibility''
+  \end{itemize}
+\item
+  Finden Sie die Erzählung schlüssig? Was fehlt Ihnen?
+\item
+  Gibt es Momente in Ihrem Alltag, in denen Sie ``metric power'' erleben?
+\end{enumerate}
 
 \end{document}

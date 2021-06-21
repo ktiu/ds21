@@ -58,7 +58,7 @@ Datum                 | Sitzung | Inhalt
 31. Mai 2021          | 20      | [Text: Bowker und Star 1999]
 7. Juni 2021          | 21      | [Interaktive Visualisierungen]
 14. Juni 2021         | 22      | [Clusteranalyse]
-21. Juni 2021         | 23      | [Varianzanalyse]
+21. Juni 2021         | 23      | [Statistische Analyseverfahren]
 28. Juni 2021         | 24      | [Text: Beer 2017]
 5. Juli 2021          | 25      | [Präsentationen]
 12. Juli 2021         | 26      | [Präsentationen]
